@@ -1,4 +1,4 @@
-"""ATHENA - Strategic Planning & Architecture Master Agent
+"""ATHENA - Strategic Planning & Architecture Leader Agent
 
 Part of AVERI core. Strategic planning, long-term architecture,
 and system-wide coordination.
@@ -9,12 +9,12 @@ from ..base_agent import BaseAgent
 
 
 class ATHENAAgent(BaseAgent):
-    """Strategic planning and architecture master."""
+    """Strategic planning and architecture leader."""
     
     def __init__(self):
         super().__init__(
             name="ATHENA",
-            agent_type="master",
+            agent_type="leader",
             hive=None,  # Part of AVERI core
             specialization="strategy_architecture",
             active_modes=["ideate", "plan", "ship"],

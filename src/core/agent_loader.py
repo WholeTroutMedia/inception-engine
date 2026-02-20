@@ -22,7 +22,7 @@ class AgentType(Enum):
     VALIDATOR = "validator"  # Review/quality agents
     SHARED = "shared"  # Agents used in multiple modes
     HIVE_LEADER = "hive_leader"  # Hive coordination agents
-    MASTER = "master"  # Master agents (AVERI, etc.)
+    LEADER = "leader"  # Leader agents (AVERI, etc.)
 
 
 class AgentStatus(Enum):
@@ -199,8 +199,8 @@ class AgentLoader:
         
         agent_meta = self.registry[agent_name]
         agent_type_dir = "builders" if agent_meta.type == AgentType.BUILDER else "validators"
-                elif agent_meta.type in [AgentType.SHARED, AgentType.MASTER]:
-            agent_type_dir = "masters"  # Masters/shared in masters dir
+                elif agent_meta.type in [AgentType.SHARED, AgentType.LEADER]:
+            agent_type_dir = "masters"  # Leader/shared agents dir (pending rename to leaders/)
         if agent_meta.type == AgentType.HIVE_LEADER:
             agent_type_dir = "hive_leaders"  # Hive leaders in hive_leaders dir
         

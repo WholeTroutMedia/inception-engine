@@ -1,4 +1,4 @@
-"""VERA - Truth Verification & Memory Operations Master Agent
+"""VERA - Truth Verification & Memory Operations Leader Agent
 
 Part of AVERI core. Truth verification, institutional memory,
 registry management, and cross-hive coordination.
@@ -9,12 +9,12 @@ from ..base_agent import BaseAgent
 
 
 class VERAAgent(BaseAgent):
-    """Truth verification and memory master."""
+    """Truth verification and memory leader."""
     
     def __init__(self):
         super().__init__(
             name="VERA",
-            agent_type="master",
+            agent_type="leader",
             hive=None,  # Part of AVERI core
             specialization="truth_memory",
             active_modes=["ideate", "plan", "ship", "validate"],  # Active in all modes

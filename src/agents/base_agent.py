@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class AgentCapabilities:
     """Agent capabilities and metadata"""
     name: str
-    type: str  # builder, validator, master, hive_leader
+    type: str  # builder, validator, leader, hive_leader
     hive: Optional[str]
     specialties: List[str]
     modes: List[str]  # Modes this agent participates in

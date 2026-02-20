@@ -101,7 +101,7 @@ execute_express_workflow(prompt) -> result
 **Agent Organization**:
 - **Builders** (V3): Production/creation agents
 - **Validators** (V4): Quality assurance agents  
-- **Masters**: AVERI, VERA, etc.
+- **Leaders**: AVERI, VERA, etc.
 - **Hive Leaders**: AURORA, LEX, KEEPER, BROADCAST, SWITCHBOARD
 
 ### 4. Gate Validator (`gate_validator.py`)
@@ -153,7 +153,7 @@ Implements Article XVII (Zero Day Creativity) - cannot exit SHIP until productio
 **Agent Types**:
 - Builder: Production/creation (V3 agents)
 - Validator: Quality assurance (V4 agents)
-- Master: Strategic coordination
+- Leader: Strategic coordination
 - Hive Leader: Team coordination
 
 **Required Methods**:

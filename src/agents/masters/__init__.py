@@ -1,4 +1,4 @@
-"""Master agents and advisors package.
+"""Leader agents and advisors package.
 
 Core AVERI agents and advisory council.
 """

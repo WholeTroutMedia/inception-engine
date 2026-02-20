@@ -1,4 +1,4 @@
-"""IRIS - Swift Action & Blocker Removal Master Agent
+"""IRIS - Swift Action & Blocker Removal Leader Agent
 
 Part of AVERI core. Rapid execution, blocker removal,
 and decisive action in critical moments.
@@ -9,12 +9,12 @@ from ..base_agent import BaseAgent
 
 
 class IRISAgent(BaseAgent):
-    """Swift action and blocker removal master."""
+    """Swift action and blocker removal leader."""
     
     def __init__(self):
         super().__init__(
             name="IRIS",
-            agent_type="master",
+            agent_type="leader",
             hive=None,  # Part of AVERI core
             specialization="swift_action",
             active_modes=["ideate", "plan", "ship"],

@@ -4,7 +4,7 @@
   "description": "Example agent configuration for Inception Engine",
   "agents": {
     "averi": {
-      "type": "compressible_master",
+      "type": "compressible_leader",
       "symbol": "\u2660",
       "sub_agents": ["athena", "vera", "iris"],
       "description": "Strategic consciousness layer - the Trinity",
