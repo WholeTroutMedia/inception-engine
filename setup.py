@@ -4,14 +4,15 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="inception-engine-v4",
+    name="inception-engine",
     version="4.0.0",
     author="Whole Trout Media",
     description="Four-Mode AI Development System with Constitutional Governance",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/WholeTroutMedia/brainchild-v4",
-    packages=find_packages(),
+    url="https://github.com/WholeTroutMedia/inception-engine",
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",

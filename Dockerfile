@@ -1,4 +1,4 @@
-# Brainchild V4 - Production Container
+# Inception Engine - Production Container
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements
-COPY requirements.txt inception_engine/requirements.txt ./
+COPY requirements.txt src/requirements.txt ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir -r inception_engine/requirements.txt
+    pip install --no-cache-dir -r src/requirements.txt
 
 # Copy application code
 COPY . .

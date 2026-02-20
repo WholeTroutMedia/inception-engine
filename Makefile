@@ -82,7 +82,7 @@ constitutional-check:
 install:
 	@echo "$(YELLOW)📦 Installing dependencies...$(NC)"
 	@$(PIP) install --upgrade pip
-	@$(PIP) install -r inception_engine/requirements.txt
+	@$(PIP) install -r src/requirements.txt
 	@echo "$(GREEN)✓ Dependencies installed$(NC)"
 
 ## docker-up: Start Docker containers
@@ -96,25 +96,25 @@ docker-up:
 ## db-init: Initialize database
 db-init:
 	@echo "$(YELLOW)🗄️  Initializing database...$(NC)"
-	@$(PYTHON) inception_engine/scripts/init_db.py
+	@$(PYTHON) src/scripts/init_db.py
 	@echo "$(GREEN)✓ Database initialized$(NC)"
 
 ## agents-load: Load all agents
 agents-load:
 	@echo "$(YELLOW)🤖 Loading agents...$(NC)"
-	@$(PYTHON) inception_engine/scripts/load_agents.py
+	@$(PYTHON) src/scripts/load_agents.py
 	@echo "$(GREEN)✓ All 35+ agents loaded$(NC)"
 
 ## health-check: Run system health checks
 health-check:
 	@echo "$(YELLOW)🏥 Running health checks...$(NC)"
-	@$(PYTHON) inception_engine/scripts/health_check.py
+	@$(PYTHON) src/scripts/health_check.py
 	@echo "$(GREEN)✓ All systems operational$(NC)"
 
 ## dev: Start development server
 dev:
 	@echo "$(BLUE)🚀 Starting development server...$(NC)"
-	@$(PYTHON) inception_engine/main.py
+	@$(PYTHON) src/main.py
 
 ## test: Run test suite
 test:
@@ -161,7 +161,7 @@ status:
 	@$(DOCKER_COMPOSE) ps
 	@echo ""
 	@echo "$(YELLOW)Agents:$(NC)"
-	@$(PYTHON) inception_engine/cli/commands/status.py
+	@$(PYTHON) src/cli/commands/status.py
 
 ## modes: List available modes
 modes:
