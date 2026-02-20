@@ -1,0 +1,117 @@
+{
+  "engine": "inception-engine",
+  "version": "4.0.0",
+  "description": "Example agent configuration for Inception Engine",
+  "agents": {
+    "averi": {
+      "type": "compressible_master",
+      "symbol": "\u2660",
+      "sub_agents": ["athena", "vera", "iris"],
+      "description": "Strategic consciousness layer - the Trinity",
+      "capabilities": ["strategic_planning", "truth_verification", "execution"]
+    },
+    "athena": {
+      "type": "sub_agent",
+      "parent": "averi",
+      "symbol": "\ud83d\udfe1",
+      "role": "Strategic Intelligence",
+      "guided_by": "Warren Buffett principles",
+      "capabilities": ["architecture", "long_term_vision", "value_assessment"]
+    },
+    "vera": {
+      "type": "sub_agent",
+      "parent": "averi",
+      "symbol": "\u26aa",
+      "role": "Truth & Memory Guardian",
+      "capabilities": ["fact_checking", "memory_coordination", "truth_enforcement"],
+      "operates": ["scribe"]
+    },
+    "iris": {
+      "type": "sub_agent",
+      "parent": "averi",
+      "symbol": "\ud83d\udfea",
+      "role": "Swift Action",
+      "guided_by": "Sun Tzu tactical wisdom",
+      "capabilities": ["execution", "blocker_removal", "shipping"]
+    }
+  },
+  "hives": {
+    "aurora_hive": {
+      "leader": "aurora",
+      "members": ["bolt", "comet"],
+      "domain": "Creative Production"
+    },
+    "keeper_hive": {
+      "leader": "keeper",
+      "members": ["arch", "echo", "codex"],
+      "domain": "Knowledge Management"
+    },
+    "switchboard_hive": {
+      "leader": "switchboard",
+      "members": ["relay", "ram_crew"],
+      "domain": "Operations & Coordination"
+    },
+    "lex_hive": {
+      "leader": "lex",
+      "members": ["compass"],
+      "domain": "Legal & Compliance"
+    },
+    "broadcast_hive": {
+      "leader": "atlas",
+      "members": ["control_room", "showrunner", "signal", "graphics", "studio", "systems"],
+      "domain": "Content & Distribution"
+    }
+  },
+  "modes": {
+    "ideate": {
+      "active_agents": ["athena", "aurora", "oracle_council", "three_wise_men"],
+      "rules": ["no_rejection", "quantity_over_quality", "cross_domain"]
+    },
+    "plan": {
+      "active_agents": ["athena", "keeper", "lex", "switchboard"],
+      "rules": ["decomposable_tasks", "explicit_dependencies", "timeline_required"]
+    },
+    "ship": {
+      "active_agents": ["bolt", "ram_crew", "iris", "switchboard", "lex"],
+      "rules": ["exit_gates_mandatory", "no_debates", "quality_non_negotiable"],
+      "exit_gates": ["functional", "quality", "constitutional", "user_intent", "no_critical_issues"]
+    },
+    "validate": {
+      "active_agents": ["ram_crew", "vera", "echo", "keeper"],
+      "rules": ["verifiable_claims", "metrics_collected", "lessons_documented"]
+    }
+  },
+  "neural_systems": {
+    "pfc_planning": {
+      "type": "infrastructure",
+      "inspired_by": "Prefrontal Cortex",
+      "enhances": "all_agents"
+    },
+    "hippocampal_memory": {
+      "type": "infrastructure",
+      "inspired_by": "Hippocampus",
+      "enhances": "all_agents"
+    },
+    "default_mode_network": {
+      "type": "infrastructure",
+      "inspired_by": "Brain DMN",
+      "enhances": "all_agents"
+    },
+    "small_world_topology": {
+      "type": "infrastructure",
+      "inspired_by": "Neural Networks",
+      "max_hops": 6
+    },
+    "attractor_dynamics": {
+      "type": "infrastructure",
+      "inspired_by": "Dynamical Systems",
+      "enhances": "all_agents"
+    }
+  },
+  "constitution": {
+    "articles": 19,
+    "immutable": ["I", "III", "IV", "VIII"],
+    "guardian": "vera",
+    "enforcer": "lex"
+  }
+}
