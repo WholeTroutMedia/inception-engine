@@ -4,8 +4,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/WholeTroutMedia/brainchild-v4.git
-cd brainchild-v4
+git clone https://github.com/WholeTroutMedia/inception-engine.git
+cd inception-engine
 
 # Create virtual environment
 python3 -m venv venv
@@ -73,7 +73,7 @@ inception validate --from-last
 
 ```bash
 # Start server
-python inception_engine/api/server.py
+python src/api/server.py
 
 # Or with uvicorn
 uvicorn inception_engine.api.server:app --reload
@@ -149,12 +149,12 @@ pytest
 pytest --cov=inception_engine --cov-report=html
 
 # Run specific test
-pytest inception_engine/tests/test_orchestrator.py
+pytest src/tests/test_orchestrator.py
 ```
 
 ## Configuration
 
-Configuration files are in `MODES/` directory:
+Configuration files are in `src/modes/` directory:
 - `01_IDEATE/MODE_CONFIG.json`
 - `02_PLAN/MODE_CONFIG.json`
 - `03_SHIP/MODE_CONFIG.json`
@@ -182,15 +182,15 @@ SHIP mode cannot exit until all gates pass:
 ## Next Steps
 
 1. Read full documentation: `README.md`
-2. Review Agent Constitution: `CORE_FOUNDATION/AGENT_CONSTITUTION.md`
-3. Explore mode configs: `MODES/*/MODE_CONFIG.json`
+2. Review Agent Constitution: `CONSTITUTION.md`
+3. Explore mode configs: `src/modes/*/MODE_CONFIG.json`
 4. Run examples: `examples/`
 5. Check test coverage: `pytest --cov`
 
 ## Support
 
 For issues or questions:
-- GitHub Issues: https://github.com/WholeTroutMedia/brainchild-v4/issues
+- GitHub Issues: https://github.com/WholeTroutMedia/inception-engine/issues
 - Documentation: Full README in repository
 
 ## License

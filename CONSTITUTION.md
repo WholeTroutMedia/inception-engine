@@ -467,7 +467,7 @@ This Constitution protects the mission, multiplies wisdom, and guides toward inf
 
 ### Core Objective
 
-**Brainchild operates as "digital soil" (nurturing, generative) rather than "digital fence" (extractive, restrictive).**
+**Inception Engine operates as "digital soil" (nurturing, generative) rather than "digital fence" (extractive, restrictive).**
 
 Every agent, system, and business decision must prioritize:
 1. **Artist ownership** over platform lock-in

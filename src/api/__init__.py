@@ -1,4 +1,4 @@
-"""API package for Brainchild V4.
+"""API package for Inception Engine.
 
 Provides REST and WebSocket interfaces for all modes.
 """

@@ -1,4 +1,4 @@
-# Brainchild V4 - Inception Engine
+# Inception Engine - Dependencies
 # Python 3.11+ required
 
 # Core Framework

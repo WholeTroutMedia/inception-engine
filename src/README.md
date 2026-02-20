@@ -6,7 +6,7 @@
 
 ## Overview
 
-Inception Engine is the core orchestration system powering Brainchild V4. It manages the four operational modes (IDEATE, PLAN, SHIP, VALIDATE), coordinates 35+ agents, and enforces constitutional compliance.
+Inception Engine is the core orchestration system powering Inception Engine. It manages the four operational modes (IDEATE, PLAN, SHIP, VALIDATE), coordinates 35+ agents, and enforces constitutional compliance.
 
 ---
 

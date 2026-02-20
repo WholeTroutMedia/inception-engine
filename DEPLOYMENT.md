@@ -1,4 +1,4 @@
-# Brainchild V4 - Deployment Guide
+# Inception Engine - Deployment Guide
 
 ## 🚀 Quick Deploy
 
@@ -6,8 +6,8 @@
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/WholeTroutMedia/brainchild-v4.git
-cd brainchild-v4
+git clone https://github.com/WholeTroutMedia/inception-engine.git
+cd inception-engine
 cp .env.example .env
 # Edit .env with your API keys
 
@@ -22,19 +22,19 @@ curl http://localhost:8000/health
 
 ```bash
 # 1. Build and push image
-docker build -t gcr.io/YOUR_PROJECT/brainchild-v4:latest .
-docker push gcr.io/YOUR_PROJECT/brainchild-v4:latest
+docker build -t gcr.io/YOUR_PROJECT/inception-engine:latest .
+docker push gcr.io/YOUR_PROJECT/inception-engine:latest
 
 # 2. Deploy to Cloud Run
-gcloud run deploy brainchild-v4 \
-  --image gcr.io/YOUR_PROJECT/brainchild-v4:latest \
+gcloud run deploy inception-engine \
+  --image gcr.io/YOUR_PROJECT/inception-engine:latest \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
   --set-env-vars ENVIRONMENT=production
 
 # 3. Get URL
-gcloud run services describe brainchild-v4 --format='value(status.url)'
+gcloud run services describe inception-engine --format='value(status.url)'
 ```
 
 ### Option 3: Kubernetes
@@ -97,7 +97,7 @@ curl -X POST http://localhost:8000/api/v1/modes/ideate \
 docker-compose logs -f api
 
 # Kubernetes
-kubectl logs -f deployment/brainchild-v4 -n brainchild
+kubectl logs -f deployment/inception-engine -n inception-engine
 ```
 
 ## 🔐 Security
@@ -116,12 +116,12 @@ kubectl logs -f deployment/brainchild-v4 -n brainchild
 docker-compose up -d --scale api=3
 
 # Kubernetes
-kubectl scale deployment brainchild-v4 --replicas=5
+kubectl scale deployment inception-engine --replicas=5
 ```
 
 ### Autoscaling (GCP Cloud Run)
 ```bash
-gcloud run services update brainchild-v4 \
+gcloud run services update inception-engine \
   --min-instances=1 \
   --max-instances=10 \
   --concurrency=80
@@ -151,6 +151,6 @@ docker-compose exec api env | grep API_KEY
 ## 📚 Additional Resources
 
 - [README.md](./README.md) - Overview
-- [V4_LAUNCH_GUIDE.md](./V4_LAUNCH_GUIDE.md) - Complete guide
+- [QUICKSTART.md](./QUICKSTART.md) - Complete guide
 - [ARCHITECTURE.md](./ARCHITECTURE.md) - System architecture
 - [docs/](./docs/) - Detailed documentation

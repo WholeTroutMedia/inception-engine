@@ -1,4 +1,4 @@
-# Brainchild V4 Makefile
+# Inception Engine Makefile
 # One-command operations for development and deployment
 
 .PHONY: help inception install docker-up db-init agents-load health-check dev test clean deploy
@@ -21,7 +21,7 @@ NC := \033[0m # No Color
 
 ## help: Display this help message
 help:
-	@echo "$(BLUE)Brainchild V4 - Makefile Commands$(NC)"
+	@echo "$(BLUE)Inception Engine - Makefile Commands$(NC)"
 	@echo ""
 	@echo "$(GREEN)Quick Start:$(NC)"
 	@echo "  make inception    - Complete setup (recommended)"
@@ -44,7 +44,7 @@ help:
 
 ## inception: Complete setup (one command)
 inception:
-	@echo "$(BLUE)🧬 Brainchild V4 - Inception Sequence$(NC)"
+	@echo "$(BLUE)🧬 Inception Engine - Inception Sequence$(NC)"
 	@echo ""
 	@echo "$(YELLOW)This will:$(NC)"
 	@echo "  ✓ Check constitutional compliance"
@@ -72,7 +72,7 @@ inception:
 ## constitutional-check: Verify constitutional compliance
 constitutional-check:
 	@echo "$(YELLOW)⚖️  Checking constitutional compliance...$(NC)"
-	@if [ ! -f CORE_FOUNDATION/AGENT_CONSTITUTION.md ]; then \
+	@if [ ! -f CONSTITUTION.md ]; then \
 		echo "$(RED)✗ Agent Constitution not found!$(NC)"; \
 		exit 1; \
 	fi
@@ -144,7 +144,7 @@ deploy:
 	@$(MAKE) --no-print-directory test
 	@$(MAKE) --no-print-directory constitutional-check
 	@echo "$(YELLOW)Building Docker image...$(NC)"
-	@$(DOCKER) build -t brainchild-v4:latest .
+	@$(DOCKER) build -t inception-engine:latest .
 	@echo "$(GREEN)✓ Deployment ready$(NC)"
 	@echo "$(BLUE)Next: Push to container registry and deploy to K8s$(NC)"
 

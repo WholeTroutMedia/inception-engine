@@ -12,7 +12,7 @@ services:
       - .env
     volumes:
       - ./inception_engine:/app/inception_engine
-      - ./CORE_FOUNDATION:/app/CORE_FOUNDATION
+      - ./src:/app/src
     command: python -m inception_engine.api.server
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
@@ -39,13 +39,13 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=brainchild_v4
-      - POSTGRES_USER=brainchild
+      - POSTGRES_DB=inception_engine
+      - POSTGRES_USER=inception_engine
       - POSTGRES_PASSWORD=dev_password_change_in_prod
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U brainchild"]
+      test: ["CMD-SHELL", "pg_isready -U inception_engine"]
       interval: 10s
       timeout: 5s
       retries: 5

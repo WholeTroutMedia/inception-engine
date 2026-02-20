@@ -1,4 +1,4 @@
-"""Brainchild V4 - API Server
+"""Inception Engine - API Server
 
 FastAPI server with REST and WebSocket support for all four modes.
 """
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize FastAPI
 app = FastAPI(
-    title="Brainchild V4 API",
+    title="Inception Engine API",
     description="Four-Mode AI Development Engine",
     version="4.0.0",
     docs_url="/docs",
@@ -337,7 +337,7 @@ async def websocket_mode_updates(websocket: WebSocket):
 if __name__ == "__main__":
     import uvicorn
     
-    logger.info("Starting Brainchild V4 API Server...")
+    logger.info("Starting Inception Engine API Server...")
     logger.info("Documentation: http://localhost:8000/docs")
     
     uvicorn.run(
