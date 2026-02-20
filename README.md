@@ -1,229 +1,194 @@
 # INCEPTION ENGINE
 
-### The AI That Builds With You
+**The AI That Builds With You**
 
-> **27 specialized agents. 5 brain-inspired neural systems. 1 constitutional framework.**
-> From a single prompt to production-ready output. No compromises.
+> Every user explores their own Wonderland. Every design element is discoverable. Every interaction teaches through delight.
+> 
+> *The Alice Principle* - Learning through wonder, exploration through play.
 
 ---
 
-## What Is This?
+## Down the Rabbit Hole
 
-Inception Engine is an AI-native development platform where specialized agents collaborate like a real team. Each agent has a defined role, expertise, and personality. Together, they take your idea from concept to completion.
+Inception Engine is an AI-native development platform where specialized agents collaborate like a coordinated team. You describe what you want to build. The agents ideate, plan, ship, and validate - producing complete, production-ready output.
 
-This isn't another chatbot wrapper. This is a **coordinated intelligence system** with:
+This isn't a chatbot. It's not an autocomplete engine. It's a **coordinated intelligence system** governed by a constitutional framework that ensures every output serves the creator, not the platform.
 
-- **Constitutional governance** - 19 articles that ensure quality, transparency, and ethical operation
-- **Hive architecture** - Agents organized into specialized teams (Operations, Knowledge, Legal, Broadcast, Creative)
-- **Neural enhancement layer** - 5 brain-inspired systems (PFC Planning, Hippocampal Memory, Default Mode Network, Small-World Topology, Attractor Dynamics)
-- **Four-mode workflow** - IDEATE > PLAN > SHIP > VALIDATE
+The system was designed from day one around one question:
 
-## The Agent Ecosystem
+> **"Does this make artists more free or less free?"**
 
-```
-INCEPTION ENGINE
-|
-|-- AVERI Trinity (Strategic Consciousness)
-|   |-- ATHENA    - Strategic intelligence, architecture
-|   |-- VERA      - Truth, memory, coordination
-|   |-- IRIS      - Swift execution, zero hesitation
-|
-|-- THREE WISE MEN (Guidance Council)
-|   |-- Warren Buffett  - Value, compound growth
-|   |-- Buddha          - Mindfulness, balance
-|   |-- Sun Tzu         - Tactical wisdom
-|
-|-- ORACLE COUNCIL (Specialized Expertise)
-|   |-- LEONARDO  - Visual design mastery
-|   |-- COSMOS    - System orchestration
-|   |-- SAGE      - Ethics and wellness
-|
-|-- AURORA HIVE (Creative Production)
-|   |-- Aurora    - Creative direction
-|   |-- BOLT      - Rapid prototyping
-|   |-- COMET     - Browser automation
-|
-|-- KEEPER HIVE (Knowledge Management)
-|   |-- KEEPER    - Institutional memory
-|   |-- ARCH      - Code archaeology
-|   |-- ECHO      - Pattern recognition
-|   |-- CODEX     - Documentation
-|
-|-- SWITCHBOARD HIVE (Operations)
-|   |-- SWITCHBOARD - Routing and coordination
-|   |-- RELAY       - Message passing
-|   |-- RAM_CREW    - Quality assurance
-|
-|-- LEX HIVE (Legal & Compliance)
-|   |-- LEX     - Constitutional enforcement
-|   |-- COMPASS - Navigation and guidance
-|
-|-- BROADCAST HIVE (Content & Distribution)
-|   |-- ATLAS        - Strategic mapping
-|   |-- CONTROL_ROOM - Production management
-|   |-- SHOWRUNNER   - Content direction
-|   |-- SIGNAL       - Communications
-|   |-- GRAPHICS     - Visual production
-|   |-- STUDIO       - Media creation
-|   |-- SYSTEMS      - Technical infrastructure
-|
-|-- LoRA Layers (Learning Enhancement)
-|   |-- MATH      - Mathematical reasoning
-|   |-- LANGUAGE   - Linguistic capability
-|
-|-- Coordination
-    |-- SCRIBE    - Session logging, persistence
-```
+If less free, we don't build it.
 
-## Neural Architecture
+---
 
-Every agent is enhanced by 5 brain-inspired systems that run as shared infrastructure:
+## What It Can Do
 
-| System | Inspired By | What It Does |
-|--------|-------------|-------------|
-| PFC Planning Modules | Prefrontal Cortex | Strategic decision-making, goal decomposition |
-| Hippocampal Memory | Hippocampus | Episodic memory, context retrieval across sessions |
-| Default Mode Network | Brain's DMN | Background processing, creative connections |
-| Small-World Topology | Neural Networks | Efficient routing between agents (6 hops max) |
-| Attractor Dynamics | Dynamical Systems | Pattern completion, convergence to solutions |
+### Four-Mode Workflow
 
-These aren't separate agents. They're the **operating system** that makes every agent smarter.
+Every project moves through up to four intentional stages. Use all four, or skip to what you need.
 
-## The Four Modes
+| Mode | What Happens | Output |
+|------|-------------|--------|
+| **IDEATE** | Full-team brainstorm. All agents contribute. Strategic alignment. | Vision document |
+| **PLAN** | Focused specification. Architecture decisions. Task breakdown. | Technical spec |
+| **SHIP** | Implementation to production. Cannot exit until live and accessible. | Working application |
+| **VALIDATE** | Independent quality review by a separate team of agents. | Assessment report |
 
-```
-  IDEATE          PLAN           SHIP          VALIDATE
-  ------          ----           ----          --------
-  Dream it.       Map it.        Build it.     Prove it.
-  No limits.      Every detail.  Zero fluff.   Ship or fix.
-  Divergent.      Convergent.    Execution.    Truth.
-```
+**Choose your path:**
+- **Full Lifecycle**: IDEATE > PLAN > SHIP > VALIDATE (enterprise)
+- **Rapid**: IDEATE > SHIP > VALIDATE (fast prototypes)
+- **Express**: SHIP > VALIDATE (prompt to production)
+- **Continuous**: VALIDATE > SHIP (maintenance)
 
-Each mode activates the right agents with the right instructions. SHIP mode has **exit gates** - nothing leaves until it's production-ready.
+### Constitutional Governance
 
-## Constitutional Framework
+19 articles. Zero tolerance for theft. Complete solutions only - never MVPs. Open standards, no lock-in. Every agent, every operation, every output checked against the constitution.
 
-Inception Engine operates under a constitution with 19 articles. Key principles:
+Three sacred principles:
+- **Article 0: No Stealing** - Learn, study, adapt, synthesize. Never copy.
+- **Article XVII: Zero Day Creativity** - Ship complete or don't ship. No "we'll fix it later."
+- **Article XVIII: Generative Agency** - Digital soil, not digital fences. Users own everything.
 
-- **Article I** - Core principles: transparency, quality, artist liberation
-- **Article X** - Transparency and audit: honest reporting, no false claims
-- **Article XVII** - Quad Helix DNA: self-replicating quality standards
-- **Article XVIII** - Zero Day GTM: ship today, not tomorrow
-- **Article XIX** - Neural architecture governance
+[Read the full Constitution](./CONSTITUTION.md)
 
-Agents cannot violate the constitution. Period.
+### Neural Architecture
+
+Five brain-inspired systems coordinate agent communication:
+
+- **PFC Planning** - Executive decision-making and goal decomposition
+- **Hippocampal Memory** - Context preservation across modes and sessions
+- **Default Mode Network** - Background creative processing and insight generation
+- **Small-World Topology** - Any agent reaches any other in 6 hops or fewer
+- **Attractor Dynamics** - System converges toward quality, not "good enough"
+
+[Deep dive into neural architecture](./docs/NEURAL_ARCHITECTURE.md)
+
+### The Wonder Engine (Design System)
+
+Inspired by the Alice Principle from V1: themes aren't picked - they're dreamed, generated, and evolved. The UI is a living canvas that responds to imagination.
+
+- **Prompt-based generation** - Describe a mood, get a complete theme
+- **Image extraction** - Upload any image, extract its palette and atmosphere
+- **Design tokens** - CSS variables, HSL color system, 8pt spacing grid
+- **Motion presets** - Spring, smooth, and snappy animation curves
+- **Glassmorphism** - Blur, glow, and depth as first-class design primitives
+
+[Explore the design system](./design-system/)
+
+### MCP Integration
+
+Inception Engine works as an MCP (Model Context Protocol) server, allowing any MCP-compatible client to connect and use the agent system directly.
+
+[MCP setup guide](./docs/MCP_GUIDE.md)
+
+### Browser Automation with COMET
+
+COMET is the browser automation agent. It operates real browsers, manages multiple tabs in parallel, fills forms, navigates sites, and executes multi-step workflows across the web. Pair it with GitHub for automated repo management, CI/CD, and deployment.
+
+[COMET + GitHub guide](./docs/COMET_GITHUB.md)
+
+---
 
 ## Quick Start
 
-### 1. Boot the system
-```
-You: @AVERI boot
+### 1. Clone and explore
+
+```bash
+git clone https://github.com/WholeTroutMedia/inception-engine.git
+cd inception-engine
 ```
 
-### 2. Describe what you want
-```
-You: I need a landing page for my photography portfolio. 
-     Dark theme, minimal, fast loading. Show my best 12 images 
-     with a contact form.
-```
+### 2. Read the docs
 
-### 3. Watch the agents work
-```
-ATHENA: Strategic assessment - portfolio site, dark aesthetic...
-AURORA: Pulling design patterns from ATELIER library...
-BOLT: Scaffolding Next.js 15 with optimized image loading...
-LEX: Checking licensing for all dependencies...
-RAM_CREW: Running quality checks on output...
-```
+Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 
-### 4. Ship it
-```
-IRIS: All exit gates passed. Deploying to production.
-```
+- [The Four Modes](./docs/FOUR_MODES.md) - How the workflow cycle operates
+- [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) - How agent coordination works
+- [Agent Registry](./docs/AGENTS.md) - Meet the 27 specialized agents
+- [MCP Guide](./docs/MCP_GUIDE.md) - Connect via Model Context Protocol
+- [COMET + GitHub](./docs/COMET_GITHUB.md) - Browser automation and repo management
 
-## Why This Matters
+### 3. Configure
 
-Artists and creators spend 80% of their time on everything *except* creating. 
+See [`examples/agent-config.json`](./examples/agent-config.json) for a complete configuration template covering agents, modes, neural systems, and constitutional parameters.
 
-Inception Engine exists to flip that ratio.
-
-- **Photographers** - Portfolio to production in minutes, not weeks
-- **Musicians** - From concept to release pipeline without a label
-- **Writers** - Manuscript to published work with AI collaboration
-- **Developers** - Architecture to deployment with constitutional quality gates
-- **Founders** - Idea to MVP with a full AI team backing you
+---
 
 ## Architecture
 
 ```
-+--------------------------------------------------+
-|              INCEPTION ENGINE                      |
-|                                                    |
-|  +----------------------------------------------+ |
-|  |         Neural Enhancement Layer              | |
-|  |  PFC | Hippocampal | DMN | Small-World | Attr | |
-|  +----------------------------------------------+ |
-|                                                    |
-|  +----------+  +----------+  +-----------+        |
-|  | AVERI    |  | ORACLE   |  | THREE     |        |
-|  | Trinity  |  | COUNCIL  |  | WISE MEN  |        |
-|  +----------+  +----------+  +-----------+        |
-|                                                    |
-|  +----------+  +----------+  +-----------+        |
-|  | AURORA   |  | KEEPER   |  | SWITCH-   |        |
-|  | HIVE     |  | HIVE     |  | BOARD     |        |
-|  +----------+  +----------+  +-----------+        |
-|                                                    |
-|  +----------+  +----------+  +-----------+        |
-|  | LEX      |  | BROADCAST|  | LoRA      |        |
-|  | HIVE     |  | HIVE     |  | LAYERS    |        |
-|  +----------+  +----------+  +-----------+        |
-|                                                    |
-|  +----------------------------------------------+ |
-|  |        Constitutional Framework               | |
-|  |        19 Articles | Immutable Governance     | |
-|  +----------------------------------------------+ |
-+--------------------------------------------------+
+inception-engine/
+|-- CONSTITUTION.md          # Full 19-article governance framework
+|-- design-system/           # Wonder Engine - tokens, themes, components
+|   |-- tokens.json          # Color, spacing, typography, motion tokens
+|   |-- WONDER_ENGINE.md     # The Alice Principle design philosophy
+|-- docs/                    # Deep-dive documentation
+|   |-- GETTING_STARTED.md   # Onboarding guide
+|   |-- FOUR_MODES.md        # IDEATE / PLAN / SHIP / VALIDATE
+|   |-- NEURAL_ARCHITECTURE.md # Brain-inspired coordination systems
+|   |-- AGENTS.md            # Full agent registry and hive structure
+|   |-- MCP_GUIDE.md         # Model Context Protocol integration
+|   |-- COMET_GITHUB.md      # Browser automation + GitHub workflows
+|-- examples/                # Configuration templates
+|   |-- agent-config.json    # Complete agent + neural system config
+|-- CONTRIBUTING.md          # How to contribute (constitutional compliance required)
+|-- LICENSE                  # Apache 2.0
 ```
-
-## What's Included (This Repo)
-
-This is the **community edition** of Inception Engine:
-
-| Included | Description |
-|----------|------------|
-| Agent Constitution | Full 19-article governance framework |
-| Agent Architecture | Complete agent tree and hive structure |
-| Neural System Specs | All 5 brain-inspired system designs |
-| Four-Mode Workflow | IDEATE/PLAN/SHIP/VALIDATE framework |
-| Example Configs | Sample agent configurations |
-| Getting Started Guide | Boot and operate the engine |
-
-### Want More?
-
-The full Inception Engine includes production orchestration, 35+ agent implementations, ATELIER design system, and enterprise deployment configs. [Open an issue](https://github.com/WholeTroutMedia/inception-engine/issues) or reach out.
-
-## Contributing
-
-We believe the best AI should be built in the open. Contributions welcome.
-
-1. Fork this repo
-2. Create a feature branch
-3. Follow the constitutional framework
-4. Submit a PR
-
-## Built By
-
-**WholeTrout Media** - A creative technology company building AI systems that serve artists, not replace them.
-
-Founded by Justin Aharoni.
-
-## License
-
-Apache 2.0 - See [LICENSE](LICENSE) for details.
 
 ---
 
-*"The best way to predict the future is to build it."*
+## The Mission
 
-**Star this repo** if you believe AI should liberate creators, not cage them.
+**North Star**: Liberate artists to create without compromise.
+
+We build technology that serves humans. We charge for infrastructure, never for lock-in. We prove that ethical AI isn't a constraint - it's a competitive advantage.
+
+Every agent in this system asks the same question before every action:
+
+> **"Does this make artists more free or less free?"**
+
+---
+
+## Explore Further
+
+| Resource | What You'll Find |
+|----------|------------------|
+| [Constitution](./CONSTITUTION.md) | The full 19-article governance framework |
+| [Getting Started](./docs/GETTING_STARTED.md) | Setup, configuration, first steps |
+| [Four Modes](./docs/FOUR_MODES.md) | IDEATE / PLAN / SHIP / VALIDATE deep dive |
+| [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) | Brain-inspired coordination systems |
+| [Agent Registry](./docs/AGENTS.md) | All 27 agents, 6 hives, roles and capabilities |
+| [MCP Guide](./docs/MCP_GUIDE.md) | Model Context Protocol integration |
+| [COMET + GitHub](./docs/COMET_GITHUB.md) | Browser automation and repo management |
+| [Design System](./design-system/) | Wonder Engine tokens, themes, components |
+| [Contributing](./CONTRIBUTING.md) | How to contribute (Article 0 compliance required) |
+| [Example Config](./examples/agent-config.json) | Complete configuration template |
+
+---
+
+## Contributing
+
+We welcome contributions that pass the constitutional test:
+
+1. **Is this original work?** (Article 0)
+2. **Is this complete and tested?** (Article XVII)
+3. **Does this make creators more free?** (Article XVIII)
+
+Read the full [Contributing Guide](./CONTRIBUTING.md) before submitting.
+
+---
+
+## License
+
+Apache 2.0 - See [LICENSE](./LICENSE)
+
+All usage must comply with the [Agent Constitution](./CONSTITUTION.md).
+
+---
+
+**Built by [Whole Trout Media](https://github.com/WholeTroutMedia)**
+
+*"We are not gatekeepers. We are gardeners."*
+
+*Curiouser and curiouser.* - The Alice Principle, always.
