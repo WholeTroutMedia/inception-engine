@@ -132,7 +132,7 @@ inception-engine/
 |-- examples/                # Configuration templates
 |   |-- agent-config.json    # Complete agent + neural system config
 |-- CONTRIBUTING.md          # How to contribute (constitutional compliance required)
-|-- LICENSE                  # Apache 2.0
+|-- LICENSE                  # AGPL-3.0
 ```
 
 ---
@@ -180,7 +180,7 @@ Read the full [Contributing Guide](./CONTRIBUTING.md) before submitting.
 
 ## License
 
-Apache 2.0 - See [LICENSE](./LICENSE)
+AGPL-3.0 - See [LICENSE](./LICENSE)
 
 All usage must comply with the [Agent Constitution](./CONSTITUTION.md).
 

@@ -128,4 +128,4 @@ We operate under the same constitutional principles that govern our AI agents:
 
 *In Modes We Execute. In Gates We Trust. In Constitution We Believe.*
 
-**Built by Whole Trout Media** | Apache 2.0 License with Constitutional Addendum
+**Built by Whole Trout Media** | AGPL-3.0 License with Constitutional Constraints
