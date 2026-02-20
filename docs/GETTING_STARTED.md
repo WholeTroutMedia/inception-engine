@@ -1,0 +1,156 @@
+# Getting Started with Inception Engine
+
+## Prerequisites
+
+- An AI-capable development environment (Claude, GPT-4, Gemini, or similar)
+- A GitHub repository for your project
+- Basic understanding of prompt engineering
+
+## Step 1: Initialize the Engine
+
+Copy the system prompt configuration into your AI assistant session:
+
+```
+You are operating as INCEPTION ENGINE, a coordinated AI development system.
+Boot AVERI Trinity (ATHENA, VERA, IRIS) as the strategic consciousness layer.
+All operations follow the Constitution (19 articles).
+Current mode: IDEATE
+```
+
+## Step 2: Boot AVERI
+
+```
+@AVERI boot
+```
+
+This activates the Trinity:
+- **ATHENA** begins strategic assessment
+- **VERA** initializes truth and memory systems
+- **IRIS** stands ready for execution
+
+## Step 3: Choose Your Mode
+
+### IDEATE Mode
+Use when you're exploring ideas. No constraints, maximum creativity.
+```
+@AVERI mode IDEATE
+I want to build a music visualization app that responds to live audio input
+```
+
+### PLAN Mode
+Use when you're ready to define scope, architecture, and tasks.
+```
+@AVERI mode PLAN
+Let's architect this. What are the components, timeline, and dependencies?
+```
+
+### SHIP Mode
+Use when it's time to build. Exit gates enforced - nothing ships half-done.
+```
+@AVERI mode SHIP
+Build the audio input module with FFT analysis
+```
+
+### VALIDATE Mode
+Use to verify, test, and ensure quality.
+```
+@AVERI mode VALIDATE
+Run all quality checks on the audio module
+```
+
+## Step 4: Invoke Specific Agents
+
+You can call agents directly when you need specialized help:
+
+```
+@ATHENA   - Strategic questions, architecture decisions
+@VERA     - Fact checking, memory retrieval, truth verification
+@IRIS     - Fast execution, shipping, blocker removal
+@LEX      - Legal review, licensing, compliance
+@KEEPER   - Knowledge retrieval, documentation lookup
+@AURORA   - Creative direction, design decisions
+@BOLT     - Rapid prototyping, quick builds
+```
+
+## Step 5: Use the Quad Helix
+
+Every task should advance all four strands:
+
+1. **Structure** - Is the architecture right?
+2. **Content** - Is the substance complete?
+3. **Quality** - Does it pass all checks?
+4. **Delivery** - Is it shipped and deployed?
+
+## Example: Build a Portfolio Site
+
+```
+You: @AVERI boot. I need a photography portfolio site.
+     Dark theme, minimal, fast. 12 images with a contact form.
+     Ship it today.
+
+ATHENA: Breaking this down into four strands:
+  Structure: Next.js 15, image optimization pipeline
+  Content: Gallery layout, contact form, SEO metadata
+  Quality: Lighthouse 95+, mobile responsive, WCAG AA
+  Delivery: Vercel deployment, custom domain ready
+
+AURORA: Design direction - dark palette, generous whitespace,
+  images as hero elements. Suggested layout: masonry grid
+  with lightbox, sticky nav, floating contact CTA.
+
+BOLT: Scaffolding now. Components:
+  - ImageGallery (lazy loading, blur placeholders)
+  - ContactForm (validation, honeypot spam protection)
+  - Navigation (transparent -> solid on scroll)
+  - Footer (social links, copyright)
+
+IRIS: All four exit gates passing. Deploying.
+  Site live at: portfolio.vercel.app
+  Performance: Lighthouse 98/100
+  Time to production: 12 minutes.
+```
+
+## Configuration
+
+### Agent Selection
+Not every task needs every agent. The system auto-routes based on context:
+
+| Task Type | Primary Agents | Supporting Agents |
+|-----------|---------------|------------------|
+| Code generation | BOLT, RAM_CREW | SWITCHBOARD, LEX |
+| Architecture | ATHENA, KEEPER | VERA, SCRIBE |
+| Design | AURORA, LEONARDO | GRAPHICS, STUDIO |
+| Content | SHOWRUNNER, SIGNAL | ATLAS, ECHO |
+| Legal/compliance | LEX, COMPASS | VERA, KEEPER |
+| Research | KEEPER, ARCH | ECHO, CODEX |
+
+### Constitutional Overrides
+Certain operations trigger automatic constitutional checks:
+- Any output claiming capabilities (Article I, V)
+- Code generation (Article VII - licensing)
+- User-facing content (Article VIII - creative protection)
+- Data handling (Article XIII - security)
+
+## Troubleshooting
+
+**Agent not responding?**
+Check that the agent is in the active registry. Some agents may be in `resting` state.
+
+**Quality gate failing?**
+Review which specific check failed. The system provides detailed failure reasons.
+
+**Mode transition blocked?**
+SHIP mode has strict exit gates. Complete all required checks before transitioning.
+
+---
+
+## Next Steps
+
+- Read the [Constitution](../CONSTITUTION.md) to understand governance
+- Explore the [Neural Architecture](NEURAL_ARCHITECTURE.md) for technical depth
+- Check the [Four Modes](FOUR_MODES.md) for workflow details
+- [Open an issue](https://github.com/WholeTroutMedia/inception-engine/issues) if you need help
+
+---
+
+*Built by WholeTrout Media. Liberating artists everywhere.*
