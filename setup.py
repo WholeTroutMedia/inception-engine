@@ -10,6 +10,7 @@ setup(
     description="Four-Mode AI Development System with Constitutional Governance",
     long_description=long_description,
     long_description_content_type="text/markdown",
+        license="AGPL-3.0-or-later",
     url="https://github.com/WholeTroutMedia/inception-engine",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
