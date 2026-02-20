@@ -65,14 +65,13 @@ Five brain-inspired systems coordinate agent communication:
 [Deep dive into neural architecture](./docs/NEURAL_ARCHITECTURE.md)
 
 ### The Wonder Engine (Design System)
+The Wonder Engine ships as a blank canvas - no opinions about what your project should look like. Describe a mood, upload an image, or set every value by hand. The system generates a complete token set and every component inherits it automatically.
 
-Inspired by the Alice Principle from V1: themes aren't picked - they're dreamed, generated, and evolved. The UI is a living canvas that responds to imagination.
-
+- **Design tokens** - CSS variables, HSL colors, configurable spacing grid
 - **Prompt-based generation** - Describe a mood, get a complete theme
 - **Image extraction** - Upload any image, extract its palette and atmosphere
-- **Design tokens** - CSS variables, HSL color system, 8pt spacing grid
-- **Motion presets** - Spring, smooth, and snappy animation curves
-- **Glassmorphism** - Blur, glow, and depth as first-class design primitives
+- **Motion presets** - Spring, smooth, snappy, or none at all
+- **Surface system** - Flat, elevated, blurred, textured - your choice
 
 [Explore the design system](./design-system/)
 
