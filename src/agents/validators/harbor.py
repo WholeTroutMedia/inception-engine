@@ -1,4 +1,4 @@
-"""COVERAGE - Test Coverage Evaluator
+"""HARBOR - Test Coverage Evaluator
 
 V4-exclusive validator agent. Evaluates test coverage,
 test quality, and testing completeness.
@@ -8,14 +8,14 @@ from typing import Dict, Any, List
 from ..base_agent import BaseAgent
 
 
-class COVERAGEAgent(BaseAgent):
+class HARBORAgent(BaseAgent):
     """Test coverage and quality evaluator."""
     
     def __init__(self):
         super().__init__(
-            name="COVERAGE",
+            name="HARBOR",
             agent_type="validator",
-            hive=None,  # Independent validator
+            hive="COMPASS",  # COMPASS Hive validator
             specialization="testing",
             active_modes=["validate"]
         )
@@ -160,7 +160,7 @@ class COVERAGEAgent(BaseAgent):
         return recommendations
     
     def get_capabilities(self) -> List[str]:
-        """Return list of COVERAGE capabilities."""
+        """Return list of HARBOR capabilities."""
         return [
             "Unit test coverage analysis",
             "Integration test evaluation",

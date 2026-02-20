@@ -8,6 +8,7 @@ from .lex import LEXAgent
 from .keeper import KEEPERAgent
 from .atlas import ATLASAgent
 from .switchboard import SWITCHBOARDAgent
+from .compass import COMPASSAgent
 
 __all__ = [
     "AuroraAgent",
@@ -15,4 +16,5 @@ __all__ = [
     "KEEPERAgent",
     "ATLASAgent",
     "SWITCHBOARDAgent",
+        "COMPASSAgent",
 ]

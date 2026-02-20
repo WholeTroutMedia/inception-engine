@@ -1,4 +1,4 @@
-"""PATTERNS - Architecture Pattern Validator
+"""ARCHON - Architecture Pattern Validator
 
 V4-exclusive validator agent. Validates architectural patterns,
 code organization, and design consistency.
@@ -8,14 +8,14 @@ from typing import Dict, Any, List
 from ..base_agent import BaseAgent
 
 
-class PATTERNSAgent(BaseAgent):
+class ARCHONAgent(BaseAgent):
     """Architecture and design pattern validator."""
     
     def __init__(self):
         super().__init__(
-            name="PATTERNS",
+            name="ARCHON",
             agent_type="validator",
-            hive=None,  # Independent validator
+            hive="COMPASS",  # COMPASS Hive validator
             specialization="architecture",
             active_modes=["validate"]
         )
@@ -154,7 +154,7 @@ class PATTERNSAgent(BaseAgent):
         return recommendations
     
     def get_capabilities(self) -> List[str]:
-        """Return list of PATTERNS capabilities."""
+        """Return list of ARCHON capabilities."""
         return [
             "Project structure validation",
             "Design pattern detection",

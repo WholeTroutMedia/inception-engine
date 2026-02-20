@@ -15,7 +15,7 @@ class SENTINELAgent(BaseAgent):
         super().__init__(
             name="SENTINEL",
             agent_type="validator",
-            hive=None,  # Independent validator
+            hive="COMPASS",  # COMPASS Hive validator
             specialization="security",
             active_modes=["validate"]
         )

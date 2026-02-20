@@ -1,4 +1,4 @@
-"""LOGIC - Behavioral Correctness Validator
+"""PROOF - Behavioral Correctness Validator
 
 V4-exclusive validator agent. Validates logical correctness,
 edge cases, and behavioral requirements.
@@ -8,14 +8,14 @@ from typing import Dict, Any, List
 from ..base_agent import BaseAgent
 
 
-class LOGICAgent(BaseAgent):
+class PROOFAgent(BaseAgent):
     """Logic and behavioral correctness validator."""
     
     def __init__(self):
         super().__init__(
-            name="LOGIC",
+            name="PROOF",
             agent_type="validator",
-            hive=None,  # Independent validator
+            hive="COMPASS",  # COMPASS Hive validator
             specialization="logic",
             active_modes=["validate"]
         )
@@ -150,7 +150,7 @@ class LOGICAgent(BaseAgent):
         return recommendations
     
     def get_capabilities(self) -> List[str]:
-        """Return list of LOGIC capabilities."""
+        """Return list of PROOF capabilities."""
         return [
             "Requirements validation",
             "Edge case detection",

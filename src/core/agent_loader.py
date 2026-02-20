@@ -198,14 +198,14 @@ class AgentLoader:
             return None
         
         agent_meta = self.registry[agent_name]
-        
-        # Determine agent module path
         agent_type_dir = "builders" if agent_meta.type == AgentType.BUILDER else "validators"
-        if agent_meta.type in [AgentType.SHARED, AgentType.HIVE_LEADER, AgentType.MASTER]:
-            agent_type_dir = "builders"  # Masters/shared in builders dir
+                elif agent_meta.type in [AgentType.SHARED, AgentType.MASTER]:
+            agent_type_dir = "masters"  # Masters/shared in masters dir
+        if agent_meta.type == AgentType.HIVE_LEADER:
+            agent_type_dir = "hive_leaders"  # Hive leaders in hive_leaders dir
         
         module_name = agent_name.lower()
-        module_path = f"inception_engine.agents.{agent_type_dir}.{module_name}"
+        module_path = f"src.agents.{agent_type_dir}.{module_name}"
         
         try:
             # Import module
@@ -331,6 +331,7 @@ class AgentLoader:
                 "AURORA": len(self.get_agents_by_hive("AURORA")),
                 "LEX": len(self.get_agents_by_hive("LEX")),
                 "KEEPER": len(self.get_agents_by_hive("KEEPER")),
+                                "COMPASS": len(self.get_agents_by_hive("COMPASS")),
                 "BROADCAST": len(self.get_agents_by_hive("BROADCAST")),
                 "SWITCHBOARD": len(self.get_agents_by_hive("SWITCHBOARD"))
             },
