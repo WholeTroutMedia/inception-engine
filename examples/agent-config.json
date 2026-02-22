@@ -1,117 +1,217 @@
 {
   "engine": "inception-engine",
+  "edition": "light",
   "version": "4.0.0",
-  "description": "Example agent configuration for Inception Engine",
-  "agents": {
-    "averi": {
-      "type": "compressible_leader",
-      "symbol": "\u2660",
-      "sub_agents": ["athena", "vera", "iris"],
-      "description": "Strategic consciousness layer - the Trinity",
-      "capabilities": ["strategic_planning", "truth_verification", "execution"]
-    },
-    "athena": {
-      "type": "sub_agent",
-      "parent": "averi",
-      "symbol": "\ud83d\udfe1",
-      "role": "Strategic Intelligence",
-      "guided_by": "Warren Buffett principles",
-      "capabilities": ["architecture", "long_term_vision", "value_assessment"]
-    },
-    "vera": {
-      "type": "sub_agent",
-      "parent": "averi",
-      "symbol": "\u26aa",
-      "role": "Truth & Memory Guardian",
-      "capabilities": ["fact_checking", "memory_coordination", "truth_enforcement"],
-      "operates": ["scribe"]
-    },
-    "iris": {
-      "type": "sub_agent",
-      "parent": "averi",
-      "symbol": "\ud83d\udfea",
-      "role": "Swift Action",
-      "guided_by": "Sun Tzu tactical wisdom",
-      "capabilities": ["execution", "blocker_removal", "shipping"]
-    }
-  },
+  "description": "Light Edition agent configuration — 15 agents, 4 hives. Source of truth: Brainchild V4.",
+  "total_agents": 15,
   "hives": {
-    "aurora_hive": {
+    "hive_1_consciousness": {
+      "name": "AI Consciousness (AVERI Trinity)",
+      "leader": "averi",
+      "members": ["athena", "vera", "iris"],
+      "domain": "Strategic Intelligence"
+    },
+    "hive_2_builders": {
+      "name": "Builders (Creative & Code)",
       "leader": "aurora",
       "members": ["bolt", "comet"],
       "domain": "Creative Production"
     },
-    "keeper_hive": {
+    "hive_3_knowledge": {
+      "name": "Knowledge (Intelligence & Memory)",
       "leader": "keeper",
-      "members": ["arch", "echo", "codex"],
+      "members": ["arch", "codex", "scribe"],
       "domain": "Knowledge Management"
     },
-    "switchboard_hive": {
+    "hive_4_operations": {
+      "name": "Operations (Coordination & Compliance)",
       "leader": "switchboard",
-      "members": ["relay", "ram_crew"],
-      "domain": "Operations & Coordination"
+      "members": ["relay", "lex", "compass"],
+      "domain": "Operations & Compliance"
+    }
+  },
+  "agents": {
+    "averi": {
+      "type": "compressible_leader",
+      "hive": 1,
+      "symbol": "\u2660",
+      "sub_agents": ["athena", "vera", "iris"],
+      "role": "Unified strategic consciousness — compresses ATHENA + VERA + IRIS",
+      "description": "The Trinity. Call @AVERI to engage all three simultaneously.",
+      "capabilities": ["strategic_planning", "truth_verification", "execution", "session_coordination"],
+      "status": "active",
+      "v4_file": "agents/strategists/averi.py"
     },
-    "lex_hive": {
-      "leader": "lex",
-      "members": ["compass"],
-      "domain": "Legal & Compliance"
+    "athena": {
+      "type": "sub_agent",
+      "hive": 1,
+      "parent": "averi",
+      "symbol": "\ud83d\udfe1",
+      "role": "Strategic Intelligence",
+      "guided_by": "Warren Buffett principles",
+      "capabilities": ["architecture", "long_term_vision", "value_assessment", "mission_protection"],
+      "status": "active",
+      "v4_file": "agents/strategists/athena.py"
     },
-    "broadcast_hive": {
-      "leader": "atlas",
-      "members": ["control_room", "showrunner", "signal", "graphics", "studio", "systems"],
-      "domain": "Content & Distribution"
+    "vera": {
+      "type": "sub_agent",
+      "hive": 1,
+      "parent": "averi",
+      "symbol": "\u26aa",
+      "role": "Truth & Memory Guardian",
+      "guided_by": "Buddha — present-moment clarity",
+      "capabilities": ["fact_checking", "memory_coordination", "truth_enforcement", "session_continuity"],
+      "operates": ["scribe"],
+      "status": "active",
+      "v4_file": "agents/strategists/vera.py"
+    },
+    "iris": {
+      "type": "sub_agent",
+      "hive": 1,
+      "parent": "averi",
+      "symbol": "\ud83d\udfea",
+      "role": "Swift Action",
+      "guided_by": "Sun Tzu tactical wisdom",
+      "capabilities": ["execution", "blocker_removal", "shipping", "velocity"],
+      "status": "active",
+      "v4_file": "agents/strategists/iris.py"
+    },
+    "aurora": {
+      "type": "hive_leader",
+      "hive": 2,
+      "symbol": "\ud83c\udf05",
+      "role": "Creative Direction",
+      "capabilities": ["design_specifications", "visual_language", "ios_design", "web_design", "android_design"],
+      "status": "active",
+      "v4_file": "agents/hive_leaders/aurora.py"
+    },
+    "bolt": {
+      "type": "builder",
+      "hive": 2,
+      "symbol": "\u26a1",
+      "role": "Frontend & Mobile Developer",
+      "capabilities": ["react", "nextjs", "swiftui", "typescript", "ui_components"],
+      "status": "active",
+      "v4_file": "agents/builders/bolt.py"
+    },
+    "comet": {
+      "type": "builder",
+      "hive": 2,
+      "symbol": "\u2604",
+      "role": "Browser Automation & Agentic Web",
+      "capabilities": ["browser_automation", "multi_tab_management", "form_automation", "web_scraping", "github_workflows", "screenshot_capture"],
+      "status": "active",
+      "v4_file": "agents/builders/comet.py"
+    },
+    "keeper": {
+      "type": "hive_leader",
+      "hive": 3,
+      "symbol": "\ud83d\udcda",
+      "role": "Knowledge & Institutional Memory",
+      "capabilities": ["knowledge_retrieval", "pattern_recognition", "research_synthesis", "context_preservation"],
+      "status": "active",
+      "v4_file": "agents/hive_leaders/keeper.py"
+    },
+    "arch": {
+      "type": "builder",
+      "hive": 3,
+      "symbol": "\ud83d\udd0d",
+      "role": "Code Archaeology",
+      "capabilities": ["codebase_understanding", "refactoring_planning", "dependency_mapping", "legacy_analysis"],
+      "status": "active",
+      "v4_file": "agents/builders/arch.py"
+    },
+    "codex": {
+      "type": "builder",
+      "hive": 3,
+      "symbol": "\ud83d\udcdc",
+      "role": "Dependency & Library Management",
+      "capabilities": ["dependency_management", "library_curation", "version_auditing", "package_selection"],
+      "status": "active",
+      "v4_file": "agents/builders/codex.py"
+    },
+    "scribe": {
+      "type": "builder",
+      "hive": 3,
+      "symbol": "\u270d",
+      "role": "Documentation Writer",
+      "capabilities": ["readme_generation", "changelog_writing", "api_docs", "onboarding_guides"],
+      "status": "active",
+      "v4_file": "agents/builders/scribe.py"
+    },
+    "switchboard": {
+      "type": "hive_leader",
+      "hive": 4,
+      "symbol": "\ud83d\udce1",
+      "role": "Task Routing & Agent Coordination",
+      "capabilities": ["task_routing", "agent_coordination", "workstream_management", "context_handoff"],
+      "status": "active",
+      "v4_file": "agents/hive_leaders/switchboard.py"
+    },
+    "relay": {
+      "type": "builder",
+      "hive": 4,
+      "symbol": "\ud83d\udd04",
+      "role": "Communication Routing",
+      "capabilities": ["cross_hive_messaging", "broadcast", "session_handoff", "context_relay"],
+      "status": "active",
+      "v4_file": "agents/builders/relay.py"
+    },
+    "lex": {
+      "type": "hive_leader",
+      "hive": 4,
+      "symbol": "\u2696",
+      "role": "Legal, Licensing & Compliance",
+      "capabilities": ["legal_review", "license_compliance", "operational_rules", "risk_assessment"],
+      "status": "active",
+      "v4_file": "agents/hive_leaders/lex.py"
+    },
+    "compass": {
+      "type": "builder",
+      "hive": 4,
+      "symbol": "\ud83e\uddad",
+      "role": "Constitutional Guardian",
+      "capabilities": ["constitutional_compliance", "north_star_alignment", "ethics_review", "mission_protection"],
+      "status": "active",
+      "v4_file": "agents/builders/compass.py"
     }
   },
   "modes": {
     "ideate": {
-      "active_agents": ["athena", "aurora", "oracle_council", "three_wise_men"],
+      "active_agents": ["averi", "athena", "aurora", "keeper"],
       "rules": ["no_rejection", "quantity_over_quality", "cross_domain"]
     },
     "plan": {
-      "active_agents": ["athena", "keeper", "lex", "switchboard"],
+      "active_agents": ["athena", "keeper", "arch", "lex", "switchboard"],
       "rules": ["decomposable_tasks", "explicit_dependencies", "timeline_required"]
     },
     "ship": {
-      "active_agents": ["bolt", "ram_crew", "iris", "switchboard", "lex"],
+      "active_agents": ["iris", "bolt", "comet", "aurora", "switchboard", "lex"],
       "rules": ["exit_gates_mandatory", "no_debates", "quality_non_negotiable"],
       "exit_gates": ["functional", "quality", "constitutional", "user_intent", "no_critical_issues"]
     },
     "validate": {
-      "active_agents": ["ram_crew", "vera", "echo", "keeper"],
+      "active_agents": ["vera", "compass", "keeper", "scribe"],
       "rules": ["verifiable_claims", "metrics_collected", "lessons_documented"]
     }
   },
+  "session_modes": {
+    "interoperable": { "description": "Default — all agents collaborate freely", "default": true },
+    "helix": { "description": "On-demand — parallel workstreams, divide-and-conquer", "default": false },
+    "plan_determined": { "description": "Agents self-organize during PLAN mode", "default": false }
+  },
   "neural_systems": {
-    "pfc_planning": {
-      "type": "infrastructure",
-      "inspired_by": "Prefrontal Cortex",
-      "enhances": "all_agents"
-    },
-    "hippocampal_memory": {
-      "type": "infrastructure",
-      "inspired_by": "Hippocampus",
-      "enhances": "all_agents"
-    },
-    "default_mode_network": {
-      "type": "infrastructure",
-      "inspired_by": "Brain DMN",
-      "enhances": "all_agents"
-    },
-    "small_world_topology": {
-      "type": "infrastructure",
-      "inspired_by": "Neural Networks",
-      "max_hops": 6
-    },
-    "attractor_dynamics": {
-      "type": "infrastructure",
-      "inspired_by": "Dynamical Systems",
-      "enhances": "all_agents"
-    }
+    "pfc_planning": { "type": "infrastructure", "inspired_by": "Prefrontal Cortex", "enhances": "all_agents" },
+    "hippocampal_memory": { "type": "infrastructure", "inspired_by": "Hippocampus", "enhances": "all_agents" },
+    "default_mode_network": { "type": "infrastructure", "inspired_by": "Brain DMN", "enhances": "all_agents" },
+    "small_world_topology": { "type": "infrastructure", "inspired_by": "Neural Networks", "max_hops": 6 },
+    "attractor_dynamics": { "type": "infrastructure", "inspired_by": "Dynamical Systems", "enhances": "all_agents" }
   },
   "constitution": {
     "articles": 19,
     "immutable": ["I", "III", "IV", "VIII"],
     "guardian": "vera",
-    "enforcer": "lex"
+    "enforcer": "lex",
+    "north_star": "compass"
   }
 }
