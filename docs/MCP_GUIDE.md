@@ -11,7 +11,7 @@ The Model Context Protocol is an open standard for connecting AI models to exter
 With MCP, you can:
 
 - Connect Inception Engine to Claude Desktop, VS Code, or any MCP-compatible client
-- Access all 27 agents through a standardized protocol
+- Access all 15 agents through a standardized protocol
 - Run the four-mode workflow (IDEATE / PLAN / SHIP / VALIDATE) from your preferred interface
 - Maintain constitutional compliance across all interactions
 
