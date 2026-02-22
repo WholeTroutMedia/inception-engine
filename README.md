@@ -6,6 +6,11 @@
 > 
 > *The Alice Principle* - Learning through wonder, exploration through play.
 
+
+> **New here? Never used Git or Python?** Start with the [Complete Beginner's Guide](./docs/setup/START_HERE.md) — it walks you through downloading everything you need, step by step, with links for Windows, Mac, and Linux.
+>
+> **Already comfortable with dev tools?** Jump to [Choose How to Run Inception Engine](#choose-how-to-run-inception-engine) to pick your LLM platform.
+
 ---
 
 ## Down the Rabbit Hole
