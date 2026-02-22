@@ -2,6 +2,9 @@
 
 Use Inception Engine with OpenAI's API or ChatGPT.
 
+> **Prerequisites:** Git and Python installed, with an OpenAI API key. If you don't have these yet, start with the [Complete Beginner's Guide](./START_HERE.md) first.
+
+
 ## Who This Is For
 
 - Developers with an OpenAI API key
