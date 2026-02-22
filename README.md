@@ -187,15 +187,12 @@ Switch modes anytime. Just ask.
 
 ---
 
-
----
-
 ## Architecture
 
 ```
 inception-engine/
 |-- CONSTITUTION.md          # Full 19-article governance framework
-|-- design-system/           # Wonder Engine - tokens, themes, components
+|-- design-system/              # Wonder Engine - design language and token architecture
 |   |-- tokens.json          # Color, spacing, typography, motion tokens
 |   |-- WONDER_ENGINE.md     # The Alice Principle design philosophy
 |-- docs/                    # Deep-dive documentation
@@ -203,6 +200,10 @@ inception-engine/
 |   |-- FOUR_MODES.md        # IDEATE / PLAN / SHIP / VALIDATE
 |   |-- NEURAL_ARCHITECTURE.md # Brain-inspired coordination systems
 |   |-- AGENTS.md            # Full agent registry and hive structure
+|   |-- BROWSER_SYSTEM.md  # Agentic browsing and COMET setup
+|   |-- IDE_ANTIGRAVITY.md # IDE and Google Antigravity workspace setup
+|   |-- CLAUDE_MCP.md      # Claude Desktop + MCP beginner guide
+|   |-- setup/             # Platform-specific setup guides (7 platforms)
 |   |-- MCP_GUIDE.md         # Model Context Protocol integration
 |   |-- COMET_GITHUB.md      # Browser automation + GitHub workflows
 |-- examples/                # Configuration templates
