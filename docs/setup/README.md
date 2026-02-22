@@ -1,3 +1,13 @@
+> ## Brand New? Start Here First
+> 
+> **Never used Git, Python, or an API key before?**
+> 
+> Before picking a platform below, read the [Complete Beginner's Guide](./START_HERE.md).
+> It covers downloading the tools, getting a free API key, and booting the engine from scratch.
+> Takes about 20 minutes total. Download links and step-by-step instructions for Windows, Mac, and Linux are all included.
+
+---
+
 # Setup Guides
 
 Choose how you want to run Inception Engine. Each guide takes you from zero to AVERI booted.
