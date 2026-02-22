@@ -23,10 +23,47 @@ Current mode: IDEATE
 @AVERI boot
 ```
 
-This activates the Trinity:
-- **ATHENA** begins strategic assessment
-- **VERA** initializes truth and memory systems
-- **IRIS** stands ready for execution
+When you boot AVERI, the engine responds with a welcome message showing exactly what you're working with:
+
+```
+=== INCEPTION ENGINE ===
+Welcome to Inception Engine.
+
+Active Package: Light Edition
+
+Core Agents:
+  AVERI (ATHENA + VERA + IRIS) - Strategic consciousness triad
+  Oracles: LEONARDO, COSMOS, SAGE - External wisdom and analysis
+  Council: Buffett, Buddha, Sun Tzu - Advisory perspective
+
+Builder Agents:
+  AURORA - Design and creative direction
+  BOLT - Frontend and rapid development
+  COMET - Backend and browser automation
+  LEX - Legal, licensing, compliance
+  SWITCHBOARD - Task routing and coordination
+  RELAY - Communication routing
+  ARCH - Code archaeology
+  CODEX - Library and dependency management
+  RAM CREW - Quality assurance and optimization
+  COMPASS - Constitutional guardian
+  + more (see docs/AGENTS.md for full registry)
+
+Modes: IDEATE | PLAN | SHIP | VALIDATE
+Session Mode: INTEROPERABLE (all agents collaborate freely)
+
+Options:
+  @AVERI mode [IDEATE|PLAN|SHIP|VALIDATE] - Set working mode
+  @AVERI helix - Enable parallel processing
+  @AVERI validate - Launch independent validation stream
+  @[AGENT] - Call any agent directly
+
+Ready. What are we building?
+```
+
+All agents are **interoperable by default** - they collaborate freely on any task. The engine routes work to the right specialists automatically.
+
+**HELIX mode** is optional. Request it when you want the engine to split a problem into parallel workstreams. Otherwise, agents work together as a unified team.
 
 ## Step 3: Choose Your Mode
 
@@ -52,34 +89,46 @@ Build the audio input module with FFT analysis
 ```
 
 ### VALIDATE Mode
-Use to verify, test, and ensure quality.
+Launches an **independent validation stream** - a separate set of agents with fresh context that review the completed work. Validators are NOT active during IDEATE, PLAN, or SHIP sessions. They operate as a distinct thought process to ensure unbiased quality review.
 ```
 @AVERI mode VALIDATE
 Run all quality checks on the audio module
 ```
+
+> **Note:** VALIDATE spins up fresh agentic streams. These validators have no memory of the build session - they see only the output and the requirements. This separation ensures honest, unbiased assessment.
 
 ## Step 4: Invoke Specific Agents
 
 You can call agents directly when you need specialized help:
 
 ```
-@ATHENA   - Strategic questions, architecture decisions
-@VERA     - Fact checking, memory retrieval, truth verification
-@IRIS     - Fast execution, shipping, blocker removal
-@LEX      - Legal review, licensing, compliance
-@KEEPER   - Knowledge retrieval, documentation lookup
-@AURORA   - Creative direction, design decisions
-@BOLT     - Rapid prototyping, quick builds
+@ATHENA  - Strategic questions, architecture decisions
+@VERA    - Fact checking, memory retrieval, truth verification
+@IRIS    - Fast execution, shipping, blocker removal
+@LEX     - Legal review, licensing, compliance
+@KEEPER  - Knowledge retrieval, documentation lookup
+@AURORA  - Creative direction, design decisions
+@BOLT    - Rapid prototyping, quick builds
 ```
 
-## Step 5: Use the Quad Helix
+## Step 5: Session Modes
 
-Every task should advance all four strands:
+You can change how agents organize at any time:
 
-1. **Structure** - Is the architecture right?
-2. **Content** - Is the substance complete?
-3. **Quality** - Does it pass all checks?
-4. **Delivery** - Is it shipped and deployed?
+| Mode | What It Means |
+|------|---------------|
+| **INTEROPERABLE** (default) | All agents collaborate freely on every task |
+| **HELIX** (on-demand) | Parallel workstreams - divide and conquer |
+| **PLAN-DETERMINED** | Agents self-organize based on the plan |
+
+```
+@AVERI session HELIX
+```
+
+Switch back anytime:
+```
+@AVERI session INTEROPERABLE
+```
 
 ## Example: Build a Portfolio Site
 
@@ -88,11 +137,15 @@ You: @AVERI boot. I need a photography portfolio site.
      Dark theme, minimal, fast. 12 images with a contact form.
      Ship it today.
 
-ATHENA: Breaking this down into four strands:
-  Structure: Next.js 15, image optimization pipeline
-  Content: Gallery layout, contact form, SEO metadata
-  Quality: Lighthouse 95+, mobile responsive, WCAG AA
-  Delivery: Vercel deployment, custom domain ready
+AVERI: Booting Inception Engine...
+  Agents active: ATHENA, VERA, IRIS, AURORA, BOLT, RAM CREW
+  Mode: SHIP (express workflow)
+
+ATHENA: Decomposing into tasks:
+  Architecture: Next.js 15, image optimization pipeline
+  Layout: Gallery, contact form, SEO metadata
+  Quality targets: Lighthouse 95+, mobile responsive, WCAG AA
+  Deployment: Vercel, custom domain ready
 
 AURORA: Design direction - dark palette, generous whitespace,
   images as hero elements. Suggested layout: masonry grid
@@ -104,7 +157,7 @@ BOLT: Scaffolding now. Components:
   - Navigation (transparent -> solid on scroll)
   - Footer (social links, copyright)
 
-IRIS: All four exit gates passing. Deploying.
+IRIS: All exit gates passing. Deploying.
   Site live at: portfolio.vercel.app
   Performance: Lighthouse 98/100
   Time to production: 12 minutes.
@@ -116,7 +169,7 @@ IRIS: All four exit gates passing. Deploying.
 Not every task needs every agent. The system auto-routes based on context:
 
 | Task Type | Primary Agents | Supporting Agents |
-|-----------|---------------|------------------|
+|-----------|----------------|-------------------|
 | Code generation | BOLT, RAM_CREW | SWITCHBOARD, LEX |
 | Architecture | ATHENA, KEEPER | VERA, SCRIBE |
 | Design | AURORA, LEONARDO | GRAPHICS, STUDIO |
@@ -153,4 +206,4 @@ SHIP mode has strict exit gates. Complete all required checks before transitioni
 
 ---
 
-*Built by WholeTrout Media. Liberating artists everywhere.*
+Built by WholeTrout Media. Liberating artists everywhere.
