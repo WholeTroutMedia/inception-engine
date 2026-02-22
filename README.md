@@ -112,6 +112,76 @@ Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 
 See [`examples/agent-config.json`](./examples/agent-config.json) for a complete configuration template covering agents, modes, neural systems, and constitutional parameters.
 
+## Choose How to Run Inception Engine
+
+Inception Engine plugs into any LLM or platform. Pick the path that fits your workflow:
+
+| Method | Best For | Time to Start |
+|--------|----------|---------------|
+| [OpenAI / ChatGPT](./docs/setup/openai-chatgpt.md) | Developers with OpenAI API keys | 5 min |
+| [Anthropic Claude + MCP](./docs/setup/anthropic-claude-mcp.md) | Claude Desktop users, MCP enthusiasts | 10 min |
+| [Google Gemini](./docs/setup/gemini-web-and-cli.md) | Gemini web app or CLI users | 5 min |
+| [Perplexity + COMET](./docs/setup/perplexity-and-comet.md) | Research-backed development | 5 min |
+| [IDE / Antigravity](./docs/setup/ide-and-antigravity.md) | Developers who live in their editor | 5 min |
+| [LLM Gateways + MCP](./docs/setup/llm-gateways-and-mcp.md) | Multi-provider power users | 15 min |
+| [No-Code Automation](./docs/setup/no-code-automation.md) | Non-coders, automation builders | 10 min |
+
+[Browse all setup guides](./docs/setup/README.md)
+
+---
+
+## Light Edition vs Full Brainchild V4
+
+This repo is the **Light Edition** of Inception Engine - a curated subset designed to get you building fast. The full system (Brainchild V4) adds production infrastructure, strict validation gates, and a larger agent roster.
+
+| Area | Light Edition (this repo) | Full Brainchild V4 |
+|------|---------------------------|-----------------------|
+| Modes | IDEATE, PLAN, SHIP, VALIDATE (simplified) | IDEATE, PLAN, SHIP, VALIDATE (strict gates) |
+| Agents | AVERI + Oracles + Council + ~15 builders | 35+ builders + 5 isolated validators |
+| Validation | Checklists and recommendations | Independent validator swarm, fresh context |
+| Orchestration | In-process orchestrator | Full orchestrator, Mode Manager, Gate Validator |
+| Interfaces | Any LLM: API, MCP, IDE, Gemini, Perplexity | CLI, Python API, REST/WebSocket, infra hooks |
+| Infra | No infra required | Docker, K8s, monitoring (Prometheus/Grafana) |
+
+**What you get in the Light Edition:**
+
+- **AVERI** (ATHENA + VERA + IRIS) - Strategic coordination triad
+- **Oracles** (LEONARDO, COSMOS, SAGE) - External wisdom and analysis
+- **Council** (Buffett, Buddha, Sun Tzu) - Advisory perspective
+- **~15 Core Builders** - Design, frontend, backend, knowledge, ops agents
+- **HELIX Formation** - On-demand parallel processing
+- **Constitutional Governance** - 19 articles, always enforced
+
+**Planned updates** (pushed from full system):
+- Stricter VALIDATE mode with isolated validator agents
+- CLI and REST API interfaces
+- Cross-session memory and learning
+- Additional specialized agents
+- Docker/K8s deployment templates
+
+**Hit a wall?** [Open an issue](https://github.com/WholeTroutMedia/inception-engine/issues) describing your use case. Almost everything in the full system is designed to be pushed down into this engine over time. Feature requests welcome.
+
+---
+
+## Agent Organization
+
+All agents are **interoperable by default** - they collaborate freely on any task. You don't manage who does what; the engine figures it out.
+
+**HELIX mode** is optional. When you request it, the engine splits your problem into parallel strands and has multiple agents think simultaneously, then braids their answers back together. You experience one conversation; under the hood, many specialists are thinking at once.
+
+Three session modes:
+
+| Mode | What It Means |
+|------|---------------|
+| **INTEROPERABLE** (default) | All agents collaborate freely |
+| **HELIX** (on-demand) | Parallel workstreams, divide-and-conquer |
+| **PLAN-DETERMINED** | Agents self-organize during PLAN mode |
+
+Switch modes anytime. Just ask.
+
+---
+
+
 ---
 
 ## Architecture
