@@ -2,6 +2,8 @@
 
 Use Inception Engine with Claude via the Model Context Protocol (MCP).
 
+> **Prerequisites:** Git and Python installed, with an Anthropic API key. New to all this? Start with the [Complete Beginner's Guide](./START_HERE.md) first.
+
 ## Who This Is For
 
 - Claude Desktop users
