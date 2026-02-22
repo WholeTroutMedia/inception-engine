@@ -104,7 +104,7 @@ Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 
 - [The Four Modes](./docs/FOUR_MODES.md) - How the workflow cycle operates
 - [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) - How agent coordination works
-- [Agent Registry](./docs/AGENTS.md) - Meet the 27 specialized agents
+- [Agent Registry](./docs/AGENTS.md) - Meet the 15 agents, 4 hives
 - [MCP Guide](./docs/MCP_GUIDE.md) - Connect via Model Context Protocol
 - [COMET + GitHub](./docs/COMET_GITHUB.md) - Browser automation and repo management
 
@@ -137,7 +137,7 @@ This repo is the **Light Edition** of Inception Engine - a curated subset design
 | Area | Light Edition (this repo) | Full Brainchild V4 |
 |------|---------------------------|-----------------------|
 | Modes | IDEATE, PLAN, SHIP, VALIDATE (simplified) | IDEATE, PLAN, SHIP, VALIDATE (strict gates) |
-| Agents | AVERI + Oracles + Council + ~15 builders | 35+ builders + 5 isolated validators |
+| Agents | 15 agents, 4 hives (INTEROPERABLE default) | 35 agents, 6 hives + 5 isolated validators |
 | Validation | Checklists and recommendations | Independent validator swarm, fresh context |
 | Orchestration | In-process orchestrator | Full orchestrator, Mode Manager, Gate Validator |
 | Interfaces | Any LLM: API, MCP, IDE, Gemini, Perplexity | CLI, Python API, REST/WebSocket, infra hooks |
@@ -148,7 +148,7 @@ This repo is the **Light Edition** of Inception Engine - a curated subset design
 - **AVERI** (ATHENA + VERA + IRIS) - Strategic coordination triad
 - **Oracles** (LEONARDO, COSMOS, SAGE) - External wisdom and analysis
 - **Council** (Buffett, Buddha, Sun Tzu) - Advisory perspective
-- **~15 Core Builders** - Design, frontend, backend, knowledge, ops agents
+- **15 Core Agents** (AVERI Trinity + 4 Builders + 4 Knowledge + 4 Ops) - Design, frontend, backend, knowledge, ops agents
 - **HELIX Formation** - On-demand parallel processing
 - **Constitutional Governance** - 19 articles, always enforced
 
@@ -227,7 +227,7 @@ Every agent in this system asks the same question before every action:
 | [Getting Started](./docs/GETTING_STARTED.md) | Setup, configuration, first steps |
 | [Four Modes](./docs/FOUR_MODES.md) | IDEATE / PLAN / SHIP / VALIDATE deep dive |
 | [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) | Brain-inspired coordination systems |
-| [Agent Registry](./docs/AGENTS.md) | All 27 agents, 6 hives, roles and capabilities |
+| [Agent Registry](./docs/AGENTS.md) | All 15 agents, 4 hives, roles and capabilities |
 | [MCP Guide](./docs/MCP_GUIDE.md) | Model Context Protocol integration |
 | [COMET + GitHub](./docs/COMET_GITHUB.md) | Browser automation and repo management |
 | [Design System](./design-system/) | Wonder Engine tokens, themes, components |
