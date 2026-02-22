@@ -5,13 +5,15 @@ Inception Engine operates in four distinct modes. Each mode activates different 
 ## Mode Overview
 
 ```
- IDEATE ---------> PLAN ----------> SHIP ----------> VALIDATE
- Dream it         Map it           Build it         Prove it
- Divergent        Convergent       Execution        Verification
- No limits        Every detail     Zero fluff       Ship or fix
+IDEATE ---------> PLAN ----------> SHIP ----------> VALIDATE
+Dream it          Map it           Build it         Prove it
+Divergent         Convergent       Execution        Verification
+No limits         Every detail     Zero fluff       Ship or fix
 ```
 
 You can enter any mode at any time. You can also skip modes for express workflows.
+
+> **Important:** All agents are **interoperable by default** across IDEATE, PLAN, and SHIP modes. They collaborate freely unless you request HELIX formation for parallel processing. VALIDATE mode is the exception - it runs as an **independent stream** with fresh agents (see below).
 
 ---
 
@@ -104,27 +106,39 @@ You can enter any mode at any time. You can also skip modes for express workflow
 
 ## VALIDATE Mode
 
-**Purpose:** Verify everything works and meets standards.
+**Purpose:** Independent verification by fresh agents in isolated streams.
 
-**Active Agents:**
+VALIDATE is fundamentally different from the other three modes. It does **not** use the same agents that built the work. Instead, it spins up **fresh agentic streams** - separate thought processes with no memory of the build session. This ensures unbiased, honest assessment.
+
+**How It Works:**
+- VALIDATE launches a new, isolated agent context
+- Validators see only the **output** and the **requirements** - not the build history
+- They have no knowledge of decisions made during IDEATE, PLAN, or SHIP
+- This separation prevents confirmation bias and groupthink
+
+**Validator Agents (fresh streams):**
 - RAM_CREW (quality validation)
 - VERA (truth verification)
 - ECHO (pattern analysis)
-- KEEPER (documentation)
+- KEEPER (documentation review)
 
 **Rules:**
 - Every claim must be verifiable
 - Performance metrics collected
 - User feedback integrated
 - Lessons learned documented
+- Validators cannot be overridden by build agents
 
 **Outputs:**
 - Test results
 - Performance reports
 - Quality scorecards
 - Improvement recommendations
+- Pass/fail determination
 
-**Transition:** Back to any mode based on findings.
+**Transition:** Back to any mode based on findings. If validators find issues, the system returns to SHIP (or PLAN) with specific remediation tasks.
+
+> **Why separate streams?** If the same agents that built something also validate it, they carry cognitive bias from the build process. Fresh streams ensure the validation is genuinely independent - like having a separate QA team that never saw the code being written.
 
 ---
 
@@ -163,8 +177,6 @@ Review this existing architecture for scalability issues.
 | IDEATE | Divergent, creative | Fast | None |
 | PLAN | Convergent, analytical | Medium | Completeness |
 | SHIP | Focused, execution | Maximum | Full exit gates |
-| VALIDATE | Critical, verification | Thorough | Evidence-based |
+| VALIDATE | Critical, verification (isolated) | Thorough | Evidence-based |
 
----
-
-*Each mode is a lens, not a cage. Use what serves the work.*
+Each mode is a lens, not a cage. Use what serves the work.
