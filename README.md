@@ -89,6 +89,9 @@ COMET is the browser automation agent. It operates real browsers, manages multip
 
 ---
 
+**New to all this?** Skip the terminal and [download the ZIP](https://github.com/WholeTroutMedia/inception-engine/archive/refs/heads/main.zip) or see the [Getting Started guide](./docs/GETTING_STARTED.md) for a full walkthrough.
+
+
 ## Quick Start
 
 ### 1. Clone and explore
@@ -105,6 +108,9 @@ Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 - [The Four Modes](./docs/FOUR_MODES.md) - How the workflow cycle operates
 - [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) - How agent coordination works
 - [Agent Registry](./docs/AGENTS.md) - Meet the 15 agents, 4 hives
+- [Browser System](./docs/BROWSER_SYSTEM.md) - Agentic browsing and COMET setup
+- [IDE + Antigravity](./docs/IDE_ANTIGRAVITY.md) - IDE and Google Antigravity workspace setup
+- [Setup Guides](./docs/setup/README.md) - Platform-specific setup for every skill level
 - [MCP Guide](./docs/MCP_GUIDE.md) - Connect via Model Context Protocol
 - [COMET + GitHub](./docs/COMET_GITHUB.md) - Browser automation and repo management
 
@@ -228,6 +234,9 @@ Every agent in this system asks the same question before every action:
 | [Four Modes](./docs/FOUR_MODES.md) | IDEATE / PLAN / SHIP / VALIDATE deep dive |
 | [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) | Brain-inspired coordination systems |
 | [Agent Registry](./docs/AGENTS.md) | All 15 agents, 4 hives, roles and capabilities |
+| [Browser System](./docs/BROWSER_SYSTEM.md) | Agentic browsing, COMET setup, privacy guide |
+| [IDE + Antigravity](./docs/IDE_ANTIGRAVITY.md) | IDE workspace setup, Google Antigravity guide |
+| [Claude + MCP Setup](./docs/CLAUDE_MCP.md) | Beginner-friendly Claude Desktop + MCP setup |
 | [MCP Guide](./docs/MCP_GUIDE.md) | Model Context Protocol integration |
 | [COMET + GitHub](./docs/COMET_GITHUB.md) | Browser automation and repo management |
 | [Design System](./design-system/) | Wonder Engine tokens, themes, components |
