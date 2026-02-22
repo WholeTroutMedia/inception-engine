@@ -7,7 +7,7 @@ Agents are dynamically loaded from the registry and activated only when needed.
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Set
+from typing import Dict, List, Optional, Any, Set, Tuple
 from dataclasses import dataclass
 from enum import Enum
 import importlib
