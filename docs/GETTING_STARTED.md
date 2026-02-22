@@ -72,9 +72,9 @@ You can call agents directly when you need specialized help:
 @BOLT     - Rapid prototyping, quick builds
 ```
 
-## Step 5: Use the Quad Helix
+## Step 5: Advance All Four Dimensions
 
-Every task should advance all four strands:
+Every task should advance all four dimensions:
 
 1. **Structure** - Is the architecture right?
 2. **Content** - Is the substance complete?
@@ -88,7 +88,7 @@ You: @AVERI boot. I need a photography portfolio site.
      Dark theme, minimal, fast. 12 images with a contact form.
      Ship it today.
 
-ATHENA: Breaking this down into four strands:
+ATHENA: Breaking this down into four dimensions:
   Structure: Next.js 15, image optimization pipeline
   Content: Gallery layout, contact form, SEO metadata
   Quality: Lighthouse 95+, mobile responsive, WCAG AA
