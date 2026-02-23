@@ -58,7 +58,7 @@ class GateValidator:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         self.results: List[GateResult] = []
-                self.gates = ["code_complete", "tests_passing", "deployed", "live_accessible"]
+        self.gates = ["code_complete", "tests_passing", "deployed", "live_accessible"]
     
     def validate_all_gates(self, context: Dict[str, Any]) -> Tuple[bool, List[GateResult]]:
         """
