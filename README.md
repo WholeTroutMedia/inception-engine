@@ -6,6 +6,43 @@
 > 
 > *The Alice Principle* - Learning through wonder, exploration through play.
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-In%20Active%20Development-yellow?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/License-AGPL%203.0-blue?style=for-the-badge" alt="License" />
+</p>
+
+---
+
+## ⚠️ Development Status
+
+**Inception Engine is in active development.** Core architecture is complete, implementation is ongoing.
+
+### ✅ What Works Now
+- 📖 Complete constitutional framework (19 articles)
+- 📖 Full agent architecture documentation (15 agents, 4 hives)
+- 📖 Design system (Wonder Engine) with working token library
+- 📖 Neural architecture specification
+- 📖 Four-mode workflow design
+- 🔧 Core Python scaffolding (orchestrator, mode manager, agent loader)
+- 🔧 FastAPI server structure
+- 🔧 Docker/docker-compose setup
+
+### 🔨 In Active Development (COMETs working on this)
+- Mode implementations (IDEATE/PLAN/SHIP/VALIDATE)
+- Memory system (Hippocampus/Neocortex)
+- Working example scripts
+- CLI functionality
+- Full test coverage
+
+### 📋 Planned
+- REST API with tested endpoints
+- WebSocket real-time updates  
+- Production deployment templates
+- Cross-session learning
+- Additional specialized agents
+
+**Want to contribute?** See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to help build what's documented.
+
 ---
 
 ## Down the Rabbit Hole
@@ -22,7 +59,7 @@ If less free, we don't build it.
 
 ---
 
-## What It Can Do
+## What It Can Do (Architecture Design)
 
 ### Four-Mode Workflow
 
@@ -75,24 +112,21 @@ The Wonder Engine ships as a blank canvas - no opinions about what your project 
 
 [Explore the design system](./design-system/)
 
-### MCP Integration
+### MCP Integration (Planned)
 
-Inception Engine works as an MCP (Model Context Protocol) server, allowing any MCP-compatible client to connect and use the agent system directly.
+Inception Engine is designed to work as an MCP (Model Context Protocol) server, allowing any MCP-compatible client to connect and use the agent system directly.
 
-[MCP setup guide](./docs/MCP_GUIDE.md)
+[MCP integration guide](./docs/MCP_GUIDE.md) (conceptual - not yet implemented)
 
-### Browser Automation with COMET
+### Browser Automation with COMET (Planned)
 
 COMET is the browser automation agent. It operates real browsers, manages multiple tabs in parallel, fills forms, navigates sites, and executes multi-step workflows across the web. Pair it with GitHub for automated repo management, CI/CD, and deployment.
 
-[COMET + GitHub guide](./docs/COMET_GITHUB.md)
+[COMET + GitHub guide](./docs/COMET_GITHUB.md) (design spec)
 
 ---
 
-**New to all this?** Skip the terminal and [download the ZIP](https://github.com/WholeTroutMedia/inception-engine/archive/refs/heads/main.zip) or see the [Getting Started guide](./docs/GETTING_STARTED.md) for a full walkthrough.
-
-
-## Quick Start
+## Getting Started
 
 ### 1. Clone and explore
 
@@ -101,36 +135,56 @@ git clone https://github.com/WholeTroutMedia/inception-engine.git
 cd inception-engine
 ```
 
-### 2. Read the docs
+### 2. Read the architecture
 
 Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 
 - [The Four Modes](./docs/FOUR_MODES.md) - How the workflow cycle operates
 - [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) - How agent coordination works
 - [Agent Registry](./docs/AGENTS.md) - Meet the 15 agents, 4 hives
-- [Browser System](./docs/BROWSER_SYSTEM.md) - Agentic browsing and COMET setup
-- [IDE + Antigravity](./docs/IDE_ANTIGRAVITY.md) - IDE and Google Antigravity workspace setup
-- [Setup Guides](./docs/setup/README.md) - Platform-specific setup for every skill level
-- [MCP Guide](./docs/MCP_GUIDE.md) - Connect via Model Context Protocol
-- [COMET + GitHub](./docs/COMET_GITHUB.md) - Browser automation and repo management
+- [Constitution](./CONSTITUTION.md) - The governance framework
+- [Design System](./design-system/) - Wonder Engine tokens and philosophy
 
-### 3. Configure
+### 3. Explore the code
 
-See [`examples/agent-config.json`](./examples/agent-config.json) for a complete configuration template covering agents, modes, neural systems, and constitutional parameters.
+```bash
+# Core orchestration (scaffolding)
+ls src/core/
 
-## Choose How to Run Inception Engine
+# Agent definitions
+ls src/agents/
 
-Inception Engine plugs into any LLM or platform. Pick the path that fits your workflow:
+# API structure
+ls src/api/
 
-| Method | Best For | Time to Start |
-|--------|----------|---------------|
-| [OpenAI / ChatGPT](./docs/setup/openai-chatgpt.md) | Developers with OpenAI API keys | 5 min |
-| [Anthropic Claude + MCP](./docs/setup/anthropic-claude-mcp.md) | Claude Desktop users, MCP enthusiasts | 10 min |
-| [Google Gemini](./docs/setup/gemini-web-and-cli.md) | Gemini web app or CLI users | 5 min |
-| [Perplexity + COMET](./docs/setup/perplexity-and-comet.md) | Research-backed development | 5 min |
-| [IDE / Antigravity](./docs/setup/ide-and-antigravity.md) | Developers who live in their editor | 5 min |
-| [LLM Gateways + MCP](./docs/setup/llm-gateways-and-mcp.md) | Multi-provider power users | 15 min |
-| [No-Code Automation](./docs/setup/no-code-automation.md) | Non-coders, automation builders | 10 min |
+# Design tokens
+cat design-system/tokens.json
+```
+
+### 4. Contribute (Implementation Needed)
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for how to help implement the architecture.
+
+**High-priority needs:**
+- Mode implementations (src/modes/)
+- Memory system (src/memory/)
+- Working example scripts
+- Test coverage
+- CLI functionality
+
+## Choose How to Use Inception Engine
+
+Inception Engine is designed to plug into any LLM or platform. These guides show the intended integration points:
+
+| Method | Documentation | Status |
+|--------|--------------|--------|
+| OpenAI / ChatGPT | [Setup Guide](./docs/setup/openai-chatgpt.md) | 📖 Conceptual |
+| Anthropic Claude + MCP | [Setup Guide](./docs/setup/anthropic-claude-mcp.md) | 📖 Conceptual |
+| Google Gemini | [Setup Guide](./docs/setup/gemini-web-and-cli.md) | 📖 Conceptual |
+| Perplexity + COMET | [Setup Guide](./docs/setup/perplexity-and-comet.md) | 📖 Conceptual |
+| IDE / Antigravity | [Setup Guide](./docs/setup/ide-and-antigravity.md) | 📖 Conceptual |
+| LLM Gateways + MCP | [Setup Guide](./docs/setup/llm-gateways-and-mcp.md) | 📖 Conceptual |
+| No-Code Automation | [Setup Guide](./docs/setup/no-code-automation.md) | 📖 Conceptual |
 
 [Browse all setup guides](./docs/setup/README.md)
 
@@ -138,7 +192,7 @@ Inception Engine plugs into any LLM or platform. Pick the path that fits your wo
 
 ## Light Edition vs Full Brainchild V4
 
-This repo is the **Light Edition** of Inception Engine - a curated subset designed to get you building fast. The full system (Brainchild V4) adds production infrastructure, strict validation gates, and a larger agent roster.
+This repo is the **Light Edition** of Inception Engine - a curated subset designed for rapid development. The full system (Brainchild V4) adds production infrastructure, strict validation gates, and a larger agent roster.
 
 | Area | Light Edition (this repo) | Full Brainchild V4 |
 |------|---------------------------|-----------------------|
@@ -146,15 +200,14 @@ This repo is the **Light Edition** of Inception Engine - a curated subset design
 | Agents | 15 agents, 4 hives (INTEROPERABLE default) | 35 agents, 6 hives + 5 isolated validators |
 | Validation | Checklists and recommendations | Independent validator swarm, fresh context |
 | Orchestration | In-process orchestrator | Full orchestrator, Mode Manager, Gate Validator |
-| Interfaces | Any LLM: API, MCP, IDE, Gemini, Perplexity | CLI, Python API, REST/WebSocket, infra hooks |
-| Infra | No infra required | Docker, K8s, monitoring (Prometheus/Grafana) |
+| Status | 🚧 In Development | 🚧 In Development |
 
 **What you get in the Light Edition:**
 
 - **AVERI** (ATHENA + VERA + IRIS) - Strategic coordination triad
 - **Oracles** (LEONARDO, COSMOS, SAGE) - External wisdom and analysis
 - **Council** (Buffett, Buddha, Sun Tzu) - Advisory perspective
-- **15 Core Agents** (AVERI Trinity + 4 Builders + 4 Knowledge + 4 Ops) - Design, frontend, backend, knowledge, ops agents
+- **15 Core Agents** - Design, frontend, backend, knowledge, ops agents
 - **HELIX Formation** - On-demand parallel processing
 - **Constitutional Governance** - 19 articles, always enforced
 
@@ -164,8 +217,6 @@ This repo is the **Light Edition** of Inception Engine - a curated subset design
 - Cross-session memory and learning
 - Additional specialized agents
 - Docker/K8s deployment templates
-
-**Hit a wall?** [Open an issue](https://github.com/WholeTroutMedia/inception-engine/issues) describing your use case. Almost everything in the full system is designed to be pushed down into this engine over time. Feature requests welcome.
 
 ---
 
@@ -192,23 +243,24 @@ Switch modes anytime. Just ask.
 ```
 inception-engine/
 |-- CONSTITUTION.md          # Full 19-article governance framework
-|-- design-system/              # Wonder Engine - design language and token architecture
+|-- design-system/           # Wonder Engine - design language and token architecture
 |   |-- tokens.json          # Color, spacing, typography, motion tokens
 |   |-- WONDER_ENGINE.md     # The Alice Principle design philosophy
+|-- src/                     # Core implementation (scaffolding)
+|   |-- core/                # Orchestration classes
+|   |-- agents/              # Agent definitions
+|   |-- api/                 # FastAPI server structure
+|   |-- cli/                 # CLI scaffolding
+|   |-- tests/               # Test suite
 |-- docs/                    # Deep-dive documentation
 |   |-- GETTING_STARTED.md   # Onboarding guide
 |   |-- FOUR_MODES.md        # IDEATE / PLAN / SHIP / VALIDATE
 |   |-- NEURAL_ARCHITECTURE.md # Brain-inspired coordination systems
-|   |-- AGENTS.md            # Full agent registry and hive structure
-|   |-- BROWSER_SYSTEM.md  # Agentic browsing and COMET setup
-|   |-- IDE_ANTIGRAVITY.md # IDE and Google Antigravity workspace setup
-|   |-- CLAUDE_MCP.md      # Claude Desktop + MCP beginner guide
-|   |-- setup/             # Platform-specific setup guides (7 platforms)
-|   |-- MCP_GUIDE.md         # Model Context Protocol integration
-|   |-- COMET_GITHUB.md      # Browser automation + GitHub workflows
+|   |-- AGENTS.md            # Full agent registry
+|   |-- setup/               # Platform-specific integration guides
 |-- examples/                # Configuration templates
 |   |-- agent-config.json    # Complete agent + neural system config
-|-- CONTRIBUTING.md          # How to contribute (constitutional compliance required)
+|-- CONTRIBUTING.md          # How to contribute
 |-- LICENSE                  # AGPL-3.0
 ```
 
@@ -231,17 +283,12 @@ Every agent in this system asks the same question before every action:
 | Resource | What You'll Find |
 |----------|------------------|
 | [Constitution](./CONSTITUTION.md) | The full 19-article governance framework |
-| [Getting Started](./docs/GETTING_STARTED.md) | Setup, configuration, first steps |
+| [Getting Started](./docs/GETTING_STARTED.md) | Architecture overview and concepts |
 | [Four Modes](./docs/FOUR_MODES.md) | IDEATE / PLAN / SHIP / VALIDATE deep dive |
 | [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) | Brain-inspired coordination systems |
 | [Agent Registry](./docs/AGENTS.md) | All 15 agents, 4 hives, roles and capabilities |
-| [Browser System](./docs/BROWSER_SYSTEM.md) | Agentic browsing, COMET setup, privacy guide |
-| [IDE + Antigravity](./docs/IDE_ANTIGRAVITY.md) | IDE workspace setup, Google Antigravity guide |
-| [Claude + MCP Setup](./docs/CLAUDE_MCP.md) | Beginner-friendly Claude Desktop + MCP setup |
-| [MCP Guide](./docs/MCP_GUIDE.md) | Model Context Protocol integration |
-| [COMET + GitHub](./docs/COMET_GITHUB.md) | Browser automation and repo management |
-| [Design System](./design-system/) | Wonder Engine tokens, themes, components |
-| [Contributing](./CONTRIBUTING.md) | How to contribute (Article 0 compliance required) |
+| [Design System](./design-system/) | Wonder Engine tokens, themes, philosophy |
+| [Contributing](./CONTRIBUTING.md) | How to help build what's documented |
 | [Example Config](./examples/agent-config.json) | Complete configuration template |
 
 ---
@@ -255,6 +302,13 @@ We welcome contributions that pass the constitutional test:
 3. **Does this make creators more free?** (Article XVIII)
 
 Read the full [Contributing Guide](./CONTRIBUTING.md) before submitting.
+
+**High-priority implementation needs:**
+- Mode implementations (src/modes/)
+- Memory system (src/memory/)  
+- Working CLI commands
+- Example scripts
+- Test coverage
 
 ---
 
