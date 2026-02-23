@@ -45,7 +45,7 @@ Inception Engine's neural architecture draws from five neuroscience-inspired sys
 **Key behaviors**:
 - Runs parallel ideation threads during IDEATE mode
 - Surfaces unexpected connections between project requirements
-- Supports the Oracle Council and Three Wise Men agents
+- Supports the AVERI collective's creative ideation and strategic synthesis
 - Enables "shower thought" style breakthrough ideas
 
 **Active in**: Strongest in IDEATE mode, provides background processing in all modes
@@ -97,12 +97,12 @@ The neural architecture enables structured communication between agent hives:
 
 ```
 AVERI (Strategic Core)
-  |-- Aurora Hive (Design & Engineering)
-  |-- LEX Hive (Legal & Constitutional)
-  |-- KEEPER Hive (Knowledge & Patterns)
-  |-- BROADCAST Hive (Infrastructure)
-  |-- SWITCHBOARD Hive (Operations)
-  |-- Validator Team (Independent QA)
+|-- Aurora Hive (Design & Engineering)
+|-- LEX Hive (Legal & Constitutional)
+|-- KEEPER Hive (Knowledge & Patterns)
+|-- BROADCAST Hive (Infrastructure)
+|-- SWITCHBOARD Hive (Operations)
+|-- COMPASS Hive (Validation & Ethics)
 ```
 
 **Small World guarantees**: Any agent in Aurora Hive can reach any Validator agent in 6 hops or fewer, ensuring rapid feedback loops between building and quality assurance.
@@ -127,7 +127,7 @@ Key parameters:
 | Small World | `max_hops` | 6 | Maximum routing distance between agents |
 | Constitution | `articles` | 19 | Total constitutional articles enforced |
 | Constitution | `immutable` | I, III, IV, VIII | Articles that cannot be overridden |
-| Modes | `exit_gates` | 5 gates | Required checks before SHIP mode exit |
+| Modes | `exit_gates` | 4 gates | Required checks before SHIP mode exit |
 
 ## Further Reading
 
