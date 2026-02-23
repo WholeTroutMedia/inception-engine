@@ -68,3 +68,14 @@ class PATTERNSAgent(BaseAgent):
         """Generate architectural recommendations."""
         failed = [c for c in self.pattern_checks if c not in checks_passed]
         return [f"Consider improving: {c.replace('_', ' ')}" for c in failed]
+
+    def get_capabilities(self):
+        """Return list of PATTERNS agent capabilities."""
+        return [
+            "Architecture pattern validation",
+            "Separation of concerns checking",
+            "Single responsibility analysis",
+            "Dependency inversion verification",
+            "Open/closed principle compliance",
+            "Interface segregation checking",
+        ]

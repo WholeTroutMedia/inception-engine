@@ -61,3 +61,14 @@ class COVERAGEAgent(BaseAgent):
         """Identify coverage gaps."""
         failed = [c for c in self.coverage_checks if c not in checks_passed]
         return [f"Missing: {c.replace('_', ' ')}" for c in failed]
+
+    def get_capabilities(self):
+        """Return list of COVERAGE agent capabilities."""
+        return [
+            "Unit test coverage analysis",
+            "Integration test verification",
+            "Edge case coverage checking",
+            "Error path validation",
+            "Happy path coverage assurance",
+            "Coverage threshold enforcement",
+        ]

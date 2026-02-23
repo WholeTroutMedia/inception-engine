@@ -67,3 +67,14 @@ class LOGICAgent(BaseAgent):
         """Get list of logic issues found."""
         failed = [c for c in self.logic_checks if c not in checks_passed]
         return [f"Logic issue in: {c.replace('_', ' ')}" for c in failed]
+
+    def get_capabilities(self):
+        """Return list of LOGIC agent capabilities."""
+        return [
+            "Behavioral logic validation",
+            "Control flow analysis",
+            "Error handling verification",
+            "Edge case detection",
+            "Business rules compliance",
+            "Data integrity checking",
+        ]
