@@ -1,0 +1,74 @@
+{
+  "system_info": {
+    "version": "4.0.0",
+    "environment": "production",
+    "uptime_started": "2026-02-11T05:07:35Z",
+    "last_boot": "2026-02-23T20:30:00Z",
+    "boot_count": 147,
+    "total_sessions": 1893
+  },
+  "agents": {
+    "total_active": 35,
+    "total_defined": 35,
+    "hive_leaders": ["AURORA", "LEX", "KEEPER", "BROADCAST", "SWITCHBOARD", "COMPASS"],
+    "averi_status": {
+      "ATHENA": {
+        "status": "active",
+        "invocations_today": 12,
+        "last_invoked": "2026-02-23T20:15:33Z"
+      },
+      "VERA": {
+        "status": "active",
+        "memory_writes_today": 23,
+        "reviews_today": 8,
+        "last_invoked": "2026-02-23T20:28:15Z"
+      },
+      "IRIS": {
+        "status": "active",
+        "actions_today": 8,
+        "last_invoked": "2026-02-23T19:45:22Z"
+      }
+    },
+    "last_registry_update": "2026-02-20T12:00:00Z",
+    "registry_version": "4.0.0"
+  },
+  "activity": {
+    "last_commit_sha": "0dc74536aebcfe3a55207257148f37810e037827",
+    "last_commit_time": "2026-02-23T20:29:40Z",
+    "last_commit_message": "Add comprehensive system telemetry and monitoring specification",
+    "commits_today": 4,
+    "active_branches": 2
+  },
+  "activity_24h": {
+    "agent_invocations": 78,
+    "memory_writes": 42,
+    "episodic_count": 35,
+    "semantic_count": 7,
+    "constitutional_reviews": 15,
+    "reviews_approved": 14,
+    "reviews_rejected": 1,
+    "artifacts_created": 23
+  },
+  "capabilities": {
+    "core_skills": ["Strategy", "Design", "Code", "Legal", "Memory", "Broadcast", "Validation"],
+    "operational_modes": ["IDEATE", "PLAN", "SHIP", "VALIDATE"],
+    "constitutional_governance": "active",
+    "scribe_memory": "active"
+  },
+  "health": {
+    "status": "operational",
+    "uptime_seconds": 1089345,
+    "errors_last_hour": 0,
+    "warnings_last_hour": 1,
+    "response_time_avg_ms": 245,
+    "success_rate_percent": 97.3
+  },
+  "alerts": [
+    {
+      "level": "warning",
+      "component": "SCRIBE",
+      "message": "Memory tier compaction delayed by 3 minutes",
+      "timestamp": "2026-02-23T20:15:00Z"
+    }
+  ]
+}
