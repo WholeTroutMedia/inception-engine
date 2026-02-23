@@ -1,3 +1,19 @@
+import sys
+import os
+import types
+
+# Create inception_engine namespace mapping to src/
+_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _src_path not in sys.path:
+    sys.path.insert(0, _src_path)
+
+# Register inception_engine as namespace pointing to src/
+if "inception_engine" not in sys.modules:
+    _ie_pkg = types.ModuleType("inception_engine")
+    _ie_pkg.__path__ = [_src_path]
+    _ie_pkg.__package__ = "inception_engine"
+    sys.modules["inception_engine"] = _ie_pkg
+
 """Pytest configuration and fixtures."""
 
 import pytest
