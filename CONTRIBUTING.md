@@ -18,7 +18,7 @@ These components have real code with meaningful logic:
 |-----------|---------|-------|--------|
 | **Orchestrator** | `src/core/orchestrator.py` | ~518 | Core workflow engine. Coordinates modes, agents, constitutional checks. |
 | **Mode Manager** | `src/core/mode_manager.py` | ~419 | IDEATE/PLAN/SHIP/VALIDATE lifecycle with entry/exit criteria. |
-| **Constitutional Guard** | `src/core/constitutional_guard.py` | ~612 | Enforces all 18 articles. Scoring system, compliance checks. |
+| **Constitutional Guard** | `src/core/constitutional_guard.py` | ~612 | Enforces all 19 articles. Scoring system, compliance checks. |
 | **Gate Validator** | `src/core/gate_validator.py` | ~429 | SHIP mode exit gates: code complete, tests pass, deployed, accessible. |
 | **Base Agent** | `src/agents/base_agent.py` | ~100 | Abstract base class all agents inherit from. |
 | **CLI** | `src/cli/inception_cli.py` | ~466 | Click-based CLI with ideate/plan/ship/validate commands. |
@@ -64,13 +64,13 @@ These have extensive documentation and architectural design, but the runtime cod
 
 ### What's Planned (Roadmap)
 
-These are on the roadmap, pushed down from the full Brainchild V4 system:
+These are on the development roadmap:
 
 - Stricter VALIDATE mode with isolated validator agents
 - REST API interface (FastAPI server exists but needs endpoints)
 - WebSocket real-time agent communication
 - Cross-session memory and learning persistence
-- Additional specialized agents from V4 roster
+- Additional specialized agents
 - Docker Compose and Kubernetes deployment templates
 - Prometheus/Grafana monitoring integration
 - MCP (Model Context Protocol) server implementation
@@ -214,6 +214,7 @@ These are specific, actionable items where contributors can make the biggest imp
 ### P0 - Critical (Foundation)
 
 #### 1. Implement Individual Mode Modules
+
 **Difficulty**: Medium | **Scope**: `src/modes/`
 
 The `src/modes/` directory only contains `__init__.py`. Mode logic currently lives inside `mode_manager.py` and `orchestrator.py`. We need clean, separate mode implementations.
@@ -235,6 +236,7 @@ The `src/modes/` directory only contains `__init__.py`. Mode logic currently liv
 ---
 
 #### 2. API Endpoint Implementation
+
 **Difficulty**: Medium | **Scope**: `src/api/`
 
 The FastAPI server scaffold exists but needs actual endpoints wired to the orchestrator.
@@ -260,6 +262,7 @@ The FastAPI server scaffold exists but needs actual endpoints wired to the orche
 ### P1 - High (Core Capabilities)
 
 #### 3. Test Coverage Expansion
+
 **Difficulty**: Easy-Medium | **Scope**: `src/tests/`
 
 Tests exist but coverage is incomplete. We need comprehensive coverage across all modules.
@@ -281,6 +284,7 @@ Tests exist but coverage is incomplete. We need comprehensive coverage across al
 ---
 
 #### 4. MCP Server Implementation
+
 **Difficulty**: Hard | **Scope**: `src/mcp/` (new)
 
 Documented in `docs/MCP_GUIDE.md` but no implementation exists. Inception Engine should work as an MCP server for Claude Desktop and other MCP clients.
@@ -301,6 +305,7 @@ Documented in `docs/MCP_GUIDE.md` but no implementation exists. Inception Engine
 ---
 
 #### 5. Cross-Session Memory Persistence
+
 **Difficulty**: Hard | **Scope**: `src/core/memory/` (new)
 
 Sessions are currently stateless. We need a persistence layer so agents can learn across sessions.
@@ -322,6 +327,7 @@ Sessions are currently stateless. We need a persistence layer so agents can lear
 ### P2 - Medium (Improvements)
 
 #### 6. Design System Token Pipeline
+
 **Difficulty**: Medium | **Scope**: `design-system/`
 
 Tokens exist in JSON but there's no pipeline to generate usable CSS, Tailwind config, or component styles.
@@ -341,6 +347,7 @@ Tokens exist in JSON but there's no pipeline to generate usable CSS, Tailwind co
 ---
 
 #### 7. Docker Compose Production Setup
+
 **Difficulty**: Easy-Medium | **Scope**: root directory
 
 Dockerfile exists but no compose setup or production deployment configuration.
@@ -360,6 +367,7 @@ Dockerfile exists but no compose setup or production deployment configuration.
 ---
 
 #### 8. Documentation Gap Filling
+
 **Difficulty**: Easy | **Scope**: `docs/`
 
 Some docs describe features that don't exist yet. Others need practical examples.
