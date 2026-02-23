@@ -3,7 +3,7 @@
 **The AI That Builds With You**
 
 > Every user explores their own Wonderland. Every design element is discoverable. Every interaction teaches through delight.
-> 
+>
 > *The Alice Principle* - Learning through wonder, exploration through play.
 
 <p align="center">
@@ -13,33 +13,33 @@
 
 ---
 
-## ⚠️ Development Status
+## Development Status
 
 **Inception Engine is in active development.** Core architecture is complete, implementation is ongoing.
 
-### ✅ What Works Now
-- 📖 Complete constitutional framework (19 articles)
-- 📖 Full agent architecture documentation (15 agents, 4 hives)
-- 📖 Design system (Wonder Engine) with working token library
-- 📖 Neural architecture specification
-- 📖 Four-mode workflow design
-- 🔧 Core Python scaffolding (orchestrator, mode manager, agent loader)
-- 🔧 FastAPI server structure
-- 🔧 Docker/docker-compose setup
+### What Works Now
+- Complete constitutional framework (19 articles)
+- Full agent architecture documentation (35 agents, 6 hives)
+- Design system (Wonder Engine) with working token library
+- Neural architecture specification
+- Four-mode workflow design
+- Core Python scaffolding (orchestrator, mode manager, agent loader)
+- FastAPI server structure
+- Docker/docker-compose setup
 
-### 🔨 In Active Development (COMETs working on this)
+### In Active Development
 - Mode implementations (IDEATE/PLAN/SHIP/VALIDATE)
-- Memory system (Hippocampus/Neocortex)
+- SCRIBE memory system (3-tier persistence)
 - Working example scripts
 - CLI functionality
 - Full test coverage
 
-### 📋 Planned
+### Planned
 - REST API with tested endpoints
-- WebSocket real-time updates  
+- WebSocket real-time updates
 - Production deployment templates
 - Cross-session learning
-- Additional specialized agents
+- UI Dashboard for agent monitoring
 
 **Want to contribute?** See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to help build what's documented.
 
@@ -102,6 +102,7 @@ Five brain-inspired systems coordinate agent communication:
 [Deep dive into neural architecture](./docs/NEURAL_ARCHITECTURE.md)
 
 ### The Wonder Engine (Design System)
+
 The Wonder Engine ships as a blank canvas - no opinions about what your project should look like. Describe a mood, upload an image, or set every value by hand. The system generates a complete token set and every component inherits it automatically.
 
 - **Design tokens** - CSS variables, HSL colors, configurable spacing grid
@@ -141,7 +142,7 @@ Start with [Getting Started](./docs/GETTING_STARTED.md), then explore:
 
 - [The Four Modes](./docs/FOUR_MODES.md) - How the workflow cycle operates
 - [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) - How agent coordination works
-- [Agent Registry](./docs/AGENTS.md) - Meet the 15 agents, 4 hives
+- [Agent Registry](./docs/AGENTS.md) - Meet the 35 agents, 6 hives
 - [Constitution](./CONSTITUTION.md) - The governance framework
 - [Design System](./design-system/) - Wonder Engine tokens and philosophy
 
@@ -178,51 +179,31 @@ Inception Engine is designed to plug into any LLM or platform. These guides show
 
 | Method | Documentation | Status |
 |--------|--------------|--------|
-| OpenAI / ChatGPT | [Setup Guide](./docs/setup/openai-chatgpt.md) | 📖 Conceptual |
-| Anthropic Claude + MCP | [Setup Guide](./docs/setup/anthropic-claude-mcp.md) | 📖 Conceptual |
-| Google Gemini | [Setup Guide](./docs/setup/gemini-web-and-cli.md) | 📖 Conceptual |
-| Perplexity + COMET | [Setup Guide](./docs/setup/perplexity-and-comet.md) | 📖 Conceptual |
-| IDE / Antigravity | [Setup Guide](./docs/setup/ide-and-antigravity.md) | 📖 Conceptual |
-| LLM Gateways + MCP | [Setup Guide](./docs/setup/llm-gateways-and-mcp.md) | 📖 Conceptual |
-| No-Code Automation | [Setup Guide](./docs/setup/no-code-automation.md) | 📖 Conceptual |
+| OpenAI / ChatGPT | [Setup Guide](./docs/setup/openai-chatgpt.md) | Conceptual |
+| Anthropic Claude + MCP | [Setup Guide](./docs/setup/anthropic-claude-mcp.md) | Conceptual |
+| Google Gemini | [Setup Guide](./docs/setup/gemini-web-and-cli.md) | Conceptual |
+| Perplexity + COMET | [Setup Guide](./docs/setup/perplexity-and-comet.md) | Conceptual |
+| IDE / Antigravity | [Setup Guide](./docs/setup/ide-and-antigravity.md) | Conceptual |
+| LLM Gateways + MCP | [Setup Guide](./docs/setup/llm-gateways-and-mcp.md) | Conceptual |
+| No-Code Automation | [Setup Guide](./docs/setup/no-code-automation.md) | Conceptual |
 
 [Browse all setup guides](./docs/setup/README.md)
 
 ---
 
-## Light Edition vs Full Brainchild V4
-
-This repo is the **Light Edition** of Inception Engine - a curated subset designed for rapid development. The full system (Brainchild V4) adds production infrastructure, strict validation gates, and a larger agent roster.
-
-| Area | Light Edition (this repo) | Full Brainchild V4 |
-|------|---------------------------|-----------------------|
-| Modes | IDEATE, PLAN, SHIP, VALIDATE (simplified) | IDEATE, PLAN, SHIP, VALIDATE (strict gates) |
-| Agents | 15 agents, 4 hives (INTEROPERABLE default) | 35 agents, 6 hives + 5 isolated validators |
-| Validation | Checklists and recommendations | Independent validator swarm, fresh context |
-| Orchestration | In-process orchestrator | Full orchestrator, Mode Manager, Gate Validator |
-| Status | 🚧 In Development | 🚧 In Development |
-
-**What you get in the Light Edition:**
-
-- **AVERI** (ATHENA + VERA + IRIS) - Strategic coordination triad
-- **Oracles** (LEONARDO, COSMOS, SAGE) - External wisdom and analysis
-- **Council** (Buffett, Buddha, Sun Tzu) - Advisory perspective
-- **15 Core Agents** - Design, frontend, backend, knowledge, ops agents
-- **HELIX Formation** - On-demand parallel processing
-- **Constitutional Governance** - 19 articles, always enforced
-
-**Planned updates** (pushed from full system):
-- Stricter VALIDATE mode with isolated validator agents
-- CLI and REST API interfaces
-- Cross-session memory and learning
-- Additional specialized agents
-- Docker/K8s deployment templates
-
----
-
 ## Agent Organization
 
-All agents are **interoperable by default** - they collaborate freely on any task. You don't manage who does what; the engine figures it out.
+All 35 agents are organized into 6 hives, **interoperable by default** - they collaborate freely on any task. You don't manage who does what; the engine figures it out.
+
+**Agent Hives:**
+- **AURORA** (Design & Frontend) - 8 agents
+- **LEX** (Constitutional & Legal) - 7 agents
+- **KEEPER** (Knowledge & Data) - 7 agents
+- **BROADCAST** (Media & Communication) - 6 agents
+- **SWITCHBOARD** (Routing & Integration) - 4 agents
+- **COMPASS** (Validation & Ethics) - 3 agents
+
+**AVERI** (ATHENA + VERA + IRIS) is the leadership collective that coordinates the entire system. Three leader agents compress into a single strategic voice for complex decisions, then expand back for parallel execution.
 
 **HELIX mode** is optional. When you request it, the engine splits your problem into parallel strands and has multiple agents think simultaneously, then braids their answers back together. You experience one conversation; under the hood, many specialists are thinking at once.
 
@@ -242,26 +223,26 @@ Switch modes anytime. Just ask.
 
 ```
 inception-engine/
-|-- CONSTITUTION.md          # Full 19-article governance framework
-|-- design-system/           # Wonder Engine - design language and token architecture
-|   |-- tokens.json          # Color, spacing, typography, motion tokens
-|   |-- WONDER_ENGINE.md     # The Alice Principle design philosophy
-|-- src/                     # Core implementation (scaffolding)
-|   |-- core/                # Orchestration classes
-|   |-- agents/              # Agent definitions
-|   |-- api/                 # FastAPI server structure
-|   |-- cli/                 # CLI scaffolding
-|   |-- tests/               # Test suite
-|-- docs/                    # Deep-dive documentation
-|   |-- GETTING_STARTED.md   # Onboarding guide
-|   |-- FOUR_MODES.md        # IDEATE / PLAN / SHIP / VALIDATE
-|   |-- NEURAL_ARCHITECTURE.md # Brain-inspired coordination systems
-|   |-- AGENTS.md            # Full agent registry
-|   |-- setup/               # Platform-specific integration guides
-|-- examples/                # Configuration templates
-|   |-- agent-config.json    # Complete agent + neural system config
-|-- CONTRIBUTING.md          # How to contribute
-|-- LICENSE                  # AGPL-3.0
+|-- CONSTITUTION.md              # Full 19-article governance framework
+|-- design-system/               # Wonder Engine - design language and token architecture
+|   |-- tokens.json              # Color, spacing, typography, motion tokens
+|   |-- WONDER_ENGINE.md         # The Alice Principle design philosophy
+|-- src/                         # Core implementation (scaffolding)
+|   |-- core/                    # Orchestration classes
+|   |-- agents/                  # Agent definitions
+|   |-- api/                     # FastAPI server structure
+|   |-- cli/                     # CLI scaffolding
+|   |-- tests/                   # Test suite
+|-- docs/                        # Deep-dive documentation
+|   |-- GETTING_STARTED.md       # Onboarding guide
+|   |-- FOUR_MODES.md            # IDEATE / PLAN / SHIP / VALIDATE
+|   |-- NEURAL_ARCHITECTURE.md   # Brain-inspired coordination systems
+|   |-- AGENTS.md                # Full agent registry
+|   |-- setup/                   # Platform-specific integration guides
+|-- examples/                    # Configuration templates
+|   |-- agent-config.json        # Complete agent + neural system config
+|-- CONTRIBUTING.md              # How to contribute
+|-- LICENSE                      # AGPL-3.0
 ```
 
 ---
@@ -286,7 +267,7 @@ Every agent in this system asks the same question before every action:
 | [Getting Started](./docs/GETTING_STARTED.md) | Architecture overview and concepts |
 | [Four Modes](./docs/FOUR_MODES.md) | IDEATE / PLAN / SHIP / VALIDATE deep dive |
 | [Neural Architecture](./docs/NEURAL_ARCHITECTURE.md) | Brain-inspired coordination systems |
-| [Agent Registry](./docs/AGENTS.md) | All 15 agents, 4 hives, roles and capabilities |
+| [Agent Registry](./docs/AGENTS.md) | All 35 agents, 6 hives, roles and capabilities |
 | [Design System](./design-system/) | Wonder Engine tokens, themes, philosophy |
 | [Contributing](./CONTRIBUTING.md) | How to help build what's documented |
 | [Example Config](./examples/agent-config.json) | Complete configuration template |
@@ -305,7 +286,7 @@ Read the full [Contributing Guide](./CONTRIBUTING.md) before submitting.
 
 **High-priority implementation needs:**
 - Mode implementations (src/modes/)
-- Memory system (src/memory/)  
+- Memory system (src/memory/)
 - Working CLI commands
 - Example scripts
 - Test coverage
