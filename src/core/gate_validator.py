@@ -58,6 +58,7 @@ class GateValidator:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         self.results: List[GateResult] = []
+                self.gates = ["code_complete", "tests_passing", "deployed", "live_accessible"]
     
     def validate_all_gates(self, context: Dict[str, Any]) -> Tuple[bool, List[GateResult]]:
         """
@@ -400,4 +401,29 @@ class GateValidator:
             "success_rate": (passed / total * 100) if total > 0 else 0,
             "all_passed": failed == 0,
             "results": [r.to_dict() for r in self.results]
+        }
+
+
+    def validate_gate(self, gate_name: str, context: dict) -> dict:
+        """Validate a specific gate by name."""
+        gate_map = {
+            "code_complete": self.validate_code_complete,
+            "tests_passing": self.validate_tests_passing,
+            "deployed": self.validate_deployment_live,
+            "live_accessible": self.validate_health_check,
+        }
+        if gate_name not in gate_map:
+            return {
+                "passed": False,
+                "gate": gate_name,
+                "issues": [f"Unknown gate: {gate_name}"],
+            }
+        result = gate_map[gate_name](context)
+        passed = result.status == GateStatus.PASS
+        issues = [] if passed else [result.message]
+        return {
+            "passed": passed,
+            "gate": gate_name,
+            "issues": issues,
+            "details": result.details or {},
         }

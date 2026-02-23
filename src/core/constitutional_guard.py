@@ -597,12 +597,15 @@ class ConstitutionalGuard:
         results = [self.validate_article(i, context) for i in range(len(self.articles))]
         all_compliant = all(r["compliant"] for r in results)
         return {
-            "compliant": all_compliant,
+            "fully_compliant": all_compliant,
             "articles_checked": len(results),
             "passed": sum(1 for r in results if r["compliant"]),
             "failed": sum(1 for r in results if not r["compliant"]),
             "results": results,
         }
+
+            # Alias for compatibility
+    validate_full_compliance = verify_full_compliance
 
 
 # Global instance

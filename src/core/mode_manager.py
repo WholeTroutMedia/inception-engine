@@ -304,3 +304,116 @@ class ModeManager:
                 s.to_dict() for s in self.session_history[-5:]
             ]
         }
+
+
+    @property
+    def current_mode(self):
+        """Return the current active mode type."""
+        return self.active_session.mode if self.active_session else None
+
+    @property
+    def mode_history(self):
+        """Return list of completed mode history records."""
+        return [
+            {
+                "mode": s.mode,
+                "status": s.status.value,
+                "started_at": s.start_time.isoformat(),
+                "completed_at": s.end_time.isoformat() if s.end_time else None,
+                "session_id": s.session_id,
+            }
+            for s in self.session_history
+        ]
+
+    def get_mode_history(self):
+        """Return mode history as a list of dicts."""
+        return self.mode_history
+
+    def _get_default_config(self, mode: ModeType) -> ModeConfig:
+        """Return a default config for a mode when files are not present."""
+        defaults = {
+            ModeType.IDEATE: {
+                "version": "1.0",
+                "tagline": "Ideate",
+                "objective": "Generate ideas",
+                "agent_roster": [],
+                "entry_requirements": {},
+                "exit_criteria": {},
+                "gates": [],
+                "workflows": [],
+                "outputs": {},
+            },
+            ModeType.PLAN: {
+                "version": "1.0",
+                "tagline": "Plan",
+                "objective": "Create plan",
+                "agent_roster": [],
+                "entry_requirements": {},
+                "exit_criteria": {},
+                "gates": [],
+                "workflows": [],
+                "outputs": {},
+            },
+            ModeType.SHIP: {
+                "version": "1.0",
+                "tagline": "Ship",
+                "objective": "Ship product",
+                "agent_roster": [],
+                "entry_requirements": {},
+                "exit_criteria": {},
+                "gates": [],
+                "workflows": [],
+                "outputs": {},
+            },
+            ModeType.VALIDATE: {
+                "version": "1.0",
+                "tagline": "Validate",
+                "objective": "Validate output",
+                "agent_roster": [],
+                "entry_requirements": {},
+                "exit_criteria": {},
+                "gates": [],
+                "workflows": [],
+                "outputs": {},
+            },
+        }
+        data = defaults[mode]
+        return ModeConfig(mode=mode, **data)
+
+    def get_config(self, mode: ModeType) -> ModeConfig:
+        """Get config for a mode, falling back to defaults."""
+        if mode not in self.configs:
+            return self._get_default_config(mode)
+        return self.configs[mode]
+
+    def start_mode(self, mode: ModeType, input_data: dict) -> dict:
+        """Start a mode session, returning a result dict."""
+        # End any active session
+        if self.active_session and self.active_session.status == ModeStatus.ACTIVE:
+            self.active_session.status = ModeStatus.CHECKPOINTED
+            self.session_history.append(self.active_session)
+        # Create new session
+        session = ModeSession(
+            session_id=self._generate_session_id(mode),
+            mode=mode,
+            status=ModeStatus.ACTIVE,
+            start_time=__import__('datetime').datetime.now(),
+            end_time=None,
+            input_data=input_data,
+            output_data=None,
+            checkpoints=[],
+            errors=[],
+        )
+        self.active_session = session
+        self.session_history.append(session)
+        return {"success": True, "session_id": session.session_id, "mode": mode.value}
+
+    def complete_mode(self, output_data: dict) -> dict:
+        """Complete the active mode session, returning a result dict."""
+        if not self.active_session:
+            return {"success": False, "error": "No active session"}
+        self.active_session.status = ModeStatus.COMPLETE
+        self.active_session.end_time = __import__('datetime').datetime.now()
+        self.active_session.output_data = output_data
+        self.active_session = None
+        return {"success": True}
