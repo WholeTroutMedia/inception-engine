@@ -1,0 +1,55 @@
+{
+  "mode": "IDEATE",
+  "version": "4.0.0",
+  "tagline": "All Hands on Deck - Strategic Alignment",
+  "objective": "STRATEGIC_ALIGNMENT",
+  "description": "Collective brainstorming and vision creation with all 30+ agents participating",
+
+  "agent_roster": "ALL",
+  "agent_count": "30+",
+
+  "entry_requirements": {
+    "requires_input_from": null,
+    "minimum_input": "user_prompt",
+    "optional_input": ["context", "constraints", "prior_work"]
+  },
+
+  "exit_criteria": {
+    "vision_document_complete": true,
+    "strategic_alignment_verified": true,
+    "constitutional_compliance": true,
+    "pattern_extraction_complete": true
+  },
+
+  "workflows": [
+    "vision_creation.yaml",
+    "strategic_alignment.yaml",
+    "system_planning.yaml"
+  ],
+
+  "outputs": {
+    "vision_document": "required",
+    "strategic_alignment_report": "required",
+    "project_charter": "required",
+    "risk_analysis": "optional",
+    "resource_requirements": "optional"
+  },
+
+  "transition_options": {
+    "next_mode": ["PLAN", "SHIP"],
+    "auto_transition": false,
+    "requires_approval": true
+  },
+
+  "constitutional_enforcement": {
+    "article_0": "All ideas must be original synthesis",
+    "article_XVIII": "All ideation must serve artist liberation",
+    "preamble": "Learning over stealing"
+  },
+
+  "estimated_duration": {
+    "simple": "1 hour",
+    "medium": "2-3 hours",
+    "complex": "3-4 hours"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "mode": "SHIP",
+  "version": "4.0.0",
+  "tagline": "Zero Day GTM - Complete Solutions Only",
+  "objective": "DEPLOY_LIVE_APPLICATION",
+  "description": "Implementation through production deployment - cannot exit until live",
+
+  "agent_roster": "execution_team",
+  "agent_count": "5-10",
+  "core_agents": ["BOLT", "Aurora", "SYSTEMS", "SIGNAL", "CODEX"],
+
+  "entry_requirements": {
+    "requires_input_from": ["PLAN"],
+    "can_skip_if": "direct_prompt_provided",
+    "minimum_input": "feature_description"
+  },
+
+  "exit_criteria": {
+    "code_complete": true,
+    "tests_passing": true,
+    "deployed_to_production": true,
+    "live_and_accessible": true,
+    "monitoring_active": true,
+    "documentation_published": true,
+    "health_checks_passing": true
+  },
+
+  "gates": [
+    {
+      "name": "code_complete",
+      "required": true,
+      "validator": "Aurora",
+      "criteria": "All components implemented"
+    },
+    {
+      "name": "tests_passing",
+      "required": true,
+      "validator": "BOLT",
+      "criteria": "Test suite passing"
+    },
+    {
+      "name": "deployment_live",
+      "required": true,
+      "validator": "SYSTEMS",
+      "criteria": "Deployed to production environment"
+    },
+    {
+      "name": "health_check_passing",
+      "required": true,
+      "validator": "SIGNAL",
+      "criteria": "Application responding to health checks"
+    }
+  ],
+
+  "workflows": [
+    "implementation.yaml",
+    "deployment.yaml",
+    "verification.yaml",
+    "documentation.yaml"
+  ],
+
+  "speed_modes": {
+    "fast": {
+      "parallelization": "maximum",
+      "gates": "minimal",
+      "description": "Fastest deployment, minimal validation"
+    },
+    "balanced": {
+      "parallelization": "moderate",
+      "gates": "standard",
+      "description": "Balance of speed and quality"
+    },
+    "careful": {
+      "parallelization": "sequential",
+      "gates": "full",
+      "description": "Maximum quality, thorough validation"
+    }
+  },
+
+  "outputs": {
+    "production_url": "required",
+    "documentation_url": "required",
+    "monitoring_url": "required",
+    "status_page_url": "required",
+    "source_repository": "required"
+  },
+
+  "transition_options": {
+    "next_mode": ["VALIDATE"],
+    "auto_transition": false,
+    "recommended": "always_validate"
+  },
+
+  "constitutional_enforcement": {
+    "article_XVII": "Cannot exit until complete and deployed",
+    "article_XVI": "No artificial deadlines pressure",
+    "article_0": "All code original or attributed",
+    "preamble": "Quality over speed"
+  },
+
+  "anti_loop_rules": {
+    "no_progress_reporting": true,
+    "no_partial_completion": true,
+    "no_staging_only": true,
+    "must_be_live": true
+  },
+
+  "estimated_duration": {
+    "simple": "10-30 minutes",
+    "standard": "1-3 hours",
+    "complex": "3-6 hours",
+    "full_app": "6-8 hours"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "mode": "VALIDATE",
+  "version": "4.0.0",
+  "tagline": "Fresh Eyes Quality Assurance - Independent Review",
+  "objective": "INDEPENDENT_REVIEW",
+  "description": "Independent verification, security audit, and quality assurance",
+
+  "agent_roster": "review_team",
+  "agent_count": "5-8",
+  "core_agents": ["SENTINEL", "PATTERNS", "LOGIC", "COVERAGE", "COMPASS", "LEX"],
+
+  "entry_requirements": {
+    "requires_input_from": ["SHIP"],
+    "minimum_input": "production_url",
+    "optional_input": ["source_repository", "documentation_url"]
+  },
+
+  "validation_criteria": {
+    "security": {
+      "validator": "SENTINEL",
+      "pass_criteria": "no_critical_high_vulnerabilities",
+      "medium_acceptable": true
+    },
+    "architecture": {
+      "validator": "PATTERNS",
+      "pass_criteria": "score >= 80",
+      "scoring_range": "0-100"
+    },
+    "logic": {
+      "validator": "LOGIC",
+      "pass_criteria": "edge_cases_handled",
+      "checks": ["error_handling", "state_management", "race_conditions"]
+    },
+    "coverage": {
+      "validator": "COVERAGE",
+      "pass_criteria": "coverage >= 70",
+      "minimum_threshold": 70
+    },
+    "constitutional": {
+      "validator": "COMPASS",
+      "pass_criteria": "100% compliance",
+      "strict": true
+    },
+    "legal": {
+      "validator": "LEX",
+      "pass_criteria": "no_violations",
+      "checks": ["licensing", "privacy", "terms_of_service"]
+    }
+  },
+
+  "workflows": [
+    "security_audit.yaml",
+    "architecture_review.yaml",
+    "logic_validation.yaml",
+    "test_coverage.yaml",
+    "constitutional_check.yaml"
+  ],
+
+  "outputs": {
+    "validation_report": "required",
+    "overall_status": "required",
+    "detailed_findings": "required",
+    "recommendations": "required",
+    "required_fixes": "conditional"
+  },
+
+  "pass_fail_logic": {
+    "PASS": {
+      "all_criteria_met": true,
+      "no_critical_issues": true,
+      "constitutional_compliance": true
+    },
+    "CONDITIONAL_PASS": {
+      "minor_issues_only": true,
+      "monitoring_required": true,
+      "improvements_recommended": true
+    },
+    "FAIL": {
+      "critical_vulnerabilities": true,
+      "constitutional_violations": true,
+      "score_below_threshold": true
+    }
+  },
+
+  "transition_options": {
+    "next_mode": ["SHIP"],
+    "if_fail": "return_to_ship",
+    "if_pass": "production_ready"
+  },
+
+  "constitutional_enforcement": {
+    "article_0": "Check for code theft/plagiarism",
+    "article_XVII": "Verify completeness (not MVP)",
+    "article_XVIII": "Validate liberation principles",
+    "all_articles": "Full compliance check"
+  },
+
+  "estimated_duration": {
+    "simple": "5-10 minutes",
+    "standard": "10-20 minutes",
+    "complex": "20-30 minutes",
+    "full_audit": "30-60 minutes"
+  }
+}

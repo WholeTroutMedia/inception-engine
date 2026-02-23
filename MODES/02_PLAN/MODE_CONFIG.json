@@ -1,0 +1,58 @@
+{
+  "mode": "PLAN",
+  "version": "4.0.0",
+  "tagline": "Focused Execution Prep - Technical Specification",
+  "objective": "TECHNICAL_SPECIFICATION",
+  "description": "Detailed specification, architecture design, and task breakdown",
+
+  "agent_roster": "project_specific",
+  "agent_count": "8-15",
+  "agent_selection_criteria": "based_on_project_type",
+
+  "entry_requirements": {
+    "requires_input_from": ["IDEATE"],
+    "can_skip_if": "direct_prompt_provided",
+    "minimum_input": "feature_description"
+  },
+
+  "exit_criteria": {
+    "technical_spec_complete": true,
+    "architecture_defined": true,
+    "tasks_broken_down": true,
+    "dependencies_mapped": true,
+    "constitutional_compliance": true
+  },
+
+  "workflows": [
+    "technical_spec.yaml",
+    "architecture_design.yaml",
+    "task_breakdown.yaml",
+    "dependency_mapping.yaml"
+  ],
+
+  "outputs": {
+    "technical_specification": "required",
+    "architecture_diagrams": "required",
+    "task_breakdown": "required",
+    "dependency_map": "required",
+    "resource_plan": "optional"
+  },
+
+  "transition_options": {
+    "next_mode": ["SHIP"],
+    "auto_transition": false,
+    "requires_approval": true
+  },
+
+  "constitutional_enforcement": {
+    "article_0": "Architecture must not copy competitors",
+    "article_XVII": "Plan for complete solutions, not MVPs",
+    "preamble": "Quality over speed"
+  },
+
+  "estimated_duration": {
+    "simple": "30 min - 1 hour",
+    "medium": "1-2 hours",
+    "complex": "2-3 hours"
+  }
+}

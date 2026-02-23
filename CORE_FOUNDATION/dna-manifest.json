@@ -1,0 +1,65 @@
+{
+  "manifest_version": "4.0.0",
+  "created": "2026-02-19",
+  "description": "DNA propagation rules for Brainchild V4",
+
+  "propagation_targets": [
+    "modes/*",
+    "inception_engine/*",
+    "agents/*",
+    "generated_applications/*"
+  ],
+
+  "dna_strands": {
+    "constitutional_dna": {
+      "source": "CORE_FOUNDATION/AGENT_CONSTITUTION.md",
+      "operator": "LEX",
+      "propagates_to": "all_systems",
+      "enforcement": "mandatory",
+      "validation": "pre_commit"
+    },
+
+    "agent_dna": {
+      "source": "CORE_FOUNDATION/agents/.agent-status.json",
+      "operator": "VERA",
+      "propagates_to": "all_modes",
+      "enforcement": "mandatory",
+      "validation": "runtime"
+    },
+
+    "mode_dna": {
+      "source": "MODES/*/MODE_CONFIG.json",
+      "operator": "inception_engine",
+      "propagates_to": "orchestrator",
+      "enforcement": "mandatory",
+      "validation": "mode_activation"
+    },
+
+    "memory_dna": {
+      "source": "inception_engine/memory/*",
+      "operator": "VERA",
+      "propagates_to": "all_sessions",
+      "enforcement": "mandatory",
+      "validation": "session_start"
+    }
+  },
+
+  "propagation_mechanism": {
+    "trigger": "github_actions",
+    "workflow": ".github/workflows/dna-propagation.yml",
+    "on_change": true,
+    "verification": "constitutional_guard"
+  },
+
+  "constitutional_enforcement": {
+    "article_0": "All propagated code must be original",
+    "article_XVII": "Propagate complete solutions only",
+    "article_XVIII": "Ensure artist liberation in all DNA"
+  },
+
+  "version_control": {
+    "track_changes": true,
+    "audit_trail": true,
+    "rollback_capable": true
+  }
+}
