@@ -5,10 +5,10 @@ Inception Engine operates in four distinct modes. Each mode activates different 
 ## Mode Overview
 
 ```
- IDEATE ---------> PLAN ----------> SHIP ----------> VALIDATE
- Dream it         Map it           Build it         Prove it
- Divergent        Convergent       Execution        Verification
- No limits        Every detail     Zero fluff       Ship or fix
+IDEATE ---------> PLAN ----------> SHIP ----------> VALIDATE
+Dream it          Map it           Build it          Prove it
+Divergent         Convergent       Execution         Verification
+No limits         Every detail     Zero fluff        Ship or fix
 ```
 
 You can enter any mode at any time. You can also skip modes for express workflows.
@@ -21,9 +21,8 @@ You can enter any mode at any time. You can also skip modes for express workflow
 
 **Active Agents:**
 - ATHENA (strategic vision)
-- AURORA (creative direction)
-- ORACLE COUNCIL (specialized expertise)
-- THREE WISE MEN (advisory wisdom)
+- VERA (truth verification, research synthesis)
+- IRIS (execution patterns, feasibility check)
 
 **Rules:**
 - No idea is rejected
@@ -46,10 +45,9 @@ You can enter any mode at any time. You can also skip modes for express workflow
 **Purpose:** Transform ideas into actionable architecture.
 
 **Active Agents:**
-- ATHENA (architecture)
-- KEEPER (knowledge retrieval)
-- LEX (compliance check)
-- SWITCHBOARD (coordination planning)
+- ATHENA (architecture, strategic planning)
+- BOLT (technical feasibility, component design)
+- KEEPER (knowledge retrieval, prior art research)
 
 **Rules:**
 - Every task must be decomposable
@@ -73,11 +71,10 @@ You can enter any mode at any time. You can also skip modes for express workflow
 **Purpose:** Build and deploy. Nothing else matters.
 
 **Active Agents:**
-- BOLT (rapid building)
-- RAM_CREW (quality assurance)
-- IRIS (execution, blocker removal)
-- SWITCHBOARD (coordination)
-- LEX (licensing validation)
+- BOLT (rapid building, frontend development)
+- AURORA (design implementation, UI/UX)
+- LEX (licensing validation, constitutional compliance)
+- SWITCHBOARD (coordination, task routing)
 
 **Rules:**
 - Code ships or blockers are named
@@ -90,7 +87,6 @@ You can enter any mode at any time. You can also skip modes for express workflow
 2. Quality checks passing
 3. Constitutional compliance
 4. User intent alignment
-5. No known critical issues
 
 **Outputs:**
 - Production-ready code
@@ -107,10 +103,9 @@ You can enter any mode at any time. You can also skip modes for express workflow
 **Purpose:** Verify everything works and meets standards.
 
 **Active Agents:**
-- RAM_CREW (quality validation)
-- VERA (truth verification)
-- ECHO (pattern analysis)
-- KEEPER (documentation)
+- COMPASS (constitutional compliance, north star alignment)
+- SENTINEL (security scanning, vulnerability detection)
+- VERA (truth verification, fact-checking)
 
 **Rules:**
 - Every claim must be verifiable
@@ -133,23 +128,29 @@ You can enter any mode at any time. You can also skip modes for express workflow
 You don't always need all four modes. Common shortcuts:
 
 ### Prompt to Production
+
 ```
 Skip IDEATE and PLAN. Go straight to SHIP with clear requirements.
+
 @AVERI mode SHIP
 Build a REST API with user auth, CRUD for posts, and rate limiting.
 ```
 
 ### Research Only
+
 ```
 Use IDEATE + VALIDATE only.
+
 @AVERI mode IDEATE
 Research the best approaches for real-time audio visualization.
 Then validate which approach fits our stack.
 ```
 
 ### Architecture Review
+
 ```
 Use PLAN + VALIDATE only.
+
 @AVERI mode PLAN
 Review this existing architecture for scalability issues.
 ```
