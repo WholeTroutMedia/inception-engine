@@ -73,7 +73,7 @@ class TestConstitutionalGuard:
     def test_article_18_fail(self):
         """Test Article XVIII (generative agency) failing."""
         context = {
-            "description": "lock-in proprietary only no export",
+            "description": "lock-in proprietary only closed platform",
             "ownership": "platform",
             "export_capability": False,
             "lock_in": True
