@@ -1,0 +1,76 @@
+{
+  "name": "inception-engine-design-tokens",
+  "version": "1.0.0",
+  "description": "Design token system for Inception Engine",
+  "organization": "WholeTroutMedia",
+  "repository": "WholeTroutMedia/inception-engine",
+
+  "source": {
+    "file": "tokens.json",
+    "format": "style-dictionary"
+  },
+
+  "build": {
+    "script": "build.js",
+    "outputDir": "dist",
+    "customTransforms": "transforms/custom-transforms.js"
+  },
+
+  "platforms": {
+    "css": {
+      "enabled": true,
+      "prefix": "ie",
+      "output": "dist/css/tokens.css",
+      "selector": ":root"
+    },
+    "scss": {
+      "enabled": true,
+      "prefix": "ie",
+      "output": "dist/scss/_tokens.scss"
+    },
+    "js-cjs": {
+      "enabled": true,
+      "output": "dist/js/tokens.js",
+      "module": "commonjs"
+    },
+    "js-esm": {
+      "enabled": true,
+      "output": "dist/js/tokens.esm.js",
+      "module": "esm"
+    },
+    "json": {
+      "enabled": true,
+      "output": "dist/json/tokens.json"
+    },
+    "tailwind": {
+      "enabled": true,
+      "output": "dist/tailwind/tokens.js"
+    }
+  },
+
+  "categories": [
+    "color.primitive",
+    "color.semantic",
+    "typography",
+    "spacing",
+    "borderRadius",
+    "shadow",
+    "animation",
+    "zIndex"
+  ],
+
+  "conventions": {
+    "naming": "kebab-case",
+    "prefix": "ie",
+    "colorFormat": "hex",
+    "baseFontSize": 16,
+    "baseSpacingUnit": 4
+  },
+
+  "ci": {
+    "workflow": ".github/workflows/build-tokens.yml",
+    "validateOnPush": true,
+    "buildOnPush": true,
+    "artifactRetentionDays": 30
+  }
+}
