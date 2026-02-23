@@ -1,0 +1,138 @@
+# Inception Engine - Kubernetes Deployment Manifests
+# HELIX DELTA - Phase 4: Horizontal Scaling
+# Kubernetes-ready with health/ready/live probes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inception-engine
+  labels:
+    app: inception-engine
+    version: "4.0.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: inception-engine
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: inception-engine
+        version: "4.0.0"
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: inception-engine
+          image: inception-engine:4.0.0
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: inception-secrets
+                  key: database-url
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: inception-secrets
+                  key: redis-url
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: inception-secrets
+                  key: sentry-dsn
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 10
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inception-engine
+  labels:
+    app: inception-engine
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    app: inception-engine
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: inception-engine-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: inception-engine
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: inception-engine-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: inception-engine

@@ -12,11 +12,12 @@ anthropic==0.18.0
 openai==1.12.0
 
 # Database & Caching
+asyncpg==0.29.0
 psycopg2-binary==2.9.9
-sqlalchemy==2.0.25
+sqlalchemy[asyncio]==2.0.25
 alembic==1.13.1
 requests==2.31.0
-redis==5.0.1
+redis[hiredis]==5.0.1
 
 # HTTP & WebSockets
 httpx==0.26.0
@@ -31,14 +32,31 @@ pyyaml==6.0.1
 json5==0.9.14
 python-multipart==0.0.22
 
+# Performance
+orjson==3.9.15
+uvloop==0.19.0; sys_platform != 'win32'
+
 # Monitoring & Logging
 prometheus-client==0.19.0
 structlog==24.1.0
+sentry-sdk[fastapi]==1.40.6
+
+# Observability
+opentelemetry-api==1.22.0
+opentelemetry-sdk==1.22.0
+opentelemetry-instrumentation-fastapi==0.43b0
+
+# Rate Limiting
+slowapi==0.1.9
+
+# Compression
+brotli==1.1.0
 
 # Testing
 pytest==7.4.4
 pytest-asyncio==0.23.3
 pytest-cov==4.1.0
+locust==2.22.0
 
 # Code Quality
 black==24.3.0

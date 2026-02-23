@@ -1,0 +1,99 @@
+# Inception Engine - Performance Regression CI
+# HELIX DELTA - Phase 5: Observability Stack
+# Runs performance benchmarks on PRs and main branch pushes
+
+name: Performance Benchmarks
+
+on:
+  push:
+    branches: [main, helix-delta-performance]
+  pull_request:
+    branches: [main]
+
+jobs:
+  benchmark:
+    name: Run Performance Benchmarks
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      postgres:
+        image: postgres:15-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: inception_engine_test
+          POSTGRES_USER: inception
+          POSTGRES_PASSWORD: inception
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r src/requirements.txt
+          pip install aiohttp pytest-benchmark
+
+      - name: Run unit performance tests
+        run: |
+          python -m pytest tests/test_performance.py -v --tb=short
+        env:
+          REDIS_URL: redis://localhost:6379/0
+          DATABASE_URL: postgresql://inception:inception@localhost:5432/inception_engine_test
+
+      - name: Start API server
+        run: |
+          python -m uvicorn src.api.server:app --host 0.0.0.0 --port 8000 &
+          sleep 5
+        env:
+          REDIS_URL: redis://localhost:6379/0
+          DATABASE_URL: postgresql://inception:inception@localhost:5432/inception_engine_test
+          ENVIRONMENT: test
+
+      - name: Run benchmarks
+        run: |
+          python benchmarks/run_benchmarks.py --url http://localhost:8000
+
+      - name: Upload benchmark results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: benchmarks/results.json
+
+      - name: Check performance thresholds
+        if: github.event_name == 'pull_request'
+        run: |
+          python -c "
+          import json
+          with open('benchmarks/results.json') as f:
+              results = json.load(f)
+          if not results.get('all_passed', False):
+              print('Performance regression detected!')
+              for r in results.get('results', []):
+                  latency = r.get('latency_ms', {})
+                  print(f\"  {r['name']}: p95={latency.get('p95', 'N/A')}ms\")
+              exit(1)
+          print('All performance benchmarks passed.')
+          "
