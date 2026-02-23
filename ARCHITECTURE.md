@@ -1,45 +1,45 @@
-# Inception Engine V4 - Architecture Documentation
+# Inception Engine - Architecture Documentation
 
 ## System Overview
 
-Inception Engine V4 is a mode-based AI development system that coordinates 35+ specialized agents through four operational modes to deliver production-ready applications.
+Inception Engine is a constitutional AI operating system that coordinates 35 specialized agents through four operational modes to deliver production-ready applications. Every agent operates under a binding constitution with institutional memory and governance.
 
 ## Core Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    ORCHESTRATOR                         │
-│  (Main coordination and workflow management)            │
+│                     ORCHESTRATOR                         │
+│   (Main coordination and workflow management)            │
 └────────────────┬────────────────────────────────────────┘
                  │
         ┌────────┴────────┐
         │                 │
         ▼                 ▼
 ┌──────────────┐  ┌──────────────────┐
-│ MODE MANAGER │  │  AGENT LOADER    │
+│ MODE MANAGER │  │   AGENT LOADER   │
 └──────┬───────┘  └────────┬─────────┘
        │                   │
        │                   │
        ▼                   ▼
 ┌─────────────────────────────────┐
-│        FOUR MODES               │
+│          FOUR MODES             │
 │  • IDEATE  (Vision)             │
 │  • PLAN    (Specification)      │
 │  • SHIP    (Implementation)     │
 │  • VALIDATE (Quality Assurance) │
 └─────────────────────────────────┘
-       │
-       ▼
+               │
+               ▼
 ┌─────────────────────────────────┐
-│    CONSTITUTIONAL GUARD         │
+│     CONSTITUTIONAL GUARD        │
 │  • Article 0: No Stealing       │
 │  • Article XVII: Zero Day       │
 │  • Article XVIII: Generative    │
 └─────────────────────────────────┘
-       │
-       ▼
+               │
+               ▼
 ┌─────────────────────────────────┐
-│      GATE VALIDATOR             │
+│        GATE VALIDATOR           │
 │  (SHIP mode exit gates)         │
 │  1. Code Complete               │
 │  2. Tests Passing               │
@@ -99,10 +99,10 @@ execute_express_workflow(prompt) -> result
 - Organize agents by hive
 
 **Agent Organization**:
-- **Builders** (V3): Production/creation agents
-- **Validators** (V4): Quality assurance agents  
-- **Leaders**: AVERI, VERA, etc.
-- **Hive Leaders**: AURORA, LEX, KEEPER, BROADCAST, SWITCHBOARD
+- **Builders**: Production/creation agents
+- **Validators**: Quality assurance agents
+- **Leaders**: AVERI (ATHENA, VERA, IRIS)
+- **Hive Leaders**: AURORA (8), LEX (7), KEEPER (7), BROADCAST (6), SWITCHBOARD (4), COMPASS (3)
 
 ### 4. Gate Validator (`gate_validator.py`)
 
@@ -114,8 +114,7 @@ execute_express_workflow(prompt) -> result
 3. **Deployment Live**: Application deployed to production
 4. **Health Check Passing**: Application accessible via HTTP
 
-**Constitutional Principle**:
-Implements Article XVII (Zero Day Creativity) - cannot exit SHIP until production-ready.
+**Constitutional Principle**: Implements Article XVII (Zero Day Creativity) - cannot exit SHIP until production-ready.
 
 ### 5. Constitutional Guard (`constitutional_guard.py`)
 
@@ -151,8 +150,8 @@ Implements Article XVII (Zero Day Creativity) - cannot exit SHIP until productio
 **Purpose**: Foundation for all agents
 
 **Agent Types**:
-- Builder: Production/creation (V3 agents)
-- Validator: Quality assurance (V4 agents)
+- Builder: Production/creation agents
+- Validator: Quality assurance agents
 - Leader: Strategic coordination
 - Hive Leader: Team coordination
 
@@ -194,27 +193,33 @@ get_capabilities() -> AgentCapabilities
 ## Workflow Patterns
 
 ### 1. Full Lifecycle
+
 ```
 IDEATE → PLAN → SHIP → VALIDATE
 ```
-- All 35+ agents participate in IDEATE
+
+- All 35 agents participate in IDEATE
 - Focused team in PLAN
 - Implementation team in SHIP
 - Fresh eyes in VALIDATE
 - Best for complex projects
 
 ### 2. Rapid Workflow
+
 ```
 IDEATE → SHIP → VALIDATE
 ```
+
 - Skip detailed planning
 - Faster than full lifecycle
 - Good for well-understood problems
 
 ### 3. Express Workflow
+
 ```
 SHIP → VALIDATE
 ```
+
 - Prompt-to-product
 - Fastest option
 - Perfect for simple applications
@@ -226,7 +231,7 @@ SHIP → VALIDATE
 
 **Purpose**: Strategic vision and alignment
 
-**Participants**: All 35+ agents
+**Participants**: All 35 agents
 
 **Process**:
 1. All agents contribute from specialties
@@ -245,13 +250,13 @@ SHIP → VALIDATE
 
 **Purpose**: Technical specification and breakdown
 
-**Participants**: Focused team (builders)
+**Participants**: Focused team (8-15 agents)
 
 **Process**:
-1. ARCH loads relevant patterns
+1. ATHENA coordinates architecture
 2. Hive leaders break down tasks
-3. RELAY maps dependencies
-4. COMPASS reviews ethics
+3. SWITCHBOARD maps dependencies
+4. LEX reviews compliance
 
 **Outputs**:
 - Technical specification
@@ -264,14 +269,14 @@ SHIP → VALIDATE
 
 **Purpose**: Implementation through production
 
-**Participants**: Implementation team
+**Participants**: Implementation team (5-10 agents)
 
 **Process**:
 1. BOLT writes and tests code
-2. SYSTEMS provisions infrastructure
-3. SIGNAL deploys to production
-4. CODEX generates documentation
-5. Aurora validates completeness
+2. Builder hives provision infrastructure
+3. Deployment to production
+4. SCRIBE generates documentation
+5. AURORA validates completeness
 6. ALL FOUR GATES MUST PASS
 
 **Outputs**:
@@ -309,23 +314,23 @@ SHIP → VALIDATE
 ```
 User Input (Prompt)
        ↓
-   Orchestrator
+Orchestrator
        ↓
-  Mode Manager (validate entry)
+Mode Manager (validate entry)
        ↓
 Constitutional Guard (pre-check)
        ↓
-  Agent Loader (activate agents)
+Agent Loader (activate agents)
        ↓
- Mode Execution (workflow)
+Mode Execution (workflow)
        ↓
- Gate Validator (SHIP only)
+Gate Validator (SHIP only)
        ↓
 Constitutional Guard (post-check)
        ↓
-  Mode Manager (complete session)
+Mode Manager (complete session)
        ↓
-    Output (results)
+Output (results)
 ```
 
 ## Session Management
@@ -433,7 +438,7 @@ tests/
       "type": "builder|validator",
       "status": "active|inactive",
       "mode": "build|validate|both",
-      "hive": "AURORA|LEX|..."
+      "hive": "AURORA|LEX|KEEPER|BROADCAST|SWITCHBOARD|COMPASS"
     }
   }
 }
