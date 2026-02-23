@@ -1,4 +1,4 @@
-# Inception Engine V4 - Quickstart Guide
+# Inception Engine - Quickstart Guide
 
 ## Installation
 
@@ -155,6 +155,7 @@ pytest src/tests/test_orchestrator.py
 ## Configuration
 
 Configuration files are in `src/modes/` directory:
+
 - `01_IDEATE/MODE_CONFIG.json`
 - `02_PLAN/MODE_CONFIG.json`
 - `03_SHIP/MODE_CONFIG.json`
@@ -175,7 +176,7 @@ Violations will prevent execution.
 SHIP mode cannot exit until all gates pass:
 
 1. ✅ Code Complete
-2. ✅ Tests Passing  
+2. ✅ Tests Passing
 3. ✅ Deployment Live
 4. ✅ Health Check Passing
 
@@ -190,6 +191,7 @@ SHIP mode cannot exit until all gates pass:
 ## Support
 
 For issues or questions:
+
 - GitHub Issues: https://github.com/WholeTroutMedia/inception-engine/issues
 - Documentation: Full README in repository
 
