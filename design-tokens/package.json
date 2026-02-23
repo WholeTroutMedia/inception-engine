@@ -1,0 +1,54 @@
+{
+  "name": "@inception-engine/design-tokens",
+  "version": "1.0.0",
+  "description": "Inception Engine design tokens — compiled via Style Dictionary for CSS, SCSS, JS, and Tailwind",
+  "main": "dist/js/tokens.js",
+  "module": "dist/js/tokens.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/js/tokens.esm.js",
+      "require": "./dist/js/tokens.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./scss": "./dist/scss/_tokens.scss",
+    "./tailwind": "./dist/tailwind/tokens.js",
+    "./json": "./dist/json/tokens.json"
+  },
+  "files": [
+    "dist/",
+    "tokens.json",
+    "build.js",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "build:css": "node build.js --platform=css",
+    "build:scss": "node build.js --platform=scss",
+    "build:js": "node build.js --platform=js",
+    "build:tailwind": "node build.js --platform=tailwind",
+    "build:json": "node build.js --platform=json",
+    "clean": "rimraf dist",
+    "rebuild": "npm run clean && npm run build",
+    "watch": "chokidar 'tokens.json' -c 'npm run build'",
+    "validate": "node -e \"JSON.parse(require('fs').readFileSync('./tokens.json','utf8')); console.log('tokens.json is valid JSON');\"",
+    "prepublishOnly": "npm run validate && npm run rebuild"
+  },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "css-variables",
+    "tailwind",
+    "inception-engine"
+  ],
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "style-dictionary": "^3.9.2"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
