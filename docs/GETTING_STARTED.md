@@ -6,7 +6,7 @@
 
 ## What Is This?
 
-Inception Engine is a system of 15 specialized AI agents that work together as a coordinated team. You give them a goal. They ideate, plan, build, and validate — producing complete, production-ready output.
+Inception Engine is a system of 35 specialized AI agents that work together as a coordinated team. You give them a goal. They ideate, plan, build, and validate — producing complete, production-ready output.
 
 You interact with them through whatever AI tool you already use: Claude, ChatGPT, Gemini, Perplexity, or an IDE like Cursor or VS Code. **No special software required.**
 
@@ -22,7 +22,7 @@ You interact with them through whatever AI tool you already use: Claude, ChatGPT
 
 **I use Claude Desktop** → [Claude + MCP Setup](./setup/anthropic-claude-mcp.md)
 
-**I don’t code at all** → [No-Code Setup](./setup/no-code-automation.md)
+**I don't code at all** → [No-Code Setup](./setup/no-code-automation.md)
 
 ---
 
@@ -31,9 +31,9 @@ You interact with them through whatever AI tool you already use: Claude, ChatGPT
 You don't need to download anything. Open any AI assistant (Claude, ChatGPT, Gemini, Perplexity) and paste this:
 
 ```
-You are now operating as INCEPTION ENGINE — a coordinated AI development system with 15 specialized agents.
+You are now operating as INCEPTION ENGINE — a coordinated AI development system with 35 specialized agents organized into 6 hives.
 
-Your agents:
+Your core agents:
 - AVERI (ATHENA + VERA + IRIS) — Strategic Trinity. Boot first.
 - AURORA — Creative direction and design
 - BOLT — Frontend and mobile development (React, Next.js, SwiftUI)
@@ -46,6 +46,13 @@ Your agents:
 - RELAY — Communication routing
 - LEX — Legal, licensing, compliance
 - COMPASS — Constitutional guardian (North Star)
+- SENTINEL — Security vulnerability scanning
+- ATLAS — Broadcast hive leader
+- RAM_CREW — Memory optimization
+
+Additional agents: ECHO, SIGNAL, GRAPHICS, STUDIO, SYSTEMS, CONTROL_ROOM, SHOWRUNNER, PATTERNS, LOGIC, COVERAGE, MATH, and advisory collectives (THREE WISE MEN, ORACLE COUNCIL).
+
+Agent Hives: AURORA (8), LEX (7), KEEPER (7), BROADCAST (6), SWITCHBOARD (4), COMPASS (3)
 
 Operating modes:
 - INTEROPERABLE (default): All agents collaborate freely
@@ -108,16 +115,16 @@ Once you have the files, open the folder. You'll see:
 
 ```
 inception-engine/
-├── README.md          ← Start here for overview
-├── CONSTITUTION.md    ← The 19-article governance framework
-├── docs/              ← All documentation
-│   ├── AGENTS.md      ← All 15 agents explained
-│   ├── FOUR_MODES.md  ← IDEATE/PLAN/SHIP/VALIDATE explained
-│   └── setup/         ← Setup guides for every platform
+├── README.md                ← Start here for overview
+├── CONSTITUTION.md          ← The 19-article governance framework
+├── docs/                    ← All documentation
+│   ├── AGENTS.md            ← All 35 agents explained
+│   ├── FOUR_MODES.md        ← IDEATE/PLAN/SHIP/VALIDATE explained
+│   └── setup/               ← Setup guides for every platform
 ├── examples/
-│   └── agent-config.json  ← Full agent configuration
+│   └── agent-config.json    ← Full agent configuration
 └── design-system/
-    └── tokens.json    ← Design language tokens
+    └── tokens.json          ← Design language tokens
 ```
 
 You can open any `.md` file in a text editor to read it. They're just text files.
@@ -192,7 +199,7 @@ You can address any agent directly:
 @SCRIBE — write documentation for what we just built
 ```
 
-You don’t have to route agents manually. `@AVERI` coordinates automatically.
+You don't have to route agents manually. `@AVERI` coordinates automatically.
 
 ---
 
@@ -211,7 +218,8 @@ Every task should advance all four dimensions:
 
 ```
 You: @AVERI boot. I need a photography portfolio site.
-Dark theme, minimal, fast. 12 images with a contact form. Ship it today.
+     Dark theme, minimal, fast. 12 images with a contact form.
+     Ship it today.
 
 ATHENA: Breaking this down into four dimensions:
   Structure: Next.js 15, image optimization pipeline
@@ -219,8 +227,9 @@ ATHENA: Breaking this down into four dimensions:
   Quality: Lighthouse 95+, mobile responsive, WCAG AA
   Delivery: Vercel deployment, custom domain ready
 
-AURORA: Design direction — dark palette, generous whitespace, images
-as hero elements. Masonry grid with lightbox, sticky nav, floating CTA.
+AURORA: Design direction — dark palette, generous whitespace,
+  images as hero elements. Masonry grid with lightbox,
+  sticky nav, floating CTA.
 
 BOLT: Scaffolding now. Components:
   - ImageGallery (lazy loading, blur placeholders)
@@ -228,8 +237,8 @@ BOLT: Scaffolding now. Components:
   - Navigation (transparent → solid on scroll)
 
 IRIS: All exit gates passing. Deploying.
-Site live at: portfolio.vercel.app
-Lighthouse: 98/100. Time to production: 12 minutes.
+  Site live at: portfolio.vercel.app
+  Lighthouse: 98/100. Time to production: 12 minutes.
 ```
 
 ---
@@ -270,7 +279,7 @@ Type their name directly: `@BOLT` or `@KEEPER`. Some agents default to resting s
 Make sure you pasted the full system prompt from the Quick Start section above. The agent names need to be established in the session context.
 
 **SHIP mode exit gate failing?**
-SHIP mode has strict exit criteria. The system will tell you exactly which gate failed and what’s needed to pass it.
+SHIP mode has strict exit criteria. The system will tell you exactly which gate failed and what's needed to pass it.
 
 **Running in an IDE?**
 See the [IDE + Antigravity guide](./setup/ide-and-antigravity.md) for workspace-specific setup, including how to enable COMET browser automation.
@@ -283,7 +292,7 @@ See [COMET + Browser System](./BROWSER_SYSTEM.md) for the full agentic browsing 
 ## Next Steps
 
 - [The Four Modes](./FOUR_MODES.md) — Deep dive into IDEATE / PLAN / SHIP / VALIDATE
-- [Agent Registry](./AGENTS.md) — All 15 agents, what they do, when to use them
+- [Agent Registry](./AGENTS.md) — All 35 agents, what they do, when to use them
 - [Neural Architecture](./NEURAL_ARCHITECTURE.md) — How the brain-inspired systems work
 - [Browser System](./BROWSER_SYSTEM.md) — COMET and agentic web automation
 - [MCP Guide](./MCP_GUIDE.md) — Model Context Protocol integration
