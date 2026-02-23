@@ -1,0 +1,208 @@
+/**
+ * usage.css — How to use Inception Engine design tokens in plain CSS
+ *
+ * After running `npm run build` in /design-tokens, import the generated
+ * CSS file in your project entry point:
+ *
+ *   @import '@inception-engine/design-tokens/css';
+ *   OR:
+ *   @import '../design-tokens/dist/css/tokens.css';
+ *
+ * All tokens are available as CSS custom properties prefixed with --ie-
+ */
+
+/* =============================================================================
+   1. IMPORTING TOKENS
+   ============================================================================= */
+
+@import '../dist/css/tokens.css';
+
+/* =============================================================================
+   2. COLOR USAGE
+   ============================================================================= */
+
+.page {
+  background-color: var(--ie-color-semantic-bg-base);
+  color: var(--ie-color-semantic-text-primary);
+}
+
+.card {
+  background-color: var(--ie-color-semantic-bg-raised);
+  border: 1px solid var(--ie-color-semantic-border-default);
+  color: var(--ie-color-semantic-text-primary);
+}
+
+.card__subtitle {
+  color: var(--ie-color-semantic-text-secondary);
+}
+
+.link {
+  color: var(--ie-color-semantic-text-link);
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: var(--ie-color-primitive-blue-800);
+}
+
+/* Status banners */
+.banner--success {
+  background-color: var(--ie-color-semantic-status-success-bg);
+  color:            var(--ie-color-semantic-status-success-text);
+  border:           1px solid var(--ie-color-semantic-status-success-border);
+}
+
+.banner--error {
+  background-color: var(--ie-color-semantic-status-error-bg);
+  color:            var(--ie-color-semantic-status-error-text);
+  border:           1px solid var(--ie-color-semantic-status-error-border);
+}
+
+.banner--warning {
+  background-color: var(--ie-color-semantic-status-warning-bg);
+  color:            var(--ie-color-semantic-status-warning-text);
+  border:           1px solid var(--ie-color-semantic-status-warning-border);
+}
+
+/* =============================================================================
+   3. TYPOGRAPHY USAGE
+   ============================================================================= */
+
+body {
+  font-family:  var(--ie-typography-font-family-sans);
+  font-size:    var(--ie-typography-font-size-base);  /* 16px */
+  line-height:  var(--ie-typography-line-height-normal);
+  font-weight:  var(--ie-typography-font-weight-regular);
+  color:        var(--ie-color-semantic-text-primary);
+}
+
+h1 {
+  font-size:      var(--ie-typography-font-size-4xl);  /* 36px */
+  font-weight:    var(--ie-typography-font-weight-bold);
+  line-height:    var(--ie-typography-line-height-tight);
+  letter-spacing: var(--ie-typography-letter-spacing-tighter);
+}
+
+h2 {
+  font-size:      var(--ie-typography-font-size-3xl);  /* 30px */
+  font-weight:    var(--ie-typography-font-weight-semibold);
+  line-height:    var(--ie-typography-line-height-snug);
+  letter-spacing: var(--ie-typography-letter-spacing-tight);
+}
+
+h3 {
+  font-size:      var(--ie-typography-font-size-xl);  /* 20px */
+  font-weight:    var(--ie-typography-font-weight-semibold);
+  line-height:    var(--ie-typography-line-height-snug);
+}
+
+.text-sm    { font-size: var(--ie-typography-font-size-sm); }
+.text-xs    { font-size: var(--ie-typography-font-size-xs); }
+.text-lg    { font-size: var(--ie-typography-font-size-lg); }
+.text-mono  { font-family: var(--ie-typography-font-family-mono); }
+
+.text-muted    { color: var(--ie-color-semantic-text-secondary); }
+.text-disabled { color: var(--ie-color-semantic-text-disabled); }
+
+/* =============================================================================
+   4. SPACING USAGE
+   ============================================================================= */
+
+.section {
+  padding: var(--ie-spacing-12) var(--ie-spacing-6);  /* 48px 24px */
+}
+
+.container {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--ie-spacing-4);  /* 16px */
+}
+
+.stack > * + * {
+  margin-top: var(--ie-spacing-4);  /* 16px gap between children */
+}
+
+.stack--sm > * + * { margin-top: var(--ie-spacing-2); }  /* 8px  */
+.stack--lg > * + * { margin-top: var(--ie-spacing-8); }  /* 32px */
+
+/* =============================================================================
+   5. BORDER RADIUS USAGE
+   ============================================================================= */
+
+.btn        { border-radius: var(--ie-border-radius-md); }   /* 6px  */
+.card       { border-radius: var(--ie-border-radius-xl); }   /* 12px */
+.modal      { border-radius: var(--ie-border-radius-2xl); }  /* 16px */
+.avatar     { border-radius: var(--ie-border-radius-full); } /* circle */
+.badge      { border-radius: var(--ie-border-radius-full); }
+.input      { border-radius: var(--ie-border-radius-md); }
+
+/* =============================================================================
+   6. SHADOW / ELEVATION USAGE
+   ============================================================================= */
+
+.card           { box-shadow: var(--ie-shadow-sm); }
+.card:hover     { box-shadow: var(--ie-shadow-md); }
+.dropdown       { box-shadow: var(--ie-shadow-lg); }
+.modal          { box-shadow: var(--ie-shadow-xl); }
+.input:focus    { box-shadow: var(--ie-shadow-inner); }
+.btn--brand:hover { box-shadow: var(--ie-shadow-brand); }
+
+/* =============================================================================
+   7. ANIMATION / TRANSITION USAGE
+   ============================================================================= */
+
+.btn {
+  transition:
+    background-color var(--ie-animation-duration-fast) var(--ie-animation-easing-ease-in-out),
+    box-shadow       var(--ie-animation-duration-fast) var(--ie-animation-easing-ease-in-out),
+    color            var(--ie-animation-duration-fast) var(--ie-animation-easing-ease-in-out);
+}
+
+.modal-overlay {
+  transition: opacity var(--ie-animation-duration-base) var(--ie-animation-easing-ease-out);
+}
+
+.modal-panel {
+  transition: transform var(--ie-animation-duration-slow) var(--ie-animation-easing-spring);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================================================
+   8. Z-INDEX USAGE
+   ============================================================================= */
+
+.sticky-header { z-index: var(--ie-z-index-sticky); }
+.overlay       { z-index: var(--ie-z-index-overlay); }
+.modal         { z-index: var(--ie-z-index-modal);   }
+.tooltip       { z-index: var(--ie-z-index-popover); }
+.toast         { z-index: var(--ie-z-index-toast);   }
+
+/* =============================================================================
+   9. FOCUS RING (ACCESSIBILITY)
+   ============================================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--ie-color-semantic-border-focus);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   10. DARK MODE — override semantic tokens at :root[data-theme="dark"]
+   ============================================================================= */
+
+:root[data-theme="dark"] {
+  --ie-color-semantic-bg-base:        var(--ie-color-primitive-neutral-900);
+  --ie-color-semantic-bg-subtle:      var(--ie-color-primitive-neutral-800);
+  --ie-color-semantic-bg-raised:      var(--ie-color-primitive-neutral-800);
+  --ie-color-semantic-text-primary:   var(--ie-color-primitive-neutral-50);
+  --ie-color-semantic-text-secondary: var(--ie-color-primitive-neutral-400);
+  --ie-color-semantic-border-default: var(--ie-color-primitive-neutral-700);
+  --ie-color-semantic-border-subtle:  var(--ie-color-primitive-neutral-800);
+}
