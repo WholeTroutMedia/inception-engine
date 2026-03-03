@@ -1,0 +1,47 @@
+# Triggers when .sync/INSTRUCTIONS.md is updated, notifying sync actors
+# that there are new instructions to process.
+
+name: Sync Notification
+
+on:
+  push:
+    paths:
+      - '.sync/INSTRUCTIONS.md'
+    branches:
+      - main
+
+jobs:
+  notify-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update sync status
+        run: |
+          if [ -f ".sync/STATUS.json" ]; then
+            python3 -c "
+import json
+from datetime import datetime, timezone
+
+with open('.sync/STATUS.json', 'r') as f:
+    status = json.load(f)
+
+status['last_sync'] = {
+    'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+    'actor': 'github-actions',
+    'action': 'instruction-change-detected'
+}
+
+with open('.sync/STATUS.json', 'w') as f:
+    json.dump(status, f, indent=2)
+"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .sync/STATUS.json
+            git diff --cached --quiet || git commit -m "[sync] Instruction change detected"
+            git push
+          fi

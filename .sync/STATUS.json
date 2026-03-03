@@ -1,0 +1,18 @@
+{
+  "last_sync": {
+    "timestamp": "2026-03-03 20:30 UTC",
+    "actor": "perplexity-computer",
+    "action": "init"
+  },
+  "pending_instructions": {
+    "for_local": [],
+    "for_remote": []
+  },
+  "active_tasks": [],
+  "completed_tasks": [],
+  "health": {
+    "local_last_seen": null,
+    "remote_last_seen": "2026-03-03 20:30 UTC",
+    "conflicts": []
+  }
+}

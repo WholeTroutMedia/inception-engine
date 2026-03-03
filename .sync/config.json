@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "protocol": "brainchild-sync",
+  "repo": {
+    "owner": "WholeTroutMedia",
+    "name": "inception-engine",
+    "branch": "main"
+  },
+  "sync": {
+    "enabled": true,
+    "auto_pull": true,
+    "monitor_frequency": "hourly",
+    "actors": {
+      "local": {
+        "name": "Antigravity",
+        "platform": "Windows",
+        "root": "D:\\Google Antigravity\\",
+        "capabilities": ["file_edit", "terminal", "mcp_local", "chromadb", "build", "test"]
+      },
+      "remote": {
+        "name": "Perplexity Computer",
+        "capabilities": ["github_mcp", "web_search", "code_gen", "research", "file_create", "cron"]
+      },
+      "relay": {
+        "name": "GitHub",
+        "role": "message_bus",
+        "protocol_path": ".sync/"
+      }
+    }
+  },
+  "paths": {
+    "instructions": ".sync/INSTRUCTIONS.md",
+    "status": ".sync/STATUS.json",
+    "changelog": ".sync/CHANGELOG.md",
+    "config": ".sync/config.json"
+  },
+  "notifications": {
+    "on_instruction_added": true,
+    "on_task_completed": true,
+    "on_conflict": true
+  }
+}
