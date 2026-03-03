@@ -1,0 +1,72 @@
+{
+  "research_policy": "autonomous_with_constraints",
+  "always_read_first": [
+    ".inception/manifest.json",
+    ".inception/context.md",
+    ".inception/mode-state.json"
+  ],
+  "template_discovery": {
+    "registry_location": "https://github.com/WholeTroutMedia/inception-templates",
+    "local_cache": "~/.inception/template-cache/",
+    "cache_ttl_hours": 24,
+    "on_new_project": "query registry for matching templates",
+    "match_criteria": [
+      "industry_vertical",
+      "tech_stack_preference",
+      "scale"
+    ]
+  },
+  "external_research": {
+    "when_to_research": [
+      "IDEATE mode: always research The Opportunity section",
+      "PLAN mode: research tech stack alternatives if architecture score < 80",
+      "SHIP mode: research error solutions when blocked > 15 minutes",
+      "VALIDATE mode: research compliance requirements for template industry"
+    ],
+    "approved_sources": [
+      "GitHub (public repos for pattern reference)",
+      "Official documentation (framework docs, API docs)",
+      "Academic/research papers (for best practices)",
+      "Industry reports (for IDEATE market research)"
+    ],
+    "constitutional_constraint": "Article 0: Research to learn patterns, never to copy",
+    "research_budget_per_mode": {
+      "IDEATE": "unlimited (market research is core output)",
+      "PLAN": "3 searches max per architectural decision",
+      "SHIP": "1 search per blocked issue",
+      "VALIDATE": "2 searches for compliance verification"
+    }
+  },
+  "repo_traversal": {
+    "on_boot": [
+      "read .inception/ (all files)",
+      "read BLUEPRINT.md (if exists)",
+      "read ARCHITECTURE.md (if exists)",
+      "check mode-state.json for current phase"
+    ],
+    "on_demand": [
+      "src/ (when SHIP mode active)",
+      "tests/ (when VALIDATE mode active)",
+      "infra/ (when SYSTEMS agent active)"
+    ],
+    "never_read_without_reason": [
+      "node_modules/",
+      ".git/",
+      "*.lock files",
+      "build/ dist/ .next/"
+    ]
+  },
+  "context_library_triggers": {
+    "api": "api-patterns",
+    "endpoint": "api-patterns",
+    "rest": "api-patterns",
+    "graphql": "api-patterns",
+    "component": "component-patterns",
+    "ui": "component-patterns",
+    "react": "component-patterns",
+    "next": "component-patterns",
+    "commerce": "commerce-patterns",
+    "stripe": "commerce-patterns",
+    "payment": "commerce-patterns"
+  }
+}

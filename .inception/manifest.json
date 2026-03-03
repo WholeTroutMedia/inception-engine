@@ -1,0 +1,47 @@
+{
+  "$schema": "https://github.com/WholeTroutMedia/brainchild-v4/schemas/inception-manifest-1.0.json",
+  "manifest_version": "1.0",
+  "created_at": "2026-03-03T19:42:00Z",
+  "last_modified": "2026-03-03T19:42:00Z",
+  "project": {
+    "id": "inception-engine",
+    "name": "The AI-Native Development Engine. 15 specialized agents, bra",
+    "owner": "WholeTroutMedia",
+    "repo": "https://github.com/WholeTroutMedia/inception-engine",
+    "description": "The AI-Native Development Engine. 15 specialized agents, brain-inspired neural architecture, constitutional governance.",
+    "status": "active"
+  },
+  "engine": {
+    "version": "v4",
+    "config_repo": "https://github.com/WholeTroutMedia/brainchild-v4",
+    "constitution": "CORE_FOUNDATION/AGENT_CONSTITUTION.md",
+    "boot_protocol": "CORE_FOUNDATION/AVERI_BOOT_PROTOCOL.md"
+  },
+  "context_library": {
+    "auto_load": [
+      "api-patterns"
+    ],
+    "template_context": null,
+    "token_budget": {
+      "core": 2000,
+      "specialized": 1500,
+      "template_context": 1500,
+      "max_total": 6000
+    }
+  },
+  "agents": {
+    "primary": "AVERI",
+    "active_hive": "AURORA",
+    "mode_overrides": {}
+  },
+  "memory": {
+    "project_memory_path": "inception-memory/projects/inception-engine",
+    "sync_on": [
+      "mode_complete",
+      "gate_pass",
+      "gate_fail",
+      "session_end"
+    ]
+  },
+  "template": null
+}
