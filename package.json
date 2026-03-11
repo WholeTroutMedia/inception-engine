@@ -1,0 +1,22 @@
+{
+  "name": "cle",
+  "version": "0.0.1",
+  "private": true,
+  "description": "a generative reasoning engine",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node --import tsx/esm packages/ai/src/server.ts",
+    "build": "tsc -b packages/core packages/ai",
+    "type-check": "tsc --noEmit -p packages/core/tsconfig.json && tsc --noEmit -p packages/ai/tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.2",
+    "vitest": "^3.0.0",
+    "@types/node": "^22.0.0"
+  }
+}
