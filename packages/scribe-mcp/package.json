@@ -1,0 +1,36 @@
+{
+    "name": "@creative-liberation-engine/scribe-mcp",
+    "version": "1.0.0",
+    "description": "SCRIBE v2 memory layer exposed as MCP server",
+    "type": "module",
+    "main": "dist/mcp-server.js",
+    "bin": {
+        "inception-scribe": "dist/mcp-server.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/mcp-server.js",
+        "dev": "tsx src/mcp-server.ts",
+        "test": "echo \"No tests defined\"",
+        "test:coverage": "vitest run --coverage"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.0.0"
+    },
+    "devDependencies": {
+        "@vitest/coverage-v8": "^4.0.18",
+        "tsx": "^4.0.0",
+        "typescript": "^5.3.0",
+        "vitest": "^4.0.18"
+    },
+    "keywords": [
+        "creative-liberation-engine",
+        "mcp",
+        "scribe",
+        "memory",
+        "context"
+    ],
+    "author": "Creative Liberation Engine Team",
+    "license": "UNLICENSED",
+    "private": true
+}

@@ -1,0 +1,737 @@
+/**
+ * signal-dashboard.module.css
+ *
+ * Spatial design language for the SIGNAL Dashboard.
+ * Uses Warm Trichromatic palette + glassmorphism + live pulse animations.
+ * All CSS custom properties fall back gracefully to the design system root vars.
+ */
+
+/* ─── Signal Source Accent Colors ─────────────────────────────────────────── */
+:root {
+    --signal-trending: hsl(270, 70%, 65%);
+    /* Sonar violet */
+    --signal-campaign: hsl(195, 75%, 55%);
+    /* Azure active */
+    --signal-brand: hsl(35, 90%, 60%);
+    /* Amber warm */
+    --signal-comet: hsl(155, 65%, 50%);
+    /* COMET green */
+}
+
+/* ─── Dashboard Shell ─────────────────────────────────────────────────────── */
+
+.signalDashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0;
+    overflow: hidden;
+    background: var(--color-surface-0, hsl(230, 18%, 8%));
+    color: var(--color-text-primary, hsl(220, 20%, 92%));
+    font-family: var(--font-base, 'Inter', 'Outfit', sans-serif);
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+
+.dashboardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px 12px;
+    border-bottom: 1px solid hsl(220, 20%, 14%);
+    background: linear-gradient(to right,
+            hsl(230, 18%, 10%) 0%,
+            hsl(240, 15%, 9%) 100%);
+    flex-shrink: 0;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.dashboardTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, hsl(270, 70%, 75%), hsl(195, 75%, 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.dashboardSubtitle {
+    font-size: 0.72rem;
+    color: hsl(220, 15%, 50%);
+    letter-spacing: 0.04em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.averiStatus {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.statusDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: hsl(155, 65%, 50%);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.averiStatus.offline .statusDot {
+    background: hsl(0, 60%, 50%);
+    animation: none;
+}
+
+.lastRefresh {
+    font-size: 0.68rem;
+    color: hsl(220, 15%, 45%);
+}
+
+.refreshBtn {
+    background: none;
+    border: 1px solid hsl(220, 20%, 22%);
+    color: hsl(220, 15%, 55%);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.refreshBtn:hover {
+    border-color: hsl(270, 50%, 55%);
+    color: hsl(270, 70%, 75%);
+    background: hsl(270, 20%, 12%);
+}
+
+/* ─── Feed Grid ───────────────────────────────────────────────────────────── */
+
+.feedGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background: hsl(220, 20%, 12%);
+}
+
+/* ─── Signal Card ─────────────────────────────────────────────────────────── */
+
+.signalCard {
+    background: hsl(230, 18%, 10%);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transition: background 0.2s ease;
+
+    /* Accent top bar via CSS custom property from component */
+    --card-accent: var(--signal-trending);
+}
+
+.signalCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--card-accent);
+    opacity: 0.7;
+}
+
+.signalCard.pulsing {
+    animation: cardPulse 0.8s ease-out;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid hsl(220, 20%, 13%);
+    flex-shrink: 0;
+}
+
+.cardIcon {
+    font-size: 0.85rem;
+    color: var(--card-accent);
+}
+
+.cardTitle {
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: hsl(220, 15%, 70%);
+    flex: 1;
+}
+
+.liveIndicator {
+    font-size: 0.55rem;
+    transition: opacity 0.3s;
+}
+
+.liveIndicator.live {
+    color: hsl(155, 65%, 50%);
+    animation: livePulse 2.5s ease-in-out infinite;
+}
+
+.liveIndicator.loading {
+    color: hsl(220, 15%, 50%);
+    animation: spin 1.2s linear infinite;
+}
+
+/* ─── Signal List ─────────────────────────────────────────────────────────── */
+
+.signalList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(220, 20%, 20%) transparent;
+}
+
+.signalItem {
+    padding: 10px 14px;
+    border-bottom: 1px solid hsl(220, 20%, 11%);
+    cursor: default;
+    transition: background 0.12s ease;
+}
+
+.signalItem:hover {
+    background: hsl(230, 18%, 13%);
+}
+
+.signalItem:last-child {
+    border-bottom: none;
+}
+
+.signalHeadline {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.signalText {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: hsl(220, 20%, 85%);
+    line-height: 1.4;
+}
+
+.signalSubtext {
+    font-size: 0.67rem;
+    color: hsl(220, 15%, 45%);
+    margin-top: 3px;
+    padding-left: 18px;
+}
+
+.trendBadge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+    padding-top: 2px;
+    flex-shrink: 0;
+}
+
+.trend-up {
+    color: hsl(155, 65%, 50%);
+}
+
+.trend-down {
+    color: hsl(0, 65%, 55%);
+}
+
+.trend-flat {
+    color: hsl(220, 15%, 50%);
+}
+
+.scoreBar {
+    margin-top: 5px;
+    margin-left: 18px;
+    height: 2px;
+    background: hsl(220, 20%, 16%);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.scoreFill {
+    height: 100%;
+    background: var(--card-accent);
+    opacity: 0.55;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* ─── Skeleton Loading ────────────────────────────────────────────────────── */
+
+.skeletonItem {
+    padding: 12px 14px;
+}
+
+.skeletonLine {
+    height: 12px;
+    background: linear-gradient(90deg, hsl(220, 18%, 14%) 25%, hsl(220, 18%, 18%) 50%, hsl(220, 18%, 14%) 75%);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: shimmer 1.4s infinite;
+    margin-bottom: 6px;
+}
+
+.skeletonLineShort {
+    height: 10px;
+    width: 60%;
+    background: linear-gradient(90deg, hsl(220, 18%, 14%) 25%, hsl(220, 18%, 18%) 50%, hsl(220, 18%, 14%) 75%);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: shimmer 1.4s infinite 0.2s;
+}
+
+/* ─── ORIGIN Loop ─────────────────────────────────────────────────────────── */
+
+.originSection {
+    flex-shrink: 0;
+    border-top: 1px solid hsl(220, 20%, 14%);
+}
+
+.originLoop {
+    background: hsl(230, 18%, 9%);
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.originHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.originIcon {
+    font-size: 0.8rem;
+    color: hsl(195, 75%, 55%);
+    animation: originSpin 4s linear infinite;
+}
+
+.originTitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(195, 75%, 55%);
+}
+
+.originStatus {
+    font-size: 0.68rem;
+    color: hsl(220, 15%, 55%);
+    margin-left: auto;
+}
+
+.originConfig {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.originTaskInput {
+    flex: 1;
+    background: hsl(230, 18%, 12%);
+    border: 1px solid hsl(220, 20%, 18%);
+    border-radius: 6px;
+    color: hsl(220, 20%, 88%);
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.originTaskInput:focus {
+    border-color: hsl(195, 75%, 45%);
+}
+
+.originMetricInput {
+    width: 120px;
+    background: hsl(230, 18%, 12%);
+    border: 1px solid hsl(220, 20%, 18%);
+    border-radius: 6px;
+    color: hsl(220, 20%, 88%);
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.budgetControl {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.budgetInput {
+    width: 52px;
+    background: hsl(230, 18%, 12%);
+    border: 1px solid hsl(220, 20%, 18%);
+    border-radius: 6px;
+    color: hsl(220, 20%, 88%);
+    padding: 6px 8px;
+    font-size: 0.78rem;
+    outline: none;
+    text-align: center;
+}
+
+.budgetLabel {
+    font-size: 0.68rem;
+    color: hsl(220, 15%, 45%);
+}
+
+.originBtn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.originStart {
+    background: hsl(195, 75%, 42%);
+    color: white;
+}
+
+.originStart:hover:not(:disabled) {
+    background: hsl(195, 75%, 48%);
+}
+
+.originStop {
+    background: hsl(0, 60%, 45%);
+    color: white;
+}
+
+.originStop:hover {
+    background: hsl(0, 60%, 52%);
+}
+
+.originBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.originProgress {
+    height: 2px;
+    background: hsl(220, 20%, 15%);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.originProgressFill {
+    height: 100%;
+    background: linear-gradient(90deg, hsl(195, 75%, 45%), hsl(270, 60%, 60%));
+    border-radius: 2px;
+    transition: width 1s linear;
+}
+
+.iterationLog {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.iterationEntry {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.71rem;
+    padding: 4px 8px;
+    background: hsl(230, 18%, 11%);
+    border-radius: 4px;
+    border-left: 2px solid hsl(195, 75%, 38%);
+}
+
+.iterIndex {
+    color: hsl(195, 75%, 55%);
+    font-weight: 600;
+    font-size: 0.67rem;
+    white-space: nowrap;
+}
+
+.iterResult {
+    flex: 1;
+    color: hsl(220, 15%, 70%);
+    line-height: 1.4;
+}
+
+.iterDelta {
+    font-weight: 700;
+    font-size: 0.67rem;
+    white-space: nowrap;
+}
+
+.deltaUp {
+    color: hsl(155, 65%, 50%);
+}
+
+.deltaDown {
+    color: hsl(0, 65%, 55%);
+}
+
+/* ─── Command Membrane ────────────────────────────────────────────────────── */
+
+.membraneSection {
+    flex-shrink: 0;
+    border-top: 1px solid hsl(220, 20%, 16%);
+}
+
+.commandMembrane {
+    background: hsl(230, 20%, 8%);
+    padding: 0;
+}
+
+.membraneResponse {
+    padding: 10px 20px;
+    border-bottom: 1px solid hsl(220, 20%, 13%);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    background: hsl(270, 20%, 9%);
+}
+
+.membraneResponse.responseDone {
+    animation: responseIn 0.3s ease-out;
+}
+
+.athenaLabel {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: hsl(270, 70%, 70%);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.responseText {
+    font-size: 0.78rem;
+    color: hsl(220, 20%, 82%);
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.streamCursor {
+    color: hsl(270, 70%, 70%);
+    animation: blink 0.7s step-end infinite;
+}
+
+.membraneForm {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 8px;
+}
+
+.membraneIcon {
+    font-size: 0.85rem;
+    color: hsl(220, 15%, 40%);
+    padding: 0 8px;
+    flex-shrink: 0;
+}
+
+.membraneInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: hsl(220, 20%, 88%);
+    font-size: 0.82rem;
+    padding: 14px 8px;
+    font-family: inherit;
+}
+
+.membraneInput::placeholder {
+    color: hsl(220, 15%, 38%);
+}
+
+.membraneInput:disabled {
+    opacity: 0.6;
+}
+
+.membraneSubmit {
+    background: none;
+    border: 1px solid hsl(220, 20%, 22%);
+    color: hsl(220, 15%, 55%);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    margin: 8px 4px;
+}
+
+.membraneSubmit:not(:disabled):hover {
+    border-color: hsl(270, 60%, 55%);
+    color: hsl(270, 70%, 75%);
+    background: hsl(270, 20%, 14%);
+}
+
+.membraneSubmit:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.membraneSubmit.streaming {
+    color: hsl(270, 70%, 70%);
+    border-color: hsl(270, 60%, 45%);
+    animation: spin 1.2s linear infinite;
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────────────── */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.85);
+    }
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes cardPulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--card-accent, hsl(270, 70%, 65%));
+        opacity: 0.7;
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px transparent;
+        opacity: 1;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes originSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes responseIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+    .feedGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .feedGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .originConfig {
+        flex-wrap: wrap;
+    }
+}

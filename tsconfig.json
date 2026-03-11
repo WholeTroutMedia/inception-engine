@@ -1,0 +1,128 @@
+{
+    // Root tsconfig — anchors VS Code TypeScript language server for the monorepo.
+    // Extends tsconfig.base.json for editor intelligence; references all packages
+    // so the LS can resolve `../../tsconfig.base.json` from any package tsconfig.
+    //
+    // For building individual packages, run `tsc` inside each package directory.
+    // For workspace-wide type checking: pnpm --filter "@inception/*" type-check
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+        "noEmit": true,
+        "disableSourceOfProjectReferenceRedirect": true
+    },
+    "references": [
+        {
+            "path": "packages/agents"
+        },
+        {
+            "path": "packages/atlas-live"
+        },
+        {
+            "path": "packages/auth"
+        },
+        {
+            "path": "packages/blockchain"
+        },
+        {
+            "path": "packages/blueprints"
+        },
+        {
+            "path": "packages/campaign"
+        },
+        {
+            "path": "packages/claude-agent"
+        },
+        {
+            "path": "packages/comet"
+        },
+        {
+            "path": "packages/config"
+        },
+        {
+            "path": "packages/constitution"
+        },
+        {
+            "path": "packages/davinci-resolve-mcp"
+        },
+        {
+            "path": "packages/design-agent"
+        },
+        {
+            "path": "packages/design-governance"
+        },
+        {
+            "path": "packages/design-sandbox"
+        },
+        {
+            "path": "packages/design-tokens"
+        },
+        {
+            "path": "packages/director"
+        },
+        {
+            "path": "packages/dispatch"
+        },
+        {
+            "path": "packages/engine"
+        },
+        {
+            "path": "packages/eslint-plugin-design-system"
+        },
+        {
+            "path": "packages/finance-agent"
+        },
+        {
+            "path": "packages/genkit"
+        },
+        {
+            "path": "packages/mcp-router"
+        },
+        {
+            "path": "packages/genmedia"
+        },
+        {
+            "path": "packages/gen-ui"
+        },
+        {
+            "path": "packages/ghost"
+        },
+        {
+            "path": "packages/god-prompt"
+        },
+        {
+            "path": "packages/inception-browser"
+        },
+        {
+            "path": "packages/inception-core"
+        },
+        {
+            "path": "packages/nas-watcher"
+        },
+        {
+            "path": "packages/plugs"
+        },
+        {
+            "path": "packages/social"
+        },
+        {
+            "path": "packages/synology-media-mcp"
+        },
+        {
+            "path": "packages/theme-engine"
+        },
+        {
+            "path": "packages/toolbox"
+        },
+        {
+            "path": "packages/memory"
+        },
+        {
+            "path": "packages/ui"
+        },
+        {
+            "path": "packages/zero-day"
+        }
+    ],
+    "files": []
+}

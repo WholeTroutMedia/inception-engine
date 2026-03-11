@@ -1,0 +1,70 @@
+{
+  "name": "Creative Liberation Engine GENESIS",
+  "short_name": "Inception",
+  "description": "AVERI Sovereign AI Operating Surface — ATHENA, VERA, IRIS unified.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d0d1a",
+  "theme_color": "#0d0d1a",
+  "lang": "en",
+  "scope": "/",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "SIGNAL Dashboard",
+      "short_name": "SIGNAL",
+      "description": "Live intelligence feed",
+      "url": "/signal",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Agent Status",
+      "short_name": "Agents",
+      "url": "/agents",
+      "description": "View all 40 agent statuses",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Dispatch",
+      "short_name": "Tasks",
+      "description": "Active dispatch queue",
+      "url": "/dispatch",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

@@ -1,0 +1,331 @@
+/* ── Collab Studio ───────────────────────────────────────────────── */
+
+.collab-studio-page {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100vh;
+    color: #e2e8f0;
+}
+
+.cs-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cs-icon {
+    font-size: 2.5rem;
+    color: #60a5fa;
+}
+
+.cs-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cs-subtitle {
+    font-size: 0.75rem;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0.25rem 0 0;
+}
+
+.cs-live-badge {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.875rem;
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #34d399;
+}
+
+.cs-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+}
+
+/* Layout */
+.cs-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+/* Canvas */
+.cs-canvas {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 500px;
+    position: relative;
+}
+
+.cs-canvas-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 500px;
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.cs-canvas-icon {
+    font-size: 4rem;
+    color: rgba(96, 165, 250, 0.15);
+    margin-bottom: 1.5rem;
+}
+
+.cs-canvas-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #475569;
+    margin: 0 0 0.75rem;
+}
+
+.cs-canvas-desc {
+    font-size: 0.9rem;
+    color: #334155;
+    max-width: 36rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+}
+
+.cs-phase-badge {
+    padding: 0.5rem 1.25rem;
+    background: rgba(96, 165, 250, 0.08);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #60a5fa;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* Floating Cursors */
+.cs-cursors {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.cs-cursor {
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    left: var(--cursor-left);
+    top: var(--cursor-top);
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    border: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+.cs-cursor:nth-child(2) {
+    animation-delay: -1s;
+}
+
+.cs-cursor:nth-child(3) {
+    animation-delay: -2s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(0, -8px);
+    }
+}
+
+.cs-cursor-pointer {
+    width: 16px;
+    height: 16px;
+    clip-path: polygon(0 0, 100% 70%, 50% 70%, 20% 100%);
+    background: var(--cursor-color, var(--accent-1));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    flex-shrink: 0;
+    margin-top: 3px;
+    opacity: 0.7;
+}
+
+.cs-cursor-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    color: white;
+    opacity: 0.85;
+}
+
+/* Sidebar */
+.cs-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cs-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cs-panel-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #475569;
+}
+
+/* Participants */
+.cs-participant {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.cs-participant-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--avatar-color, var(--surface-3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0f0f0f;
+    flex-shrink: 0;
+}
+
+.cs-participant-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.cs-participant-handle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.cs-participant-role {
+    font-size: 0.65rem;
+    color: #475569;
+    text-transform: capitalize;
+}
+
+.cs-participant-status {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #334155;
+    flex-shrink: 0;
+}
+
+.cs-participant-status.active {
+    background: #34d399;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Activity Feed */
+.cs-activity {
+    border-left: 2px solid rgba(255, 255, 255, 0.05);
+    padding-left: 0.75rem;
+}
+
+.cs-activity-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.cs-activity-handle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.cs-activity-engine {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--engine-color, var(--text-secondary));
+    letter-spacing: 0.06em;
+}
+
+.cs-activity-time {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: #334155;
+}
+
+.cs-activity-desc {
+    font-size: 0.75rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Roadmap */
+.cs-roadmap-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.75rem;
+    color: #475569;
+    line-height: 1.4;
+}
+
+.cs-roadmap-bullet {
+    color: #334155;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}

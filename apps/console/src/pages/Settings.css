@@ -1,0 +1,231 @@
+/* ── Settings Container ────────────────────────────────────────── */
+.settings-container {
+    padding: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+}
+
+/* ── Header ── */
+.settings-header {
+    margin-bottom: 32px;
+}
+
+.settings-header-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+}
+
+.settings-header-title {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+    color: var(--chalk);
+}
+
+.settings-header-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* ── Content Sections ── */
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.settings-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.settings-section-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--c-accent, var(--accent-1));
+    box-shadow: 0 0 6px var(--c-accent, var(--accent-1));
+}
+
+.settings-section-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--c-accent, var(--text-primary));
+}
+
+/* ── Rows ── */
+.settings-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.settings-row:hover {
+    border-color: var(--border-default);
+}
+
+.settings-row-label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--chalk);
+}
+
+.settings-row-label.danger {
+    color: var(--status-error);
+}
+
+.settings-row-desc {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+.settings-row-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── Info Text ── */
+.settings-info-text {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+}
+
+/* ── Text Inputs ── */
+.settings-text-input-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.settings-text-input {
+    background: var(--surface-2);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    border-radius: 4px;
+    min-width: 250px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.settings-text-input:focus {
+    border-color: var(--accent-1);
+}
+
+.settings-button-save {
+    padding: 0 16px;
+    height: 36px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--c-accent, var(--accent-1));
+    color: #000;
+}
+
+.settings-button-save.saved {
+    background: var(--status-success);
+    color: #000;
+}
+
+.settings-button-save:hover {
+    opacity: 0.9;
+}
+
+/* ── Select Buttons ── */
+.settings-select-wrapper {
+    display: flex;
+    gap: 6px;
+    background: var(--surface-2);
+    padding: 4px;
+    border-radius: 6px;
+    border: 1px solid var(--border-subtle);
+}
+
+.settings-select-button {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface-2);
+    color: var(--text-tertiary);
+    border: 1px solid var(--border-subtle);
+}
+
+.settings-select-button.active {
+    background: var(--surface-2);
+    color: var(--c-accent, var(--accent-1));
+    border-color: var(--c-accent, var(--accent-1));
+    opacity: 1;
+}
+
+.settings-select-button:hover:not(.active) {
+    background: var(--surface-3);
+    color: var(--text-secondary);
+}
+
+/* ── Action Buttons ── */
+.settings-action-button {
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface-2);
+    color: var(--chalk);
+    border: 1px solid var(--border-subtle);
+}
+
+.settings-action-button.danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--status-error);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.settings-action-button.saved {
+    background: var(--status-success);
+    color: #000;
+    border-color: var(--status-success);
+}
+
+.settings-action-button:hover {
+    opacity: 0.9;
+}

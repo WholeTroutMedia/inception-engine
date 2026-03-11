@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  genkit-orchestrator:
+    build: .
+    container_name: genkit-orchestrator
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+      - "4100:4100"
+    env_file:
+      - .env
+    environment:
+      - GENKIT_ENV=dev
+      - HOST=0.0.0.0
+      - GENKIT_HOST=0.0.0.0
+      # Point Ollama at the sidecar service via Docker internal DNS
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: genkit-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+
+volumes:
+  ollama-data:

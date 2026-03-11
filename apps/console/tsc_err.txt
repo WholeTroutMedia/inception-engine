@@ -1,0 +1,6 @@
+src/pages/Dashboard.tsx(516,29): error TS1005: ')' expected.
+src/pages/Dashboard.tsx(518,21): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/Dashboard.tsx(518,23): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/Dashboard.tsx(522,13): error TS1005: ')' expected.
+src/pages/Dashboard.tsx(685,9): error TS1128: Declaration or statement expected.
+src/pages/Dashboard.tsx(686,5): error TS1109: Expression expected.

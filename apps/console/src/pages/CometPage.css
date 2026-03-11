@@ -1,0 +1,430 @@
+.comet-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-void);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+}
+
+/* ── Header ── */
+.comet-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    gap: 16px;
+    background: var(--surface-1);
+}
+
+.comet-header-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-1);
+    letter-spacing: 0.15em;
+}
+
+.comet-header-subtitle {
+    font-size: 0.65rem;
+    color: #5A4A3A;
+    letter-spacing: 0.1em;
+    flex: 1;
+}
+
+.comet-view-toggle {
+    display: flex;
+    gap: 2px;
+}
+
+.comet-view-btn {
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
+
+.comet-connection-ind {
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comet-connection-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* ── Coverage Meter ── */
+.comet-coverage-meter {
+    display: flex;
+    gap: 16px;
+    padding: 10px 16px;
+    background: var(--surface-2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+}
+
+.comet-coverage-item {
+    color: var(--text-tertiary);
+}
+
+.comet-coverage-anim {
+    color: var(--accent-1);
+    animation: pulse 1s infinite;
+}
+
+/* ── Body Layout ── */
+.comet-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* ── Left Command Panel ── */
+.comet-command-panel {
+    width: 400px;
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.comet-input-section {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.comet-input-section-flex {
+    flex: 1;
+}
+
+.comet-input-label {
+    margin-bottom: 10px;
+    font-size: 0.65rem;
+    color: #5A4A3A;
+    letter-spacing: 0.1em;
+}
+
+.comet-url-input,
+.comet-instruction-textarea {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-family: monospace;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.comet-url-input {
+    padding: 8px 10px;
+}
+
+.comet-instruction-textarea {
+    padding: 10px;
+    resize: vertical;
+}
+
+.comet-autonomy-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.comet-autonomy-label {
+    font-size: 0.65rem;
+    color: #5A4A3A;
+    letter-spacing: 0.08em;
+}
+
+.comet-autonomy-btn {
+    padding: 3px 10px;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.comet-execute-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    transition: background 0.2s;
+}
+
+.comet-result-summary {
+    padding: 12px 16px;
+    font-size: 0.72rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.comet-result-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.comet-smg-hit {
+    color: #8A7A6A;
+    font-size: 0.65rem;
+}
+
+.comet-result-error {
+    color: #C93B2A;
+    font-size: 0.7rem;
+}
+
+.comet-result-stats {
+    color: #8A7A6A;
+}
+
+/* ── Right Main Panel ── */
+.comet-main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.comet-panel-header {
+    padding: 10px 16px;
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.comet-panel-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ── Event Log ── */
+.comet-event-log {
+    flex: 1;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 12px;
+    background: var(--surface-1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-subtle);
+    max-height: 260px;
+}
+
+.comet-event-item {
+    margin-bottom: 4px;
+}
+
+.comet-event-time {
+    color: #5A4A3A;
+    margin-right: 8px;
+}
+
+.comet-event-type {
+    text-transform: uppercase;
+    margin-right: 8px;
+    letter-spacing: 0.05em;
+}
+
+.comet-event-node {
+    color: #8A7A6A;
+}
+
+.comet-event-desc {
+    color: #C8B8A8;
+}
+
+.comet-event-err {
+    color: #C93B2A;
+}
+
+.comet-event-empty {
+    color: #5A4A3A;
+    text-align: center;
+    padding-top: 24px;
+}
+
+/* ── Plan Nodes ── */
+.comet-plan-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+}
+
+.comet-plan-header {
+    font-size: 0.65rem;
+    color: #5A4A3A;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.comet-plan-node {
+    display: flex;
+    gap: 10px;
+    padding: 6px 8px;
+    margin-bottom: 2px;
+    font-family: monospace;
+    font-size: 0.72rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.comet-node-status {
+    color: var(--c-node-status, var(--text-tertiary));
+    font-size: 0.8rem;
+    min-width: 14px;
+    text-align: center;
+}
+
+.comet-plan-node-id {
+    color: #5A4A3A;
+    min-width: 68px;
+}
+
+.comet-plan-node-action {
+    color: #B87333;
+    min-width: 60px;
+}
+
+.comet-plan-node-desc {
+    color: #C8B8A8;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comet-plan-node-confirm {
+    color: #C93B2A;
+    font-size: 0.6rem;
+}
+
+/* ── Topology View ── */
+.comet-crawl-btn {
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    background: var(--surface-2);
+    color: var(--accent-1);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.comet-topology-loading {
+    padding: 24px;
+    text-align: center;
+    color: #5A4A3A;
+    font-size: 0.78rem;
+}
+
+.comet-topology-empty {
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.comet-topology-empty-text {
+    color: #5A4A3A;
+    font-size: 0.78rem;
+    margin-bottom: 16px;
+}
+
+.comet-start-mapping-btn {
+    padding: 8px 20px;
+    background: #E8621A;
+    color: #0F0C0A;
+    border: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+}
+
+.comet-lynch-legend {
+    display: flex;
+    gap: 12px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.comet-lynch-legend-item {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    color: var(--c-lynch, var(--text-secondary));
+}
+
+.comet-state-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.comet-state-card {
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    cursor: default;
+}
+
+.comet-state-card.inactive {
+    border-left: 2px solid var(--c-lynch, var(--border-subtle));
+}
+
+.comet-state-card.active {
+    border-left: 2px solid var(--accent-1);
+    background: var(--surface-2);
+}
+
+.comet-state-lynch {
+    font-size: 0.65rem;
+    color: var(--c-lynch, var(--text-tertiary));
+}
+
+.comet-state-label {
+    color: var(--chalk);
+    font-size: 0.78rem;
+    flex: 1;
+}
+
+.comet-state-stats {
+    color: #5A4A3A;
+    font-size: 0.65rem;
+}
+
+/* ── Status Pill ── */
+.comet-status-pill {
+    color: var(--chalk);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    border-radius: 12px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}

@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guest {
+  id          String   @id @default(uuid())
+  firstName   String
+  lastName    String?
+  email       String   @unique
+  phone       String
+  socialLink  String?
+  referredBy  String?
+  
+  riskScore   Int      @default(0)
+  status      IDVStatus @default(PENDING)
+  
+  idvSession  IDVSession?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model IDVSession {
+  id          String   @id @default(uuid())
+  guestId     String   @unique
+  guest       Guest    @relation(fields: [guestId], references: [id])
+  
+  applicantId String   @unique // Onfido Applicant ID
+  sdkToken    String?
+  
+  provider    String   @default("ONFIDO")
+  status      SessionStatus @default(INITIATED)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum IDVStatus {
+  PENDING
+  APPROVED
+  REQUIRES_IDV
+  REJECTED
+}
+
+enum SessionStatus {
+  INITIATED
+  PROCESSING
+  CLEARED
+  CONSIDER
+  FAILED
+}

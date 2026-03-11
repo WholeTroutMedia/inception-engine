@@ -1,0 +1,52 @@
+# Root-level dockerignore for FORGE build (context = monorepo root)
+# Prevents sending node_modules, git history, and other large artifacts
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# All node_modules except what we explicitly copy
+node_modules
+packages/*/node_modules
+apps/*/node_modules
+
+# Build output (we build fresh in container)
+packages/*/dist
+packages/*/build
+apps/*/dist
+apps/*/.next
+apps/*/out
+
+# IDE & tooling
+.vscode
+.idea
+*.code-workspace
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Test artifacts
+coverage
+.nyc_output
+packages/*/coverage
+
+# Docker artifacts from other services (don't send to FORGE build)
+packages/forge/docker-compose.forge.yml
+
+# Large binary directories we don't need for FORGE build
+models
+tools
+inception
+services/triposr*
+services/foley*
+services/vision*
+infra
+
+# Tmp files
+tmp
+*.tmp
+*.temp

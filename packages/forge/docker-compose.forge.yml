@@ -1,0 +1,72 @@
+version: '3.9'
+
+# FORGE Real-Time Asset Economy — NAS Docker Compose
+# Deploy: docker-compose -f docker-compose.forge.yml up -d
+# Runs on NAS at localhost alongside the sovereign dispatch server
+
+services:
+
+  # ── FORGE API Server ────────────────────────────────────────────────────────
+  forge-api:
+    image: node:22-alpine
+    container_name: forge-api
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app
+      - forge-storage:/data/forge
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      NODE_ENV: production
+      PORT: 4300
+      REDIS_URL: redis://forge-redis:6379
+      FORGE_STORAGE_PATH: /data/forge
+      # Cloud mesh endpoints (set to empty to disable cloud routing)
+      FORGE_SOVEREIGN_ENDPOINT: http://localhost
+      FORGE_GCP_ENDPOINT: ${FORGE_GCP_ENDPOINT:-}
+      FORGE_CF_ENDPOINT: ${FORGE_CF_ENDPOINT:-}
+    command: >
+      sh -c "npm install --production --silent &&
+             node --experimental-vm-modules dist/server.js"
+    ports:
+      - "4300:4300"
+    depends_on:
+      forge-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4300/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      com.inception.service: forge-api
+      com.inception.version: "1.0.0"
+
+  # ── Redis (Forge Ledger Backend) ─────────────────────────────────────────────
+  forge-redis:
+    image: redis:7-alpine
+    container_name: forge-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - forge-redis-data:/data
+    ports:
+      - "6380:6379"   # External port offset to avoid conflict with any existing Redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    labels:
+      com.inception.service: forge-redis
+
+volumes:
+  forge-storage:
+    driver: local
+  forge-redis-data:
+    driver: local
+
+networks:
+  default:
+    name: inception-net
+    external: true

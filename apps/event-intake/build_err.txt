@@ -1,0 +1,75 @@
+
+> event-intake@0.1.0 build C:\\Creative-Liberation-Engine\apps\event-intake
+> next build
+
+   ▲ Next.js 15.2.0
+
+   Creating an optimized production build ...
+node.exe :  ⚠ Compiled with 
+warnings
+At C:\Users\jahar\AppData\Roam
+ing\npm\pnpm.ps1:24 char:5
++     & "node$exe"  "$basedir/
+node_modules/pnpm/bin/pnpm.cjs
+" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: ( ⚠ Compil  
+  ed with warnings:String)    
+ [], RemoteException
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+
+../../packages/idv-engine/dist
+/onfidoClient.js
+Attempted import error: 
+'Onfido' is not exported from 
+'@onfido/api' (imported as 
+'Onfido').
+
+Import trace for requested 
+module:
+../../packages/idv-engine/dist
+/onfidoClient.js
+../../packages/idv-engine/dist
+/index.js
+./src/app/api/intake/route.ts
+
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+   The following mandatory changes were made to your tsconfig.json:
+
+   	- jsx was set to preserve (next.js implements its own optimized jsx transform)
+
+
+Failed to compile.
+
+./src/app/api/intake/route.ts
+26:19  Error: Unexpected any. 
+Specify a different type.  @ty
+pescript-eslint/no-explicit-an
+y
+
+./src/app/page.tsx
+6:10  Warning: 'cn' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+18:48  Error: Unexpected any. 
+Specify a different type.  @ty
+pescript-eslint/no-explicit-an
+y
+41:14  Warning: 'err' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+
+info  - Need to disable some 
+ESLint rules? Learn more 
+here: https://nextjs.org/docs/
+app/api-reference/config/eslin
+t#disabling-rules
+ ELIFECYCLE  Command failed with exit code 1.

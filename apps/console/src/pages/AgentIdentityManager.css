@@ -1,0 +1,95 @@
+﻿/* AgentIdentityManager.css */
+.aim-container {
+    padding: 24px;
+    max-width: 1400px;
+    color: #E8EAF2;
+    font-family: 'Inter', sans-serif;
+}
+
+.aim-header {
+    margin-bottom: 24px;
+}
+
+.aim-title {
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.aim-subtitle {
+    color: #8890A6;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.aim-tier-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.aim-tier-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    -webkit--webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    backdrop-filter: blur(10px);
+}
+
+.aim-audit-entry {
+    font-size: 11px;
+    color: #8890A6;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 4px;
+}
+
+/* Dynamic Tier & Session Classes */
+.aim-tier-system {
+    color: #FF6B35;
+    border-color: #FF6B35;
+}
+
+.aim-tier-operator {
+    color: #FFD700;
+    border-color: #FFD700;
+}
+
+.aim-tier-restricted {
+    color: #00FFF5;
+    border-color: #00FFF5;
+}
+
+.aim-tier-lg {
+    font-size: 12px;
+}
+
+.aim-session-status {
+    font-size: 12px;
+}
+
+.aim-session-status.active {
+    color: #7EDE8A;
+}
+
+.aim-session-status.none {
+    color: #8890A6;
+}

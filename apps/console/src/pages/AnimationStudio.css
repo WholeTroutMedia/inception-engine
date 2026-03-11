@@ -1,0 +1,91 @@
+.container {
+    padding: 24px;
+    max-width: 1400px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.titleAccent {
+    color: var(--inc-amber, #FF6B35);
+    font-size: 20px;
+}
+
+.badge {
+    font-size: 10px;
+    background: rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    color: var(--inc-amber, #FF6B35);
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 24px;
+}
+
+.configPanel {
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 24px;
+    -webkit--webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    -webkit-backdrop-filter:;
+  backdrop-filter:;
+    backdrop-filter: blur(10px);
+}
+
+.copyBtn {
+    margin-top: 8px;
+    background: rgba(0, 255, 245, 0.1);
+    border: 1px solid rgba(0, 255, 245, 0.2);
+    color: var(--inc-neon-teal, #00FFF5);
+    border-radius: 6px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Progress bar — width driven by --progress custom property */
+.progressBar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    width: var(--progress, 0%);
+    background: var(--inc-amber, #FF6B35);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}

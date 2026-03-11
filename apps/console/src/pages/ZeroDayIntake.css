@@ -1,0 +1,295 @@
+.zdi-container {
+    min-height: 100vh;
+    background: #020202;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.zdi-ambient-glow {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle, #06b6d408 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.zdi-content-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.zdi-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.zdi-badge {
+    display: inline-block;
+    background: #06b6d415;
+    border: 1px solid #06b6d440;
+    color: #06b6d4;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.zdi-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    background: linear-gradient(180deg, #fff 0%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.zdi-subtitle {
+    font-size: 20px;
+    color: #a3a3a3;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.zdi-form {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 48px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+.zdi-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #06b6d4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.zdi-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.zdi-grid-full {
+    grid-column: 1 / -1;
+}
+
+.zdi-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.zdi-select-wrapper {
+    position: relative;
+}
+
+.zdi-select-arrow {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #a3a3a3;
+}
+
+.zdi-form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.zdi-sovereign-toggle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 0 20px;
+    transition: all 0.2s;
+    margin-top: 24px;
+}
+
+.zdi-sovereign-toggle.active {
+    background: #06b6d415;
+    border: 1px solid #06b6d4;
+}
+
+.zdi-sovereign-toggle.inactive {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.zdi-sovereign-switch {
+    width: 44px;
+    height: 24px;
+    border-radius: 100px;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.zdi-sovereign-switch.active {
+    background: #06b6d4;
+}
+
+.zdi-sovereign-switch.inactive {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.zdi-sovereign-thumb {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: left 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.zdi-sovereign-thumb.active {
+    left: 22px;
+}
+
+.zdi-sovereign-thumb.inactive {
+    left: 2px;
+}
+
+.zdi-sovereign-label {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.zdi-sovereign-label.active {
+    color: #fff;
+}
+
+.zdi-sovereign-label.inactive {
+    color: #a3a3a3;
+}
+
+.zdi-error {
+    color: #ef4444;
+    font-size: 14px;
+    background: #ef444415;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #ef444440;
+}
+
+.zdi-submit-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 20px 32px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 12px 32px #06b6d440;
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+}
+
+.zdi-submit-btn.loading {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.zdi-submit-btn.idle {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.zdi-chip-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.zdi-chip-btn {
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.zdi-chip-btn.active {
+    background: #06b6d415;
+    border: 1px solid #06b6d4;
+    color: #fff;
+    box-shadow: 0 0 20px #06b6d420;
+}
+
+.zdi-chip-btn.inactive {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a3a3a3;
+    box-shadow: none;
+}
+
+.zdi-label {
+    font-size: 13px;
+    color: #a3a3a3;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.zdi-input,
+.zdi-select,
+.zdi-textarea {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 16px;
+    color: #fff;
+    outline: none;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+}
+
+.zdi-select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.zdi-textarea {
+    min-height: 120px;
+    resize: vertical;
+}

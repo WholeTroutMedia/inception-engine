@@ -1,22 +1,55 @@
 {
-  "name": "cle",
-  "version": "0.0.1",
+  "name": "brainchild-v5",
+  "version": "5.1.0-COMMUNITY",
   "private": true,
-  "description": "a generative reasoning engine",
-  "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
+  "description": "Creative Liberation Engine v5 â€” Artist Liberation Through Sovereign AI",
   "scripts": {
-    "dev": "node --import tsx/esm packages/ai/src/server.ts",
-    "build": "tsc -b packages/core packages/ai",
-    "type-check": "tsc --noEmit -p packages/core/tsconfig.json && tsc --noEmit -p packages/ai/tsconfig.json",
-    "test": "vitest run"
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev",
+    "boot": "python -m inception boot",
+    "status": "python -m inception status",
+    "terminal-daemon": "tsx .agents/terminal-watcher.ts",
+    "firebase:dev": "set JAVA_HOME=C:\\Program Files\\Microsoft\\jdk-21.0.10.7-hotspot && set PATH=%JAVA_HOME%\\bin;%PATH% && C:\\Users\\jahar\\AppData\\Roaming\\npm\\firebase.cmd emulators:start --only auth,firestore,hosting",
+    "genkit:dev": "npm run genkit:server --prefix packages/genkit",
+    "genkit:ui": "npm run genkit:ui --prefix packages/genkit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "design:ingest": "node scripts/design-ingest.mjs",
+    "tokens:penpot": "pnpm --filter @inception/design-tokens penpot:push",
+    "tokens:penpot:dry": "pnpm --filter @inception/design-tokens penpot:push:dry",
+    "ecosystem:sync": "powershell -ExecutionPolicy Bypass -File scripts/ecosystem-sync.ps1"
+  },
+  "keywords": [
+    "creative-liberation-engine",
+    "ai-agents",
+    "constitutional-ai"
+  ],
+  "author": "WholeTrout Media",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "discord.js": "^14.25.1",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
-    "tsx": "^4.19.2",
-    "vitest": "^3.0.0",
-    "@types/node": "^22.0.0"
-  }
+    "@storybook/addon-a11y": "^10.2.16",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-themes": "^10.2.16",
+    "@storybook/react": "^8.6.18",
+    "@storybook/react-vite": "^8.6.18",
+    "storybook": "^8.6.18"
+  },
+  "main": "fetch-tasks.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Creative Liberation Engine Community/creative-liberation-engine.git"
+  },
+  "type": "commonjs"
 }

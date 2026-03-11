@@ -1,0 +1,307 @@
+/* ── ServiceScanner — First-Run Phase 3 ──────────────────────────────────── */
+
+.service-scanner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+    color: var(--color-text-primary, #f1ede6);
+}
+
+.scanner-header {
+    text-align: center;
+}
+
+.scanner-icon {
+    font-size: 2.5rem;
+    color: var(--color-amber-400, #f59e0b);
+    margin-bottom: 0.75rem;
+    animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(0.96);
+    }
+}
+
+.scanner-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.375rem;
+    background: linear-gradient(135deg, #f1ede6 0%, #c4a882 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.scanner-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary, #8b7355);
+    margin: 0;
+}
+
+/* Progress Bar */
+.scanner-progress-bar {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.scanner-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+/* Grid */
+.scanner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+/* Card */
+.scanner-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.scanner-card--online {
+    border-color: rgba(52, 211, 153, 0.3);
+    background: rgba(52, 211, 153, 0.04);
+}
+
+.scanner-card--offline {
+    border-color: rgba(239, 68, 68, 0.25);
+    background: rgba(239, 68, 68, 0.03);
+}
+
+.scanner-card--degraded {
+    border-color: rgba(251, 191, 36, 0.3);
+    background: rgba(251, 191, 36, 0.04);
+}
+
+.scanner-card--checking {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.scanner-card--checking::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.scanner-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.375rem;
+}
+
+.scanner-card-category {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.scanner-card-required {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.4rem;
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.scanner-card-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f1ede6;
+}
+
+.scanner-card-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scanner-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.scanner-dot--online {
+    background: #34d399;
+    box-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
+}
+
+.scanner-dot--offline {
+    background: #f87171;
+}
+
+.scanner-dot--degraded {
+    background: #fbbf24;
+}
+
+.scanner-dot--checking {
+    background: rgba(255, 255, 255, 0.3);
+    animation: dot-pulse 1s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.scanner-status-text {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #8b7355);
+}
+
+.scanner-card--online .scanner-status-text {
+    color: #6ee7b7;
+}
+
+.scanner-card--offline .scanner-status-text {
+    color: #fca5a5;
+}
+
+.scanner-card--degraded .scanner-status-text {
+    color: #fde68a;
+}
+
+.scanner-card-version {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.25);
+    margin-top: 0.25rem;
+}
+
+/* Warning */
+.scanner-warning {
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    font-size: 0.825rem;
+    color: #fde68a;
+}
+
+/* Actions */
+.scanner-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.scanner-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.scanner-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.scanner-btn--primary {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #1a1208;
+    border-color: #f59e0b;
+}
+
+.scanner-btn--primary:hover:not(:disabled) {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.scanner-btn--secondary {
+    background: transparent;
+    color: var(--color-text-secondary, #8b7355);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.scanner-btn--secondary:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f1ede6;
+}
+
+.scanner-btn--ghost {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f1ede6;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.scanner-btn--ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.scanner-category--core {
+    color: var(--color-amber-500, #f59e0b);
+}
+
+.scanner-category--ai {
+    color: var(--color-violet-400, #a78bfa);
+}
+
+.scanner-category--media {
+    color: var(--color-rose-400, #fb7185);
+}
+
+.scanner-category--storage {
+    color: var(--color-teal-400, #2dd4bf);
+}
+
+.scanner-category--agent {
+    color: var(--color-sky-400, #38bdf8);
+}

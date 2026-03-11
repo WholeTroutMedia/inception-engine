@@ -1,0 +1,24 @@
+{
+    "connector": {
+        "name": "local",
+        "options": {}
+    },
+    "hints": {
+        "axe": "off",
+        "axe/css": "off",
+        "axe/css-style-inside-head": "off",
+        "compat-api/css": "off",
+        "compat-api/html": "off",
+        "no-inline-styles": "off",
+        "css-property-ordering": "off",
+        "html-checker": "off",
+        "meta-charset-utf-8": "off",
+        "no-protocol-relative-urls": "off",
+        "no-html-only-headers": "off",
+        "strict-transport-security": "off",
+        "target-bidi-aware-dom": "off",
+        "disown-opener": "off",
+        "x-content-type-options": "off"
+    },
+    "hintsTimeout": 10000
+}

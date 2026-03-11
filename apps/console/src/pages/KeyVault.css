@@ -1,0 +1,339 @@
+/* KeyVault.css */
+
+/* ── Page shell ─────────────────────────────────────────────────── */
+.kv-page {
+    min-height: 100%;
+    background: var(--bg-void);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.kv-header {
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.kv-supertitle {
+    font-size: 10px;
+    color: var(--amber);
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.kv-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.kv-title {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: var(--chalk);
+    margin: 0;
+}
+
+.kv-count {
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+.kv-count-active {
+    color: var(--status-success);
+    font-weight: 800;
+}
+
+.kv-description {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+/* ── Body ───────────────────────────────────────────────────────── */
+.kv-body {
+    flex: 1;
+    padding: 28px 40px 120px;
+    overflow-y: auto;
+}
+
+/* ── Provider grid ──────────────────────────────────────────────── */
+.kv-provider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 12px;
+}
+
+.kv-provider-card {
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: all 0.15s;
+}
+
+.kv-card-header-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.kv-provider-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kv-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+}
+
+.kv-card-meta {
+    flex: 1;
+}
+
+.kv-card-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kv-provider-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--chalk);
+}
+
+.kv-status-badge {
+    font-size: 8px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 100px;
+}
+
+.kv-docs-link {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+}
+
+/* ── Capabilities ───────────────────────────────────────────────── */
+.kv-capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.kv-cap-chip {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+/* ── Local badge (Ollama) ───────────────────────────────────────── */
+.kv-local-badge {
+    font-size: 11px;
+    color: var(--status-success);
+    font-family: var(--font-mono);
+    background: rgba(34, 197, 94, 0.06);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+/* ── Key display ────────────────────────────────────────────────── */
+.kv-key-existing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.kv-key-masked {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--chalk);
+    letter-spacing: 0.5px;
+}
+
+.kv-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--status-error);
+    font-size: 11px;
+    padding: 2px 4px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+}
+
+/* ── Input row ──────────────────────────────────────────────────── */
+.kv-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.kv-key-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--chalk);
+    outline: none;
+}
+
+.kv-save-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    border: none;
+    font-family: var(--font-sans);
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+/* ── Custom Secrets section ─────────────────────────────────────── */
+.kv-custom-section-header {
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.kv-custom-supertitle {
+    font-size: 10px;
+    color: var(--amber);
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.kv-custom-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.kv-custom-title {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--chalk);
+    margin: 0;
+}
+
+/* ── Custom secret list ─────────────────────────────────────────── */
+.kv-custom-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+}
+
+.kv-custom-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.kv-custom-item-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.kv-custom-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--status-success);
+    box-shadow: 0 0 8px var(--status-success);
+}
+
+.kv-custom-key-name {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--chalk);
+}
+
+.kv-custom-masked {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 1px;
+}
+
+.kv-custom-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--status-error);
+    font-size: 11px;
+    padding: 4px 8px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    margin-left: 16px;
+}
+
+/* ── Custom add row ─────────────────────────────────────────────── */
+.kv-add-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.kv-add-input {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--chalk);
+    outline: none;
+}
+
+.kv-add-input-key {
+    flex: 1;
+}
+
+.kv-add-input-value {
+    flex: 1.5;
+}
+
+.kv-add-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    border: none;
+    font-family: var(--font-sans);
+    transition: all 0.15s;
+}

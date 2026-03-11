@@ -1,0 +1,23 @@
+name = "inception-mcp-gateway"
+main = "src/edge-gateway.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Workers environment variables
+[vars]
+DISPATCH_URL = "https://dispatch.creative-liberation-engine.io"  # Override with real Cloudflare Tunnel URL
+GENKIT_FALLBACK_URL = "https://cle-[hash]-uc.a.run.app"
+
+# KV namespace for API key storage (create with: wrangler kv:namespace create "API_KEYS")
+[[kv_namespaces]]
+binding = "API_KEYS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_KV_PREVIEW_ID"
+
+# Production environment overrides
+[env.production]
+name = "inception-mcp-gateway-prod"
+
+[env.production.vars]
+DISPATCH_URL = "https://dispatch.creative-liberation-engine.io"
+GENKIT_FALLBACK_URL = "https://cle-[hash]-uc.a.run.app"

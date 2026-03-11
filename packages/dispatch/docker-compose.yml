@@ -1,0 +1,64 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Creative Liberation Engine — Dispatch Server
+# NAS Docker Compose Stack
+# Sovereign deployment at localhost
+# ═══════════════════════════════════════════════════════════════════════════════
+
+version: '3.9'
+
+services:
+  dispatch:
+    image: creative-liberation-engine/inception-dispatch:latest
+    build:
+      context: ../../           # workspace root (needs pnpm-workspace.yaml)
+      dockerfile: packages/dispatch/Dockerfile
+    container_name: inception-dispatch
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    environment:
+      NODE_ENV: production
+      PORT: "5050"
+      DISPATCH_DATA_DIR: /data/dispatch
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      # Vault encryption key — set in .env on the NAS
+      DISPATCH_VAULT_KEY: ${DISPATCH_VAULT_KEY:?DISPATCH_VAULT_KEY is required}
+      # Redis (optional — for pub/sub SSE fanout in multi-instance mode)
+      REDIS_HOST: ${REDIS_HOST:-localhost}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_ENABLED: ${REDIS_ENABLED:-false}
+    volumes:
+      # Persistent SQLite store — survives redeploys
+      - dispatch-data:/data/dispatch
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5050/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    networks:
+      - inception-mesh
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  dispatch-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      # NAS bind mount — symlink /data/dispatch to NAS volume
+      device: ${DISPATCH_DATA_PATH:-/volume1/docker/inception-dispatch/data}
+
+networks:
+  inception-mesh:
+    name: inception-mesh
+    driver: bridge
+    # Allow external services (Creative Liberation Engine, COMET) to join this network
+    external: false
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24

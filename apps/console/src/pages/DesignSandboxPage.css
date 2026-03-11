@@ -1,0 +1,583 @@
+/* DesignSandboxPage.css — Genesis Warm Trichromatic Design Sandbox */
+
+/* ─── Page ──────────────────────────────────────────────────────────────────── */
+.ds-page {
+    min-height: 100vh;
+    background: var(--bg-void, hsl(220, 20%, 4%));
+    color: var(--text-primary, hsl(0, 0%, 94%));
+    font-family: 'Inter', 'SF Pro', sans-serif;
+    padding: 40px 24px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+.ds-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.ds-supertitle {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: hsl(38, 92%, 52%);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.ds-title {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    background: linear-gradient(135deg, hsl(38, 92%, 68%), hsl(346, 84%, 70%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ds-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+}
+
+.ds-header-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.ds-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: hsla(38, 92%, 52%, 0.1);
+    border: 1px solid hsla(38, 92%, 52%, 0.25);
+    color: hsl(38, 92%, 68%);
+}
+
+/* ─── Tab Bar ────────────────────────────────────────────────────────────────── */
+.ds-tab-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 32px;
+    background: var(--surface-1, hsl(220, 15%, 8%));
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.ds-tab {
+    flex: 1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.ds-tab:hover {
+    color: var(--text-primary, hsl(0, 0%, 94%));
+    background: hsla(220, 15%, 100%, 0.04);
+}
+
+.ds-tab.active {
+    background: hsla(38, 92%, 52%, 0.12);
+    color: hsl(38, 92%, 68%);
+    border: 1px solid hsla(38, 92%, 52%, 0.2);
+}
+
+/* ─── Category Bar ───────────────────────────────────────────────────────────── */
+.ds-category-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.ds-cat-btn {
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.ds-cat-btn:hover {
+    border-color: hsla(262, 83%, 68%, 0.3);
+    color: hsl(262, 83%, 78%);
+}
+
+.ds-cat-btn.active {
+    background: hsla(262, 83%, 68%, 0.1);
+    border-color: hsla(262, 83%, 68%, 0.3);
+    color: hsl(262, 83%, 78%);
+}
+
+/* ─── Token Grid ─────────────────────────────────────────────────────────────── */
+.ds-token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.ds-token-item {
+    background: var(--surface-1, hsl(220, 15%, 8%));
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.ds-token-item:hover {
+    border-color: hsla(262, 83%, 68%, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px hsla(262, 83%, 68%, 0.08);
+}
+
+/* ─── Swatches ───────────────────────────────────────────────────────────────── */
+.ds-color-swatch {
+    width: 100%;
+    height: 64px;
+    border-radius: 8px;
+    border: 1px solid hsla(220, 15%, 100%, 0.08);
+}
+
+.ds-spacing-viz {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    background: hsla(220, 15%, 100%, 0.03);
+    border-radius: 6px;
+    padding: 0 8px;
+    overflow: hidden;
+}
+
+.ds-spacing-bar {
+    height: 6px;
+    background: hsl(262, 83%, 68%);
+    border-radius: 3px;
+    max-width: 100%;
+    min-width: 4px;
+}
+
+.ds-shadow-swatch {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    background: var(--surface-2, hsl(220, 14%, 12%));
+}
+
+.ds-radius-swatch {
+    width: 48px;
+    height: 48px;
+    background: hsla(38, 92%, 52%, 0.15);
+    border: 2px solid hsl(38, 92%, 52%);
+}
+
+/* ─── Token Info ─────────────────────────────────────────────────────────────── */
+.ds-token-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ds-token-name {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: hsl(262, 83%, 78%);
+}
+
+.ds-token-value {
+    font-size: 12px;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+    word-break: break-all;
+}
+
+.ds-copied-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: hsl(38, 92%, 52%);
+    color: hsl(220, 20%, 4%);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    animation: ds-pop-in 0.15s ease;
+}
+
+@keyframes ds-pop-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Typography Panel ───────────────────────────────────────────────────────── */
+.ds-typo-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--surface-1, hsl(220, 15%, 8%));
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.ds-typo-row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    transition: background 0.15s;
+}
+
+.ds-typo-row:last-child {
+    border-bottom: none;
+}
+
+.ds-typo-row:hover {
+    background: hsla(220, 15%, 100%, 0.02);
+}
+
+.ds-typo-label {
+    min-width: 100px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: hsl(38, 92%, 52%);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+}
+
+.ds-typo-display-xl {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.ds-typo-display-lg {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.ds-typo-heading {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.ds-typo-body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.ds-typo-caption {
+    font-size: 12px;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+}
+
+.ds-typo-mono {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: hsl(346, 84%, 70%);
+}
+
+/* ─── IRIS-GEN Panel ─────────────────────────────────────────────────────────── */
+.ds-iris-panel {
+    background: var(--surface-1, hsl(220, 15%, 8%));
+    border: 1px solid hsla(262, 83%, 68%, 0.15);
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.ds-iris-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ds-iris-badge {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: hsl(262, 83%, 78%);
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: hsla(262, 83%, 68%, 0.12);
+    border: 1px solid hsla(262, 83%, 68%, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.ds-iris-desc {
+    font-size: 13px;
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+}
+
+.ds-iris-input-row {
+    display: flex;
+    gap: 12px;
+}
+
+.ds-iris-input {
+    flex: 1;
+    background: var(--surface-2, hsl(220, 14%, 12%));
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary, hsl(0, 0%, 94%));
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.ds-iris-input:focus {
+    border-color: hsla(262, 83%, 68%, 0.4);
+    box-shadow: 0 0 0 3px hsla(262, 83%, 68%, 0.08);
+}
+
+.ds-iris-btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, hsl(262, 83%, 68%), hsl(262, 83%, 58%));
+    color: #fff;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.ds-iris-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px hsla(262, 83%, 68%, 0.3);
+}
+
+.ds-iris-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.ds-iris-result {
+    margin-top: 20px;
+    border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ds-iris-grade {
+    padding: 12px 20px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ds-iris-grade.promoted {
+    background: hsla(142, 71%, 45%, 0.08);
+    color: hsl(142, 71%, 60%);
+    border-bottom: 1px solid hsla(142, 71%, 45%, 0.15);
+}
+
+.ds-iris-grade.rejected {
+    background: hsla(38, 92%, 52%, 0.08);
+    color: hsl(38, 92%, 68%);
+    border-bottom: 1px solid hsla(38, 92%, 52%, 0.15);
+}
+
+.ds-iris-score {
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+.ds-iris-tokens {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ds-iris-token-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.ds-iris-token-row code {
+    font-family: 'JetBrains Mono', monospace;
+    color: hsl(262, 83%, 78%);
+    min-width: 160px;
+}
+
+.ds-iris-token-row span {
+    color: var(--text-secondary, hsl(220, 10%, 60%));
+}
+
+.ds-iris-mini-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid hsla(220, 15%, 100%, 0.1);
+    flex-shrink: 0;
+}
+
+.ds-iris-issues {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ds-iris-issue {
+    font-size: 12px;
+    color: hsl(38, 92%, 68%);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Token swatch custom-property consumers ─────────────────────────────────── */
+
+.ds-color-swatch {
+    background: var(--swatch-bg, transparent);
+}
+
+.ds-spacing-bar {
+    width: var(--bar-width, 0);
+    height: 8px;
+    background: var(--inc-amber, #FF6B35);
+    border-radius: 4px;
+}
+
+.ds-shadow-swatch {
+    box-shadow: var(--swatch-shadow, none);
+    width: 60px;
+    height: 40px;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm, 6px);
+}
+
+.ds-radius-swatch {
+    border-radius: var(--swatch-radius, 0);
+    width: 48px;
+    height: 48px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+}
+
+.ds-iris-mini-swatch {
+    background: var(--iris-swatch-bg, transparent);
+}
+
+/* ── Apply-button semantic styles ───────────────────────────────────────────── */
+
+.ds-apply-btn {
+    margin-top: 16px;
+    background: var(--amber-primary, #FF6B35);
+    color: var(--bg-void, #0a0a0f);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-sm, 6px);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.ds-apply-btn:hover {
+    opacity: 0.85;
+}
+
+/* ── PreviewPanel classes ────────────────────────────────────────────────────── */
+
+.ds-preview-heading {
+    margin-top: 0;
+}
+
+.ds-preview-body {
+    color: var(--text-secondary);
+}
+
+.ds-preview-input {
+    width: 100%;
+}
+
+.ds-preview-input--mt {
+    margin-top: 12px;
+}
+
+.ds-preview-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.ds-preview-btn {
+    padding: 12px 24px;
+}
+
+.ds-metric-card {
+    background: var(--surface-2);
+    padding: 24px;
+    border-radius: var(--radius-lg, 12px);
+}
+
+.ds-metric-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ds-pill--flush {
+    margin: 0;
+}
+
+.ds-metric-value {
+    color: var(--amber-primary, #FF6B35);
+    margin-top: 16px;
+}
+
+.ds-metric-viz {
+    margin-top: var(--space-md, 16px);
+}

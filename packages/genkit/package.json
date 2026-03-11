@@ -1,0 +1,76 @@
+{
+    "name": "@inception/genkit",
+    "version": "5.0.0",
+    "private": true,
+    "description": "Creative Liberation Engine — Unified AI Provider Orchestration via Genkit",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./dira": {
+            "import": "./dist/dira/index.js",
+            "types": "./dist/dira/index.d.ts"
+        },
+        "./memory/scribe": {
+            "import": "./dist/memory/scribe.js",
+            "types": "./dist/memory/scribe.d.ts"
+        },
+        "./memory/vera-gate": {
+            "import": "./dist/memory/vera-gate.js",
+            "types": "./dist/memory/vera-gate.d.ts"
+        },
+        "./memory/context-pager": {
+            "import": "./dist/memory/context-pager.js",
+            "types": "./dist/memory/context-pager.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "cross-env GENKIT_ENV=dev tsx --watch src/server.ts",
+        "start": "node dist/server.js",
+        "test": "vitest run --testTimeout=30000",
+        "genkit:server": "cross-env GENKIT_ENV=dev tsx src/server.ts",
+        "genkit:ui": "npx --no genkit-cli start -- tsx src/server.ts",
+        "docker:start": "tsx src/server.ts"
+    },
+    "dependencies": {
+        "@genkit-ai/anthropic": "^0.2.0",
+        "@genkit-ai/compat-oai": "^1.29.0",
+        "@genkit-ai/firebase": "^1.29.0",
+        "@genkit-ai/google-genai": "^1.29.0",
+        "@google-cloud/aiplatform": "^6.5.0",
+        "@google/generative-ai": "^0.24.1",
+        "@inception/auth": "workspace:*",
+        "@inception/claude-agent": "workspace:*",
+        "@inception/core": "workspace:*",
+        "@inception/mcp-router": "workspace:*",
+        "@inception/memory": "workspace:*",
+        "@inception/somatic": "workspace:*",
+        "@inception/toolbox": "workspace:*",
+        "ai": "^6.0.116",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.0",
+        "express": "^4.21.0",
+        "firebase-admin": "^13.7.0",
+        "firebase-functions": "^7.0.6",
+        "genkit": "^1.29.0",
+        "genkitx-ollama": "^1.29.0",
+        "ollama-ai-provider": "^1.2.0",
+        "p-limit": "^6.1.0",
+        "zod": "^4.3.6"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.0.0",
+        "cross-env": "^10.1.0",
+        "genkit-cli": "^1.29.0",
+        "tsx": "^4.19.0",
+        "typescript": "^5.7.0",
+        "vitest": "^3.0.0"
+    }
+}

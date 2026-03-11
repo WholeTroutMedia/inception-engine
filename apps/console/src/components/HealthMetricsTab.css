@@ -1,0 +1,120 @@
+.hm-pane {
+    width: 380px;
+    background-color: #09090b;
+    border-right: 1px solid #27272a;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.hm-section {
+    padding: 24px 16px;
+    border-bottom: 1px solid #27272a;
+}
+
+.hm-sec-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: #a1a1aa;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.hm-pulse {
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.hm-pulse-ok-6 { width: 6px; height: 6px; background-color: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+.hm-pulse-err-6 { width: 6px; height: 6px; background-color: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.6); }
+
+.hm-svc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hm-svc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.hm-svc-offline {
+    opacity: 0.5;
+}
+
+.hm-svc-name {
+    display: flex;
+    align-items: center;
+    color: #e4e4e7;
+    font-weight: 600;
+}
+
+.hm-svc-port {
+    font-family: 'JetBrains Mono', monospace;
+    color: #71717a;
+    font-size: 11px;
+}
+
+/* CP */
+.cp-loading {
+    padding: 20px;
+    text-align: center;
+    color: #71717a;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.cp-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cp-stat-box {
+    background: #18181b;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #3f3f46;
+}
+
+.cp-stat-val {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.cp-stat-lbl {
+    font-size: 11px;
+    color: #a1a1aa;
+    text-transform: uppercase;
+}
+
+.cp-spark-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.cp-spark {
+    padding: 12px;
+    background: #18181b;
+    border-radius: 6px;
+    border: 1px solid #27272a;
+}
+
+.cp-spark-head {
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}

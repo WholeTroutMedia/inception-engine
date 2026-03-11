@@ -1,0 +1,33 @@
+{
+    "name": "@inception/auth",
+    "version": "1.0.0",
+    "description": "Firebase Auth integration for Creative Liberation Engine v5 — React 19 + Vite 5",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "type-check": "tsc --noEmit",
+        "dev": "tsc --watch",
+        "test": "vitest run"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/react": "^19.2.14",
+        "firebase": "^12.10.0",
+        "jsdom": "^28.1.0",
+        "react": "^19.2.4",
+        "typescript": "^5.4.5",
+        "vite": "^7.3.1",
+        "vitest": "^1.6.0"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "dependencies": {
+        "react": "^19.0.0",
+        "zod": "^4.3.6"
+    }
+}

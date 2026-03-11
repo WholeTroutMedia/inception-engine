@@ -1,0 +1,342 @@
+/**
+ * CloudMeshPage.css — Sovereignty Dashboard
+ * Wave 38 · Helix C
+ */
+
+.cmesh-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background: #0a0a0e;
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+
+.cmesh-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cmesh-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #22d3ee, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.25rem;
+}
+
+.cmesh-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.cmesh-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cmesh-refresh-label {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────── */
+
+.cmesh-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cmesh-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.cmesh-btn--primary {
+  background: rgba(34,211,238,0.12);
+  border-color: rgba(34,211,238,0.3);
+  color: #22d3ee;
+}
+
+.cmesh-btn--primary:hover {
+  background: rgba(34,211,238,0.2);
+}
+
+/* ── Summary strip ────────────────────────────────────────────── */
+
+.cmesh-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cmesh-summary-stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cmesh-summary-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22d3ee;
+  font-variant-numeric: tabular-nums;
+}
+
+.cmesh-summary-label {
+  font-size: 0.7rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Section label ────────────────────────────────────────────── */
+
+.cmesh-section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #475569;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Provider grid ────────────────────────────────────────────── */
+
+.cmesh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+/* ── Card ─────────────────────────────────────────────────────── */
+
+.cmesh-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.cmesh-card:hover {
+  border-color: rgba(34,211,238,0.2);
+}
+
+.cmesh-card--degraded {
+  border-color: rgba(245,158,11,0.3);
+}
+
+.cmesh-card--offline {
+  border-color: rgba(239,68,68,0.3);
+  opacity: 0.7;
+}
+
+.cmesh-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cmesh-card-icon {
+  font-size: 1.4rem;
+  width: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.cmesh-card-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+
+.cmesh-card-region {
+  font-size: 0.7rem;
+  color: #475569;
+  margin-top: 0.15rem;
+}
+
+.cmesh-card-badge {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.cmesh-card-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.cmesh-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cmesh-metric-label {
+  font-size: 0.65rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cmesh-metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cmesh-failover-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(239,68,68,0.3);
+  background: rgba(239,68,68,0.08);
+  color: #f87171;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+
+.cmesh-failover-btn:hover {
+  background: rgba(239,68,68,0.16);
+}
+
+/* ── Federation list ──────────────────────────────────────────── */
+
+.cmesh-fed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cmesh-fed-row {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr auto auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.83rem;
+}
+
+.cmesh-fed-dot { font-size: 0.6rem; }
+.cmesh-fed-name { font-weight: 500; color: #e2e8f0; }
+.cmesh-fed-agents { color: #64748b; font-size: 0.75rem; }
+.cmesh-fed-queued { color: #64748b; font-size: 0.75rem; }
+.cmesh-fed-seen { color: #475569; font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+
+/* ── States ───────────────────────────────────────────────────── */
+
+.cmesh-loading {
+  text-align: center;
+  color: #475569;
+  padding: 3rem;
+  font-size: 0.85rem;
+}
+
+.cmesh-empty {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  color: #475569;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+/* ── Modal ────────────────────────────────────────────────────── */
+
+.cmesh-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.cmesh-modal {
+  background: #111118;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  width: min(480px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+}
+
+.cmesh-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.cmesh-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 0.25rem;
+}
+
+.cmesh-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.cmesh-input:focus {
+  border-color: rgba(34,211,238,0.4);
+}
+
+.cmesh-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}

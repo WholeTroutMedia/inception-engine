@@ -1,0 +1,50 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "tasks": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
+            ]
+        },
+        "test": {
+            "dependsOn": [
+                "build"
+            ]
+        },
+        "lint": {},
+        "dev": {
+            "cache": false,
+            "persistent": true
+        },
+        "validate": {
+            "dependsOn": [],
+            "outputs": [],
+            "cache": false
+        },
+        "tokens:build": {
+            "dependsOn": [],
+            "outputs": [
+                "dist/css/**",
+                "dist/js/**",
+                "dist/json/**",
+                "dist/ios/**",
+                "dist/android/**"
+            ]
+        },
+        "tokens:validate": {
+            "dependsOn": [],
+            "outputs": [],
+            "cache": false
+        },
+        "scan": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [],
+            "cache": false
+        }
+    }
+}

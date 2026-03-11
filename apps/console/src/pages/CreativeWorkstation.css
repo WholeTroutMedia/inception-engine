@@ -1,0 +1,460 @@
+/* ── CreativeWorkstation ───────────────────────────────────────────────── */
+
+.cw-page-header {
+    align-items: flex-end;
+}
+
+/* Pipeline connector accent color */
+.pipeline-connector.complete {
+    color: var(--inc-color-primary);
+}
+
+/* Idle pipeline node dimming */
+.pipeline-node.cw-idle {
+    opacity: 0.55;
+}
+
+/* Genkit status dot variants */
+.cw-genkit-dot.active {
+    background: var(--inc-color-primary);
+    box-shadow: 0 0 10px var(--inc-color-primary);
+}
+
+.cw-genkit-dot.offline {
+    background: var(--inc-color-feedback-danger);
+    box-shadow: none;
+}
+
+/* Latency bar high-latency variant */
+.latency-bar-fill.high {
+    background: linear-gradient(90deg, var(--inc-color-feedback-warning), #e8803a);
+}
+
+/* Terminal row type colorings */
+.cw-terminal-row-sys {
+    color: var(--inc-color-text-secondary);
+}
+
+.cw-terminal-row-info {
+    color: var(--inc-color-text-primary);
+}
+
+.cw-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: var(--inc-space-md);
+}
+
+/* Header */
+.cw-header-actions {
+    display: flex;
+    gap: var(--inc-space-sm);
+    align-items: center;
+}
+
+.cw-genkit-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.cw-genkit-label {
+    font-family: var(--inc-font-family-code);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+
+.cw-genkit-label.online {
+    color: var(--inc-color-primary);
+}
+
+.cw-genkit-label.offline {
+    color: var(--inc-color-feedback-danger);
+}
+
+.cw-init-btn {
+    padding: 6px 16px;
+    background: var(--inc-color-primary);
+    color: #000;
+    border: none;
+    border-radius: 100px;
+    font-family: var(--inc-font-family-code);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px var(--inc-color-primary-glow);
+    transition: filter 0.15s;
+}
+
+.cw-init-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* Workstation layout */
+.cw-layout {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Pipeline panel */
+.cw-stage-count {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.cw-stage-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cw-stage-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--inc-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+.cw-stage-icon.idle {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--inc-color-text-tertiary);
+}
+
+.cw-stage-icon.active {
+    background: var(--inc-color-primary-subtle);
+    border: 1px solid var(--inc-color-primary-glow);
+    color: var(--inc-color-primary);
+}
+
+.cw-stage-icon.complete {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--inc-color-feedback-success);
+}
+
+.cw-stage-icon.error {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--inc-color-feedback-danger);
+}
+
+.cw-stage-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cw-stage-dot.active {
+    animation: breathe 1.5s infinite;
+}
+
+.cw-stage-dot-label {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+}
+
+/* Job Queue */
+.cw-job-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.cw-job-stat-card {
+    background: rgba(255, 255, 255, 0.02);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--inc-radius-sm);
+    padding: 8px 10px;
+    text-align: center;
+}
+
+.cw-job-stat-value {
+    font-family: var(--inc-font-family-display);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.cw-job-stat-label {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.cw-queue-header {
+    display: flex;
+    gap: 8px;
+}
+
+.cw-queue-done {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-feedback-success);
+}
+
+.cw-queue-failed {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-feedback-danger);
+}
+
+.cw-job-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cw-job-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.cw-job-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.cw-job-tag {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 100px;
+}
+
+.cw-job-tag.running {
+    background: var(--inc-color-primary-subtle);
+    color: var(--inc-color-primary);
+    border: 1px solid var(--inc-color-primary-glow);
+}
+
+.cw-job-tag.complete {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--inc-color-feedback-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cw-job-tag.failed {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--inc-color-feedback-danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.cw-job-tag.queued {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--inc-color-text-tertiary);
+    border: 1px solid var(--inc-color-border-subtle);
+}
+
+.cw-job-eta {
+    font-family: var(--inc-font-family-code);
+    font-size: 10px;
+    color: var(--inc-color-text-tertiary);
+}
+
+.cw-job-progress-pct {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-text-tertiary);
+    margin-top: 4px;
+}
+
+.cw-empty-jobs {
+    color: var(--inc-color-text-tertiary);
+    font-size: 12px;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* Telemetry terminal */
+.cw-terminal {
+    flex: 1;
+    min-height: 140px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--inc-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 8px;
+}
+
+.cw-terminal-title {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--inc-color-primary);
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.cw-terminal-row {
+    font-family: var(--inc-font-family-code);
+    font-size: 10px;
+}
+
+.cw-terminal-ts {
+    margin-right: 8px;
+    opacity: 0.6;
+}
+
+.cw-terminal-ts.sys {
+    color: var(--inc-color-text-tertiary);
+}
+
+.cw-terminal-ts.info {
+    color: var(--inc-color-primary);
+}
+
+.cw-terminal-cursor {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 6px;
+    height: 12px;
+    background: var(--inc-color-primary);
+    animation: pulse-amber 1s infinite;
+}
+
+/* Provider health */
+.cw-provider-count {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    color: var(--inc-color-text-tertiary);
+}
+
+.cw-provider-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.cw-provider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cw-provider-dot.online {
+    background: var(--inc-color-feedback-success);
+    box-shadow: 0 0 6px var(--inc-color-feedback-success);
+    animation: breathe 2.5s infinite;
+}
+
+.cw-provider-dot.degraded {
+    background: var(--inc-color-feedback-warning);
+    box-shadow: none;
+}
+
+.cw-provider-dot.offline {
+    background: var(--inc-color-feedback-danger);
+    box-shadow: none;
+}
+
+.cw-provider-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cw-provider-jobs-badge {
+    font-family: var(--inc-font-family-code);
+    font-size: 10px;
+    color: var(--inc-color-primary);
+    background: var(--inc-color-primary-subtle);
+    border: 1px solid var(--inc-color-primary-glow);
+    border-radius: 100px;
+    padding: 1px 6px;
+}
+
+.cw-provider-latency-value {
+    color: var(--inc-color-text-secondary);
+}
+
+.cw-provider-latency-value.high {
+    color: var(--inc-color-feedback-warning);
+}
+
+.cw-provider-metrics-right {
+    text-align: right;
+}
+
+.cw-provider-offline-label {
+    font-family: var(--inc-font-family-code);
+    font-size: 10px;
+    color: var(--inc-color-feedback-danger);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Quick actions */
+.cw-quick-actions {
+    margin-top: var(--inc-space-sm);
+    border-top: 1px solid var(--inc-color-border-subtle);
+    padding-top: var(--inc-space-sm);
+}
+
+.cw-quick-actions-title {
+    font-family: var(--inc-font-family-code);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--inc-color-text-tertiary);
+    margin-bottom: 8px;
+}
+
+.cw-quick-action-btn {
+    display: block;
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: var(--inc-radius-sm);
+    color: var(--inc-color-text-secondary);
+    font-family: var(--inc-font-family-body);
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.cw-quick-action-btn:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--inc-color-text-primary);
+    background: rgba(255, 255, 255, 0.06);
+}

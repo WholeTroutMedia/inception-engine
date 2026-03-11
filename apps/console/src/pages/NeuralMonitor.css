@@ -1,0 +1,209 @@
+/* pages/NeuralMonitor.css — extracted from NeuralMonitor.tsx */
+
+.nm-root {
+    min-height: 100%;
+    background: var(--bg-void);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────── */
+.nm-header {
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.nm-eyebrow {
+    font-size: 10px;
+    color: var(--violet);
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.nm-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.nm-h1 {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: var(--chalk);
+    margin: 0;
+}
+
+.nm-status-text {
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+.nm-status-online {
+    color: var(--status-success);
+    font-weight: 800;
+}
+
+.nm-refresh-btn {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nm-desc {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+/* ── Quick stats strip ──────────────────────────── */
+.nm-stats {
+    display: flex;
+    gap: 10px;
+    padding: 20px 40px 0;
+    flex-shrink: 0;
+}
+
+/* stat card — bg and border use --stat-color set inline via JS */
+.nm-stat-card {
+    padding: 12px 18px;
+    border-radius: 12px;
+    flex: 1;
+    /* Use rgba fallback — color-mix() requires Chrome 111+ */
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.nm-stat-label {
+    font-size: 9px;
+    color: var(--text-tertiary);
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
+/* value color = --stat-color */
+.nm-stat-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--stat-color, var(--chalk));
+}
+
+/* ── System cards ────────────────────────────────── */
+.nm-cards {
+    flex: 1;
+    padding: 20px 40px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.nm-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    /* border uses --card-border-color set per-card */
+    border: 1px solid var(--card-border-color, rgba(255, 255, 255, 0.06));
+}
+
+/* identity column */
+.nm-card-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nm-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* background + box-shadow from --status-glow-color inline */
+    background: var(--status-glow-color, #6B7280);
+    box-shadow: 0 0 8px var(--status-glow-color, #6B7280);
+}
+
+/* panel name color = --panel-color */
+.nm-panel-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--panel-color, var(--chalk));
+}
+
+.nm-panel-role {
+    font-size: 10px;
+    color: var(--text-tertiary);
+}
+
+/* metrics column */
+.nm-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nm-metric-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.nm-metric-key {
+    font-size: 8px;
+    color: var(--text-tertiary);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+}
+
+.nm-metric-val {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--chalk);
+    font-family: var(--font-mono);
+}
+
+.nm-metric-unit {
+    font-size: 9px;
+    color: var(--text-tertiary);
+    margin-left: 2px;
+}
+
+/* status column */
+.nm-card-status {
+    text-align: right;
+}
+
+/* color = --status-glow-color */
+.nm-status-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--status-glow-color, #6B7280);
+}
+
+.nm-latency {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    margin-top: 3px;
+}
+
+.nm-port {
+    font-size: 9px;
+    color: var(--text-tertiary);
+    margin-top: 3px;
+}

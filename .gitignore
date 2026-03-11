@@ -1,7 +1,128 @@
-node_modules/
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
 dist/
-*.log
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+
+# Node
+node_modules/
+.turbo/
+.next/
+
+# Environment
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build
+*.pyc
+
+# TypeScript build artifacts
 *.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Genkit runtime state (ephemeral process files)
+**/.genkit/runtimes/
+
+# pnpm / package manager generated
+packages/tsconfig/
+
+# Runtime agent logs (auto-generated, never commit)
+.agents/*.log
+.agents/scribe-buffer.json
+*.patch
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+
+# Node
+node_modules/
+.turbo/
+.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build
+*.pyc
+
+# TypeScript build artifacts
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Genkit runtime state (ephemeral process files)
+**/.genkit/runtimes/
+
+# pnpm / package manager generated
+packages/tsconfig/
+
+# Runtime agent logs (auto-generated, never commit)
+.agents/*.log
+.agents/scribe-buffer.json
+*.patch
+
+# Service runtime logs
+**/logs/*.log
+**/logs/*.error.log
+**/logs/*.out.log
+
+# Unregistered ecosystem directories
+ecosystem/
+
+# Submodule packages (managed separately)
+packages/workspace-mcp/
+# Scratch Logs and Testing Dumps
+*.log
+crash*.json
+dump*.json
+status*.json
+tasks*.json
+error*.json
+test*.json
+auth*.json
+*out*.txt
+*error*.txt
