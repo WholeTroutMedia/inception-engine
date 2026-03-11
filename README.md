@@ -11,11 +11,15 @@ The Creative Liberation Engine is a compound-learning, multi-agent AI operating 
 > âš ï¸ **Disclaimer: AI-Generated Documentation**  
 > Notice: A large portion of this repository's documentation is generated and maintained autonomously by AI agents. While we strive for hyper-accuracy, there may be discrepancies, outdated context, or hallucinated facts. Please verify any critical information and report inaccuracies. We believe in being fully honest about the role of AI in maintaining this project.
 
+<br>
+<img src="assets/cle-hero-banner.png" width="100%" alt="Creative Liberation Engine Hero Banner" style="border-radius: 8px;">
+<br>
+
 ![License: FSL-1.1-ALv2](https://img.shields.io/badge/License-FSL--1.1--ALv2-violet) ![Version](https://img.shields.io/badge/version-5.0.0--GENESIS-gold) ![Agents](https://img.shields.io/badge/agents-40%2B-blue)
 
 ---
 
-## What Makes It Different
+## ✨ What Makes It Different
 
 | Platform             | What you get                                                                  |
 |----------------------|-------------------------------------------------------------------------------|
@@ -28,13 +32,13 @@ The engine doesn't just respond — it *learns*, *remembers*, and *compounds* ev
 
 ---
 
-## The Scale
+## ⚖️ The Scale
 
 - **40+ Total Agents & LoRAs**
 
 ---
 
-## Architecture
+## 🏛️ Architecture
 
 ```text
 +-------------------------------------------------------------------------+
@@ -70,7 +74,7 @@ The engine doesn't just respond — it *learns*, *remembers*, and *compounds* ev
 
 ---
 
-## The 20-Article Constitution
+## 📜 The 20-Article Constitution
 
 The engine is governed by 20 immutable articles. Selected highlights:
 
@@ -83,7 +87,7 @@ The engine is governed by 20 immutable articles. Selected highlights:
 
 ---
 
-## Live Memory Bus
+## 🧠 Live Memory Bus
 
 The engine's compound intelligence layer. Every agent execution:
 
@@ -95,7 +99,7 @@ This means `kbuildd` gets better at your codebase with every run. `kuid` remembe
 
 ---
 
-## The OmniMedia Orchestrator
+## ⚡ The OmniMedia Orchestrator
 
 The God Node. A single creative brief produces:
 
@@ -118,7 +122,7 @@ const result = await OmniMediaOrchestratorFlow({
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/Creative-Liberation-Engine/creative-liberation-engine.git
@@ -149,7 +153,7 @@ docker compose up     # Genkit + FastAPI engine + Console UI + ChromaDB
 
 ---
 
-## Constitutional Preflight (Public SDK)
+## 🛡️ Constitutional Preflight (Public SDK)
 
 ```typescript
 import { constitutionalPreflight, CONSTITUTION, HIVES } from '@cle/core';
@@ -169,7 +173,7 @@ console.log(HIVES.kuid.members);
 
 ---
 
-## Access Tiers
+## 🔐 Access Tiers
 
 | Tier            | Who        | Capabilities                                        |
 |-----------------|------------|-----------------------------------------------------|
@@ -179,7 +183,7 @@ console.log(HIVES.kuid.members);
 
 ---
 
-## The Numbers
+## 📊 The Numbers
 
 | Metric                | Value                              |
 |-----------------------|------------------------------------|
@@ -194,7 +198,7 @@ console.log(HIVES.kuid.members);
 
 ---
 
-## Correspondence
+## 📧 Correspondence
 
 For correspondence, reach out to `operator@gmail.com`.
 
@@ -202,7 +206,7 @@ For correspondence, reach out to `operator@gmail.com`.
 
 ---
 
-## Repository Navigation
+## 🗺️ Repository Navigation
 
 | Area | Link | Description |
 |---|---|---|
