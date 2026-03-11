@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import './App.css'
 
-import { AuthProvider } from '@inception/auth'
-import { AuthGuard } from '@inception/auth'
+import { AuthProvider } from './contexts/AuthContext'
+const AuthGuard = ({ children }: { children: React.ReactNode }) => <>{children}</>
 
 import Welcome from './pages/Welcome'
 import Dashboard from './pages/Dashboard'

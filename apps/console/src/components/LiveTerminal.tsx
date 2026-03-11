@@ -14,39 +14,50 @@ export function LiveTerminal() {
     const endRef = useRef<HTMLDivElement>(null);
     const [autoScroll, setAutoScroll] = useState(true);
 
-    // Simulate system logs for the HUD feel since we don't have a direct raw SSE endpoint for everything yet
     useEffect(() => {
-        let counter = 0;
-        const addLog = () => {
-            const levels: LogEntry['level'][] = ['INFO', 'INFO', 'SYS', 'AXON', 'WARN'];
-            const sources = ['Dispatch', 'Genkit', 'NeuralBus', 'AgentMesh', 'Observer'];
-            const messages = [
-                'Checking connected hive state...',
-                'Pulse received from KEEPER-2.',
-                'STRATA engaged in planning phase.',
-                'Memory compacted in ChromaDB.',
-                'Polling genmedia-asset-generator workflow.',
-                'Awaiting human input in active stream.',
-                'Local LLM inference latency 41ms.',
-                'Synchronizing with NAS localhost.' // Leaving this strictly as a simulated log text to look hacker-ish
-            ];
-
-            const entry: LogEntry = {
-                id: Date.now() + counter++,
-                timestamp: new Date().toISOString().split('T')[1].substring(0, 12),
-                level: levels[Math.floor(Math.random() * levels.length)],
-                source: sources[Math.floor(Math.random() * sources.length)],
-                message: messages[Math.floor(Math.random() * messages.length)]
-            };
-
-            setLogs(prev => [...prev.slice(-99), entry]); // keep last 100
+        const es = new EventSource('http://127.0.0.1:5050/api/events');
+        
+        const addSystemLog = (level: LogEntry['level'], source: string, message: string) => {
+            setLogs(prev => {
+                const newLog = {
+                    id: Date.now() + Math.random(),
+                    timestamp: new Date().toISOString().split('T')[1].substring(0, 12),
+                    level, source, message
+                };
+                return [...prev.slice(-99), newLog];
+            });
         };
 
-        const interval = setInterval(() => {
-            if (Math.random() > 0.3) addLog();
-        }, 800);
+        es.addEventListener('connected', () => {
+            addSystemLog('SYS', 'Dispatch', 'Connected to SSE terminal stream.');
+        });
 
-        return () => clearInterval(interval);
+        es.addEventListener('status', (e) => {
+            try {
+                const data = JSON.parse(e.data);
+                addSystemLog('INFO', 'Observer', `Status sync: ${data.summary?.active || 0} active tasks, ${data.summary?.queued || 0} queued.`);
+            } catch (err) { console.error('Error parsing status event', err); }
+        });
+
+        es.addEventListener('blocker', (e) => {
+            try {
+                const data = JSON.parse(e.data);
+                addSystemLog('WARN', 'AgentMesh', `Blocker ${data.event?.toUpperCase()}: ${data.blocker?.id}`);
+            } catch (err) { console.error('Error parsing blocker event', err); }
+        });
+        
+        es.addEventListener('capability_update', (e) => {
+            try {
+                const data = JSON.parse(e.data);
+                addSystemLog('SYS', 'NeuralBus', `Capability Reload [${data.hash}] via ${data.source}`);
+            } catch (err) { console.error('Error parsing capability_update event', err); }
+        });
+
+        es.onerror = () => {
+            addSystemLog('ERROR', 'Dispatch', 'SSE connection lost. Reconnecting...');
+        };
+
+        return () => es.close();
     }, []);
 
     useEffect(() => {

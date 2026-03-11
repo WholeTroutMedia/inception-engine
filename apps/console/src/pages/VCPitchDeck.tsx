@@ -1,15 +1,15 @@
-import React, { useState, useEffect, MouseEvent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion'
 import { ChevronRight, ChevronLeft, ArrowRight, Activity, Zap, Shield, Cpu, Box as BoxIcon, Workflow } from 'lucide-react'
 
 // ─── ANIMATION VARIANTS ──────────────────────────────────────────────────
-const slideVariants = {
+const slideVariants: any = {
   enter: (direction: number) => ({ x: direction > 0 ? 100 : -100, opacity: 0, scale: 0.95, filter: 'blur(10px)' }),
   center: { x: 0, opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 } },
   exit: (direction: number) => ({ x: direction < 0 ? 100 : -100, opacity: 0, scale: 0.95, filter: 'blur(10px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } })
 }
 
-const itemVariants = {
+const itemVariants: any = {
   enter: { y: 20, opacity: 0, filter: 'blur(5px)' },
   center: { y: 0, opacity: 1, filter: 'blur(0px)', transition: { duration: 0.5, ease: 'easeOut' } }
 }
@@ -19,7 +19,7 @@ function SpotlightBackground({ children }: { children: React.ReactNode }) {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  function handleMouseMove({ clientX, clientY }: MouseEvent) {
+  function handleMouseMove({ clientX, clientY }: React.MouseEvent) {
     mouseX.set(clientX)
     mouseY.set(clientY)
   }

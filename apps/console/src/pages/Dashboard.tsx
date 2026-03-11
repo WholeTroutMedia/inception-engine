@@ -50,7 +50,7 @@ const GENESIS_SERVICES: Svc[] = [
     { name: 'God-Prompt', port: 7000, health: '/health', status: 'checking', color: '#8B5CF6', group: 'Extended' },
     { name: 'COMET', port: 7100, health: '/health', status: 'checking', color: '#20B2AA', group: 'Extended' },
     { name: 'Atlas Live', port: 8500, health: '/health', status: 'checking', color: '#FF6B35', group: 'Extended' },
-    { name: 'ChromaDB', port: 8000, health: '/api/v2/heartbeat', status: 'checking', color: '#9B72CF', group: 'Memory' },
+    { name: 'Python Engine', port: 8000, health: '/health', status: 'checking', color: '#9B72CF', group: 'Memory' },
 ]
 
 /* ── Hive roster ─────────────────────────────────────────────── */
@@ -148,12 +148,12 @@ async function checkSvcHealth(svc: Svc): Promise<Svc> {
     const t0 = Date.now()
     const nasBase = `http://${NAS_IP}:${svc.port}`
     try {
-        const r = await fetch(`${nasBase}${svc.health}`, { signal: AbortSignal.timeout(2500) })
-        if (r.ok || r.status === 204) return { ...svc, status: 'online', ms: Date.now() - t0 }
+        const r = await fetch(`${nasBase}${svc.health}`, { mode: 'no-cors', signal: AbortSignal.timeout(2500) })
+        if (r.type === 'opaque' || r.ok || r.status === 204) return { ...svc, status: 'online', ms: Date.now() - t0 }
     } catch { /* try localhost */ }
     try {
-        const r = await fetch(`http://localhost:${svc.port}${svc.health}`, { signal: AbortSignal.timeout(1500) })
-        if (r.ok || r.status === 204) return { ...svc, status: 'online', ms: Date.now() - t0 }
+        const r = await fetch(`http://localhost:${svc.port}${svc.health}`, { mode: 'no-cors', signal: AbortSignal.timeout(1500) })
+        if (r.type === 'opaque' || r.ok || r.status === 204) return { ...svc, status: 'online', ms: Date.now() - t0 }
     } catch { /* offline */ }
     return { ...svc, status: 'offline' }
 }
@@ -375,13 +375,12 @@ export default function Dashboard() {
         poll()
         const iv = setInterval(poll, 10_000)
         return () => clearInterval(iv)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // Poll dispatch board every 10s
     const pollDispatch = async () => {
         try {
-            const r = await fetch(`${DISPATCH}/api/status`, { signal: AbortSignal.timeout(3000) })
+            const r = await fetch(`/api/dispatch/status`, { signal: AbortSignal.timeout(3000) })
             if (r.ok) { setDispatch(await r.json()); setDispatchOnline(true) }
             else setDispatchOnline(false)
         } catch { setDispatchOnline(false) }
@@ -390,7 +389,6 @@ export default function Dashboard() {
         pollDispatch()
         const t = setInterval(pollDispatch, 10_000)
         return () => clearInterval(t)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const submitTask = async () => {

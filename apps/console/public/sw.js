@@ -38,11 +38,17 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
-  // API calls: network only (never cache dispatch/agent data)
-  if (event.request.url.includes('/api/')) return;
+  // API calls and health checks: network only (never cache dispatch/agent/health data)
+  if (event.request.method !== 'GET') return;
+  if (event.request.url.includes('/api/') || event.request.url.includes('/health')) return;
+  
   // Static assets: cache-first
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    caches.match(event.request).then((cached) => {
+      return cached || fetch(event.request).catch(() => {
+        return new Response(null, { status: 503, statusText: 'Offline' });
+      });
+    })
   );
 });
 
