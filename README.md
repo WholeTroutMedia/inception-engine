@@ -188,29 +188,11 @@ console.log(HIVES.AURORA.members);
 
 ---
 
-## WholeTrout Media
+## Philosophy
 
-Built by [WholeTrout Media](https://wholetrout.media).
+The engine is built on absolute transparency, compound intelligence, and complete user sovereignty. Every component is designed to run locally, learn from execution, and serve the operator without telemetry or external reliance.
 
-> *"We are building a system that allows ALL ARTISTS to shape the future world, unencumbered by previous restrictions in ANY WAY, SHAPE, OR FORM."*
-
----
-
-## Why This Exists
-
-This engine was not born in a boardroom or a lab.
-
-It was built by someone who knows what it feels like to grow up in a world that doesn't see you — to be young and adrift, without the anchors that most people take for granted. That loneliness never fully leaves. It compounds. It passes forward in ways you can't always stop.
-
-The founder released this publicly on a day of personal significance — a quiet dedication to the people he couldn't reach any other way, and to every person who has ever felt invisible in a world accelerating past them.
-
-**The engine has one purpose beneath all its architecture:**  
-*To bring humans into meaningful contact — with their own creativity, with each other, and with the sense that they are not alone.*
-
-Every agent, every memory system, every constitutional article exists in service of that.  
-Connection is the primary output. Everything else is infrastructure.
-
-> *"Built for the ones who grew up in the middle of things. For everyone who needed a hand and didn't find one. This is the hand."*
+> *"Artist liberation through sovereign technology."*
 
 ---
 
