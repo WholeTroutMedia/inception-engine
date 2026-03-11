@@ -1,0 +1,12 @@
+{
+    "name": "@creative-liberation-engine/cloud-edge-worker",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "deploy": "wrangler deploy"
+    },
+    "devDependencies": {
+        "wrangler": "^3.45.0",
+        "typescript": "^5.0.0"
+    }
+}

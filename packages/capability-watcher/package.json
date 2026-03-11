@@ -1,0 +1,25 @@
+{
+    "name": "@inception/capability-watcher",
+    "version": "1.0.0",
+    "description": "Watches AGENTS.md, skills, and workflow files for changes and broadcasts capability_update events to the Creative Liberation Engine dispatch server.",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsx src/index.ts",
+        "start": "node dist/index.js",
+        "test": "vitest run",
+        "type-check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "chokidar": "^3.6.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "tsx": "^4.0.0",
+        "typescript": "^5.4.0",
+        "vitest": "^1.0.0"
+    },
+    "engines": {
+        "node": ">=18"
+    }
+}

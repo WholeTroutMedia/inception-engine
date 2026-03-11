@@ -1,0 +1,17 @@
+{
+    "name":  "@inception/config",
+    "version":  "1.0.0-genesis",
+    "description":  "Creative Liberation Engine v5 Ã¢â‚¬â€ Global configuration management",
+    "type":  "module",
+    "main":  "./dist/index.js",
+    "types":  "./dist/index.d.ts",
+    "scripts":  {
+                    "build":  "tsc",
+                    "dev":  "tsc -w"
+                },
+    "devDependencies":  {
+                            "@types/node":  "^25.3.5",
+                            "typescript":  "^5.3.0",
+                            "@inception/tsconfig":  "workspace:*"
+                        }
+}

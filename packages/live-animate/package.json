@@ -1,0 +1,41 @@
+{
+    "name": "@inception/live-animate",
+    "version": "0.1.0",
+    "description": "LIVE ANIMATE — Real-time procedural animation of live events. OMNIBUS Vertical 1: Sports & Entertainment. Every league. Every feed. Open source.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsx watch src/index.ts",
+        "test": "echo \"No tests defined\"",
+        "type-check": "tsc --noEmit",
+        "demo:nba": "tsx src/feeds/nba-stats.ts",
+        "demo:f1": "tsx src/feeds/openf1.ts",
+        "studio": "tsx studio/server.ts",
+        "studio:open": "tsx studio/server.ts & start http://localhost:4200"
+    },
+    "author": "Creative Liberation Engine Community — Creative Liberation Engine",
+    "license": "MIT",
+    "dependencies": {
+        "@google/generative-ai": "^0.7.0",
+        "express": "^4.22.1",
+        "http-proxy-middleware": "^3.0.5",
+        "node-fetch": "^3.3.2",
+        "three": "^0.162.0",
+        "tsx": "^4.7.0",
+        "ws": "^8.16.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.19.35",
+        "@types/three": "^0.162.0",
+        "@types/ws": "^8.5.10",
+        "typescript": "^5.3.3",
+        "vitest": "^1.2.2"
+    },
+    "peerDependencies": {
+        "@inception/sensor-mesh": "workspace:*"
+    }
+}

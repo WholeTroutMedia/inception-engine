@@ -1,0 +1,19 @@
+{
+  "name": "Kling AI",
+  "url": "https://klingai.com",
+  "category": "AI Video & Render",
+  "account": {
+    "status": "Logged In",
+    "plan": "Pro"
+  },
+  "editing_suite": {
+    "name": "Kling Canvas",
+    "features": [
+      "Intelligent Creation Agent",
+      "Storyboard Generation",
+      "Multi-Angle Storyboard",
+      "Product Visual Generator"
+    ],
+    "workflow": "Canvas-based prompting where an AI agent iterative builds sequences and multi-angle views maintaining temporal and spatial consistency."
+  }
+}

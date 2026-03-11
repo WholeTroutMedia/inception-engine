@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Threshold — Creative Liberation Engine</title>
+  <meta name="description" content="The spatial home of the Creative Liberation Engine. COMET and the AVERI agents wait inside." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #09001A;
+      color: #fff;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #canvas-container {
+      position: fixed;
+      inset: 0;
+    }
+
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Arrival overlay */
+    #arrival-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, #09001A 0%, #000000 100%);
+      z-index: 100;
+      transition: opacity 2s ease;
+      pointer-events: all;
+    }
+
+    #arrival-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .arrival-logo {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(201, 160, 80, 0.6);
+      margin-bottom: 40px;
+    }
+
+    .arrival-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 200;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 16px;
+    }
+
+    .arrival-subtitle {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 64px;
+    }
+
+    #enter-btn {
+      padding: 14px 48px;
+      background: transparent;
+      border: 1px solid rgba(201, 160, 80, 0.4);
+      color: rgba(201, 160, 80, 0.9);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      font-family: inherit;
+    }
+
+    #enter-btn:hover {
+      background: rgba(201, 160, 80, 0.08);
+      border-color: rgba(201, 160, 80, 0.8);
+      color: #C9A050;
+    }
+
+    #vr-btn {
+      margin-top: 16px;
+      padding: 10px 32px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      font-family: inherit;
+      display: none;
+    }
+
+    #vr-btn.available {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #vr-btn:hover {
+      color: rgba(255, 255, 255, 0.8);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* HUD — peripheral always-on overlay */
+    #hud {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      display: none;
+    }
+
+    #hud.active { display: block; }
+
+    /* COMET speech bubble */
+    #comet-speech {
+      position: fixed;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 520px;
+      width: 90vw;
+      padding: 20px 28px;
+      background: rgba(9, 0, 26, 0.85);
+      border: 1px solid rgba(201, 160, 80, 0.2);
+      backdrop-filter: blur(20px);
+      border-radius: 2px;
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    #comet-speech.visible { opacity: 1; }
+
+    .comet-label {
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(201, 160, 80, 0.6);
+      margin-bottom: 8px;
+    }
+
+    /* Peripheral agent indicators */
+    #agent-indicators {
+      position: fixed;
+      top: 32px;
+      right: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .agent-pip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.4;
+      transition: opacity 0.6s ease;
+    }
+
+    .agent-pip.active { opacity: 1; }
+
+    .pip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pip-dot.athena { background: #C9A050; box-shadow: 0 0 8px #C9A050; }
+    .pip-dot.vera   { background: #00E5FF; box-shadow: 0 0 8px #00E5FF; }
+    .pip-dot.iris   { background: #9B59B6; box-shadow: 0 0 8px #9B59B6; }
+    .pip-dot.comet  { background: #7FFFD4; box-shadow: 0 0 8px #7FFFD4; }
+
+    .pip-label {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Voice status */
+    #voice-indicator {
+      position: fixed;
+      top: 32px;
+      left: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #voice-indicator.listening {
+      opacity: 1;
+    }
+
+    .voice-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7FFFD4;
+      animation: pulse-ring 1.2s ease infinite;
+    }
+
+    .voice-label {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(127, 255, 212, 0.7);
+    }
+
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(127,255,212,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(127,255,212,0); }
+      100% { box-shadow: 0 0 0 0 rgba(127,255,212,0); }
+    }
+
+    /* Dashboard panel */
+    #dashboard {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.94);
+      width: min(820px, 92vw);
+      max-height: 80vh;
+      overflow-y: auto;
+      background: rgba(9, 0, 26, 0.95);
+      border: 1px solid rgba(201, 160, 80, 0.15);
+      backdrop-filter: blur(32px);
+      padding: 40px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 60;
+    }
+
+    #dashboard::-webkit-scrollbar { width: 4px; }
+    #dashboard::-webkit-scrollbar-track { background: transparent; }
+    #dashboard::-webkit-scrollbar-thumb { background: rgba(201,160,80,0.2); }
+
+    #dashboard.open {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: all;
+    }
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .dash-title {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(201, 160, 80, 0.7);
+      margin-bottom: 8px;
+    }
+
+    .dash-status {
+      font-size: 22px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.02em;
+    }
+
+    #close-dash {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.3);
+      padding: 8px 16px;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+
+    #close-dash:hover {
+      color: rgba(255,255,255,0.7);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .metric-card {
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .metric-label {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .metric-value.gold { color: #C9A050; }
+    .metric-value.cyan { color: #00E5FF; }
+    .metric-value.violet { color: #9B59B6; }
+    .metric-value.teal { color: #7FFFD4; }
+
+    .tasks-section {
+      margin-top: 8px;
+    }
+
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 16px;
+    }
+
+    .task-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .task-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .task-status-dot.active  { background: #7FFFD4; }
+    .task-status-dot.queued  { background: rgba(255,255,255,0.2); }
+    .task-status-dot.done    { background: #C9A050; }
+
+    .task-name {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      flex: 1;
+    }
+
+    .task-agent {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* Agent hive grid */
+    .hive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .hive-agent {
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hive-agent .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #7FFFD4;
+      flex-shrink: 0;
+    }
+
+    /* Voice command hint */
+    #voice-hint {
+      position: fixed;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+      pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Loading shimmer */
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      transition: opacity 1s ease;
+    }
+    #loading.done { opacity: 0; pointer-events: none; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="loading">Initializing</div>
+
+  <div id="canvas-container">
+    <canvas id="threshold-canvas"></canvas>
+  </div>
+
+  <!-- Arrival gate -->
+  <div id="arrival-overlay">
+    <div class="arrival-logo">Creative Liberation Engine · AVERI</div>
+    <div class="arrival-title">The Threshold</div>
+    <div class="arrival-subtitle">A spatial home for the crew</div>
+    <button id="enter-btn">Enter</button>
+    <button id="vr-btn">Enter in VR</button>
+  </div>
+
+  <!-- HUD layer (always-on after entry) -->
+  <div id="hud">
+    <div id="agent-indicators">
+      <div class="agent-pip active" id="pip-comet">
+        <div class="pip-dot comet"></div>
+        <span class="pip-label">COMET</span>
+      </div>
+      <div class="agent-pip" id="pip-athena">
+        <div class="pip-dot athena"></div>
+        <span class="pip-label">ATHENA</span>
+      </div>
+      <div class="agent-pip" id="pip-vera">
+        <div class="pip-dot vera"></div>
+        <span class="pip-label">VERA</span>
+      </div>
+      <div class="agent-pip" id="pip-iris">
+        <div class="pip-dot iris"></div>
+        <span class="pip-label">IRIS</span>
+      </div>
+    </div>
+
+    <div id="voice-indicator">
+      <div class="voice-dot"></div>
+      <span class="voice-label">Listening</span>
+    </div>
+
+    <div id="comet-speech">
+      <div class="comet-label">COMET</div>
+      <div id="comet-text"></div>
+    </div>
+
+    <div id="voice-hint">Say "Hey COMET" to speak</div>
+  </div>
+
+  <!-- Dashboard panel -->
+  <div id="dashboard">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">Creative Liberation Engine · Live</div>
+        <div class="dash-status" id="dash-status-text">Engine operational</div>
+      </div>
+      <button id="close-dash">Close</button>
+    </div>
+
+    <div class="dash-grid">
+      <div class="metric-card">
+        <div class="metric-label">Active Agents</div>
+        <div class="metric-value teal" id="metric-agents">40</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Tasks Running</div>
+        <div class="metric-value cyan" id="metric-active">—</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Queue Depth</div>
+        <div class="metric-value" id="metric-queued">—</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Completed Today</div>
+        <div class="metric-value gold" id="metric-done">—</div>
+      </div>
+    </div>
+
+    <div class="tasks-section">
+      <div class="section-label">Active Tasks</div>
+      <div id="task-list">
+        <div class="task-row">
+          <div class="task-status-dot queued"></div>
+          <div class="task-name">Connecting to dispatch…</div>
+          <div class="task-agent">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tasks-section" style="margin-top:32px;">
+      <div class="section-label">Agent Roster</div>
+      <div class="hive-grid" id="agent-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js + WebXR -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

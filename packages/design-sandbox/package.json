@@ -1,0 +1,37 @@
+{
+    "name": "@inception/design-sandbox",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Interactive Sandbox for validating themes and components",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsup src/index.ts --format esm,cjs --dts --external react",
+        "dev": "tsup src/index.ts --format esm,cjs --dts --external react --watch",
+        "lint": "eslint src/"
+    },
+    "dependencies": {
+        "@inception/ui": "workspace:*",
+        "@inception/theme-engine": "workspace:*"
+    },
+    "peerDependencies": {
+        "react": ">=18",
+        "react-dom": ">=18"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tsup": "^8.0.2",
+        "typescript": "^5.3.3"
+    }
+}

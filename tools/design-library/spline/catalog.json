@@ -1,0 +1,24 @@
+{
+  "name": "Spline",
+  "url": "https://spline.design",
+  "account": {
+    "status": "Logged In",
+    "workspace": "operator's Workspace",
+    "plan": "Free Tier"
+  },
+  "features": [
+    "3D Web Design",
+    "2D Web Design",
+    "AI 3D Generation",
+    "React Integration (<Spline scene='url' />)",
+    "Interactive State Machines",
+    "Physics & Materials"
+  ],
+  "community_examples": [
+    "Distorting Typography",
+    "Retrofuturism - BG animation",
+    "Boxes Hover",
+    "Physics Interactions",
+    "Glassmorphism"
+  ]
+}

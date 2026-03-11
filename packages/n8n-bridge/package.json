@@ -1,0 +1,24 @@
+{
+    "name": "@wholetrout/n8n-bridge",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.27.1",
+        "@types/express": "^5.0.6",
+        "express": "^5.2.1"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "vitest": "^1.0.0"
+    },
+    "bin": {
+        "n8n-bridge-mcp": "./dist/mcp-server.js"
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "@inception/god-prompt",
+    "version": "1.0.0-genesis",
+    "description": "GOD PROMPT â€” One-sentence multimodal creative pipeline powered by Genkit",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsx watch src/index.ts",
+        "test": "echo \"No tests defined\"",
+        "flows": "tsx src/start-flows.ts"
+    },
+    "dependencies": {
+        "@fal-ai/client": "^1.2.0",
+        "@genkit-ai/google-genai": "^1.0.0",
+        "axios": "^1.6.0",
+        "cors": "^2.8.6",
+        "dotenv": "^16.4.0",
+        "express": "^5.2.1",
+        "genkit": "^1.0.0",
+        "playwright": "^1.58.2",
+        "sharp": "^0.33.0",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "@inception/tsconfig": "workspace:*",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/node": "^20.0.0",
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.0",
+        "vitest": "^1.2.0"
+    }
+}

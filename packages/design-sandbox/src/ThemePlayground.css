@@ -1,0 +1,235 @@
+/* packages/design-sandbox/src/ThemePlayground.css */
+/* Extracted static styles from ThemePlayground.tsx */
+
+.tp-root {
+  font-family: var(--inc-font-family-body, system-ui);
+  background: var(--inc-color-surface-base);
+  color: var(--inc-color-text-primary);
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.tp-header {
+  margin-bottom: 24px;
+}
+
+.tp-title {
+  margin: 0 0 4px;
+  font-size: var(--inc-font-size-2xl);
+  font-weight: var(--inc-font-weight-bold);
+}
+
+.tp-subtitle {
+  margin: 0;
+  color: var(--inc-color-text-secondary);
+  font-size: var(--inc-font-size-sm);
+}
+
+/* ── Theme Switcher ──────────────────────────────────────────── */
+.tp-theme-switcher {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.tp-theme-btn {
+  padding: 8px 16px;
+  border-radius: var(--inc-radius-full);
+  font-size: var(--inc-font-size-sm);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.tp-theme-btn--active {
+  border: 2px solid var(--inc-color-primary);
+  background: var(--inc-color-primary-subtle);
+  color: var(--inc-color-primary);
+  font-weight: 600;
+}
+
+.tp-theme-btn--default {
+  border: 1px solid var(--inc-color-border-default);
+  background: var(--inc-color-surface-overlay);
+  color: var(--inc-color-text-secondary);
+  font-weight: 400;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────── */
+.tp-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--inc-color-border-default);
+  padding-bottom: 0;
+}
+
+.tp-tab-btn {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  font-size: var(--inc-font-size-sm);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.tp-tab-btn--active {
+  border-bottom: 2px solid var(--inc-color-primary);
+  color: var(--inc-color-primary);
+  font-weight: 600;
+}
+
+.tp-tab-btn--default {
+  border-bottom: 2px solid transparent;
+  color: var(--inc-color-text-secondary);
+  font-weight: 400;
+}
+
+/* ── Token List ──────────────────────────────────────────────── */
+.tp-token-list {
+  max-width: 600px;
+}
+
+.tp-token-list-header {
+  margin-bottom: 8px;
+}
+
+.tp-token-count {
+  font-size: var(--inc-font-size-xs);
+  color: var(--inc-color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tp-empty-msg {
+  color: var(--inc-color-text-secondary);
+  font-size: var(--inc-font-size-sm);
+}
+
+/* ── Token Row ───────────────────────────────────────────────── */
+.tp-token-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--inc-color-border-subtle);
+}
+
+.tp-token-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid var(--inc-color-border-default);
+  flex-shrink: 0;
+  /* background is the live token value — set via --token-swatch-bg on the row */
+  background: var(--token-swatch-bg, transparent);
+}
+
+.tp-token-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tp-token-name {
+  font-size: var(--inc-font-size-xs);
+  color: var(--inc-color-text-secondary);
+  display: block;
+}
+
+.tp-token-value {
+  font-size: var(--inc-font-size-sm);
+  color: var(--inc-color-text-primary);
+}
+
+/* ── Contrast Checker ────────────────────────────────────────── */
+.tp-contrast-card {
+  padding: 16px;
+  background: var(--inc-color-surface-overlay);
+  border-radius: var(--inc-radius-lg);
+  border: 1px solid var(--inc-color-border-default);
+}
+
+.tp-contrast-title {
+  margin: 0 0 12px;
+  font-size: var(--inc-font-size-base);
+  font-weight: var(--inc-font-weight-semibold);
+  color: var(--inc-color-text-primary);
+}
+
+.tp-contrast-inputs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.tp-contrast-label {
+  flex: 1;
+}
+
+.tp-contrast-label-text {
+  font-size: var(--inc-font-size-xs);
+  color: var(--inc-color-text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.tp-color-input {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid var(--inc-color-border-default);
+  cursor: pointer;
+}
+
+.tp-color-code {
+  font-size: var(--inc-font-size-xs);
+  color: var(--inc-color-text-tertiary);
+}
+
+/* Preview block — bg/fg are dynamic (color picker values), consumed via CSS vars */
+.tp-contrast-preview {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: var(--preview-bg, transparent);
+  color: var(--preview-fg, inherit);
+}
+
+.tp-contrast-preview-heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tp-contrast-preview-body {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Result row */
+.tp-contrast-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tp-contrast-ratio {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--inc-color-text-primary);
+}
+
+/* Badge bg is dynamic (per level) — consumed via --badge-bg CSS var */
+.tp-contrast-badge {
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--badge-bg, #6B7280);
+}
+
+.tp-contrast-hint {
+  font-size: var(--inc-font-size-xs);
+  color: var(--inc-color-text-secondary);
+}

@@ -1,0 +1,59 @@
+# COMET Vision — visionOS App
+# Creative Liberation Engine v5 | Phase G
+
+# ── Info.plist keys ─────────────────────────────────────────────────────────
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSPrivacyManifestDescription</key>
+    <string>COMET Vision browser connects to the self-hosted GENESIS gateway to execute spatial tasks.</string>
+
+    <!-- Allow arbitrary loads to the local GENESIS gateway -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>localhost</key>
+            <dict>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- Immersive space + hand tracking -->
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <true/>
+    </dict>
+
+    <key>NSHandsTrackingUsageDescription</key>
+    <string>COMET uses hand tracking to enable spatial interaction with the SMG node graph in immersive mode.</string>
+
+    <key>NSWorldSensingUsageDescription</key>
+    <string>COMET uses world sensing to anchor SMG nodes in your physical space during immersive execution.</string>
+
+    <!-- VisionOS 1.2+ -->
+    <key>MinimumOSVersion</key>
+    <string>1.2</string>
+
+    <!-- COMET Gateway URL — override via xcconfig or env for deployment -->
+    <key>COMET_GATEWAY_URL</key>
+    <string>http://localhost:3080</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>COMET</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.wholetrooutmedia.inception.comet-vision</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>5.1.0</string>
+</dict>
+</plist>

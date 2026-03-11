@@ -1,0 +1,116 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# COMET C1 — NAS Always-On Autonomous Browser Agent
+# Dockerfile for packages/inception-browser
+#
+# This produces a headless Playwright/Chromium container that:
+#   - Self-registers with the Dispatch Server as agent_id: comet-C1
+#   - Exposes an MCP SSE endpoint on :7200 for Creative Liberation Engine to connect
+#   - Runs 24/7 on NAS with persistent SQLite session memory
+#   - Tags itself with ["nas-persistent", "stealth", "web-research"]
+#
+# Build: docker compose -f docker-compose.genesis.yml build comet-c1
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Stage 1: Dependencies ─────────────────────────────────────────────────────
+FROM node:20-slim AS deps
+
+# Install Playwright system dependencies (Chromium + fonts + libs)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Chromium runtime dependencies
+    chromium \
+    chromium-sandbox \
+    # Font rendering (for proper page layout)
+    fonts-noto-color-emoji \
+    fonts-noto-cjk \
+    libfreetype6 \
+    libfontconfig1 \
+    # X11 / display (virtual framebuffer)
+    xvfb \
+    # Network tools
+    curl \
+    wget \
+    # Cleanup
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy workspace manifests for dependency install
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/inception-browser/package.json ./packages/inception-browser/
+
+# Install pnpm
+RUN npm install -g pnpm@9 --quiet
+
+# Install only inception-browser dependencies
+RUN pnpm --filter @inception/inception-browser install --frozen-lockfile --prod
+
+# ── Stage 2: Build ────────────────────────────────────────────────────────────
+FROM deps AS builder
+
+# Install dev dependencies for build
+RUN pnpm --filter @inception/inception-browser install --frozen-lockfile
+
+COPY packages/inception-browser/ ./packages/inception-browser/
+
+RUN pnpm --filter @inception/inception-browser build
+
+# ── Stage 3: Production Runtime ───────────────────────────────────────────────
+FROM node:20-slim AS runtime
+
+# Runtime system deps only
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium \
+    chromium-sandbox \
+    fonts-noto-color-emoji \
+    fonts-noto-cjk \
+    libfreetype6 \
+    libfontconfig1 \
+    xvfb \
+    curl \
+    dumb-init \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security (Chromium sandbox requires this)
+RUN groupadd -r comet && useradd -r -g comet -G audio,video comet \
+    && mkdir -p /home/comet/Downloads /app/data \
+    && chown -R comet:comet /home/comet /app
+
+WORKDIR /app
+
+# Copy built artifact + production node_modules
+COPY --from=builder --chown=comet:comet /app/packages/inception-browser/dist ./packages/inception-browser/dist
+COPY --from=builder --chown=comet:comet /app/packages/inception-browser/package.json ./packages/inception-browser/
+COPY --from=deps    --chown=comet:comet /app/node_modules ./node_modules
+COPY --from=deps    --chown=comet:comet /app/packages/inception-browser/node_modules ./packages/inception-browser/node_modules
+
+# Playwright will use the system Chromium (not download its own)
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+ENV PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
+
+# ── Environment defaults (override via docker-compose) ────────────────────────
+ENV NODE_ENV=production
+ENV COMET_AGENT_ID=comet-C1
+ENV COMET_WINDOW=C1
+ENV COMET_WORKSTREAM=comet-browser
+ENV COMET_CAPABILITIES=nas-persistent,web-research,stealth,dispatch-worker
+ENV COMET_HEADLESS=true
+ENV COMET_PORT=7200
+ENV COMET_MEMORY_DIR=/app/data/sessions
+ENV DISPATCH_URL=http://dispatch:5050
+ENV GENKIT_URL=http://genkit:4000
+
+# ── Health + data volumes ─────────────────────────────────────────────────────
+VOLUME ["/app/data"]
+
+EXPOSE 7200
+
+USER comet
+
+# Use dumb-init to handle signals cleanly (important for graceful browser shutdown)
+ENTRYPOINT ["dumb-init", "--"]
+
+# Start Xvfb virtual display, then launch the MCP SSE server
+CMD ["/bin/sh", "-c", \
+    "Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp &\n \
+     export DISPLAY=:99\n \
+     node /app/packages/inception-browser/dist/server-sse.js"]

@@ -1,0 +1,9 @@
+{
+  "name": "@inception/fly-mesh",
+  "version": "1.0.0",
+  "description": "Creative Liberation Engine — Fly.io Lightweight Mesh Node",
+  "main": "src/server.js",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Designing an Agentic OS for the Day Brain Emulation Ships — Inception Engine</title>
+  <meta name="description" content="Why we built Inception Engine's model routing layer to be bio-emulation ready — and why that bet matters for the next decade of AI." />
+  <meta property="og:title" content="Designing an Agentic OS for the Day Brain Emulation Ships" />
+  <meta property="og:description" content="In March 2026, Eon Systems uploaded the first embodied brain. Our routing layer was already waiting." />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="neural-canvas" aria-hidden="true"></canvas>
+
+  <nav class="nav" role="navigation" aria-label="Site navigation">
+    <div class="nav-inner">
+      <span class="nav-logo">INCEPTION ENGINE</span>
+      <div class="nav-links">
+        <a href="#architecture">Architecture</a>
+        <a href="#neuron-pipeline">The Bet</a>
+        <a href="#partner" class="nav-cta">Partner →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-meta">
+        <span class="tag">Research Brief</span>
+        <time datetime="2026-03-11">March 11, 2026</time>
+      </div>
+      <h1 id="hero-heading">
+        Designing an Agentic OS<br />
+        <span class="hero-accent">for the Day Brain Emulation Ships</span>
+      </h1>
+      <p class="hero-sub">
+        In March 2026, Eon Systems uploaded the first embodied brain —
+        140,000 neurons, 50 million synapses, 91% behavioral accuracy,
+        zero reinforcement learning. Our routing layer was already waiting for it.
+        Here's why that matters.
+      </p>
+      <div class="hero-stats" role="list">
+        <div class="stat" role="listitem">
+          <span class="stat-val" id="stat-neurons">140K</span>
+          <span class="stat-label">neurons emulated</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-val">91%</span>
+          <span class="stat-label">bio-fidelity</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-val" id="stat-status">PENDING</span>
+          <span class="stat-label">eon-bio provider</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Discovery -->
+    <section class="section" aria-labelledby="discovery-heading">
+      <h2 id="discovery-heading">The Discovery</h2>
+      <p>
+        Every agentic system being built right now — ours included — routes tasks to LLMs.
+        Large language models that learned statistical patterns from text.
+        They are remarkable. They are also not how biological brains work.
+      </p>
+      <p>
+        Eon Systems is doing something categorically different. They are reconstructing
+        biological neural circuits at full resolution — electron microscopy at the nanometer scale —
+        and running those circuits in physics simulation. The fruit fly brain they uploaded
+        in March 2026 does not <em>predict</em> what a fly would do.
+        It <em>does</em> what the fly does, because it <em>is</em> the fly's brain,
+        running in a MuJoCo physics engine.
+      </p>
+      <p>
+        Their advisory board includes Stephen Wolfram. George Church.
+        Robin Hanson. Dr. Alex Wissner-Gross — the co-founder, who put it plainly:
+      </p>
+      <blockquote>
+        "This is not an animation or reinforcement learning mimicking biology.
+        This is a direct copy of a biological brain running in simulation."
+      </blockquote>
+      <p>
+        Within two years, they target a mouse brain. 70 million neurons.
+        The long-term mission: digital human intelligence.
+      </p>
+    </section>
+
+    <!-- The Architecture -->
+    <section class="section" id="architecture" aria-labelledby="arch-heading">
+      <h2 id="arch-heading">How We Built For This</h2>
+      <p>
+        Inception Engine's model routing layer — the <code>model-arbitrage</code> package —
+        was designed from day one to be model-agnostic. Not "model-agnostic" in the marketing sense,
+        where it means "we support GPT-4 and Claude." Model-agnostic in the foundational sense:
+        any intelligence substrate that can accept a structured input and return structured output
+        can be registered as a provider.
+      </p>
+
+      <div class="code-block" role="region" aria-label="Model registry YAML excerpt">
+        <div class="code-header">
+          <span>model-registry.yaml</span>
+          <span class="code-badge">LIVE</span>
+        </div>
+        <pre><code><span class="c"># Eon Systems — Brain Emulation Runtime</span>
+<span class="c"># Forward-declared. Activates when EON_BIO_API_KEY is present.</span>
+eon-bio:
+  name: Eon Systems — Brain Emulation Runtime
+  api_base: https://api.eon.systems/v1
+  auth_env: EON_BIO_API_KEY
+  models:
+    drosophila-v1:
+      bio_fidelity: <span class="v">91</span>
+      neuron_count: <span class="v">140000</span>
+      synapse_count: <span class="v">50000000</span>
+      physics_engine: <span class="v">mujoco</span>
+      status: <span class="p">pending</span>
+
+<span class="c"># Bio-emulation tier — activates when key is present</span>
+tier_defaults:
+  bio-emulation: [eon-bio/drosophila-v1]</code></pre>
+      </div>
+
+      <p>
+        This is already in production. It is not a mock. The routing circuit breaker
+        returns gracefully when <code>EON_BIO_API_KEY</code> is absent —
+        exactly the same pattern we use for every provider that isn't yet configured.
+        The moment Eon Systems makes their API available to research partners,
+        AVERI's routing layer starts sending tasks there automatically.
+      </p>
+      <p>
+        No retrofitting. No architectural debt. One environment variable.
+      </p>
+    </section>
+
+    <!-- The Neuron Pipeline -->
+    <section class="section neuron-vis-section" id="neuron-pipeline" aria-labelledby="pipeline-heading">
+      <h2 id="pipeline-heading">The Neuron Pipeline</h2>
+      <p>
+        Here is what the routing architecture looks like when a bio-emulation task arrives
+        inside Inception Engine's dispatch system:
+      </p>
+
+      <div class="pipeline" role="list">
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <strong>Task Arrives</strong>
+            <span>AVERI dispatch receives a task with <code>task_affinity: bio-emulation</code></span>
+          </div>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">↓</div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <strong>Capability Router</strong>
+            <span>CapabilityRouter scores all registered providers, selects <code>eon-bio/drosophila-v1</code></span>
+          </div>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">↓</div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <strong>EonBioAdapter</strong>
+            <span>Injects sensory stimulus into the neural circuit. Physics sim fires.</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">↓</div>
+        <div class="pipeline-step active" role="listitem">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <strong>Emergent Output</strong>
+            <span>Behavioral response returns. Not predicted — <em>emerged</em> from 140k neurons.</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">↓</div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <strong>SCRIBE Memory</strong>
+            <span>Interaction written to persistent memory with bio_fidelity metadata.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why It Matters -->
+    <section class="section" aria-labelledby="matters-heading">
+      <h2 id="matters-heading">Why The Next 5 Years Are Won Now</h2>
+      <p>
+        Every AI company that exists today is going to need to answer this question
+        when bio-emulation becomes production-ready: how do we route tasks to biological intelligence?
+        The API layer that connects agentic systems to neural emulation does not exist yet.
+        The architectural pattern for it — provider abstraction, capability routing, bio-fidelity scoring —
+        we designed it. It is in the codebase. It is deployed.
+      </p>
+      <div class="timeline" role="list">
+        <div class="timeline-item" role="listitem">
+          <span class="tl-year">2026</span>
+          <span class="tl-event">Drosophila brain emulation live. Inception Engine provider tier forward-declared. Partnership outreach initiated.</span>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <span class="tl-year">2027</span>
+          <span class="tl-event">Mouse brain emulation ships (~70M neurons). CLE flips <code>status: active</code>. First production bio-emulation inference in an agentic OS.</span>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <span class="tl-year">2028–29</span>
+          <span class="tl-event">Bio-emulation enters enterprise. Inception Engine is the infrastructure layer — every company routes through us.</span>
+        </div>
+        <div class="timeline-item future" role="listitem">
+          <span class="tl-year">2030+</span>
+          <span class="tl-event">Human-scale emulation roadmap. CLE is already in production with their stack. First mover advantage compounding.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partner CTA -->
+    <section class="section partner-section" id="partner" aria-labelledby="partner-heading">
+      <h2 id="partner-heading">Build With Us</h2>
+      <p>
+        If you work at Eon Systems, EON Reality, or are building at the frontier of
+        biological intelligence — we want to talk.
+        Inception Engine is a production agentic OS, not a demo.
+        We are looking for research partners, not vendors.
+      </p>
+      <div class="partner-contacts">
+        <a href="mailto:contact@eon.systems?subject=Inception%20Engine%20%E2%80%94%20Research%20Integration%20Partnership&body=Hi%20Eon%20Systems%20team%2C%0A%0AI%20build%20Inception%20Engine%2C%20a%20sovereign%20agentic%20OS.%20We%20have%20forward-declared%20your%20bio-emulation%20runtime%20as%20a%20provider%20tier%20in%20our%20model%20routing%20layer.%20When%20your%20API%20is%20available%2C%20we%27re%20ready%20to%20connect.%0A%0AOpen%20to%20a%20conversation%20about%20a%20research%20integration%20partnership%3F%0A%0A%E2%80%94%20Justin%20Aharoni" class="contact-card primary" id="contact-eon-systems">
+          <span class="contact-org">Eon Systems</span>
+          <span class="contact-type">Research Integration Partnership</span>
+          <span class="contact-email">contact@eon.systems →</span>
+        </a>
+        <a href="mailto:partnerships@eonreality.com?subject=EON%20AI%20Ventures%20Partnership%20Program%20%E2%80%94%20Inception%20Engine" class="contact-card" id="contact-eon-reality">
+          <span class="contact-org">EON Reality</span>
+          <span class="contact-type">Spatial AI Orchestration</span>
+          <span class="contact-email">partnerships@eonreality.com →</span>
+        </a>
+      </div>
+      <p class="partner-note">
+        Built by <strong>The Operator</strong> with the AVERI agent collective.
+        The Inception Engine is open for research collaboration.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Inception Engine v5 · Creative Liberation Engine</span>
+      <span class="footer-status">
+        <span class="status-dot" id="bio-status-dot" aria-hidden="true"></span>
+        <span id="bio-status-text">eon-bio: checking...</span>
+      </span>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

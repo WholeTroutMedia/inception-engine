@@ -1,0 +1,226 @@
+{
+    "last_node_id": 8,
+    "last_link_id": 8,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "image": "concept_art.png"
+            }
+        },
+        {
+            "id": 2,
+            "type": "ImageRemoveBackground",
+            "pos": [
+                500,
+                100
+            ],
+            "inputs": {
+                "image": [
+                    "1",
+                    0
+                ],
+                "model": "birefnet-general"
+            }
+        },
+        {
+            "id": 3,
+            "type": "CRMLoader",
+            "pos": [
+                100,
+                300
+            ],
+            "inputs": {
+                "crm_model": "CRM-base.pth"
+            }
+        },
+        {
+            "id": 4,
+            "type": "CRMPreprocessor",
+            "pos": [
+                900,
+                100
+            ],
+            "inputs": {
+                "image": [
+                    "2",
+                    0
+                ],
+                "mask": [
+                    "2",
+                    1
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "CRMPostSampler",
+            "pos": [
+                1300,
+                100
+            ],
+            "inputs": {
+                "crm_model": [
+                    "3",
+                    0
+                ],
+                "preprocessed_image": [
+                    "4",
+                    0
+                ],
+                "num_views": 6
+            }
+        },
+        {
+            "id": 6,
+            "type": "CCMSampler",
+            "pos": [
+                1700,
+                100
+            ],
+            "inputs": {
+                "crm_model": [
+                    "3",
+                    0
+                ],
+                "views": [
+                    "5",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "CRMModeler",
+            "pos": [
+                2100,
+                100
+            ],
+            "inputs": {
+                "crm_model": [
+                    "3",
+                    0
+                ],
+                "views": [
+                    "5",
+                    0
+                ],
+                "normals": [
+                    "6",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "Save3DMesh",
+            "pos": [
+                2500,
+                100
+            ],
+            "inputs": {
+                "filename_prefix": "crm_3d_asset_v1",
+                "format": "glb",
+                "mesh": [
+                    "7",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            2,
+            0,
+            "IMAGE"
+        ],
+        [
+            2,
+            2,
+            0,
+            4,
+            0,
+            "IMAGE"
+        ],
+        [
+            3,
+            2,
+            1,
+            4,
+            1,
+            "MASK"
+        ],
+        [
+            4,
+            3,
+            0,
+            5,
+            0,
+            "CRM_MODEL"
+        ],
+        [
+            5,
+            4,
+            0,
+            5,
+            1,
+            "PREPROCESSED_IMAGE"
+        ],
+        [
+            6,
+            3,
+            0,
+            6,
+            0,
+            "CRM_MODEL"
+        ],
+        [
+            7,
+            5,
+            0,
+            6,
+            1,
+            "VIEWS"
+        ],
+        [
+            8,
+            3,
+            0,
+            7,
+            0,
+            "CRM_MODEL"
+        ],
+        [
+            9,
+            5,
+            0,
+            7,
+            1,
+            "VIEWS"
+        ],
+        [
+            10,
+            6,
+            0,
+            7,
+            2,
+            "NORMALS"
+        ],
+        [
+            11,
+            7,
+            0,
+            8,
+            0,
+            "MESH"
+        ]
+    ]
+}

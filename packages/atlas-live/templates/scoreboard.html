@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scoreboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            background: transparent;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        #scoreboard {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            display: flex;
+            align-items: stretch;
+            min-width: 600px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+        }
+
+        #scoreboard.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: rgba(10, 10, 15, 0.94);
+            padding: 12px 20px;
+        }
+
+        .team-badge {
+            width: 48px;
+            height: 48px;
+            background: var(--team-color, #b87333);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            flex-shrink: 0;
+            margin-right: 14px;
+        }
+
+        .team-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .score-block {
+            background: var(--team-color, #b87333);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 64px;
+        }
+
+        .score-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+
+        .divider {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .divider-period {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider-time {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .score-updated {
+            animation: score-flash 0.5s ease;
+        }
+
+        @keyframes score-flash {
+
+            0%,
+            100% {
+                background: var(--team-color, #b87333);
+            }
+
+            50% {
+                background: white;
+                filter: brightness(2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scoreboard">
+        <div class="team" style="--team-color: var(--home-color, #1a3a7c);">
+            <div class="team-badge" id="home-badge">H</div>
+            <div class="team-name" id="f0">HOME</div>
+        </div>
+        <div class="score-block" id="home-score-block" style="--team-color: var(--home-color, #1a3a7c);">
+            <div class="score-value" id="f1">0</div>
+        </div>
+        <div class="divider">
+            <div class="divider-period" id="f4">Q1</div>
+            <div class="divider-time" id="f5">12:00</div>
+        </div>
+        <div class="score-block" id="away-score-block" style="--team-color: var(--away-color, #c41e3a);">
+            <div class="score-value" id="f2">0</div>
+        </div>
+        <div class="team" style="--team-color: var(--away-color, #c41e3a);">
+            <div class="team-name" id="f3">AWAY</div>
+            <div class="team-badge" id="away-badge" style="margin-left: 14px; margin-right: 0;">A</div>
+        </div>
+    </div>
+
+    <script>
+        let prevHome = 0, prevAway = 0;
+
+        function update(data) {
+            if (data.f0) document.getElementById('f0').textContent = data.f0;
+            if (data.f1) {
+                const newScore = data.f1;
+                if (newScore !== String(prevHome)) {
+                    const el = document.getElementById('home-score-block');
+                    el.classList.remove('score-updated');
+                    void el.offsetWidth; // reflow
+                    el.classList.add('score-updated');
+                    prevHome = parseInt(newScore);
+                }
+                document.getElementById('f1').textContent = newScore;
+            }
+            if (data.f2) {
+                const newScore = data.f2;
+                if (newScore !== String(prevAway)) {
+                    const el = document.getElementById('away-score-block');
+                    el.classList.remove('score-updated');
+                    void el.offsetWidth;
+                    el.classList.add('score-updated');
+                    prevAway = parseInt(newScore);
+                }
+                document.getElementById('f2').textContent = newScore;
+            }
+            if (data.f3) document.getElementById('f3').textContent = data.f3;
+            if (data.f4) document.getElementById('f4').textContent = data.f4;
+            if (data.f5) document.getElementById('f5').textContent = data.f5;
+            if (data.home_color) document.documentElement.style.setProperty('--home-color', data.home_color);
+            if (data.away_color) document.documentElement.style.setProperty('--away-color', data.away_color);
+            if (data.home_abbr) document.getElementById('home-badge').textContent = data.home_abbr;
+            if (data.away_abbr) document.getElementById('away-badge').textContent = data.away_abbr;
+        }
+
+        function play() { document.getElementById('scoreboard').classList.add('visible'); }
+        function stop() {
+            const el = document.getElementById('scoreboard');
+            el.style.transition = 'transform 0.35s ease-in, opacity 0.3s ease';
+            el.classList.remove('visible');
+        }
+
+        window.update = (xml) => {
+            try {
+                const doc = new DOMParser().parseFromString(xml, 'text/xml');
+                const data = {};
+                doc.querySelectorAll('componentData').forEach(n => {
+                    const id = n.getAttribute('id');
+                    const value = n.querySelector('data')?.getAttribute('value');
+                    if (id && value !== null) data[id] = value;
+                });
+                update(data);
+            } catch (e) { console.error(e); }
+        };
+        window.play = play;
+        window.stop = stop;
+    </script>
+</body>
+
+</html>

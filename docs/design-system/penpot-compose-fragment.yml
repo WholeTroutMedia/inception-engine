@@ -1,0 +1,88 @@
+# Penpot — Creative Liberation Engine Design Tool (NAS)
+# DS-801: Self-hosted Penpot on Synology NAS
+# Add this to the main brainchild-v5 docker-compose.yml under services:
+
+penpot-frontend:
+  image: penpotapp/frontend:latest
+  container_name: penpot-frontend
+  restart: unless-stopped
+  ports:
+    - "9001:80"
+  environment:
+    PENPOT_FLAGS: "enable-registration enable-login-with-password disable-email-verification disable-smtp"
+  networks:
+    - inception-net
+  depends_on:
+    - penpot-backend
+    - penpot-exporter
+  labels:
+    - "com.inception.service=design-tool"
+    - "com.inception.component=penpot"
+
+penpot-backend:
+  image: penpotapp/backend:latest
+  container_name: penpot-backend
+  restart: unless-stopped
+  volumes:
+    - penpot-data:/app/data
+  environment:
+    PENPOT_FLAGS: "enable-registration enable-login-with-password disable-email-verification disable-smtp"
+    PENPOT_DATABASE_URI: "postgresql://penpot-postgres/penpot"
+    PENPOT_DATABASE_USERNAME: penpot
+    PENPOT_DATABASE_PASSWORD: "${PENPOT_DB_PASSWORD:-penpot_secret}"
+    PENPOT_REDIS_URI: "redis://penpot-redis/0"
+    PENPOT_PUBLIC_URI: "http://nas.local:9001"
+    PENPOT_STORAGE_BACKEND: fs
+    PENPOT_STORAGE_FS_DIRECTORY: /app/data/assets
+    PENPOT_TELEMETRY_ENABLED: "false"
+  networks:
+    - inception-net
+  depends_on:
+    - penpot-postgres
+    - penpot-redis
+
+penpot-exporter:
+  image: penpotapp/exporter:latest
+  container_name: penpot-exporter
+  restart: unless-stopped
+  environment:
+    PENPOT_PUBLIC_URI: "http://penpot-frontend:80"
+    BROWSER_VERBOSE: "false"
+  networks:
+    - inception-net
+
+penpot-postgres:
+  image: postgres:15-alpine
+  container_name: penpot-postgres
+  restart: unless-stopped
+  environment:
+    POSTGRES_DB: penpot
+    POSTGRES_USER: penpot
+    POSTGRES_PASSWORD: "${PENPOT_DB_PASSWORD:-penpot_secret}"
+  volumes:
+    - penpot-postgres-data:/var/lib/postgresql/data
+  networks:
+    - inception-net
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U penpot"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+
+penpot-redis:
+  image: redis:7-alpine
+  container_name: penpot-redis
+  restart: unless-stopped
+  networks:
+    - inception-net
+
+# ─── Volumes to add to the volumes: section ──────────────────────────────────
+# penpot-data:
+# penpot-postgres-data:
+
+# ─── After deploy ─────────────────────────────────────────────────────────────
+# 1. Navigate to http://nas.local:9001
+# 2. Register with your Creative Liberation Engine admin email
+# 3. Create "Inception Design System" team
+# 4. Run: pnpm --filter @inception/design-tokens penpot:push
+#    This syncs all tokens to the Penpot shared library

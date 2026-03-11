@@ -1,0 +1,29 @@
+{
+    "name": "pulse-studio",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --port 5175",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@deepgram/sdk": "^5.0.0",
+        "@fal-ai/serverless-client": "^0.15.0",
+        "date-fns": "^3.6.0",
+        "elevenlabs": "^1.59.0",
+        "framer-motion": "^12.35.0",
+        "lucide-react": "^0.577.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^4.3.4",
+        "typescript": "~5.9.3",
+        "vite": "^5.4.11"
+    }
+}

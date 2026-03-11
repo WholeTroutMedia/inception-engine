@@ -1,0 +1,25 @@
+{
+  "name": "RunwayML",
+  "url": "https://app.runwayml.com",
+  "category": "Generative Video Hub",
+  "account": {
+    "status": "Logged In",
+    "credits": 1685
+  },
+  "editing_suite": {
+    "name": "Generative Session",
+    "models": [
+      "Gen-4.5",
+      "Runway Characters",
+      "Kling 3.0",
+      "Nano Banana 2"
+    ],
+    "features": [
+      "Image Reference Management",
+      "Motion Sketch",
+      "Character Render",
+      "Timeline editing"
+    ],
+    "workflow": "A centralized hub where users compose shots using multiple state-of-the-art models inside a unified session, reusing image references for character consistency."
+  }
+}

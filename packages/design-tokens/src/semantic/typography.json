@@ -1,0 +1,193 @@
+{
+    "typography": {
+        "scale": {
+            "hero": {
+                "fontSize": {
+                    "$value": "{font.size.4xl}",
+                    "$type": "dimension",
+                    "description": "Hero / splash heading font size"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.tight}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.bold}",
+                    "$type": "fontWeight"
+                },
+                "description": "Hero / splash headings"
+            },
+            "h1": {
+                "fontSize": {
+                    "$value": "{font.size.4xl}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.tight}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.bold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "h2": {
+                "fontSize": {
+                    "$value": "{font.size.3xl}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.tight}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.semibold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "h3": {
+                "fontSize": {
+                    "$value": "{font.size.2xl}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.snug}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.semibold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "h4": {
+                "fontSize": {
+                    "$value": "{font.size.xl}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.snug}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.medium}",
+                    "$type": "fontWeight"
+                }
+            },
+            "body": {
+                "fontSize": {
+                    "$value": "{font.size.base}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.normal}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "bodySmall": {
+                "fontSize": {
+                    "$value": "{font.size.sm}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.normal}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "label": {
+                "fontSize": {
+                    "$value": "{font.size.sm}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.snug}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.medium}",
+                    "$type": "fontWeight"
+                }
+            },
+            "caption": {
+                "fontSize": {
+                    "$value": "{font.size.xs}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.normal}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "mono": {
+                "fontSize": {
+                    "$value": "{font.size.sm}",
+                    "$type": "dimension"
+                },
+                "fontFamily": {
+                    "$value": "{font.family.code}",
+                    "$type": "fontFamily"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.relaxed}",
+                    "$type": "number"
+                }
+            },
+            "buttonSm": {
+                "fontSize": {
+                    "$value": "{font.size.sm}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.snug}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.semibold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "buttonMd": {
+                "fontSize": {
+                    "$value": "{font.size.base}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{font.lineHeight.snug}",
+                    "$type": "number"
+                },
+                "fontWeight": {
+                    "$value": "{font.weight.semibold}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "family": {
+            "sans": {
+                "$value": "{font.family.body}",
+                "$type": "fontFamily",
+                "description": "Primary UI font"
+            },
+            "display": {
+                "$value": "{font.family.display}",
+                "$type": "fontFamily",
+                "description": "Headlines and display type"
+            },
+            "mono": {
+                "$value": "{font.family.code}",
+                "$type": "fontFamily",
+                "description": "Code, terminal, data"
+            }
+        }
+    }
+}

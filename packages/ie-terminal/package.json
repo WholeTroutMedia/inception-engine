@@ -1,0 +1,29 @@
+{
+    "name": "@wholetrout/ie-terminal",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "ie": "./dist/cli.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\"",
+        "start": "node dist/cli.js",
+        "repl": "node dist/cli.js repl"
+    },
+    "dependencies": {
+        "@inquirer/prompts": "^8.3.0",
+        "chalk": "^5.6.2",
+        "commander": "^12.1.0",
+        "node-fetch": "^3.3.2"
+    },
+    "devDependencies": {
+        "@types/node-fetch": "^2.6.13",
+        "typescript": "^5.0.0",
+        "vitest": "^1.0.0"
+    }
+}

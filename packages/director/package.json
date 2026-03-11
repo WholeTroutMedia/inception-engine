@@ -1,0 +1,24 @@
+{
+    "name": "@inception/director",
+    "version": "1.0.0",
+    "description": "Director Agent — autonomous codebase auditor that auto-populates the Creative Liberation Engine dispatch queue",
+    "type": "module",
+    "main": "dist/cron.js",
+    "types": "dist/cron.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/cron.js",
+        "dev": "tsx watch src/cron.ts",
+        "audit": "tsx src/auditor.ts",
+        "type-check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "node-cron": "^3.0.3"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/node-cron": "^3.0.11",
+        "tsx": "^4.0.0",
+        "typescript": "^5.3.0"
+    }
+}

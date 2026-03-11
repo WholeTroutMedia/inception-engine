@@ -137,8 +137,8 @@ Local IP in JS = unreachable from 5G.
 3. CORTEX transcribes + live-summarizes
 4. On close â†’ IDEATE + PLAN flows fire
 5. SHIP agents execute autonomously
-6. Validation link sent to Justin via email
-7. Justin approves â†’ client receives
+6. Validation link sent to Operator via email
+7. Operator approves â†’ client receives
 
 **Missing to complete this (March 9, 2026):**
 

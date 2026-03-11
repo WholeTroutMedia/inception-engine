@@ -1,0 +1,29 @@
+{
+  "name": "@inception/browser",
+  "version": "1.0.0",
+  "description": "Sovereign agentic browser MCP server for Creative Liberation Engine — 40+ tools, constitutional governance, VERA memory.",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "lint": "tsc --noEmit",
+    "smoke": "tsx tests/smoke.ts",
+    "install:browsers": "playwright install chromium"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "better-sqlite3": "^9.4.3",
+    "playwright": "^1.42.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

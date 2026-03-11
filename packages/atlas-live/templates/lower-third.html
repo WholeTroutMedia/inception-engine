@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lower Third</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            background: transparent;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        #lower-third {
+            position: absolute;
+            bottom: 120px;
+            left: 0;
+            display: flex;
+            align-items: stretch;
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #lower-third.visible {
+            transform: translateX(0);
+        }
+
+        .accent-bar {
+            width: 6px;
+            background: var(--accent, #b87333);
+            flex-shrink: 0;
+        }
+
+        .content {
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 16px 32px 16px 24px;
+            min-width: 420px;
+            border-right: 1px solid rgba(184, 115, 51, 0.3);
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 400;
+            color: #b87333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        .logo-area {
+            background: rgba(10, 10, 15, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 28px;
+            min-width: 100px;
+        }
+
+        .logo-text {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(245, 240, 232, 0.6);
+            writing-mode: initial;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="lower-third">
+        <div class="accent-bar"></div>
+        <div class="content">
+            <div class="name" id="f0">Guest Name</div>
+            <div class="title" id="f1">Title / Organization</div>
+        </div>
+        <div class="logo-area">
+            <div class="logo-text" id="f2">NBC</div>
+        </div>
+    </div>
+
+    <script>
+        // CasparCG Template Data API
+        function update(data) {
+            if (data.f0 !== undefined) document.getElementById('f0').textContent = data.f0;
+            if (data.f1 !== undefined) document.getElementById('f1').textContent = data.f1;
+            if (data.f2 !== undefined) document.getElementById('f2').textContent = data.f2;
+            if (data.accent) document.documentElement.style.setProperty('--accent', data.accent);
+        }
+
+        function play() {
+            document.getElementById('lower-third').classList.add('visible');
+        }
+
+        function stop() {
+            const el = document.getElementById('lower-third');
+            el.style.transition = 'transform 0.4s cubic-bezier(0.55, 0, 1, 0.45)';
+            el.classList.remove('visible');
+        }
+
+        // CasparCG template interface
+        if (window.top && window.top !== window) {
+            window.update = (xmlData) => {
+                try {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(xmlData, 'text/xml');
+                    const data = {};
+                    doc.querySelectorAll('componentData').forEach(node => {
+                        const id = node.getAttribute('id');
+                        const value = node.querySelector('data')?.getAttribute('value');
+                        if (id && value !== null) data[id] = value;
+                    });
+                    update(data);
+                } catch (e) {
+                    console.error('Template update error:', e);
+                }
+            };
+            window.play = play;
+            window.stop = stop;
+        }
+    </script>
+</body>
+
+</html>

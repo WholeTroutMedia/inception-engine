@@ -188,9 +188,9 @@ console.log(HIVES.AURORA.members);
 
 ---
 
-## Philosophy
+## Correspondence
 
-The engine is built on absolute transparency, compound intelligence, and complete user sovereignty. Every component is designed to run locally, learn from execution, and serve the operator without telemetry or external reliance.
+For correspondence, reach out to `operator@gmail.com`.
 
 > *"Artist liberation through sovereign technology."*
 

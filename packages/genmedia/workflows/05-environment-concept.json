@@ -1,0 +1,180 @@
+{
+    "last_node_id": 8,
+    "last_link_id": 8,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+        },
+        {
+            "id": 2,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "image": "depth_map_input.png"
+            }
+        },
+        {
+            "id": 3,
+            "type": "ControlNetLoader",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "control_net_name": "controlnet-depth-sdxl-1.0.safetensors"
+            }
+        },
+        {
+            "id": 4,
+            "type": "CLIPTextEncode",
+            "pos": [
+                400,
+                250
+            ],
+            "inputs": {
+                "text": "epic cinematic wide shot, vast alien landscape, neon glowing mega city, atmospheric mist, volumetric lighting, photorealistic 8k, Unreal Engine 5 render"
+            }
+        },
+        {
+            "id": 5,
+            "type": "EmptyLatentImage",
+            "pos": [
+                400,
+                400
+            ],
+            "inputs": {
+                "width": 1536,
+                "height": 640,
+                "batch_size": 1
+            }
+        },
+        {
+            "id": 6,
+            "type": "KSamplerAdvanced",
+            "pos": [
+                800,
+                250
+            ],
+            "inputs": {
+                "add_noise": "enable",
+                "noise_seed": 7777777,
+                "steps": 30,
+                "cfg": 6.5,
+                "sampler_name": "dpmpp_2m",
+                "scheduler": "karras",
+                "start_at_step": 0,
+                "end_at_step": 10000,
+                "return_with_leftover_noise": "disable",
+                "model": [
+                    "1",
+                    0
+                ],
+                "positive": [
+                    "4",
+                    0
+                ],
+                "negative": [
+                    ""
+                ],
+                "latent_image": [
+                    "5",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "VAEDecode",
+            "pos": [
+                1100,
+                250
+            ],
+            "inputs": {
+                "samples": [
+                    "6",
+                    0
+                ],
+                "vae": [
+                    "1",
+                    2
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "SaveImage",
+            "pos": [
+                1400,
+                250
+            ],
+            "inputs": {
+                "filename_prefix": "environment_concept_v1",
+                "images": [
+                    "7",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            6,
+            0,
+            "MODEL"
+        ],
+        [
+            2,
+            4,
+            0,
+            6,
+            1,
+            "CONDITIONING"
+        ],
+        [
+            3,
+            5,
+            0,
+            6,
+            3,
+            "LATENT"
+        ],
+        [
+            4,
+            6,
+            0,
+            7,
+            0,
+            "LATENT"
+        ],
+        [
+            5,
+            1,
+            2,
+            7,
+            1,
+            "VAE"
+        ],
+        [
+            6,
+            7,
+            0,
+            8,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

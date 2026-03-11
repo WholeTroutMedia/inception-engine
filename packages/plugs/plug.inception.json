@@ -1,0 +1,398 @@
+{
+    "plug_version": "1.0",
+    "description": "Official Creative Liberation Engine MCP Adapter Registry — THE PLUG",
+    "updated": "2026-03-04",
+    "adapters": [
+        {
+            "id": "stripe",
+            "name": "Stripe",
+            "category": "finance",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/stripe/server.js"
+            ],
+            "env_required": [
+                "STRIPE_SECRET_KEY"
+            ],
+            "agent_permissions": [
+                "COMMERCE",
+                "WARREN_BUFFETT",
+                "STUDIO",
+                "ZERO_DAY"
+            ],
+            "description": "Stripe billing: products, prices, customers, subscriptions, invoices, payment links"
+        },
+        {
+            "id": "linear",
+            "name": "Linear",
+            "category": "project_management",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/linear/server.js"
+            ],
+            "env_required": [
+                "LINEAR_API_KEY"
+            ],
+            "agent_permissions": [
+                "RELAY",
+                "SHOWRUNNER",
+                "SWITCHBOARD",
+                "ATHENA"
+            ],
+            "description": "Linear: issue creation, sprint management, project tracking, team assignments"
+        },
+        {
+            "id": "slack",
+            "name": "Slack",
+            "category": "communication",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/slack/server.js"
+            ],
+            "env_required": [
+                "SLACK_BOT_TOKEN"
+            ],
+            "agent_permissions": [
+                "RELAY",
+                "STUDIO",
+                "CONTROL_ROOM",
+                "SENTINEL"
+            ],
+            "description": "Slack: channel messaging, DMs, thread replies, file uploads, user lookup"
+        },
+        {
+            "id": "figma",
+            "name": "Figma",
+            "category": "design",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/figma/server.js"
+            ],
+            "env_required": [
+                "FIGMA_ACCESS_TOKEN"
+            ],
+            "agent_permissions": [
+                "AURORA",
+                "BOLT",
+                "IRIS",
+                "GOD_PROMPT"
+            ],
+            "description": "Figma: file reading, component extraction, asset export, variable inspection"
+        },
+        {
+            "id": "fal_ai",
+            "name": "FAL.ai",
+            "category": "generative_ai",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/fal_ai/server.js"
+            ],
+            "env_required": [
+                "FAL_KEY"
+            ],
+            "agent_permissions": [
+                "IRIS",
+                "AURORA",
+                "GOD_PROMPT",
+                "GRAPHICS"
+            ],
+            "description": "FAL.ai: Flux image generation, video gen, audio gen, 3D (Meshy), stable diffusion variants"
+        },
+        {
+            "id": "elevenlabs",
+            "name": "ElevenLabs",
+            "category": "generative_ai",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/elevenlabs/server.js"
+            ],
+            "env_required": [
+                "ELEVENLABS_API_KEY"
+            ],
+            "agent_permissions": [
+                "ATLAS",
+                "GRAPHICS",
+                "SHOWRUNNER",
+                "LANGUAGE",
+                "ZERO_DAY"
+            ],
+            "description": "ElevenLabs: TTS, voice cloning, real-time dubbing, voice design"
+        },
+        {
+            "id": "notion",
+            "name": "Notion",
+            "category": "knowledge",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@notionhq/notion-mcp-server"
+            ],
+            "env_required": [
+                "NOTION_INTEGRATION_TOKEN"
+            ],
+            "agent_permissions": [
+                "KEEPER",
+                "CODEX",
+                "SCRIBE",
+                "ECHO"
+            ],
+            "description": "Notion: page creation, database operations, search, block manipulation"
+        },
+        {
+            "id": "github",
+            "name": "GitHub",
+            "category": "development",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env_required": [
+                "GITHUB_TOKEN"
+            ],
+            "agent_permissions": [
+                "BOLT",
+                "COMET",
+                "ARCH",
+                "SYSTEMS",
+                "RELAY"
+            ],
+            "description": "GitHub: repos, PRs, issues, releases, actions, code search"
+        },
+        {
+            "id": "brave_search",
+            "name": "Brave Search",
+            "category": "intelligence",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-brave-search"
+            ],
+            "env_required": [
+                "BRAVE_API_KEY"
+            ],
+            "agent_permissions": [
+                "VERA",
+                "BROWSER",
+                "ATHENA",
+                "LEX",
+                "COSMOS"
+            ],
+            "description": "Brave Search: web search, news search, image search with privacy focus"
+        },
+        {
+            "id": "google_maps",
+            "name": "Google Maps",
+            "category": "location",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-google-maps"
+            ],
+            "env_required": [
+                "GOOGLE_MAPS_API_KEY"
+            ],
+            "agent_permissions": [
+                "STUDIO",
+                "COMMERCE",
+                "ATLAS",
+                "BROWSER"
+            ],
+            "description": "Google Maps: geocoding, places, directions, distance matrix"
+        },
+        {
+            "id": "twilio",
+            "name": "Twilio",
+            "category": "communication",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/twilio/server.js"
+            ],
+            "env_required": [
+                "TWILIO_ACCOUNT_SID",
+                "TWILIO_AUTH_TOKEN",
+                "TWILIO_FROM_NUMBER"
+            ],
+            "agent_permissions": [
+                "RELAY",
+                "STUDIO",
+                "CONTROL_ROOM",
+                "SENTINEL"
+            ],
+            "description": "Twilio: SMS, voice calls, WhatsApp, programmable notifications"
+        },
+        {
+            "id": "home_assistant",
+            "name": "Home Assistant",
+            "category": "physical",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@voiceflow/mcp-server-home-assistant"
+            ],
+            "env_required": [
+                "HASS_URL",
+                "HASS_TOKEN"
+            ],
+            "agent_permissions": [
+                "SYSTEMS",
+                "CONTROL_ROOM",
+                "ATLAS"
+            ],
+            "description": "Home Assistant: smart device control, automations, scene activation, sensor reading"
+        },
+        {
+            "id": "shopify",
+            "name": "Shopify",
+            "category": "ecommerce",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/shopify/server.js"
+            ],
+            "env_required": [
+                "SHOPIFY_STORE_DOMAIN",
+                "SHOPIFY_ACCESS_TOKEN"
+            ],
+            "agent_permissions": [
+                "COMMERCE",
+                "STUDIO",
+                "ZERO_DAY"
+            ],
+            "description": "Shopify: products, collections, orders, customers, inventory, storefront"
+        },
+        {
+            "id": "cal_com",
+            "name": "Cal.com",
+            "category": "scheduling",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/cal_com/server.js"
+            ],
+            "env_required": [
+                "CAL_API_KEY"
+            ],
+            "agent_permissions": [
+                "STUDIO",
+                "ZERO_DAY",
+                "RELAY"
+            ],
+            "description": "Cal.com: booking links, availability, meeting scheduling, calendar management"
+        },
+        {
+            "id": "resend",
+            "name": "Resend",
+            "category": "communication",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/resend/server.js"
+            ],
+            "env_required": [
+                "RESEND_API_KEY"
+            ],
+            "agent_permissions": [
+                "STUDIO",
+                "RELAY",
+                "ZERO_DAY",
+                "SHOWRUNNER"
+            ],
+            "description": "Resend: transactional email, React email templates, delivery tracking"
+        },
+        {
+            "id": "airtable",
+            "name": "Airtable",
+            "category": "knowledge",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/airtable/server.js"
+            ],
+            "env_required": [
+                "AIRTABLE_PERSONAL_ACCESS_TOKEN"
+            ],
+            "agent_permissions": [
+                "KEEPER",
+                "ECHO",
+                "COMMERCE",
+                "SCRIBE"
+            ],
+            "description": "Airtable: base read/write, record creation, formula fields, linked records"
+        },
+        {
+            "id": "youtube_data",
+            "name": "YouTube Data API",
+            "category": "intelligence",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/youtube/server.js"
+            ],
+            "env_required": [
+                "YOUTUBE_API_KEY"
+            ],
+            "agent_permissions": [
+                "VERA",
+                "ECHO",
+                "ATLAS",
+                "SHOWRUNNER"
+            ],
+            "description": "YouTube: video analytics, comment monitoring, channel data, search"
+        },
+        {
+            "id": "runway",
+            "name": "Runway ML",
+            "category": "generative_ai",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/runway/server.js"
+            ],
+            "env_required": [
+                "RUNWAY_API_SECRET"
+            ],
+            "agent_permissions": [
+                "IRIS",
+                "GOD_PROMPT",
+                "ATLAS",
+                "SHOWRUNNER"
+            ],
+            "description": "Runway: video generation (Gen-3), image-to-video, video inpainting"
+        },
+        {
+            "id": "quickbooks",
+            "name": "QuickBooks",
+            "category": "finance",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/quickbooks/server.js"
+            ],
+            "env_required": [
+                "QB_CLIENT_ID",
+                "QB_CLIENT_SECRET",
+                "QB_REFRESH_TOKEN",
+                "QB_REALM_ID"
+            ],
+            "agent_permissions": [
+                "WARREN_BUFFETT",
+                "MATH",
+                "STUDIO"
+            ],
+            "description": "QuickBooks: P&L, expenses, invoices, reports, accounts"
+        },
+        {
+            "id": "suno",
+            "name": "Suno AI",
+            "category": "generative_ai",
+            "command": "node",
+            "args": [
+                "packages/plugs/official/suno/server.js"
+            ],
+            "env_required": [
+                "SUNO_COOKIE"
+            ],
+            "agent_permissions": [
+                "ATLAS",
+                "GRAPHICS",
+                "GOD_PROMPT",
+                "IRIS"
+            ],
+            "description": "Suno: AI music generation with lyrics, custom styles, extensions"
+        }
+    ]
+}

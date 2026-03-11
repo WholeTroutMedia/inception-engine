@@ -1,0 +1,24 @@
+{
+    "gradient": {
+        "hard": {
+            "$value": "linear-gradient(135deg, {color.base.feedback.danger} 0%, #b91c1c 100%)",
+            "$type": "gradient",
+            "description": "Hard error or destructive action guardrail"
+        },
+        "soft": {
+            "$value": "linear-gradient(135deg, {color.base.feedback.warning} 0%, #a05e14 100%)",
+            "$type": "gradient",
+            "description": "Soft warning or caution guardrail"
+        },
+        "nudge": {
+            "$value": "linear-gradient(135deg, {color.base.brand.primary} 0%, {color.base.brand.secondary} 100%)",
+            "$type": "gradient",
+            "description": "Informational nudge or guidance"
+        },
+        "celebration": {
+            "$value": "linear-gradient(135deg, {color.base.feedback.success} 0%, {color.base.brand.primary} 100%)",
+            "$type": "gradient",
+            "description": "Success or milestone celebration"
+        }
+    }
+}

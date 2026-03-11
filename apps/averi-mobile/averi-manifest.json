@@ -1,0 +1,44 @@
+{
+    "name": "CORTEX — Creative Liberation Engine Community",
+    "short_name": "CORTEX",
+    "description": "Your WTM creative intelligence. Context-aware AI for E Is For Eat, Barnstorm, and Creative Liberation Engine.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0f",
+    "theme_color": "#0a0a0f",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/cortex-icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/cortex-icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/cortex-icon-180.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "apple-touch-icon"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "utilities"
+    ],
+    "shortcuts": [
+        {
+            "name": "E Is For Eat",
+            "url": "/?client=e-is-for-eat",
+            "description": "Switch to E Is For Eat context"
+        },
+        {
+            "name": "Barnstorm",
+            "url": "/?client=barnstorm",
+            "description": "Switch to Barnstorm context"
+        }
+    ]
+}

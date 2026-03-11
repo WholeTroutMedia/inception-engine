@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Drummondville Lifeline | Creative Liberation Engine</title>
+    <style>
+        :root {
+            --bg-color: #0d0f12;
+            --text-color: #e2e8f0;
+            --accent: #eab308;
+            --duration: 60s; /* Total duration */
+            --shot-duration: 10s; /* Standard time per shot */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Cinema 4:3 Container */
+        .cinema-container {
+            position: relative;
+            width: 100vw;
+            height: 75vw; /* 4:3 Aspect Ratio */
+            max-width: 1280px;
+            max-height: 960px;
+            background: #000;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border-radius: 12px; /* Slight rounding for web aesthetic */
+        }
+
+        @media (min-width: 1706px) {
+            .cinema-container {
+                width: 1280px;
+                height: 960px;
+            }
+        }
+
+        @media (max-width: 1280px) and (min-aspect-ratio: 4/3) {
+             .cinema-container {
+                height: 100vh;
+                width: 133.33vh; /* 4:3 Aspect Ratio constraint */
+             }
+        }
+
+        /* Shot Layer Setup */
+        .shot {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            visibility: hidden;
+            transform-origin: center center;
+        }
+
+        /* The Ken Burns & Fade Animations */
+        @keyframes playSequence {
+            0% { opacity: 0; visibility: hidden; transform: scale(1.0); }
+            5% { opacity: 1; visibility: visible; } /* Fade in */
+            95% { opacity: 1; visibility: visible; transform: scale(1.08); } /* Subtle Zoom over active time */
+            100% { opacity: 0; visibility: hidden; transform: scale(1.1); } /* Fade out */
+        }
+
+        /* Shot 1: The Fairmont */
+        .shot-1 {
+            background-image: url('quebec_2d_shot_1_1773200852875.png');
+            animation: playSequence 10s ease-in-out forwards;
+            animation-delay: 0s;
+        }
+
+        /* Shot 2: The Dinner */
+        .shot-2 {
+            background-image: url('quebec_2d_shot_2_1773200865171.png');
+            animation: playSequence 10s ease-in-out forwards;
+            animation-delay: 9s; /* 1 sec crossfade overlap */
+        }
+
+        /* Shot 3: The Breakdown / Tow Truck */
+        .shot-3 {
+            background-image: url('quebec_2d_shot_3_1773200875539.png');
+            animation: playSequence 10s ease-in-out forwards;
+            animation-delay: 18s; 
+            transform-origin: left center; /* Slight pan */
+        }
+
+        /* Shot 4: The Mechanic */
+        .shot-4 {
+            background-image: url('quebec_2d_shot_4_1773200891869.png');
+            animation: playSequence 10s ease-in-out forwards;
+            animation-delay: 27s;
+            transform-origin: bottom center;
+        }
+
+        /* Shot 5: The Ferry Race */
+        .shot-5 {
+            background-image: url('quebec_2d_shot_5_1773200905877.png');
+            animation: playSequence 10s ease-in-out forwards;
+            animation-delay: 36s;
+            transform-origin: center right;
+        }
+
+        /* Shot 6: Arriving Home */
+        .shot-6 {
+            background-image: url('quebec_2d_shot_6_1773200916826.png');
+            animation: playSequence 12s ease-in-out forwards; /* Hold slightly longer */
+            animation-delay: 45s;
+        }
+
+        /* Snow Overlay Effect Overlay */
+        .snow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="none"/><circle cx="10%" cy="10%" r="2" fill="white" opacity="0.8"/><circle cx="30%" cy="40%" r="1" fill="white" opacity="0.6"/><circle cx="50%" cy="20%" r="3" fill="white" opacity="0.5"/><circle cx="70%" cy="80%" r="2" fill="white" opacity="0.7"/><circle cx="90%" cy="30%" r="1.5" fill="white" opacity="0.9"/></svg>');
+            background-repeat: repeat;
+            animation: snowDrift 20s linear infinite;
+            opacity: 0.2;
+            z-index: 10;
+        }
+
+        @keyframes snowDrift {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 200px 500px; }
+        }
+
+        /* Letterbox UI & Text Overlay */
+        .ui-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px 32px;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            opacity: 0;
+            animation: showSubtitle 50s forwards;
+        }
+
+        @keyframes showSubtitle {
+            0% { opacity: 0; content: "December 24th, 2023. Outgoing."; }
+            8% { opacity: 1; content: "December 24th, 2023. Outgoing."; }
+            18% { opacity: 0; }
+            22% { opacity: 1; content: "Boxing Day. Total Electrical Failure. Drummondville."; }
+            35% { opacity: 0; }
+            38% { opacity: 1; content: "A desperate message. A stranger's holiday sacrifice."; }
+            50% { opacity: 0; }
+            53% { opacity: 1; content: "The race against the ice rain. New London Ferry."; }
+            65% { opacity: 0; }
+            68% { opacity: 1; content: "Sometimes the greatest gifts aren't under the tree..."; }
+            85% { opacity: 1; content: "They're waiting in Drummondville."; }
+            100% { opacity: 1; content: "The Drummondville Lifeline. A True Holiday Survival Story."; }
+        }
+
+        /* Javascript handles the dynamic subtitle text replacement since CSS content replacement is tricky */
+
+        .controls {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 30;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .play-overlay h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .play-overlay p {
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .play-button {
+            width: 64px;
+            height: 64px;
+            background: var(--text-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--bg-color);
+        }
+        .play-button svg {
+            width: 32px;
+            height: 32px;
+            margin-left: 4px; /* Optical optical centering */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cinema-container" id="player">
+        <!-- Sequence -->
+        <div class="shot shot-1"></div>
+        <div class="shot shot-2"></div>
+        <div class="shot shot-3"></div>
+        <div class="shot shot-4"></div>
+        <div class="shot shot-5"></div>
+        <div class="shot shot-6"></div>
+
+        <!-- VFX -->
+        <div class="snow-overlay"></div>
+
+        <!-- UI -->
+        <div class="ui-layer">
+            <div class="subtitle" id="subtext">December 24th, 2023. Outgoing.</div>
+        </div>
+
+        <div class="controls">
+            <button onclick="window.location.reload()">Replay</button>
+        </div>
+
+        <div class="play-overlay" id="startScreen" onclick="startPlayback()">
+            <h1>The Drummondville Lifeline</h1>
+            <p>A 60-second Animated Narrative (4:3)</p>
+            <div class="play-button">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JS handler to pause animation initially and manage subtitles
+        const shots = document.querySelectorAll('.shot');
+        const overlay = document.getElementById('startScreen');
+        const subtitle = document.getElementById('subtext');
+
+        // Pause animations initially
+        shots.forEach(s => s.style.animationPlayState = 'paused');
+
+        const captions = [
+            { time: 0, text: "The majestic Fairmont. The perfect holiday getaway." },
+            { time: 9000, text: "A festive dinner, unaware of the storm tracking south." },
+            { time: 18000, text: "Boxing Day. Total electrical failure on Route 55." },
+            { time: 27000, text: "A desperate Instagram message answered by a stranger on his day off." },
+            { time: 36000, text: "The repair held. The race to the New London Ferry begins." },
+            { time: 45000, text: "Safe in Long Island. Sometimes the greatest gifts aren't under the tree." }
+        ];
+
+        function startPlayback() {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 300);
+
+            // Start animations
+            shots.forEach(s => s.style.animationPlayState = 'running');
+
+            // Subtitle sequencer
+            let startTime = Date.now();
+            
+            setInterval(() => {
+                let elapsed = Date.now() - startTime;
+                
+                // Find current caption
+                let currentCap = captions[0].text;
+                for (let i = 0; i < captions.length; i++) {
+                    if (elapsed >= captions[i].time) {
+                        currentCap = captions[i].text;
+                    }
+                }
+
+                // Simple fade effect for text change
+                if(subtitle.innerText !== currentCap) {
+                    subtitle.style.opacity = '0';
+                    setTimeout(() => {
+                        subtitle.innerText = currentCap;
+                        subtitle.style.transition = 'opacity 1s ease';
+                        subtitle.style.opacity = '1';
+                    }, 500);
+                } else {
+                     subtitle.style.transition = 'opacity 1s ease';
+                     subtitle.style.opacity = '1';
+                }
+
+            }, 500);
+        }
+    </script>
+</body>
+</html>

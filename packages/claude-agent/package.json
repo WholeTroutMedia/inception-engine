@@ -1,0 +1,23 @@
+{
+    "name": "@inception/claude-agent",
+    "version": "5.0.0",
+    "private": true,
+    "description": "Creative Liberation Engine — Claude Agent SDK integration (agentic coding loop)",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsx --watch src/index.ts",
+        "smoke-test": "tsx src/smoke-test.ts",
+        "runner": "tsx src/dispatch-runner.ts"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "tsx": "^4.19.0",
+        "typescript": "^5.7.0"
+    }
+}

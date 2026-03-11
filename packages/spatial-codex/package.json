@@ -1,0 +1,21 @@
+{
+  "name": "@inception/spatial-codex",
+  "version": "1.0.0",
+  "description": "Hardware and structural ingestion engine for EON Reality spatial mapping.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@genkit-ai/googleai": "^0.9.0",
+    "@google/genai": "^1.44.0",
+    "genkit": "^0.9.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.5.4"
+  }
+}

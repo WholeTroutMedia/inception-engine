@@ -1,0 +1,19 @@
+{
+  "name": "Freepik",
+  "url": "https://www.freepik.com",
+  "category": "Asset Library & AI Design Hub",
+  "account": {
+    "status": "Logged In",
+    "plan": "Premium"
+  },
+  "editing_suite": {
+    "name": "Freepik Designer (Beta)",
+    "features": [
+      "AI Presentation Generator",
+      "Canvas/Figma-style layout editor",
+      "Integrated Background Remover",
+      "Direct asset drag-and-drop from main library"
+    ],
+    "workflow": "Cloud-based visual composer combining static assets with generative AI tools directly on the canvas."
+  }
+}

@@ -1,0 +1,11 @@
+[project]
+name = "davinci-resolve-mcp"
+version = "1.0.0"
+description = "MCP Server driving the DaVinci Resolve Studio Python API for autonomous AI editing"
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

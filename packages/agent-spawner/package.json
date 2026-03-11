@@ -1,0 +1,27 @@
+{
+    "name": "@wholetrout/agent-spawner",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\""
+    },
+    "dependencies": {
+        "@genkit-ai/googleai": "^1.28.0",
+        "@creative-liberation-engine/skills": "workspace:*",
+        "@modelcontextprotocol/sdk": "^1.27.1",
+        "express": "^4.18.0",
+        "google-auth-library": "^9.6.3",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "vitest": "^1.0.0"
+    },
+    "bin": {
+        "agent-spawner-mcp": "./dist/mcp-server.js"
+    }
+}

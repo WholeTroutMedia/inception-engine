@@ -1,0 +1,46 @@
+{
+    "$schema": "https://raw.githubusercontent.com/tokens-studio/tokens-studio-for-figma/main/packages/tokens-studio-for-figma/src/schema/schema.json",
+    "$description": "Creative Liberation Engine Design System — W3C DTCG token index. This file maps all token sources. Use style-dictionary.config.mjs for platform compilation.",
+    "sources": {
+        "primitives": [
+            "src/primitives/globals.json",
+            "src/primitives/color.json",
+            "src/primitives/typography.json",
+            "src/primitives/spacing.json",
+            "src/primitives/motion.json",
+            "src/primitives/radius-shadow.json"
+        ],
+        "semantic": {
+            "light": [
+                "src/semantic/light.json",
+                "src/semantic/gradient.json",
+                "src/semantic/motion.json",
+                "src/semantic/radius-shadow.json",
+                "src/semantic/spacing.json",
+                "src/semantic/typography.json"
+            ],
+            "dark": [
+                "src/semantic/dark.json",
+                "src/semantic/gradient.json",
+                "src/semantic/motion.json",
+                "src/semantic/radius-shadow.json",
+                "src/semantic/spacing.json",
+                "src/semantic/typography.json"
+            ]
+        }
+    },
+    "outputs": {
+        "css": {
+            "light": "dist/css/tokens.light.css",
+            "dark": "dist/css/tokens.dark.css",
+            "primitives": "dist/css/tokens.primitives.css"
+        },
+        "js": "dist/js/tokens.cjs",
+        "json": "dist/json/tokens.json",
+        "ios": "dist/ios/DesignTokens.swift",
+        "android": {
+            "colors": "dist/android/tokens.colors.xml",
+            "dimens": "dist/android/tokens.dimens.xml"
+        }
+    }
+}

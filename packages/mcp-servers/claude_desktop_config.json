@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/packages/claude-desktop/schema/claude_desktop_config.schema.json",
+  "mcpServers": {
+    "inception-dispatch": {
+      "command": "npx",
+      "args": ["tsx", "./packages/mcp-servers/inception-dispatch/src/mcp-server.ts"],
+      "env": {
+        "IE_DISPATCH_API": "http://127.0.0.1:4800"
+      }
+    },
+    "inception-scribe": {
+      "command": "npx",
+      "args": ["tsx", "./packages/mcp-servers/inception-scribe/src/mcp-server.ts"],
+      "env": {
+        "IE_SCRIBE_API": "http://127.0.0.1:4810"
+      }
+    },
+    "inception-browser": {
+      "command": "npx",
+      "args": ["tsx", "./packages/mcp-servers/inception-browser/src/mcp-server.ts"],
+      "env": {
+        "IE_BROWSER_API": "http://127.0.0.1:4900"
+      }
+    },
+    "inception-registry": {
+      "command": "npx",
+      "args": ["tsx", "./packages/mcp-servers/inception-registry/src/mcp-server.ts"],
+      "env": {
+        "IE_REGISTRY_PATH": "./.averi"
+      }
+    }
+  }
+}

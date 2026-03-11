@@ -1,0 +1,29 @@
+{
+    "name": "@inception/design-system-storybook",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "storybook dev -p 6006",
+        "build": "storybook build",
+        "preview": "http-server storybook-static -p 6006"
+    },
+    "dependencies": {
+        "@inception/ui": "workspace:*",
+        "@inception/design-tokens": "workspace:*",
+        "@inception/theme-engine": "workspace:*"
+    },
+    "devDependencies": {
+        "@storybook/addon-essentials": "^8.6.0",
+        "@storybook/addon-a11y": "^8.6.0",
+        "@storybook/addon-docs": "^8.6.0",
+        "@storybook/react": "^8.6.0",
+        "@storybook/react-vite": "^8.6.0",
+        "@storybook/blocks": "^8.6.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "typescript": "^5.7.0",
+        "vite": "^6.0.0"
+    }
+}

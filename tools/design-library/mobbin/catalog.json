@@ -1,0 +1,68 @@
+{
+  "source": "https://mobbin.com",
+  "account": "operator@gmail.com",
+  "plan": "Pro ($15/month, active — next bill Apr 25 2026)",
+  "localized": "2026-03-10",
+  "description": "400,000+ fully searchable mobile & web app UI screenshots. Real-world design patterns from top apps.",
+  "links": {
+    "dashboard": "https://mobbin.com/discover/apps/ios/latest",
+    "iosApps": "https://mobbin.com/browse/ios/apps",
+    "webApps": "https://mobbin.com/browse/web/apps",
+    "androidApps": "https://mobbin.com/browse/android/apps",
+    "iosFlows": "https://mobbin.com/browse/ios/flows",
+    "webFlows": "https://mobbin.com/browse/web/flows",
+    "iosScreens": "https://mobbin.com/browse/ios/screens",
+    "webScreens": "https://mobbin.com/browse/web/screens",
+    "patterns": "https://mobbin.com/patterns"
+  },
+  "totals": {
+    "screenshots": "400,000+",
+    "platforms": ["iOS", "Android", "Web"]
+  },
+  "platforms": {
+    "ios": {
+      "url": "https://mobbin.com/browse/ios/apps",
+      "categories": [
+        "Health & Fitness", "Travel & Transportation", "Food & Drink",
+        "Business", "Lifestyle", "Finance", "Social", "Entertainment",
+        "Productivity", "Shopping", "Education", "Utilities"
+      ],
+      "sampleApps": [
+        "Netflix", "Tinder", "TIDE", "Weverse", "Todoist", "Tabby",
+        "Spotify", "Airbnb", "Duolingo", "Notion", "Figma", "Linear"
+      ]
+    },
+    "web": {
+      "url": "https://mobbin.com/browse/web/apps",
+      "sampleApps": [
+        "Copy.ai", "Todoist", "Salesforce", "Shop", "Substack", "Rox",
+        "Notion", "Linear", "Vercel", "Stripe", "Loom", "Figma"
+      ]
+    },
+    "android": {
+      "url": "https://mobbin.com/browse/android/apps"
+    }
+  },
+  "flows": {
+    "url": "https://mobbin.com/browse/ios/flows",
+    "commonFlows": [
+      "Onboarding", "Creating Account", "Sign In / Sign Up",
+      "Subscribing & Upgrading", "Payment Method", "Browsing Tutorial",
+      "Chatting & Sending Messages", "Notifications Settings",
+      "Profile Setup", "Search & Discovery", "Checkout"
+    ]
+  },
+  "screens": {
+    "commonScreens": [
+      "Dashboard", "Home Feed", "Profile", "Settings",
+      "Payment Method", "Signup", "Login", "Notifications",
+      "Search", "Empty States", "Banners", "Bottom Sheets", "Cards",
+      "Modals", "Onboarding Carousels"
+    ]
+  },
+  "proFeatures": [
+    "Unlimited downloads", "Full-res screenshots",
+    "Flow navigation", "Advanced filters",
+    "Collections & bookmarks", "Team sharing"
+  ]
+}

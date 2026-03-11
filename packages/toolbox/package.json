@@ -1,0 +1,32 @@
+{
+    "name": "@inception/toolbox",
+    "version": "1.0.0",
+    "description": "Creative Liberation Engine Creator Sidebar — pure TypeScript utility functions (zero external deps)",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./categories/*": {
+            "import": "./dist/categories/*.js",
+            "types": "./dist/categories/*.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\"",
+        "lint": "eslint src --ext .ts"
+    },
+    "peerDependencies": {
+        "genkit": ">=1.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.4.5",
+        "vitest": "^1.6.0",
+        "zod": "^3.22.0"
+    }
+}

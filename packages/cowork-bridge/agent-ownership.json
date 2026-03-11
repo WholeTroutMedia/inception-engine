@@ -1,0 +1,42 @@
+{
+  "$schema": "./agent-ownership.schema.json",
+  "version": "1.0.0",
+  "description": "Agent ownership map for Creative Liberation Engine cowork-bridge",
+  "agents": {
+    "ATHENA": {
+      "role": "Strategic Intelligence & Architecture",
+      "backend": "claude-sonnet",
+      "capabilities": ["architecture", "strategy", "analysis", "planning"],
+      "workstreams": ["system-design", "integration-planning"],
+      "peers": ["VERA", "IRIS", "NEXUS"]
+    },
+    "VERA": {
+      "role": "Verification & Quality Assurance",
+      "backend": "claude-sonnet",
+      "capabilities": ["testing", "validation", "code-review", "qa"],
+      "workstreams": ["quality-gates", "test-coverage"],
+      "peers": ["ATHENA", "IRIS"]
+    },
+    "IRIS": {
+      "role": "Interface & Runtime Intelligence",
+      "backend": "gemini-pro",
+      "capabilities": ["ui-generation", "runtime-optimization", "monitoring"],
+      "workstreams": ["ui-systems", "runtime-health"],
+      "peers": ["ATHENA", "VERA"]
+    },
+    "NEXUS": {
+      "role": "Network & External Integration",
+      "backend": "claude-sonnet",
+      "capabilities": ["api-integration", "data-sync", "networking"],
+      "workstreams": ["external-apis", "data-pipelines"],
+      "peers": ["ATHENA", "DISPATCH"]
+    },
+    "DISPATCH": {
+      "role": "Task Orchestration & Routing",
+      "backend": "claude-sonnet",
+      "capabilities": ["task-routing", "orchestration", "scheduling"],
+      "workstreams": ["task-queue", "agent-coordination"],
+      "peers": ["ATHENA", "NEXUS", "VERA"]
+    }
+  }
+}

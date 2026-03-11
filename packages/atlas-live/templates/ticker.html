@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>News Ticker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            background: transparent;
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+        }
+
+        #ticker-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: stretch;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #ticker-bar.visible {
+            transform: translateY(0);
+        }
+
+        .ticker-label {
+            background: var(--accent, #e03030);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 140px;
+        }
+
+        .ticker-track {
+            background: rgba(10, 10, 15, 0.95);
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .ticker-mask {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: ticker-scroll linear infinite;
+            animation-duration: var(--scroll-duration, 30s);
+            gap: 0;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 500;
+            color: #f5f0e8;
+            padding: 0 32px;
+            letter-spacing: 0.3px;
+        }
+
+        .ticker-separator {
+            color: var(--accent, #e03030);
+            font-size: 18px;
+            padding: 0 8px;
+        }
+
+        .ticker-time {
+            background: rgba(245, 240, 232, 0.08);
+            color: rgba(245, 240, 232, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            font-size: 16px;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            flex-shrink: 0;
+            min-width: 80px;
+            border-left: 1px solid rgba(245, 240, 232, 0.08);
+        }
+
+        @keyframes ticker-scroll {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ticker-bar">
+        <div class="ticker-label" id="ticker-label">BREAKING</div>
+        <div class="ticker-track">
+            <div class="ticker-mask" id="ticker-content">
+                <!-- headlines injected here -->
+            </div>
+        </div>
+        <div class="ticker-time" id="ticker-time">00:00</div>
+    </div>
+
+    <script>
+        let headlines = ['Loading news feed...'];
+        let ticker;
+
+        function buildTicker() {
+            // Double the items for seamless loop
+            const all = [...headlines, ...headlines];
+            ticker.innerHTML = all.map((h, i) =>
+                `<span class="ticker-item">${h}</span><span class="ticker-separator">●</span>`
+            ).join('');
+            const speed = Math.max(20, headlines.join('').length * 0.15);
+            ticker.style.animationDuration = speed + 's';
+        }
+
+        function update(data) {
+            if (data.f0) {
+                const label = document.getElementById('ticker-label');
+                label.textContent = data.f0;
+            }
+            if (data.f1) {
+                // f1 = pipe-separated headlines: "Headline 1|Headline 2|Headline 3"
+                headlines = data.f1.split('|').filter(Boolean);
+                buildTicker();
+            }
+            if (data.accent) {
+                document.documentElement.style.setProperty('--accent', data.accent);
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('ticker-time').textContent = `${h}:${m}`;
+        }
+
+        function play() { document.getElementById('ticker-bar').classList.add('visible'); }
+        function stop() {
+            document.getElementById('ticker-bar').style.transition = 'transform 0.3s ease-in';
+            document.getElementById('ticker-bar').classList.remove('visible');
+        }
+
+        window.onload = () => {
+            ticker = document.getElementById('ticker-content');
+            buildTicker();
+            setInterval(updateClock, 1000);
+            updateClock();
+        };
+
+        window.update = (xml) => {
+            try {
+                const doc = new DOMParser().parseFromString(xml, 'text/xml');
+                const data = {};
+                doc.querySelectorAll('componentData').forEach(n => {
+                    const id = n.getAttribute('id');
+                    const value = n.querySelector('data')?.getAttribute('value');
+                    if (id && value !== null) data[id] = value;
+                });
+                update(data);
+            } catch (e) { console.error(e); }
+        };
+        window.play = play;
+        window.stop = stop;
+    </script>
+</body>
+
+</html>

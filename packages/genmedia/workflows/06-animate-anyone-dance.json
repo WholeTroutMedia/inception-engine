@@ -1,0 +1,156 @@
+{
+    "last_node_id": 6,
+    "last_link_id": 6,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "image": "hero_character.png"
+            }
+        },
+        {
+            "id": 2,
+            "type": "LoadVideo",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "video": "dance_reference_motion.mp4",
+                "force_rate": 24,
+                "force_size": "Disabled",
+                "custom_width": 512,
+                "custom_height": 768,
+                "frame_load_cap": 0,
+                "skip_first_frames": 0,
+                "select_every_nth": 1
+            }
+        },
+        {
+            "id": 3,
+            "type": "MooreAnimateAnyoneLoader",
+            "pos": [
+                500,
+                100
+            ],
+            "inputs": {
+                "model_path": "animate-anyone-512.pth"
+            }
+        },
+        {
+            "id": 4,
+            "type": "MooreAnimateAnyoneGenerator",
+            "pos": [
+                900,
+                200
+            ],
+            "inputs": {
+                "steps": 20,
+                "guidance_scale": 3.5,
+                "seed": 918273645,
+                "animate_model": [
+                    "3",
+                    0
+                ],
+                "ref_image": [
+                    "1",
+                    0
+                ],
+                "pose_video": [
+                    "2",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "VAEDecode",
+            "pos": [
+                1300,
+                200
+            ],
+            "inputs": {
+                "samples": [
+                    "4",
+                    0
+                ],
+                "vae": [
+                    "3",
+                    1
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "type": "VideoCombine",
+            "pos": [
+                1600,
+                200
+            ],
+            "inputs": {
+                "frame_rate": 24,
+                "format": "video/mp4",
+                "filename_prefix": "animate_anyone_dance_v1",
+                "images": [
+                    "5",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            4,
+            1,
+            "IMAGE"
+        ],
+        [
+            2,
+            2,
+            0,
+            4,
+            2,
+            "IMAGE"
+        ],
+        [
+            3,
+            3,
+            0,
+            4,
+            0,
+            "MODEL"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            0,
+            "LATENT"
+        ],
+        [
+            5,
+            5,
+            0,
+            6,
+            0,
+            "IMAGE"
+        ],
+        [
+            6,
+            3,
+            1,
+            5,
+            1,
+            "VAE"
+        ]
+    ]
+}

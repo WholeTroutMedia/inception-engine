@@ -1,0 +1,47 @@
+{
+    "name": "@inception/foley-engine",
+    "version": "0.1.0",
+    "description": "Sovereign AI audio pipeline: CampaignBrief → MIDI → REAPER render → stem separation → beat detection → transcription",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "dev": "tsc --watch",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@genkit-ai/flow": "^0.5.17",
+        "@genkit-ai/googleai": "^0.5.0",
+        "@inception/genkit": "workspace:*",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.19.37",
+        "typescript": "^5.4.5",
+        "vitest": "^1.4.0"
+    },
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "keywords": [
+        "audio",
+        "foley",
+        "reaper",
+        "demucs",
+        "whisper",
+        "inception"
+    ],
+    "author": "Creative Liberation Engine Community",
+    "license": "UNLICENSED"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@inception/azure-function",
+  "version": "1.0.0",
+  "description": "Creative Liberation Engine — Azure Functions Cloud Mesh Node",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.2",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

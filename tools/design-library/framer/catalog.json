@@ -1,0 +1,16 @@
+{
+  "name": "Framer",
+  "url": "https://framer.com",
+  "account": {
+    "status": "Logged In",
+    "team_id": "4edbf25a-c7a1-459e-b7d3-f15cfa3b5c78"
+  },
+  "capabilities": [
+    "Visual Site Building",
+    "React Component Export (via Framify/handshake)",
+    "Figma to Framer import",
+    "AI Site Generation",
+    "CMS Integration",
+    "Built-in Motion Integration"
+  ]
+}

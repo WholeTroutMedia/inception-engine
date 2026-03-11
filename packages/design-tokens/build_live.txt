@@ -1,0 +1,4 @@
+
+> @inception/design-tokens@1.0.0 build C:\\Creative-Liberation-Engine\packages\design-tokens
+> style-dictionary build --config style-dictionary.config.mjs
+

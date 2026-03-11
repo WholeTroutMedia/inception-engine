@@ -1,0 +1,33 @@
+{
+    "name": "@brainchild/model-arbitrage",
+    "version": "0.1.0",
+    "description": "Multi-provider LLM routing engine with cost optimization and failover",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\"",
+        "test:watch": "vitest",
+        "lint": "eslint src/"
+    },
+    "dependencies": {
+        "@anthropic-ai/sdk": "^0.30.0",
+        "openai": "^4.70.0",
+        "@google/generative-ai": "^0.21.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.6.0",
+        "vitest": "^2.1.0",
+        "@types/node": "^22.0.0"
+    },
+    "keywords": [
+        "llm",
+        "routing",
+        "arbitrage",
+        "multi-provider",
+        "cost-optimization"
+    ],
+    "license": "UNLICENSED",
+    "private": true
+}

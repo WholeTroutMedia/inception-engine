@@ -1,0 +1,145 @@
+{
+    "last_node_id": 8,
+    "last_link_id": 8,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "image": "input_frame.png"
+            }
+        },
+        {
+            "id": 2,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "ckpt_name": "juggernautXL_v9Rdphoto2Lightning.safetensors"
+            }
+        },
+        {
+            "id": 3,
+            "type": "ControlNetLoader",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "control_net_name": "controlnet-tile-sdxl.safetensors"
+            }
+        },
+        {
+            "id": 4,
+            "type": "UltimateSDUpscale",
+            "pos": [
+                500,
+                250
+            ],
+            "inputs": {
+                "upscale_by": 2.0,
+                "seed": 42,
+                "steps": 20,
+                "cfg": 7.0,
+                "sampler_name": "dpmpp_2m_sde",
+                "scheduler": "karras",
+                "denoise": 0.35,
+                "mode_type": "Linear",
+                "tile_width": 1024,
+                "tile_height": 1024,
+                "mask_blur": 8,
+                "tile_padding": 32,
+                "seam_fix_mode": "None",
+                "image": [
+                    "1",
+                    0
+                ],
+                "model": [
+                    "2",
+                    0
+                ],
+                "positive": [
+                    ""
+                ],
+                "negative": [
+                    ""
+                ],
+                "vae": [
+                    "2",
+                    2
+                ],
+                "upscale_model": [
+                    "",
+                    0
+                ],
+                "control_net": [
+                    "3",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "SaveImage",
+            "pos": [
+                900,
+                250
+            ],
+            "inputs": {
+                "filename_prefix": "ultimate_upscale_v1",
+                "images": [
+                    "4",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            4,
+            8,
+            "IMAGE"
+        ],
+        [
+            2,
+            2,
+            0,
+            4,
+            9,
+            "MODEL"
+        ],
+        [
+            3,
+            3,
+            0,
+            4,
+            15,
+            "CONTROL_NET"
+        ],
+        [
+            4,
+            2,
+            2,
+            4,
+            13,
+            "VAE"
+        ],
+        [
+            5,
+            4,
+            0,
+            5,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

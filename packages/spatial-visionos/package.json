@@ -1,0 +1,20 @@
+{
+    "name": "@inception/spatial-visionos",
+    "version": "1.0.0",
+    "description": "visionOS to Creative Liberation Engine bridge — MCP Server",
+    "main": "dist/mcp-server.js",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/mcp-server.js",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.4.1",
+        "@inception/core": "workspace:*"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3",
+        "vitest": "^1.2.2"
+    }
+}

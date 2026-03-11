@@ -1,0 +1,75 @@
+{
+    "radius": {
+        "component": {
+            "button": {
+                "$value": "{radius.md}",
+                "$type": "dimension",
+                "description": "Standard button corner radius"
+            },
+            "input": {
+                "$value": "{radius.md}",
+                "$type": "dimension"
+            },
+            "card": {
+                "$value": "{radius.lg}",
+                "$type": "dimension"
+            },
+            "modal": {
+                "$value": "{radius.lg}",
+                "$type": "dimension"
+            },
+            "badge": {
+                "$value": "{radius.full}",
+                "$type": "dimension"
+            },
+            "tag": {
+                "$value": "{radius.sm}",
+                "$type": "dimension"
+            },
+            "avatar": {
+                "$value": "{radius.full}",
+                "$type": "dimension"
+            },
+            "tooltip": {
+                "$value": "{radius.sm}",
+                "$type": "dimension"
+            }
+        }
+    },
+    "shadow": {
+        "component": {
+            "card": {
+                "$value": "{shadow.md}",
+                "$type": "shadow",
+                "description": "Default card elevation"
+            },
+            "cardHover": {
+                "$value": "{shadow.lg}",
+                "$type": "shadow",
+                "description": "Elevated state on hover"
+            },
+            "modal": {
+                "$value": "{shadow.xl}",
+                "$type": "shadow",
+                "description": "Modal / sheet overlay shadow"
+            },
+            "dropdown": {
+                "$value": "{shadow.lg}",
+                "$type": "shadow"
+            },
+            "button": {
+                "$value": "{shadow.sm}",
+                "$type": "shadow"
+            },
+            "input": {
+                "$value": "{shadow.sm}",
+                "$type": "shadow"
+            },
+            "nav": {
+                "$value": "{shadow.md}",
+                "$type": "shadow",
+                "description": "Top navigation bar shadow"
+            }
+        }
+    }
+}

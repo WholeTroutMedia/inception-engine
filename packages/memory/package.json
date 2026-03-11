@@ -1,0 +1,31 @@
+{
+    "name": "@inception/memory",
+    "version": "5.0.0",
+    "private": true,
+    "description": "Creative Liberation Engine — Unified Memory Bus (ChromaDB + Git + SCRIBE)",
+    "type": "module",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./src/index.js",
+            "types": "./src/index.d.ts"
+        }
+    },
+    "dependencies": {
+        "chromadb": "^3.3.1",
+        "dotenv": "^16.4.0",
+        "genkit": "^1.29.0",
+        "zod": "^4.3.6"
+    },
+    "scripts": {
+        "build": "tsc -b",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0",
+        "vitest": "^1.2.2"
+    }
+}

@@ -1,6 +1,6 @@
 {
   "name": "brainchild-v5",
-  "version": "5.1.2-COMMUNITY",
+  "version": "5.1.3-COMMUNITY",
   "private": true,
   "description": "Creative Liberation Engine v5 â€” Artist Liberation Through Sovereign AI",
   "scripts": {
@@ -11,7 +11,7 @@
     "boot": "python -m inception boot",
     "status": "python -m inception status",
     "terminal-daemon": "tsx .agents/terminal-watcher.ts",
-    "firebase:dev": "set JAVA_HOME=C:\\Program Files\\Microsoft\\jdk-21.0.10.7-hotspot && set PATH=%JAVA_HOME%\\bin;%PATH% && C:\\Users\\jahar\\AppData\\Roaming\\npm\\firebase.cmd emulators:start --only auth,firestore,hosting",
+    "firebase:dev": "firebase emulators:start --only auth,firestore,hosting",
     "genkit:dev": "npm run genkit:server --prefix packages/genkit",
     "genkit:ui": "npm run genkit:ui --prefix packages/genkit",
     "storybook": "storybook dev -p 6006",
@@ -26,7 +26,7 @@
     "ai-agents",
     "constitutional-ai"
   ],
-  "author": "WholeTrout Media",
+  "author": "The Collective <operator@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",

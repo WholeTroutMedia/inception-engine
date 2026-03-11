@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CORTEX">
+  <meta name="theme-color" content="#080810">
+  <title>CORTEX</title>
+  <link rel="apple-touch-icon" href="cortex-icon-180.png">
+  <link rel="manifest" href="cortex-manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,300&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="cortex-app.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ── Status Bar spacer ── -->
+    <div id="status-bar"></div>
+
+    <!-- ══════════════════════════════════
+         SCREEN: DASHBOARD (Central Hub)
+    ══════════════════════════════════ -->
+    <div class="screen active" id="screen-dashboard">
+      <header class="nav-header">
+        <div class="header-left">
+          <div class="cortex-wordmark">CORTEX</div>
+          <div class="header-sub" id="header-client-name">WTM Studio</div>
+        </div>
+        <div class="header-right">
+          <button class="icon-btn" id="client-switch-btn" onclick="openClientSheet()">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+            </svg>
+          </button>
+          <div class="status-orb" id="status-orb"></div>
+        </div>
+      </header>
+
+      <div class="screen-scroll" style="padding: 20px 16px;">
+        <!-- Welcome state -->
+        <div class="welcome-hero">
+          <div class="cortex-glyph">
+            <svg viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="29" stroke="url(#g1)" stroke-width="1.5" opacity="0.4" />
+              <path d="M30 10L38 28H22L30 10Z" fill="url(#g2)" />
+              <path d="M22 28L14 46H30L22 28Z" fill="url(#g2)" opacity="0.6" />
+              <path d="M38 28L46 46H30L38 28Z" fill="url(#g2)" opacity="0.4" />
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="60" y2="60">
+                  <stop stop-color="#f59e0b" />
+                  <stop offset="1" stop-color="#d97706" />
+                </linearGradient>
+                <linearGradient id="g2" x1="30" y1="10" x2="30" y2="46">
+                  <stop stop-color="#fbbf24" />
+                  <stop offset="1" stop-color="#f59e0b" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="welcome-title" id="welcome-title">Good morning.</h1>
+          <p class="welcome-sub">System online. All agents standing by.</p>
+        </div>
+
+        <h2 class="section-label">WORKFLOWS</h2>
+        <div class="workflow-grid">
+
+          <button class="wf-card glow-amber" onclick="switchScreen('ambient')">
+            <span class="wf-icon">🎙️</span>
+            <span class="wf-label">Ambient Session</span>
+            <span class="wf-desc">Café meeting recorder & auto-processor</span>
+          </button>
+
+          <button class="wf-card glow-purple" onclick="switchScreen('studio')">
+            <span class="wf-icon">🎬</span>
+            <span class="wf-label">Barnstorm Studio</span>
+            <span class="wf-desc">Auto-edit pipelines & clip scoring</span>
+          </button>
+
+          <button class="wf-card glow-green" onclick="switchScreen('content')">
+            <span class="wf-icon">📱</span>
+            <span class="wf-label">Content Planner</span>
+            <span class="wf-desc">Trend analysis & E Is For Eat pipeline</span>
+          </button>
+
+          <button class="wf-card glow-blue" onclick="switchScreen('capture')">
+            <span class="wf-icon">⚡</span>
+            <span class="wf-label">Spark Capture</span>
+            <span class="wf-desc">Rapid idea ingest & development</span>
+          </button>
+
+          <button class="wf-card glow-white" style="grid-column: 1 / -1;" onclick="switchScreen('chat')">
+            <span class="wf-icon">💬</span>
+            <span class="wf-label">Direct Command</span>
+            <span class="wf-desc">Raw unrestricted access to the Creative Liberation Engine</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: AMBIENT SESSION
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-ambient">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('dashboard')">‹ Back</button>
+        </div>
+        <div class="header-right">
+          <div class="status-badge"><span class="dot-live" id="rec-dot" style="background:var(--t3)"></span><span
+              id="rec-status-text">Standby</span></div>
+        </div>
+      </header>
+
+      <div class="screen-scroll" style="display:flex; flex-direction:column; justify-content:center; padding: 20px;">
+        <div class="ambient-center">
+          <button class="mic-orb" id="main-mic-btn" onclick="toggleAmbientRecording()">
+            <div class="mic-ring r1"></div>
+            <div class="mic-ring r2"></div>
+            <div class="mic-icon">🎙️</div>
+          </button>
+          <h2 class="ambient-title" id="ambient-main-text">Start Session</h2>
+          <p class="ambient-sub" id="ambient-sub-text">Place phone on table. Cortex will listen, summarize, and
+            auto-dispatch action items when you tap stop.</p>
+        </div>
+
+        <div class="transcript-preview" id="transcript-preview"></div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: CHAT (Direct Command)
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-chat">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('dashboard')">‹ Back</button>
+        </div>
+        <div class="header-right">
+          <div class="header-sub">Engine Direct</div>
+        </div>
+      </header>
+
+      <div class="messages-wrap" id="messages">
+        <!-- Message thread renders here -->
+        <div id="msg-thread"></div>
+      </div>
+
+      <!-- Input dock -->
+      <div class="input-dock">
+        <div class="input-pill" id="input-pill">
+          <button class="pill-action" id="cmd-voice-btn" onclick="toggleCmdVoice()">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z" />
+            </svg>
+          </button>
+          <textarea id="msg-input" placeholder="Execute command…" rows="1" oninput="autoGrow(this)"
+            onkeydown="handleEnter(event)"></textarea>
+          <button class="pill-send" id="send-btn" onclick="triggerSend()">
+            <svg viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+        </div>
+        <div class="suggestion-row" id="suggestion-row"></div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: STUDIO (Barnstorm)
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-studio">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('dashboard')">‹ Back</button>
+        </div>
+        <div class="header-right">
+          <div class="status-badge"><span class="dot-live"></span>Studio UI Live</div>
+        </div>
+      </header>
+
+      <div class="screen-scroll">
+        <section class="studio-section" style="padding-top: 20px;">
+          <h2 class="section-label">ACTIVE SHOOTS (NAS)</h2>
+          <div class="tool-list">
+            <button class="tool-row"
+              onclick="openPipeline('Laurel Links 8-31-25', ['FFMPEG INGEST', 'TEMPO AUDIO', 'ORACLE VISION', 'FUSER RANKING'])">
+              <div class="tr-icon purple">🎬</div>
+              <div class="tr-info">
+                <div class="tr-name">Laurel Links Wedding</div>
+                <div class="tr-sub">241 clips · Awaiting ingest</div>
+              </div>
+              <div class="tr-status">Run Pipeline</div>
+            </button>
+          </div>
+        </section>
+
+        <section class="studio-section">
+          <h2 class="section-label">CREATIVE LIBERATION ENGINE CLUSTER</h2>
+          <div class="ie-stats" id="ie-stats">
+            <div class="stat-pill">
+              <span class="stat-n" id="stat-agents">—</span>
+              <span class="stat-l">Agents Live</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-n" id="stat-queued">—</span>
+              <span class="stat-l">Jobs Queued</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: SPARK CAPTURE (Ideation)
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-capture">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('dashboard')">‹ Back</button>
+        </div>
+      </header>
+      <div class="screen-scroll">
+        <div class="capture-hero">
+          <p class="capture-prompt">What's the spark?</p>
+          <textarea id="capture-input" class="capture-textarea" placeholder="A raw idea, a hook, a person to email..."
+            oninput="autoGrow(this)"></textarea>
+          <button class="capture-send" onclick="captureAndProcess()">
+            <span>Ignite</span>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z" />
+            </svg>
+          </button>
+        </div>
+
+        <h2 class="section-label" style="padding: 0 20px 10px">SPARK HISTORY</h2>
+        <div id="capture-history" class="capture-list"></div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: CONTENT PLANNER
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-content">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('dashboard')">‹ Back</button>
+        </div>
+        <div class="header-right">
+          <div class="header-sub">E Is For Eat</div>
+        </div>
+      </header>
+      <div class="screen-scroll">
+        <section class="studio-section" style="padding-top: 20px;">
+          <h2 class="section-label">CREATION TOOLS</h2>
+          <div class="tool-list">
+            <button class="tool-row"
+              onclick="openEditor('Trend & Hook Gen', 'Analyzing this week\'s food media trends via Perplexity...', 'hooks')">
+              <div class="tr-icon green">📊</div>
+              <div class="tr-info">
+                <div class="tr-name">Trend & Hook Gen</div>
+                <div class="tr-sub">Data-driven content angles</div>
+              </div>
+            </button>
+            <button class="tool-row"
+              onclick="openEditor('Brand Pitch Draft', 'Drafting highly-personalized partnership pitch...', 'pitch')">
+              <div class="tr-icon amber">✉️</div>
+              <div class="tr-info">
+                <div class="tr-name">Brand Pitch Draft</div>
+                <div class="tr-sub">Sponsorship outreach</div>
+              </div>
+            </button>
+            <button class="tool-row"
+              onclick="openEditor('Caption Writer', 'Reading image context and generating warm, curious copy...', 'caption')">
+              <div class="tr-icon blue">✍️</div>
+              <div class="tr-info">
+                <div class="tr-name">Caption Writer</div>
+                <div class="tr-sub">Instagram / TikTok formatting</div>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: PIPELINE TRACKER
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-pipeline">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('studio')">‹ Close</button>
+        </div>
+        <div class="header-right">
+          <div class="header-sub">Engine Execution</div>
+        </div>
+      </header>
+
+      <div class="screen-scroll" style="padding: 20px;">
+        <div class="pipeline-header">
+          <div class="pl-icon">⚡</div>
+          <h2 class="pl-title" id="pl-title">Pipeline Active</h2>
+          <div class="pl-status" id="pl-status-text">Initializing parameters...</div>
+        </div>
+
+        <div class="pl-progress">
+          <div class="pl-bar-bg">
+            <div class="pl-bar-fill" id="pl-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="pl-pct" id="pl-pct">0%</div>
+        </div>
+
+        <div class="pl-steps" id="pl-steps-container">
+          <!-- Steps injected via JS -->
+        </div>
+
+        <div class="pl-actions" id="pl-actions" style="display:none; margin-top: 24px;">
+          <button class="btn-primary" style="width:100%;"
+            onclick="alert('Downloading fcpXML Resolve timeline via NAS routing...')">Download DaVinci Resolve
+            XML</button>
+          <button class="btn-secondary" style="width:100%; margin-top: 12px; background:transparent; color:#fff;"
+            onclick="alert('Opening client portal proxy link...')">View Lighthouse Portal</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         SCREEN: DOCUMENT EDITOR
+    ══════════════════════════════════ -->
+    <div class="screen" id="screen-editor">
+      <header class="nav-header">
+        <div class="header-left">
+          <button class="icon-btn text-only" onclick="switchScreen('content')">‹ Back</button>
+        </div>
+        <div class="header-right">
+          <button class="icon-btn text-only" onclick="copyDocument()">Copy</button>
+        </div>
+      </header>
+
+      <div class="screen-scroll" style="display:flex; flex-direction:column; padding: 20px;">
+        <div id="doc-loading" class="doc-loading">
+          <div class="status-orb" style="margin: 0 auto 16px; width: 12px; height: 12px;"></div>
+          <h3 id="doc-loading-title">Generating...</h3>
+          <p id="doc-loading-sub" style="color:var(--t2); font-size:14px;">Please wait.</p>
+        </div>
+
+        <div id="doc-content-wrapper" class="doc-content-wrapper" style="display:none; flex:1;">
+          <input type="text" class="doc-title-input" id="doc-title" value="Draft" />
+          <textarea class="doc-textarea" id="doc-editor" placeholder="Start typing..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         CLIENT SWITCHER SHEET
+    ══════════════════════════════════ -->
+    <div class="sheet-overlay" id="client-overlay" onclick="closeClientSheet()"></div>
+    <div class="bottom-sheet" id="client-sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title">Your context</h3>
+      <div class="sheet-list">
+        <button class="sheet-option" onclick="selectClient('e-is-for-eat','E Is For Eat','🍽️')">
+          <div class="so-icon" style="background:linear-gradient(135deg,#10b981,#059669)">🍽️</div>
+          <div class="so-info">
+            <div class="so-name">E Is For Eat</div>
+            <div class="so-sub">Food · Travel · Lifestyle</div>
+          </div>
+          <div class="so-check" id="chk-e-is-for-eat">✓</div>
+        </button>
+        <button class="sheet-option" onclick="selectClient('barnstorm','Barnstorm','📸')">
+          <div class="so-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">📸</div>
+          <div class="so-info">
+            <div class="so-name">Barnstorm</div>
+            <div class="so-sub">Photo + Video · Weddings</div>
+          </div>
+          <div class="so-check" id="chk-barnstorm"></div>
+        </button>
+        <button class="sheet-option" onclick="selectClient('wtm-internal','WTM Studio','🌊')">
+          <div class="so-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">🌊</div>
+          <div class="so-info">
+            <div class="so-name">WTM Studio</div>
+            <div class="so-sub">All clients · Full context</div>
+          </div>
+          <div class="so-check" id="chk-wtm-internal"></div>
+        </button>
+        <button class="sheet-option" onclick="selectClient('inception','Creative Liberation Engine','⚡')">
+          <div class="so-icon" style="background:linear-gradient(135deg,#6366f1,#4f46e5)">⚡</div>
+          <div class="so-info">
+            <div class="so-name">Creative Liberation Engine</div>
+            <div class="so-sub">AI OS · Build mode</div>
+          </div>
+          <div class="so-check" id="chk-inception"></div>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script src="cortex-app.js"></script>
+</body>
+
+</html>

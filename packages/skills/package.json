@@ -1,0 +1,32 @@
+{
+    "name": "@creative-liberation-engine/skills",
+    "version": "1.0.0",
+    "description": "Agent skills library — charter-to-YAML compiler, registry, loader, Cowork export",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\"",
+        "compile-skills": "ts-node src/cli.ts compile",
+        "export-cowork": "ts-node src/cli.ts export"
+    },
+    "keywords": [
+        "creative-liberation-engine",
+        "skills",
+        "mcp",
+        "cowork",
+        "agent"
+    ],
+    "author": "Creative Liberation Engine Community",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "ts-node": "^10.9.0",
+        "typescript": "^5.4.0",
+        "vitest": "^1.6.0"
+    },
+    "bin": {
+        "skills-mcp": "./dist/mcp-server.js"
+    }
+}

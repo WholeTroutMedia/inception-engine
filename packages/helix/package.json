@@ -1,0 +1,26 @@
+{
+  "name": "@creative-liberation-engine/helix",
+  "version": "1.0.0-genesis",
+  "description": "Multi-Helix Orchestration Layer — First-class lifecycle governance and thread parallelism",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo node_modules"
+  },
+  "dependencies": {
+    "@genkit-ai/googleai": "^0.9.11",
+    "@modelcontextprotocol/sdk": "^1.5.0",
+    "@wholetrout/agent-spawner": "workspace:*",
+    "@inception/orchestrator": "workspace:*",
+    "genkit": "^0.9.11",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

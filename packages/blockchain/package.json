@@ -1,0 +1,16 @@
+{
+    "name": "@inception/blockchain",
+    "version": "1.0.0",
+    "description": "IECR Blockchain Layer — provenance, royalties, decentralized storage (P2)",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch"
+    },
+    "devDependencies": {
+        "@types/node": "^25.3.5",
+        "typescript": "^5.3.0"
+    }
+}

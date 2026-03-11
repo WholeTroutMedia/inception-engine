@@ -1,0 +1,26 @@
+{
+    "extends": "../../packages/tsconfig/base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "baseUrl": ".",
+        "paths": {
+            "@inception/dispatch": [
+                "../../packages/dispatch/build/server.js"
+            ],
+            "@inception/dispatch/*": [
+                "../../packages/dispatch/*"
+            ],
+            "@inception/director/*": [
+                "../../packages/director/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+  "color": {
+    "background": {
+      "default": { "$type": "color", "$value": "{color.base.neutral.0}" },
+      "subtle": { "$type": "color", "$value": "{color.base.neutral.50}" },
+      "inverse": { "$type": "color", "$value": "{color.base.neutral.950}" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "{color.base.neutral.950}" },
+      "secondary": { "$type": "color", "$value": "{color.base.neutral.500}" },
+      "inverse": { "$type": "color", "$value": "{color.base.neutral.0}" },
+      "brand": { "$type": "color", "$value": "{color.base.brand.primary}" }
+    },
+    "border": {
+      "default": { "$type": "color", "$value": "{color.base.neutral.200}" },
+      "focus": { "$type": "color", "$value": "{color.base.brand.primary}" }
+    }
+  }
+}

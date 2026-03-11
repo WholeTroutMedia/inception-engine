@@ -1,0 +1,23 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "noEmit": true,
+        "paths": {
+            "@inception/genkit": [
+                "../genkit/src/index.ts"
+            ],
+            "@inception/campaign": [
+                "../campaign/src/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

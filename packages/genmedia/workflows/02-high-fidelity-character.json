@@ -1,0 +1,183 @@
+{
+    "last_node_id": 15,
+    "last_link_id": 15,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "UNETLoader",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "unet_name": "flux1-dev.safetensors",
+                "weight_dtype": "fp8_e4m3fn"
+            }
+        },
+        {
+            "id": 2,
+            "type": "DualCLIPLoader",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "clip_name1": "t5xxl_fp8_e4m3fn.safetensors",
+                "clip_name2": "clip_l.safetensors",
+                "type": "flux"
+            }
+        },
+        {
+            "id": 3,
+            "type": "VAELoader",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "vae_name": "ae.safetensors"
+            }
+        },
+        {
+            "id": 4,
+            "type": "CLIPTextEncode",
+            "pos": [
+                400,
+                250
+            ],
+            "inputs": {
+                "text": "cinematic hero shot, highly detailed 8k, photorealistic facial features, dramatic rim lighting, anamorphic lens 35mm, shallow depth of field, blockbuster movie still",
+                "clip": [
+                    "2",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "EmptyLatentImage",
+            "pos": [
+                400,
+                400
+            ],
+            "inputs": {
+                "width": 1024,
+                "height": 1024,
+                "batch_size": 1
+            }
+        },
+        {
+            "id": 6,
+            "type": "SamplerCustomAdvanced",
+            "pos": [
+                800,
+                250
+            ],
+            "inputs": {
+                "model": [
+                    "1",
+                    0
+                ],
+                "positive": [
+                    "4",
+                    0
+                ],
+                "latents": [
+                    "5",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "VAEDecode",
+            "pos": [
+                1100,
+                250
+            ],
+            "inputs": {
+                "samples": [
+                    "6",
+                    0
+                ],
+                "vae": [
+                    "3",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "SaveImage",
+            "pos": [
+                1400,
+                250
+            ],
+            "inputs": {
+                "images": [
+                    "7",
+                    0
+                ],
+                "filename_prefix": "hero_character_v1"
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            6,
+            0,
+            "MODEL"
+        ],
+        [
+            2,
+            2,
+            0,
+            4,
+            1,
+            "CLIP"
+        ],
+        [
+            3,
+            4,
+            0,
+            6,
+            1,
+            "CONDITIONING"
+        ],
+        [
+            4,
+            5,
+            0,
+            6,
+            2,
+            "LATENT"
+        ],
+        [
+            5,
+            6,
+            0,
+            7,
+            0,
+            "LATENT"
+        ],
+        [
+            6,
+            3,
+            0,
+            7,
+            1,
+            "VAE"
+        ],
+        [
+            7,
+            7,
+            0,
+            8,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

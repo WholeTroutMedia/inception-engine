@@ -1,0 +1,15 @@
+At D:\Google Creative Liberation Engine\Infusion Engine Brainchild\brainchild-v5\.agents\git-monitor.ps1:146 char:58
++         Send-Heartbeat "cycle $cycle �?" pushed $finalSha"
++                                                          ~
+The string is missing the terminator: ".
+At D:\Google Creative Liberation Engine\Infusion Engine Brainchild\brainchild-v5\.agents\git-monitor.ps1:141 char:18
++     if ($pushed) {
++                  ~
+Missing closing '}' in statement block or type definition.
+At D:\Google Creative Liberation Engine\Infusion Engine Brainchild\brainchild-v5\.agents\git-monitor.ps1:78 char:15
++ while ($true) {
++               ~
+Missing closing '}' in statement block or type definition.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : TerminatorExpectedAtEndOfString
+ 

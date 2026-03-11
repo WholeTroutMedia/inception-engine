@@ -1,0 +1,43 @@
+{
+    "name": "@inception/agent-sdk",
+    "version": "1.0.0",
+    "description": "inception-agent — Register any agent into the Creative Liberation Engine mesh from any cloud",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./cloudflare": {
+            "import": "./dist/templates/cloudflare-worker-template.js",
+            "types": "./dist/templates/cloudflare-worker-template.d.ts"
+        },
+        "./aws": {
+            "import": "./dist/templates/aws-lambda-template.js",
+            "types": "./dist/templates/aws-lambda-template.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "type-check": "tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.3.0",
+        "vitest": "^1.0.0"
+    },
+    "keywords": [
+        "creative-liberation-engine",
+        "agentic",
+        "mcp",
+        "multi-cloud",
+        "agent-sdk"
+    ]
+}

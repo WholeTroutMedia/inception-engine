@@ -1,0 +1,175 @@
+{
+    "last_node_id": 9,
+    "last_link_id": 9,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "image": "product_masked.png"
+            }
+        },
+        {
+            "id": 2,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+        },
+        {
+            "id": 3,
+            "type": "ICLightLoader",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "model_name": "iclight_sdxl_fc.safetensors"
+            }
+        },
+        {
+            "id": 4,
+            "type": "CLIPTextEncode",
+            "pos": [
+                500,
+                250
+            ],
+            "inputs": {
+                "text": "commercial product photography, luxury perfume bottle, dramatic studio rim lighting, dark moody background, water reflections, depth of field, 8k resolution, photorealistic"
+            }
+        },
+        {
+            "id": 5,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                550
+            ],
+            "inputs": {
+                "image": "lighting_map.png"
+            }
+        },
+        {
+            "id": 6,
+            "type": "KSampler",
+            "pos": [
+                900,
+                250
+            ],
+            "inputs": {
+                "cfg": 7.0,
+                "denoise": 1.0,
+                "model": [
+                    "2",
+                    0
+                ],
+                "latent_image": [
+                    "1",
+                    0
+                ],
+                "negative": [
+                    ""
+                ],
+                "positive": [
+                    "4",
+                    0
+                ],
+                "sampler_name": "dpmpp_2m_sde",
+                "scheduler": "karras",
+                "seed": 5555555,
+                "steps": 30
+            }
+        },
+        {
+            "id": 7,
+            "type": "VAEDecode",
+            "pos": [
+                1300,
+                250
+            ],
+            "inputs": {
+                "samples": [
+                    "6",
+                    0
+                ],
+                "vae": [
+                    "2",
+                    2
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "SaveImage",
+            "pos": [
+                1600,
+                250
+            ],
+            "inputs": {
+                "filename_prefix": "commercial_product_v1",
+                "images": [
+                    "7",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            6,
+            2,
+            "LATENT"
+        ],
+        [
+            2,
+            2,
+            0,
+            6,
+            0,
+            "MODEL"
+        ],
+        [
+            3,
+            4,
+            0,
+            6,
+            1,
+            "CONDITIONING"
+        ],
+        [
+            4,
+            6,
+            0,
+            7,
+            0,
+            "LATENT"
+        ],
+        [
+            5,
+            2,
+            2,
+            7,
+            1,
+            "VAE"
+        ],
+        [
+            6,
+            7,
+            0,
+            8,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

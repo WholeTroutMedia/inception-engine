@@ -1,0 +1,52 @@
+{
+    "motion": {
+        "transition": {
+            "subtle": {
+                "$value": "{motion.duration.fast} {motion.easing.ease}",
+                "$type": "transition",
+                "description": "Micro-interactions: hover state, focus ring"
+            },
+            "default": {
+                "$value": "{motion.duration.normal} {motion.easing.ease}",
+                "$type": "transition",
+                "description": "Standard UI transitions: panels, menus"
+            },
+            "enter": {
+                "$value": "{motion.duration.slow} {motion.easing.easeOut}",
+                "$type": "transition",
+                "description": "Elements entering the viewport"
+            },
+            "exit": {
+                "$value": "{motion.duration.fast} {motion.easing.easeIn}",
+                "$type": "transition",
+                "description": "Elements leaving the viewport (faster = more natural)"
+            },
+            "spring": {
+                "$value": "{motion.duration.slow} {motion.easing.spring}",
+                "$type": "transition",
+                "description": "Elastic / bouncy interactions: drawers, modals"
+            },
+            "dramatic": {
+                "$value": "{motion.duration.dramatic} {motion.easing.ease}",
+                "$type": "transition",
+                "description": "Hero transitions, page-level animations"
+            }
+        },
+        "animation": {
+            "fadein": {
+                "$value": "fadein {motion.duration.normal} {motion.easing.easeOut} both",
+                "$type": "string",
+                "description": "Reusable animation shorthand for fade-in keyframe"
+            },
+            "slideup": {
+                "$value": "slideup {motion.duration.slow} {motion.easing.easeOut} both",
+                "$type": "string"
+            },
+            "pulse": {
+                "$value": "pulse {motion.duration.slower} {motion.easing.ease} infinite",
+                "$type": "string",
+                "description": "Attention-grabbing pulse for status indicators"
+            }
+        }
+    }
+}

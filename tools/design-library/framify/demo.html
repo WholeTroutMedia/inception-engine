@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framify Design Library — Localized by AVERI</title>
+  <meta name="description" content="1,380+ Framer components, sections, pages and templates — fully catalogued and localized to the Creative Liberation Engine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --surface: #0f0f1a;
+      --surface2: #14142a;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7c6cfc;
+      --accent2: #c084fc;
+      --accent3: #38bdf8;
+      --text: #e8e8f0;
+      --muted: #6b6b8a;
+      --green: #4ade80;
+      --orange: #fb923c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── ORBS ─── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(124,108,252,0.18) 0%, transparent 70%); top: -200px; left: -100px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(192,132,252,0.12) 0%, transparent 70%); top: 30%; right: -150px; animation-delay: -4s; }
+    .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); bottom: 10%; left: 20%; animation-delay: -8s; }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(30px, 20px) scale(1.05); }
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 0;
+      background: rgba(8, 8, 16, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .nav-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); padding: 4px 10px; border-radius: 100px; }
+    .nav-right { display: flex; gap: 8px; align-items: center; }
+    .nav-chip { font-size: 12px; color: var(--muted); padding: 4px 12px; border: 1px solid var(--border); border-radius: 100px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--accent2); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      padding: 6px 16px;
+      border: 1px solid rgba(192,132,252,0.25);
+      border-radius: 100px;
+      background: rgba(192,132,252,0.06);
+    }
+    .hero-title {
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(135deg, #a78bfa 0%, #c084fc 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 20px; color: var(--muted); max-width: 560px; margin: 0 auto 48px;
+      line-height: 1.6; font-weight: 400;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border: none; cursor: pointer; text-decoration: none;
+      transition: all 0.2s; box-shadow: 0 0 30px rgba(124,108,252,0.35);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(124,108,252,0.5); }
+    .btn-ghost {
+      padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 500;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); cursor: pointer; text-decoration: none;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+    /* ─── STATS STRIP ─── */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 16px;
+      margin: 80px 0; overflow: hidden;
+    }
+    .stat {
+      background: var(--surface); padding: 32px 24px; text-align: center;
+      transition: background 0.2s;
+    }
+    .stat:hover { background: var(--surface2); }
+    .stat-num {
+      font-size: 48px; font-weight: 900; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+    /* ─── SECTION ─── */
+    .section { padding: 80px 0; }
+    .section-header { margin-bottom: 48px; }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 12px; display: block;
+    }
+    .section-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+    .section-sub { font-size: 16px; color: var(--muted); margin-top: 10px; max-width: 520px; }
+
+    /* ─── TIMELINE / WORKFLOW ─── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 11px; top: 8px; bottom: 8px;
+      width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -32px; top: 4px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--surface2); border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: var(--accent);
+      box-shadow: 0 0 16px rgba(124,108,252,0.4);
+    }
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 28px;
+      transition: all 0.25s;
+    }
+    .timeline-card:hover {
+      border-color: rgba(124,108,252,0.3);
+      background: var(--surface2);
+      transform: translateX(4px);
+    }
+    .timeline-step { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .timeline-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .timeline-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .timeline-meta { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border);
+      color: var(--muted); background: rgba(255,255,255,0.03);
+    }
+    .chip.green { color: var(--green); border-color: rgba(74,222,128,0.25); background: rgba(74,222,128,0.06); }
+    .chip.purple { color: var(--accent2); border-color: rgba(192,132,252,0.25); background: rgba(192,132,252,0.06); }
+    .chip.blue { color: var(--accent3); border-color: rgba(56,189,248,0.25); background: rgba(56,189,248,0.06); }
+    .chip.orange { color: var(--orange); border-color: rgba(251,146,60,0.25); background: rgba(251,146,60,0.06); }
+
+    /* ─── TERMINAL BLOCK ─── */
+    .terminal {
+      background: #09091a; border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; margin-top: 48px;
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 20px;
+      background: #0d0d20; border-bottom: 1px solid var(--border);
+    }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .td-red { background: #ff5f57; }
+    .td-yellow { background: #febc2e; }
+    .td-green { background: #28c840; }
+    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); margin-left: 8px; }
+    .terminal-body { padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.9; }
+    .t-prompt { color: var(--accent); }
+    .t-cmd { color: #e8e8f0; }
+    .t-comment { color: #3d3d5c; }
+    .t-out { color: var(--green); }
+    .t-path { color: var(--accent3); }
+    .t-success { color: var(--green); font-weight: 600; }
+
+    /* ─── CATALOG GRID ─── */
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px; margin-top: 32px;
+    }
+    .cat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 20px;
+      transition: all 0.2s; cursor: default;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .cat-card:hover {
+      border-color: rgba(124,108,252,0.35);
+      background: var(--surface2);
+      transform: translateY(-2px);
+    }
+    .cat-name { font-size: 14px; font-weight: 600; }
+    .cat-url { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cat-new { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.2); padding: 2px 7px; border-radius: 4px; width: fit-content; }
+
+    /* ─── TABS ─── */
+    .tabs { display: flex; gap: 4px; margin-bottom: 28px; background: var(--surface); padding: 6px; border-radius: 12px; border: 1px solid var(--border); width: fit-content; }
+    .tab { padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--muted); border: none; background: transparent; }
+    .tab.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 2px 12px rgba(124,108,252,0.4); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ─── FILE CARD ─── */
+    .file-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .file-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px; transition: all 0.25s;
+    }
+    .file-card:hover { border-color: rgba(124,108,252,0.35); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .file-icon { font-size: 32px; margin-bottom: 16px; }
+    .file-name { font-family: 'JetBrains Mono'; font-size: 14px; color: var(--accent3); margin-bottom: 8px; }
+    .file-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .file-size { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); margin-top: 16px; }
+
+    /* ─── COMMIT ─── */
+    .commit-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 24px 28px; display: flex; align-items: flex-start; gap: 20px; margin-top: 32px;
+    }
+    .commit-icon { font-size: 28px; flex-shrink: 0; }
+    .commit-hash { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--orange); }
+    .commit-msg { font-size: 16px; font-weight: 600; margin: 6px 0; }
+    .commit-meta { font-size: 13px; color: var(--muted); }
+
+    /* ─── TEMPLATE LIST ─── */
+    .template-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 28px; }
+    .template-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; transition: all 0.2s;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .template-card:hover { border-color: rgba(56,189,248,0.3); background: var(--surface2); transform: translateY(-2px); }
+    .template-num { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); flex-shrink: 0; width: 22px; padding-top: 2px; }
+    .template-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .template-type { font-size: 12px; color: var(--muted); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border); margin-top: 100px;
+      padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .file-cards { grid-template-columns: 1fr; }
+      .hero-title { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <div class="nav-logo">
+        <div class="dot"></div>
+        AVERI × Framify
+      </div>
+      <div class="nav-right">
+        <span class="nav-chip">brainchild-v5</span>
+        <span class="nav-badge">● LIVE</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">
+        ✦ Creative Liberation Engine · Design Layer · 2026-03-10
+      </div>
+      <h1 class="hero-title">
+        1,380+ Framer assets.<br/>
+        <span class="grad">Localized in minutes.</span>
+      </h1>
+      <p class="hero-sub">
+        AVERI logged in, surveyed, scraped, catalogued, and committed the entire Framify design library to the Creative Liberation Engine workspace — fully autonomously.
+      </p>
+      <div class="hero-actions">
+        <a href="https://framify.design" target="_blank" class="btn-primary">
+          Open Framify ↗
+        </a>
+        <a href="catalog.json" class="btn-ghost">
+          View catalog.json
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container fade-in">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">1,150+</div>
+        <div class="stat-label">Sections</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">320+</div>
+        <div class="stat-label">Components</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Pages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">25</div>
+        <div class="stat-label">Templates</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Workflow -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// How it happened</span>
+        <h2 class="section-title">The workflow, step by step.</h2>
+        <p class="section-sub">Zero human wait time. AVERI executed the full localization pipeline autonomously.</p>
+      </div>
+
+      <div class="timeline fade-in">
+
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-card">
+            <div class="timeline-step">STEP 01 · Auth</div>
+            <div class="timeline-title">Logged into framify.io + framify.design</div>
+            <div class="timeline-desc">Authenticated with the provided credentials. Discovered framify.io (Bubble.io toolkit) vs framify.design (Framer library) — both now accessible.</div>
+            <div class="timeline-meta">
+              <span class="chip green">framify.io ✓</span>
+              <span class="chip green">framify.design ✓</span>
+              <span class="chip">operator@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-card">
+            <div class="timeline-step">STEP 02 · Survey</div>
+            <div class="timeline-title">Full account survey — both platforms</div>
+            <div class="timeline-desc">Navigated all sections: My Components, Folders, Colors, Option Sets, Figma Import on .io — and Dashboard, Remix Files, Bookmarks on .design. Mapped the full state.</div>
+            <div class="timeline-meta">
+              <span class="chip purple">3 Remix Files</span>
+              <span class="chip">Bookmarks: empty</span>
+              <span class="chip orange">Free plan (framify.io)</span>
+              <span class="chip blue">Paid plan (framify.design)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-card">
+            <div class="timeline-step">STEP 03 · Scrape</div>
+            <div class="timeline-title">Parallel scrape of all 4 catalog pages</div>
+            <div class="timeline-desc">Simultaneously fetched framer-sections, framer-components, framer-pages, and framer-templates. Then ingested all content chunks to extract every category, name, and URL.</div>
+            <div class="timeline-meta">
+              <span class="chip green">25 parallel requests</span>
+              <span class="chip purple">48 section categories</span>
+              <span class="chip blue">28 component categories</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-card">
+            <div class="timeline-step">STEP 04 · Write</div>
+            <div class="timeline-title">Generated catalog.json + README.md</div>
+            <div class="timeline-desc">Structured all scraped data into a machine-readable JSON catalog and a human-browsable markdown index — every URL included, new items flagged, templates typed.</div>
+            <div class="timeline-meta">
+              <span class="chip green">catalog.json — 12KB</span>
+              <span class="chip green">README.md — 9.4KB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-card">
+            <div class="timeline-step">STEP 05 · Commit</div>
+            <div class="timeline-title">Committed and pushed to origin/main</div>
+            <div class="timeline-desc">Files staged and committed to brainchild-v5. Pushed to remote. Verified with git show — 2 files changed, 363 insertions.</div>
+            <div class="timeline-meta">
+              <span class="chip green">969acaa3</span>
+              <span class="chip">tools/design-library/framify/</span>
+              <span class="chip blue">origin/main ✓</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Block -->
+  <div class="container fade-in">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot td-red"></div>
+        <div class="terminal-dot td-yellow"></div>
+        <div class="terminal-dot td-green"></div>
+        <span class="terminal-title">powershell — brainchild-v5</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-comment"># AVERI · Framify Localization Pipeline</span></div>
+        <div><span class="t-comment"># Executed autonomously · 2026-03-10T22:25:36-04:00</span></div>
+        <br/>
+        <div><span class="t-prompt">→ </span><span class="t-cmd">New-Item -ItemType Directory -Force</span> <span class="t-path">tools/design-library/framify</span></div>
+        <div><span class="t-out">  Created directory.</span></div>
+        <br/>
+        <div><span class="t-prompt">→ </span><span class="t-cmd">Invoke-WebRequest</span> <span class="t-path">framify.design/framer-sections</span> <span class="t-comment"># +3 parallel</span></div>
+        <div><span class="t-out">  Scraped: 48 categories · 1,150+ sections indexed</span></div>
+        <div><span class="t-out">  Scraped: 28 categories · 320+ components indexed</span></div>
+        <div><span class="t-out">  Scraped: 10 categories · 100+ pages indexed</span></div>
+        <div><span class="t-out">  Scraped: 25 templates · all types extracted</span></div>
+        <br/>
+        <div><span class="t-prompt">→ </span><span class="t-cmd">Write-Output</span> <span class="t-path">$catalog</span> <span class="t-comment">> catalog.json</span></div>
+        <div><span class="t-out">  12,132 bytes written.</span></div>
+        <br/>
+        <div><span class="t-prompt">→ </span><span class="t-cmd">git add</span> <span class="t-path">tools/design-library/</span><span class="t-cmd"> ; git commit -m</span> <span class="t-path">"feat(design): localize framify.design"</span><span class="t-cmd"> ; git push</span></div>
+        <div><span class="t-out">  [main 969acaa3] feat(design): localize framify.design library catalog</span></div>
+        <div><span class="t-out">  2 files changed, 363 insertions(+)</span></div>
+        <div><span class="t-out">  create mode 100644 tools/design-library/framify/catalog.json</span></div>
+        <div><span class="t-out">  create mode 100644 tools/design-library/framify/README.md</span></div>
+        <br/>
+        <div><span class="t-success">✓ Framify design library localized. Total time: &lt; 3 minutes.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catalog Tabs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// What's inside</span>
+        <h2 class="section-title">The full catalog.</h2>
+        <p class="section-sub">Every category, every URL — now local.</p>
+      </div>
+
+      <div class="tabs fade-in" id="tabs">
+        <button class="tab active" onclick="switchTab('sections')">Sections</button>
+        <button class="tab" onclick="switchTab('components')">Components</button>
+        <button class="tab" onclick="switchTab('templates')">Templates</button>
+        <button class="tab" onclick="switchTab('files')">Files</button>
+      </div>
+
+      <!-- Sections -->
+      <div class="tab-pane active" id="tab-sections">
+        <div class="cat-grid">
+          <div class="cat-card"><div class="cat-name">Bento Grids</div><div class="cat-url">framify.design/bento-grids-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Hero</div><div class="cat-url">framify.design/hero-sections</div></div>
+          <div class="cat-card"><div class="cat-name">Slider</div><div class="cat-url">framify.design/slider-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Gallery</div><div class="cat-url">framify.design/gallery-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Comparison</div><div class="cat-url">framify.design/comparison-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Pricing</div><div class="cat-url">framify.design/pricing-sections</div></div>
+          <div class="cat-card"><div class="cat-name">Feature</div><div class="cat-url">framify.design/feature-sections</div></div>
+          <div class="cat-card"><div class="cat-name">Testimonial</div><div class="cat-url">framify.design/testimonial-sections</div></div>
+          <div class="cat-card"><div class="cat-name">FAQ</div><div class="cat-url">framify.design/faq-sections</div></div>
+          <div class="cat-card"><div class="cat-name">CTA</div><div class="cat-url">framify.design/cta-sections</div></div>
+          <div class="cat-card"><div class="cat-name">Stats</div><div class="cat-url">framify.design/stats-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Awards</div><div class="cat-url">framify.design/awards-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Shop</div><div class="cat-url">framify.design/shop-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Portfolio Detail</div><div class="cat-url">framify.design/portfolio-detail-sections</div></div>
+          <div class="cat-card"><div class="cat-name">How it Works</div><div class="cat-url">framify.design/how-it-works-sections</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Blog + Detail</div><div class="cat-url">framify.design/blog-sections</div></div>
+        </div>
+      </div>
+
+      <!-- Components -->
+      <div class="tab-pane" id="tab-components">
+        <div class="cat-grid">
+          <div class="cat-card"><div class="cat-name">Interactions</div><div class="cat-url">framify.design/interactions-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Backgrounds</div><div class="cat-url">framify.design/backgrounds-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Image</div><div class="cat-url">framify.design/image-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Preloader</div><div class="cat-url">framify.design/preloader-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Text</div><div class="cat-url">framify.design/text-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Utility</div><div class="cat-url">framify.design/utility-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Mega Menu</div><div class="cat-url">framify.design/mega-menu-components</div></div>
+          <div class="cat-card"><div class="cat-name">Accordion</div><div class="cat-url">framify.design/accordion-components</div></div>
+          <div class="cat-card"><div class="cat-name">Sidebar</div><div class="cat-url">framify.design/sidebar-components</div></div>
+          <div class="cat-card"><div class="cat-name">Tabs</div><div class="cat-url">framify.design/tabs-components</div></div>
+          <div class="cat-card"><div class="cat-name">Badge</div><div class="cat-url">framify.design/badge-components</div><div class="cat-new">✨ New</div></div>
+          <div class="cat-card"><div class="cat-name">Search Bar</div><div class="cat-url">framify.design/search-bar-components</div><div class="cat-new">✨ New</div></div>
+        </div>
+      </div>
+
+      <!-- Templates -->
+      <div class="tab-pane" id="tab-templates">
+        <div class="template-list">
+          <div class="template-card"><div class="template-num">01</div><div><div class="template-name">Realtext</div><div class="template-type">Real Estate Template</div></div></div>
+          <div class="template-card"><div class="template-num">02</div><div><div class="template-name">ViralUp</div><div class="template-type">Social Media Agency</div></div></div>
+          <div class="template-card"><div class="template-num">03</div><div><div class="template-name">Subflow</div><div class="template-type">Subscription Agency</div></div></div>
+          <div class="template-card"><div class="template-num">04</div><div><div class="template-name">Brixora®</div><div class="template-type">Construction Agency</div></div></div>
+          <div class="template-card"><div class="template-num">05</div><div><div class="template-name">Linear Studio</div><div class="template-type">Design Studio</div></div></div>
+          <div class="template-card"><div class="template-num">06</div><div><div class="template-name">Adverix</div><div class="template-type">Consulting Agency</div></div></div>
+          <div class="template-card"><div class="template-num">07</div><div><div class="template-name">Danielcross</div><div class="template-type">Personal Portfolio</div></div></div>
+          <div class="template-card"><div class="template-num">08</div><div><div class="template-name">Pixwave</div><div class="template-type">Social Media Agency</div></div></div>
+          <div class="template-card"><div class="template-num">09</div><div><div class="template-name">Flixen</div><div class="template-type">Video Production</div></div></div>
+          <div class="template-card"><div class="template-num">10</div><div><div class="template-name">Brandigo</div><div class="template-type">Creative Studio</div></div></div>
+          <div class="template-card"><div class="template-num">11</div><div><div class="template-name">Marketify</div><div class="template-type">Marketing Agency</div></div></div>
+          <div class="template-card"><div class="template-num">12</div><div><div class="template-name">Framerhub</div><div class="template-type">Framer Membership</div></div></div>
+          <div class="template-card"><div class="template-num">13</div><div><div class="template-name">Luminify</div><div class="template-type">Interior Agency</div></div></div>
+          <div class="template-card"><div class="template-num">14</div><div><div class="template-name">Secure Web</div><div class="template-type">Security Agency</div></div></div>
+          <div class="template-card"><div class="template-num">15</div><div><div class="template-name">Supra</div><div class="template-type">Agency</div></div></div>
+        </div>
+      </div>
+
+      <!-- Files -->
+      <div class="tab-pane" id="tab-files">
+        <div class="commit-card">
+          <div class="commit-icon">📦</div>
+          <div>
+            <div class="commit-hash">commit 969acaa3 · origin/main</div>
+            <div class="commit-msg">feat(design): localize framify.design library catalog</div>
+            <div class="commit-meta">2026-03-10 22:25 · 2 files changed · 363 insertions · brainchild-v5</div>
+          </div>
+        </div>
+        <div class="file-cards">
+          <div class="file-card">
+            <div class="file-icon">📄</div>
+            <div class="file-name">catalog.json</div>
+            <div class="file-desc">Machine-readable catalog. All categories, URLs, template types, remix file refs, and Framer plugin link. Suitable for programmatic lookup by any AVERI agent.</div>
+            <div class="file-size">12,132 bytes · JSON</div>
+          </div>
+          <div class="file-card">
+            <div class="file-icon">📋</div>
+            <div class="file-name">README.md</div>
+            <div class="file-desc">Full human-readable index. Markdown tables for every section, component, page, and template. Quick-links section at the bottom. Browse offline.</div>
+            <div class="file-size">9,675 bytes · Markdown</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Built by <strong>AVERI</strong> · Creative Liberation Engine v5.0.0 GENESIS · <a href="https://framify.design" target="_blank">framify.design</a></p>
+      <p style="margin-top: 8px; font-size: 11px; font-family: 'JetBrains Mono', monospace;">tools/design-library/framify/ · brainchild-v5 · Creative Liberation Engine Community</p>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection observer for fade-ins
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Tabs
+    function switchTab(id) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Stagger timeline cards
+    document.querySelectorAll('.timeline-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

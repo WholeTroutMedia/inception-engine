@@ -1,0 +1,82 @@
+[
+    {
+        "id": "art-i-sovereignty",
+        "article": 1,
+        "description": "Prefer sovereign/local infrastructure; audit any external data exfiltration actions",
+        "rule_type": "audit_required",
+        "conditions": {
+            "action_types": [
+                "browser_download",
+                "browser_har_export",
+                "browser_intercept_requests"
+            ]
+        },
+        "action": "audit"
+    },
+    {
+        "id": "art-iv-quality",
+        "article": 4,
+        "description": "All form fills must be intentional; forms are audited before submission",
+        "rule_type": "audit_required",
+        "conditions": {
+            "action_types": [
+                "browser_fill",
+                "browser_type",
+                "browser_smart_form_fill"
+            ]
+        },
+        "action": "audit"
+    },
+    {
+        "id": "art-iv-no-harm",
+        "article": 4,
+        "description": "Block navigation to known malicious or harmful domain patterns",
+        "rule_type": "domain_block",
+        "conditions": {
+            "domains": []
+        },
+        "action": "block"
+    },
+    {
+        "id": "art-ix-no-mvp",
+        "article": 9,
+        "description": "No half-baked extractions — browser_extract_data must target meaningful content",
+        "rule_type": "audit_required",
+        "conditions": {
+            "action_types": [
+                "browser_extract_data"
+            ]
+        },
+        "action": "audit"
+    },
+    {
+        "id": "art-xx-pii-guard",
+        "article": 20,
+        "description": "Warn when PII-adjacent data is being entered into forms",
+        "rule_type": "pii_guard",
+        "conditions": {
+            "keywords": [
+                "ssn",
+                "social security",
+                "passport number",
+                "credit card",
+                "cvv",
+                "pin number",
+                "bank account",
+                "routing number"
+            ]
+        },
+        "action": "warn"
+    },
+    {
+        "id": "art-xx-rate-limit",
+        "article": 20,
+        "description": "Prevent agents from hammering external sites; max 30 requests/min per domain",
+        "rule_type": "rate_limit",
+        "conditions": {
+            "max_requests_per_minute": 30,
+            "scope": "per_domain"
+        },
+        "action": "block"
+    }
+]

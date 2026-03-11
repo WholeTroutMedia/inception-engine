@@ -1,0 +1,16 @@
+{
+    "name": "@inception/social",
+    "version": "1.0.0",
+    "description": "IECR Social Layer — Process Post, collaborative sessions, Lens Protocol (P2)",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "typescript": "^5.3.0"
+    }
+}

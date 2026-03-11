@@ -1,0 +1,176 @@
+# Model Registry -- Creative Liberation Engine
+# Auto-maintained by PRISM + Arbitrage Engine
+# Last updated: 2026-03-11
+# refs #46 #eon-bio-integration
+
+schema_version: "1.0.0"
+
+providers:
+  google:
+    name: Google AI
+    api_base: https://generativelanguage.googleapis.com/v1beta
+    auth_env: GOOGLE_AI_API_KEY
+    models:
+      gemini-2.5-pro:
+        context_window: 1048576
+        cost_per_1k_input: 0.00125
+        cost_per_1k_output: 0.005
+        modalities: [text, image, audio, video, code]
+        reasoning_score: 92
+        creative_score: 88
+        code_score: 90
+        factual_score: 91
+        speed_tier: standard
+        status: active
+      gemini-2.5-flash:
+        context_window: 1048576
+        cost_per_1k_input: 0.00015
+        cost_per_1k_output: 0.0006
+        modalities: [text, image, audio, video, code]
+        reasoning_score: 78
+        creative_score: 72
+        code_score: 80
+        factual_score: 82
+        speed_tier: fast
+        status: active
+      gemini-2.0-flash:
+        context_window: 1048576
+        cost_per_1k_input: 0.0001
+        cost_per_1k_output: 0.0004
+        modalities: [text, image, audio, video, code]
+        reasoning_score: 70
+        creative_score: 65
+        code_score: 72
+        factual_score: 74
+        speed_tier: realtime
+        status: active
+
+  anthropic:
+    name: Anthropic
+    api_base: https://api.anthropic.com/v1
+    auth_env: ANTHROPIC_API_KEY
+    models:
+      claude-sonnet-4:
+        context_window: 200000
+        cost_per_1k_input: 0.003
+        cost_per_1k_output: 0.015
+        modalities: [text, image, code]
+        reasoning_score: 90
+        creative_score: 85
+        code_score: 93
+        factual_score: 89
+        speed_tier: standard
+        status: active
+      claude-haiku-3.5:
+        context_window: 200000
+        cost_per_1k_input: 0.0008
+        cost_per_1k_output: 0.004
+        modalities: [text, image, code]
+        reasoning_score: 72
+        creative_score: 68
+        code_score: 75
+        factual_score: 74
+        speed_tier: fast
+        status: active
+
+  openai:
+    name: OpenAI
+    api_base: https://api.openai.com/v1
+    auth_env: OPENAI_API_KEY
+    models:
+      gpt-4.1:
+        context_window: 1048576
+        cost_per_1k_input: 0.002
+        cost_per_1k_output: 0.008
+        modalities: [text, image, code]
+        reasoning_score: 88
+        creative_score: 82
+        code_score: 89
+        factual_score: 87
+        speed_tier: standard
+        status: active
+      gpt-4.1-mini:
+        context_window: 1048576
+        cost_per_1k_input: 0.0004
+        cost_per_1k_output: 0.0016
+        modalities: [text, image, code]
+        reasoning_score: 75
+        creative_score: 70
+        code_score: 78
+        factual_score: 76
+        speed_tier: fast
+        status: active
+      gpt-4.1-nano:
+        context_window: 1048576
+        cost_per_1k_input: 0.0001
+        cost_per_1k_output: 0.0004
+        modalities: [text, code]
+        reasoning_score: 62
+        creative_score: 55
+        code_score: 65
+        factual_score: 64
+        speed_tier: realtime
+        status: active
+
+  local:
+    name: Local (Ollama/vLLM)
+    api_base: http://localhost/v1
+    auth_env: null
+    models:
+      llama-3.3-70b:
+        context_window: 131072
+        cost_per_1k_input: 0
+        cost_per_1k_output: 0
+        modalities: [text, code]
+        reasoning_score: 68
+        creative_score: 62
+        code_score: 70
+        factual_score: 66
+        speed_tier: batch
+        status: active
+        is_local: true
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # EON Systems — Brain Emulation Runtime
+  # Forward-declared. Activates when EON_BIO_API_KEY is present in environment.
+  # Bio-fidelity values are empirical from published research (not quality_score proxies).
+  # Roadmap: drosophila-v1 (live) → mouse-v1 (~2028) → human-v1 (long-term)
+  # ─────────────────────────────────────────────────────────────────────────────
+  eon-bio:
+    name: Eon Systems — Brain Emulation Runtime
+    api_base: https://api.eon.systems/v1
+    auth_env: EON_BIO_API_KEY
+    models:
+      drosophila-v1:
+        context_window: 4096
+        cost_per_1k_input: 0
+        cost_per_1k_output: 0
+        modalities: [emergent, sensorimotor]
+        bio_fidelity: 91
+        behavioral_accuracy_pct: 91
+        neuron_count: 140000
+        synapse_count: 50000000
+        physics_engine: mujoco
+        primary_behaviors: [walking, grooming, foraging, escape]
+        paper_doi: "10.1038/s41586-024-08404-1"
+        status: pending
+        is_experimental: true
+        is_local: false
+        notes: >
+          World's first embodied whole-brain emulation. 140k neurons, 50M synapses.
+          Behaviors emerge from direct biological connectome copy — no RL or hand-tuning.
+          API access pending research partnership with Eon Systems.
+      # mouse-v1: ROADMAP — Eon Systems targeting ~2028
+      #   neuron_count: 70000000
+      #   status: roadmap
+
+# Tier resolution rules (dynamic -- overridden by benchmark)
+tier_defaults:
+  frontier: [google/gemini-2.5-pro, anthropic/claude-sonnet-4, openai/gpt-4.1]
+  efficient: [google/gemini-2.5-flash, anthropic/claude-haiku-3.5, openai/gpt-4.1-mini]
+  fast: [google/gemini-2.0-flash, openai/gpt-4.1-nano]
+  local: [local/llama-3.3-70b]
+  creative: [google/gemini-2.5-pro, anthropic/claude-sonnet-4]
+  code: [anthropic/claude-sonnet-4, google/gemini-2.5-pro, openai/gpt-4.1]
+  # Bio-emulation tier — activates when EON_BIO_API_KEY is present
+  bio-emulation: [eon-bio/drosophila-v1]

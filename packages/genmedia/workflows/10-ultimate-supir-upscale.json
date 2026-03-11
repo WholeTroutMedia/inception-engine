@@ -1,0 +1,261 @@
+{
+    "last_node_id": 11,
+    "last_link_id": 11,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadImage",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "image": "source_raw_render.png"
+            }
+        },
+        {
+            "id": 2,
+            "type": "SUPIRModelLoader",
+            "pos": [
+                100,
+                300
+            ],
+            "inputs": {
+                "supir_model": "SUPIR-v0Q.safetensors"
+            }
+        },
+        {
+            "id": 3,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                450
+            ],
+            "inputs": {
+                "ckpt_name": "Juggernaut-XL_v9.safetensors"
+            }
+        },
+        {
+            "id": 4,
+            "type": "SUPIRFirstStage",
+            "pos": [
+                500,
+                100
+            ],
+            "inputs": {
+                "image": [
+                    "1",
+                    0
+                ],
+                "vae": [
+                    "3",
+                    2
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "SUPIREncode",
+            "pos": [
+                900,
+                100
+            ],
+            "inputs": {
+                "supir_model": [
+                    "2",
+                    0
+                ],
+                "latents": [
+                    "4",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "type": "CLIPTextEncode",
+            "pos": [
+                500,
+                300
+            ],
+            "inputs": {
+                "text": "high quality detail, maximum resolution, 4k cinematic grading"
+            }
+        },
+        {
+            "id": 7,
+            "type": "SUPIRConditioning",
+            "pos": [
+                900,
+                300
+            ],
+            "inputs": {
+                "supir_model": [
+                    "2",
+                    0
+                ],
+                "positive": [
+                    "6",
+                    0
+                ],
+                "sdxl_model": [
+                    "3",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "SUPIRSampler",
+            "pos": [
+                1300,
+                100
+            ],
+            "inputs": {
+                "cfg_scale_start": 2.5,
+                "cfg_scale_end": 1.0,
+                "steps": 25,
+                "sampler": "RestoreDPM++ 2M",
+                "s_churn": 0,
+                "s_noise": 1.003,
+                "supir_model": [
+                    "2",
+                    0
+                ],
+                "encoded_latents": [
+                    "5",
+                    0
+                ],
+                "conditioning": [
+                    "7",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "type": "SUPIRDecode",
+            "pos": [
+                1700,
+                100
+            ],
+            "inputs": {
+                "samples": [
+                    "8",
+                    0
+                ],
+                "vae": [
+                    "3",
+                    2
+                ],
+                "decoder_tile_size": 768,
+                "tile_overlap": 384
+            }
+        },
+        {
+            "id": 10,
+            "type": "SaveImage",
+            "pos": [
+                2100,
+                100
+            ],
+            "inputs": {
+                "filename_prefix": "supir_4k_upscale_v1",
+                "images": [
+                    "9",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            4,
+            0,
+            "IMAGE"
+        ],
+        [
+            2,
+            3,
+            2,
+            4,
+            1,
+            "VAE"
+        ],
+        [
+            3,
+            2,
+            0,
+            5,
+            0,
+            "SUPIR_MODEL"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            1,
+            "LATENTS"
+        ],
+        [
+            5,
+            2,
+            0,
+            7,
+            0,
+            "SUPIR_MODEL"
+        ],
+        [
+            6,
+            6,
+            0,
+            7,
+            1,
+            "POSITIVE"
+        ],
+        [
+            7,
+            3,
+            0,
+            7,
+            2,
+            "SDXL_MODEL"
+        ],
+        [
+            8,
+            2,
+            0,
+            8,
+            0,
+            "SUPIR_MODEL"
+        ],
+        [
+            9,
+            5,
+            0,
+            8,
+            1,
+            "ENCODED_LATENTS"
+        ],
+        [
+            10,
+            7,
+            0,
+            8,
+            2,
+            "CONDITIONING"
+        ],
+        [
+            11,
+            8,
+            0,
+            9,
+            0,
+            "SAMPLES"
+        ]
+    ]
+}

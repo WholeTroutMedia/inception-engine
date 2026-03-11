@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constitutional Governance for Multi-Agent Systems — AI Agent Conference 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --amber: hsl(38, 92%, 52%);
+            --rose: hsl(346, 84%, 61%);
+            --violet: hsl(262, 83%, 68%);
+            --ink: hsl(220, 13%, 9%);
+            --ink-2: hsl(220, 12%, 13%);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-2: rgba(255, 255, 255, 0.09);
+            --text: hsl(0, 0%, 95%);
+            --muted: hsl(220, 10%, 55%);
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--ink);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .deck {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            animation: slideIn 0.4s ease;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 100;
+            background: var(--glass-2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 100px;
+            backdrop-filter: blur(20px);
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px 8px;
+            transition: color 0.2s;
+        }
+
+        .nav button:hover {
+            color: var(--amber);
+        }
+
+        .slide-counter {
+            font-size: 13px;
+            color: var(--muted);
+            font-family: var(--mono);
+            min-width: 48px;
+            text-align: center;
+        }
+
+        /* Common */
+        .tag {
+            display: inline-block;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-family: var(--mono);
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .tag.amber {
+            border-color: rgba(245, 158, 11, 0.4);
+            color: var(--amber);
+        }
+
+        .tag.rose {
+            border-color: rgba(251, 113, 133, 0.4);
+            color: var(--rose);
+        }
+
+        .tag.violet {
+            border-color: rgba(167, 139, 250, 0.4);
+            color: var(--violet);
+        }
+
+        h1 {
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(28px, 3vw, 48px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: clamp(20px, 2vw, 32px);
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--amber), var(--rose), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 15px;
+        }
+
+        .number {
+            font-size: 64px;
+            font-weight: 900;
+            font-family: var(--mono);
+            background: linear-gradient(135deg, var(--amber), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .code-block {
+            background: var(--ink-2);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 20px 24px;
+            font-family: var(--mono);
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: left;
+            color: var(--amber);
+            white-space: pre;
+            overflow: hidden;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.green {
+            background: #4ade80;
+        }
+
+        .dot.amber {
+            background: var(--amber);
+        }
+
+        .dot.red {
+            background: var(--rose);
+        }
+
+        .glow-line {
+            width: 100px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--amber), var(--rose));
+            margin: 24px auto;
+        }
+
+        /* Slide-specific */
+        #slide-1 {
+            text-align: center;
+            gap: 28px;
+        }
+
+        #slide-1 .subtitle {
+            font-size: 22px;
+            color: var(--muted);
+            max-width: 720px;
+        }
+
+        #slide-1 .meta {
+            font-size: 15px;
+            color: var(--muted);
+            font-family: var(--mono);
+        }
+
+        #slide-2 h2 {
+            margin-bottom: 8px;
+        }
+
+        #slide-2 .gap-list {
+            list-style: none;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #slide-2 .gap-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 18px 24px;
+        }
+
+        #slide-2 .gap-num {
+            font-size: 32px;
+            font-weight: 900;
+            font-family: var(--mono);
+            color: var(--amber);
+            min-width: 48px;
+        }
+
+        #slide-6 .trace-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        #slide-6 .trace-step {
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            align-items: center;
+            gap: 16px;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            padding: 14px 20px;
+        }
+
+        #slide-6 .step-num {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-weight: 700;
+        }
+
+        #slide-6 .step-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active" id="slide-1">
+            <span class="tag amber">AI Agent Conference 2026 · NYC · May 4-5</span>
+            <h1><span class="gradient-text">Constitutional Governance</span><br>for Multi-Agent Systems</h1>
+            <p class="subtitle">20 Articles for Production-Safe AI Orchestration — The governance layer the industry
+                forgot to build.</p>
+            <div class="glow-line"></div>
+            <p class="meta">The Operator · Creative Liberation Engine · Creative Liberation Engine Community</p>
+        </div>
+
+        <!-- Slide 2: The Problem — 5 Governance Gaps -->
+        <div class="slide" id="slide-2">
+            <div style="width:100%;max-width:900px">
+                <span class="tag rose">The Governance Crisis</span>
+                <h2 style="margin:16px 0 28px">5 Questions Nobody Can Answer</h2>
+                <ul class="gap-list">
+                    <li><span class="gap-num">01</span>
+                        <div><strong>Who is this agent?</strong> — No agent identity standard. No OAuth for agents. Zero
+                            accountability chain.</div>
+                    </li>
+                    <li><span class="gap-num">02</span>
+                        <div><strong>What is it allowed to do?</strong> — No RBAC for multi-agent systems. Every agent
+                            can call any API.</div>
+                    </li>
+                    <li><span class="gap-num">03</span>
+                        <div><strong>Who is liable?</strong> — Agent makes a financial error in a regulated environment.
+                            Who owns it?</div>
+                    </li>
+                    <li><span class="gap-num">04</span>
+                        <div><strong>How do you debug 50 agents?</strong> — No visibility into reasoning. Black-box
+                            outcomes, no traceable decisions.</div>
+                    </li>
+                    <li><span class="gap-num">05</span>
+                        <div><strong>Can Agent A trust Agent B?</strong> — No inter-agent trust framework. Cross-agent
+                            calls are fully unauthenticated.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Competitive Landscape -->
+        <div class="slide" id="slide-3">
+            <span class="tag violet">Competitive Landscape</span>
+            <h2 style="margin:16px 0 28px">Who's Solving Governance?</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="color:var(--muted)">CrewAI</h3>
+                    <p>Backend only. No visual layer. No governance certificates. No compliance audit trail.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color:var(--muted)">LangChain</h3>
+                    <p>Tooling framework for developers. No embedded governance. No enterprise audit layer.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color:var(--muted)">AG2ai</h3>
+                    <p>Multi-agent research. Production design system: none. Constitutional rules: none.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color:var(--muted)">OutSystems</h3>
+                    <p>No-code platform. No AI orchestration depth. No agent-level decision visibility.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color:var(--muted)">UiPath</h3>
+                    <p>Enterprise RPA — not developer-native. Agent collaboration: none. Sovereignty: none.</p>
+                </div>
+                <div class="card" style="border-color:rgba(245,158,11,0.4)">
+                    <h3 style="color:var(--amber)">Creative Liberation Engine ✓</h3>
+                    <p>Spatial UI + Constitutional governance + No-code intake + Sovereign NAS-first infra.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Solution — CORTEX Constitution -->
+        <div class="slide" id="slide-4">
+            <div class="grid-2" style="align-items:center">
+                <div>
+                    <span class="tag amber">The Solution</span>
+                    <h2 style="margin:16px 0">The CORTEX Constitution</h2>
+                    <p style="margin-bottom:24px">20 Constitutional Articles that execute at runtime — not just as
+                        guidelines, but as enforceable middleware checks on every agent action.</p>
+                    <p>Governed by the CORTEX Leadership Triad: <strong style="color:var(--amber)">STRATA</strong>
+                        (strategy), <strong style="color:var(--rose)">LOGD</strong> (memory), <strong
+                            style="color:var(--violet)">PRISM</strong> (execution).</p>
+                </div>
+                <div class="code-block">Article IX:
+                    Never ship an MVP.
+                    Ship complete or don't ship.
+
+                    Article VII:
+                    Every execution contributes
+                    to knowledge. Mandatory.
+
+                    Article XV:
+                    Constitutional review required
+                    for: deploy:production,
+                    approve:financial, modify:constitution.
+
+                    Article XX:
+                    No human wait time in task
+                    sequences. Automate everything.</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Agent RBAC -->
+        <div class="slide" id="slide-5">
+            <span class="tag rose">W4 — Agent Identity</span>
+            <h2 style="margin:16px 0 28px">Agent RBAC: The Missing Layer</h2>
+            <div class="grid-2" style="align-items:start">
+                <div>
+                    <h3 style="margin-bottom:16px;color:var(--amber)">12 Capability Scopes</h3>
+                    <div style="display:grid;gap:8px">
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--amber)">read:memory</span> · write:memory</div>
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--amber)">read:files</span> · write:files</div>
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--amber)">execute:genkit</span> · call:external-apis</div>
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--rose)">deploy:production</span> · manage:agents</div>
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--rose)">modify:constitution · approve:financial</span></div>
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)"><span
+                                style="color:var(--violet)">clinical:access · read:constitution</span></div>
+                    </div>
+                </div>
+                <div class="code-block">// Every agent has a scoped JWT
+                    X-Agent-Id: BOLT
+                    X-Agent-Token: eyJhbGc...
+
+                    // Middleware check
+                    requireAgentCapability('write:files')
+                    → BOLT ✅ has capability
+
+                    requireAgentCapability('deploy:production')
+                    → BOLT ❌ RESTRICTED
+                    → 403: "Missing capability: deploy:production"
+                    → NORTHSTAR review triggered</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Blueprint Reasoning Traces -->
+        <div class="slide" id="slide-6">
+            <span class="tag violet">W3 — Inception Blueprints</span>
+            <h2 style="margin:16px 0 28px">Visible Reasoning Traces</h2>
+            <div class="trace-steps">
+                <div class="trace-step">
+                    <span class="step-num">01</span>
+                    <div>
+                        <div class="step-name">Signal Detection</div>
+                        <div style="font-size:14px;color:var(--muted)">Scan market data, news, earnings reports for
+                            statistically significant signals</div>
+                    </div>
+                    <span class="tag violet">STRATA + Perplexity</span>
+                </div>
+                <div class="trace-step">
+                    <span class="step-num">02</span>
+                    <div>
+                        <div class="step-name">Risk Assessment</div>
+                        <div style="font-size:14px;color:var(--muted)">VaR at 95/99% confidence · Max drawdown · Macro
+                            tail risks</div>
+                    </div>
+                    <span class="tag amber">WATCHD</span>
+                </div>
+                <div class="trace-step">
+                    <span class="step-num">03</span>
+                    <div>
+                        <div class="step-name">Position Recommendation</div>
+                        <div style="font-size:14px;color:var(--muted)">Entry · Stop-loss · Conviction score · What would
+                            change your view</div>
+                    </div>
+                    <span class="tag amber">LOGD + NORTHSTAR</span>
+                </div>
+                <div class="trace-step" style="border-color:rgba(251,113,133,0.3)">
+                    <span class="step-num">04</span>
+                    <div>
+                        <div class="step-name">SOX Compliance Audit</div>
+                        <div style="font-size:14px;color:var(--muted)">MNPI check · SEC Rule 10b-5 · Position limits ·
+                            Disclosure requirements</div>
+                    </div>
+                    <span class="tag rose">LEX · Constitutional</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Sovereign Infrastructure -->
+        <div class="slide" id="slide-7">
+            <div class="grid-2" style="align-items:center">
+                <div>
+                    <span class="tag amber">The Sovereign Moat</span>
+                    <h2 style="margin:16px 0">Your Data Never Leaves Your Hardware</h2>
+                    <p style="margin-bottom:20px">Bloomberg, Citigroup, and hospital networks <em>cannot</em> send
+                        proprietary data to OpenAI. They need sovereign, governed, on-premise agent infrastructure.</p>
+                    <p>Creative Liberation Engine runs entirely on a Synology NAS via Docker. No cloud dependency. No data
+                        residency risk. No vendor lock-in.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:16px">
+                    <div class="card">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <span class="dot green"></span>
+                            <strong>Synology NAS</strong>
+                        </div>
+                        <p style="font-size:14px">All 10 GENESIS microservices run locally. ChromaDB, Postgres, Nginx —
+                            no cloud.</p>
+                    </div>
+                    <div class="card">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <span class="dot amber"></span>
+                            <strong>Self-hosted Forgejo CI/CD</strong>
+                        </div>
+                        <p style="font-size:14px">Git server, Docker registry, and runners — all on-premise. Zero GitHub
+                            dependency.</p>
+                    </div>
+                    <div class="card">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <span class="dot green"></span>
+                            <strong>Ollama (local LLMs)</strong>
+                        </div>
+                        <p style="font-size:14px">Offline-capable embeddings via nomic-embed-text. Air-gap ready.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: The Trinity -->
+        <div class="slide" id="slide-8">
+            <span class="tag violet">W1 — Trinity Protocol</span>
+            <h2 style="margin:16px 0 24px">The Three-Tool Development Stack</h2>
+            <div class="grid-3">
+                <div class="card" style="border-color:rgba(245,158,11,0.3);text-align:center">
+                    <div class="number">P</div>
+                    <h3 style="margin:12px 0 8px;color:var(--amber)">PROBE</h3>
+                    <p style="font-size:14px"><strong>Perplexity Computer</strong> — Live web research, competitor
+                        intel, live data. Writes HANDOFF.md with research brief.</p>
+                    <div style="margin-top:12px"><span class="tag amber">Research</span></div>
+                </div>
+                <div class="card" style="border-color:rgba(167,139,250,0.3);text-align:center">
+                    <div class="number"
+                        style="background:linear-gradient(135deg,var(--violet),var(--rose));-webkit-background-clip:text;background-clip:text">
+                        A</div>
+                    <h3 style="margin:12px 0 8px;color:var(--violet)">PLAN</h3>
+                    <p style="font-size:14px"><strong>Google Creative Liberation Engine</strong> — Architecture, implementation plans,
+                        Stitch UI design. Reads HANDOFF, writes implementation plan.</p>
+                    <div style="margin-top:12px"><span class="tag violet">Architecture</span></div>
+                </div>
+                <div class="card" style="border-color:rgba(251,113,133,0.3);text-align:center">
+                    <div class="number"
+                        style="background:linear-gradient(135deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text">
+                        C</div>
+                    <h3 style="margin:12px 0 8px;color:var(--rose)">SHIP</h3>
+                    <p style="font-size:14px"><strong>Claude Code</strong> — Code execution, file editing, git
+                        operations. Reads HANDOFF + task.md, ships complete.</p>
+                    <div style="margin-top:12px"><span class="tag rose">Execution</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Zero-Day No-Code Intake -->
+        <div class="slide" id="slide-9">
+            <div class="grid-2" style="align-items:center;gap:60px">
+                <div>
+                    <span class="tag rose">W6 — Zero-Day Intake</span>
+                    <h2 style="margin:16px 0">The No-Code Surface</h2>
+                    <p style="margin-bottom:20px">A hospital CTO should be able to provision a 15-agent clinical
+                        decision support network without writing a single line of code.</p>
+                    <p>Zero-Day Intake: public form → `provisionAgentNetwork` Genkit flow → live client dashboard with
+                        agent status, memory graph, and constitutional audit trail.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px">
+                        <strong style="color:var(--amber);font-family:var(--mono);font-size:20px">01</strong>
+                        <div><strong>Intake Form</strong><br><span style="font-size:14px;color:var(--muted)">Industry →
+                                use case → data sources → compliance requirements</span></div>
+                    </div>
+                    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px">
+                        <strong style="color:var(--amber);font-family:var(--mono);font-size:20px">02</strong>
+                        <div><strong>Blueprint Selection</strong><br><span
+                                style="font-size:14px;color:var(--muted)">Finance · Healthcare · Media — or custom
+                                configuration</span></div>
+                    </div>
+                    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px">
+                        <strong style="color:var(--amber);font-family:var(--mono);font-size:20px">03</strong>
+                        <div><strong>Auto-Provisioned Network</strong><br><span
+                                style="font-size:14px;color:var(--muted)">Agent team deployed, monitoring active, LEX
+                                contract generated</span></div>
+                    </div>
+                    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px">
+                        <strong style="color:var(--amber);font-family:var(--mono);font-size:20px">04</strong>
+                        <div><strong>Client Dashboard</strong><br><span style="font-size:14px;color:var(--muted)">Live
+                                agent status · Memory graph · Constitutional audit trail</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Live Demo -->
+        <div class="slide" id="slide-10">
+            <span class="tag amber">Live Demo</span>
+            <h2 style="margin:16px 0 12px">Finance Blueprint — Running Now</h2>
+            <p style="margin-bottom:32px;max-width:600px;text-align:center">Watch STRATA lead 4 agents through a market
+                analysis in real-time. Every reasoning step visible. Constitutional review fires live.</p>
+            <div class="code-block">→ BLUEPRINTS RUNNER: finance-v1 · query: "NVDA Q1 2026 positioning"
+
+                [01] SIGNAL DETECTION (STRATA + Perplexity)
+                Signals found: 3 | Highest strength: 8.2/10 | Horizon: 45 days
+
+                [02] RISK ASSESSMENT (WATCHD)
+                VaR 95%: -4.2% | VaR 99%: -8.1% | Tail risk: MODERATE
+
+                [03] POSITION RECOMMENDATION (LOGD + NORTHSTAR)
+                Direction: LONG | Conviction: 7/10 | Stop: -6.5% | Target: +18%
+
+                [04] SOX COMPLIANCE AUDIT (LEX) ← constitutional check
+                MNPI risk: LOW ✅ | 10b-5 exposure: NONE ✅ | Disclosure: NONE ✅
+                CONSTITUTIONAL REVIEW: APPROVED ✅
+
+                Total latency: 14.2s | Tokens: 8,240 | All 4 agents coordinated
+            </div>
+        </div>
+
+        <!-- Slide 11: Traction + Ask -->
+        <div class="slide" id="slide-11">
+            <div class="grid-2" style="align-items:start">
+                <div>
+                    <span class="tag amber">Traction</span>
+                    <h2 style="margin:16px 0 24px">Where We Are</h2>
+                    <div style="display:flex;flex-direction:column;gap:20px">
+                        <div>
+                            <div class="number" style="font-size:40px">50+</div>
+                            <div style="color:var(--muted)">Specialized agents in production</div>
+                        </div>
+                        <div>
+                            <div class="number" style="font-size:40px">20</div>
+                            <div style="color:var(--muted)">Constitutional articles enforced at runtime</div>
+                        </div>
+                        <div>
+                            <div class="number" style="font-size:40px">3</div>
+                            <div style="color:var(--muted)">Vertical blueprints: Finance, Healthcare, Media</div>
+                        </div>
+                        <div>
+                            <div class="number" style="font-size:40px">v5</div>
+                            <div style="color:var(--muted)">GENESIS stack shipped — 10 microservices</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span class="tag rose">The Ask</span>
+                    <h2 style="margin:16px 0 24px">We're Building the Standard</h2>
+                    <div class="card" style="margin-bottom:16px">
+                        <h3 style="color:var(--amber);margin-bottom:8px">For Enterprise CTOs</h3>
+                        <p style="font-size:15px">If your company can't send data to OpenAI, we're your only option.
+                            Let's talk sovereign deployment.</p>
+                    </div>
+                    <div class="card" style="margin-bottom:16px">
+                        <h3 style="color:var(--rose);margin-bottom:8px">For VCs &amp; Investors</h3>
+                        <p style="font-size:15px">The governance layer is the moat. Every regulated industry needs this.
+                            We're raising a seed round.</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color:var(--violet);margin-bottom:8px">For Conference Partners</h3>
+                        <p style="font-size:15px">We want to be the live demo floor installation. 50 agents, visible on
+                            screen, available to interact with.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Close -->
+        <div class="slide" id="slide-12">
+            <div style="text-align:center;max-width:800px">
+                <span class="tag violet">Creative Liberation Engine · v5 GENESIS</span>
+                <h1 style="margin:24px 0 0"><span class="gradient-text">Govern your agents.</span></h1>
+                <h1 style="margin:0 0 24px">Or they'll govern you.</h1>
+                <div class="glow-line"
+                    style="background:linear-gradient(90deg,var(--amber),var(--rose),var(--violet));width:200px"></div>
+                <p style="font-size:20px;margin-bottom:40px">20 Constitutional Articles. 50 Agents. 3 Vertical
+                    Blueprints.<br>Sovereign. Governed. Production-safe.</p>
+                <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+                    <div class="card" style="padding:16px 28px">
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)">GITHUB</div>
+                        <div style="font-weight:600;color:var(--amber)">WholeTroutOrg/creative-liberation-engine</div>
+                    </div>
+                    <div class="card" style="padding:16px 28px">
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)">CONTACT</div>
+                        <div style="font-weight:600;color:var(--amber)">justin@creative-liberation-engine.io</div>
+                    </div>
+                    <div class="card" style="padding:16px 28px">
+                        <div style="font-family:var(--mono);font-size:13px;color:var(--muted)">DECK</div>
+                        <div style="font-weight:600;color:var(--amber)">inceptionengine.ai/deck</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /deck -->
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button id="prev" onclick="navigate(-1)">‹</button>
+        <span class="slide-counter" id="counter">1 / 12</span>
+        <button id="next" onclick="navigate(1)">›</button>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+
+        function navigate(dir) {
+            slides[current].classList.remove('active');
+            current = (current + dir + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') navigate(1);
+            if (e.key === 'ArrowLeft') navigate(-1);
+        });
+    </script>
+</body>
+
+</html>

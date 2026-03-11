@@ -1,0 +1,5 @@
+/* ── Theme Playground Root ─────────────────────────────────────────────────── */
+.theme-playground-root {
+    background-color: var(--inc-color-surface-base, #ffffff);
+    color: var(--inc-color-text-primary, #111827);
+}

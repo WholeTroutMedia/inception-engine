@@ -1,0 +1,528 @@
+{
+    "version": "5.0.0",
+    "updatedAt": "2026-03-07T07:35:00.000Z",
+    "domains": {
+        "memory": [
+            {
+                "id": "chromadb-mcp",
+                "name": "ChromaDB MCP",
+                "domain": "memory",
+                "description": "Semantic vector search and storage â€” the Living Archive backend",
+                "keywords": [
+                    "remember",
+                    "recall",
+                    "memory",
+                    "knowledge",
+                    "archive",
+                    "search",
+                    "vector",
+                    "embed",
+                    "chroma",
+                    "store",
+                    "retrieve",
+                    "past",
+                    "history",
+                    "pattern"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true
+            },
+            {
+                "id": "github-memory-mcp",
+                "name": "GitHub Memory MCP",
+                "domain": "memory",
+                "description": "Persistent memory stored as GitHub issues/gists for multi-session recall",
+                "keywords": [
+                    "github memory",
+                    "persistent",
+                    "cross-session",
+                    "gist",
+                    "issue memory",
+                    "long-term"
+                ],
+                "alwaysOn": false,
+                "priority": 2,
+                "enabled": true
+            },
+            {
+                "id": "shard-v2-mcp",
+                "name": "SHARD v2 MCP",
+                "domain": "memory",
+                "description": "Memory consolidation, dream cycles, and KV compaction",
+                "keywords": [
+                    "shard",
+                    "memory",
+                    "compaction",
+                    "dream cycle",
+                    "consolidate",
+                    "compress",
+                    "kv",
+                    "redis"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/shard-v2/dist/mcp-server.js"
+                ]
+            }
+        ],
+        "browser": [
+            {
+                "id": "inception-browser-mcp",
+                "name": "Inception Browser MCP",
+                "domain": "browser",
+                "description": "Sovereign Playwright-native browser â€” navigate, interact, extract, screenshot",
+                "keywords": [
+                    "browse",
+                    "browser",
+                    "navigate",
+                    "click",
+                    "scrape",
+                    "screenshot",
+                    "page",
+                    "web",
+                    "url",
+                    "search",
+                    "playwright",
+                    "comet",
+                    "extract",
+                    "html",
+                    "dom"
+                ],
+                "alwaysOn": false,
+                "priority": 1,
+                "enabled": true
+            },
+            {
+                "id": "perplexity-mcp",
+                "name": "Perplexity MCP",
+                "domain": "browser",
+                "description": "Live web research via Perplexity Sonar â€” cited answers, real-time data",
+                "keywords": [
+                    "research",
+                    "perplexity",
+                    "sonar",
+                    "live web",
+                    "current",
+                    "news",
+                    "latest",
+                    "fact-check",
+                    "cite",
+                    "sources",
+                    "2025",
+                    "2026"
+                ],
+                "alwaysOn": false,
+                "priority": 2,
+                "enabled": true
+            }
+        ],
+        "cloud": [
+            {
+                "id": "cloud-run-mcp",
+                "name": "Cloud Run MCP",
+                "domain": "cloud",
+                "description": "Deploy and manage Cloud Run services â€” build, push, deploy, rollback",
+                "keywords": [
+                    "cloud run",
+                    "deploy",
+                    "container",
+                    "docker",
+                    "gcr",
+                    "artifact registry",
+                    "service",
+                    "production",
+                    "rollback",
+                    "scale",
+                    "gcp",
+                    "google cloud"
+                ],
+                "alwaysOn": false,
+                "priority": 1,
+                "enabled": true
+            },
+            {
+                "id": "firebase-mcp",
+                "name": "Firebase MCP",
+                "domain": "cloud",
+                "description": "Firebase project management â€” Firestore, Auth, Storage, Hosting",
+                "keywords": [
+                    "firebase",
+                    "firestore",
+                    "auth",
+                    "storage",
+                    "hosting",
+                    "functions",
+                    "firebase app"
+                ],
+                "alwaysOn": false,
+                "priority": 2,
+                "enabled": true
+            },
+            {
+                "id": "bigquery-mcp",
+                "name": "BigQuery MCP",
+                "domain": "cloud",
+                "description": "Execute SQL queries on BigQuery â€” analytics, data pipelines, reporting",
+                "keywords": [
+                    "bigquery",
+                    "sql",
+                    "query",
+                    "analytics",
+                    "data warehouse",
+                    "dataset",
+                    "table",
+                    "report",
+                    "aggregate"
+                ],
+                "alwaysOn": false,
+                "priority": 3,
+                "enabled": true
+            },
+            {
+                "id": "cloud-logging-mcp",
+                "name": "Cloud Logging MCP",
+                "domain": "cloud",
+                "description": "Read and filter Google Cloud logs â€” debug production, trace errors",
+                "keywords": [
+                    "logs",
+                    "logging",
+                    "cloud logging",
+                    "stackdriver",
+                    "error logs",
+                    "trace",
+                    "debug production",
+                    "gcp logs"
+                ],
+                "alwaysOn": false,
+                "priority": 4,
+                "enabled": true
+            },
+            {
+                "id": "compute-mcp",
+                "name": "Compute MCP",
+                "domain": "cloud",
+                "description": "Manage Compute Engine VMs â€” create, start, stop, resize instances",
+                "keywords": [
+                    "compute engine",
+                    "vm",
+                    "virtual machine",
+                    "instance",
+                    "gce",
+                    "machine type",
+                    "disk",
+                    "zone"
+                ],
+                "alwaysOn": false,
+                "priority": 5,
+                "enabled": true
+            }
+        ],
+        "design": [
+            {
+                "id": "figma-mcp",
+                "name": "Figma Dev Mode MCP",
+                "domain": "design",
+                "description": "Pull live Figma specs â€” tokens, components, layouts, assets, dev mode data",
+                "keywords": [
+                    "figma",
+                    "design",
+                    "component",
+                    "token",
+                    "frame",
+                    "layout",
+                    "prototype",
+                    "figma file",
+                    "design system",
+                    "spec"
+                ],
+                "alwaysOn": false,
+                "priority": 1,
+                "enabled": true
+            },
+            {
+                "id": "stitch-mcp",
+                "name": "Stitch MCP",
+                "domain": "design",
+                "description": "Generate and iterate UI screens from text prompts â€” Gemini-powered screen generation",
+                "keywords": [
+                    "stitch",
+                    "generate ui",
+                    "screen",
+                    "mockup",
+                    "wireframe",
+                    "ui generation",
+                    "design prompt",
+                    "generate screen"
+                ],
+                "alwaysOn": false,
+                "priority": 2,
+                "enabled": true
+            },
+            {
+                "id": "inception-design-ingest",
+                "name": "Design Ingest MCP",
+                "domain": "design",
+                "description": "Multi-Source Pattern Extraction Pipeline (Framer, Mobbin, Vision).",
+                "keywords": [
+                    "design",
+                    "extract",
+                    "framer",
+                    "mobbin",
+                    "vision",
+                    "reconstruct",
+                    "ingest",
+                    "rag",
+                    "react"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/design-ingest/dist/mcp-server.js"
+                ]
+            }
+        ],
+        "data": [
+            {
+                "id": "firestore-mcp",
+                "name": "Firestore MCP",
+                "domain": "data",
+                "description": "Read/write Firestore documents â€” CRUD operations on any collection",
+                "keywords": [
+                    "firestore",
+                    "document",
+                    "collection",
+                    "nosql",
+                    "database",
+                    "read document",
+                    "write document",
+                    "query"
+                ],
+                "alwaysOn": false,
+                "priority": 1,
+                "enabled": true
+            }
+        ],
+        "media": [
+            {
+                "id": "inception-spatial-visionos",
+                "name": "NEXUS Spatial Workspace MCP",
+                "domain": "media",
+                "description": "Spatial awareness, coordinate synchronization, and environmental boundaries.",
+                "keywords": [
+                    "spatial",
+                    "visionos",
+                    "coordinates",
+                    "headPosition",
+                    "eyeVector",
+                    "boundaries",
+                    "workspace",
+                    "layout",
+                    "physical",
+                    "sync",
+                    "nexus"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/spatial-visionos/dist/mcp-server.js"
+                ]
+            }
+        ],
+        "infra": [],
+        "utilities": [
+            {
+                "id": "toolbox-mcp",
+                "name": "Inception Toolbox MCP",
+                "domain": "utilities",
+                "description": "Pure TS utility functions â€” media, data, design, dev, web, security helpers",
+                "keywords": [
+                    "convert",
+                    "format",
+                    "optimize",
+                    "encode",
+                    "generate",
+                    "utility",
+                    "tool",
+                    "transform",
+                    "parse",
+                    "hash",
+                    "slug",
+                    "color",
+                    "palette",
+                    "contrast",
+                    "mime",
+                    "base64",
+                    "password",
+                    "mask",
+                    "svg"
+                ],
+                "alwaysOn": false,
+                "priority": 1,
+                "enabled": true
+            },
+            {
+                "id": "n8n-bridge-mcp",
+                "name": "n8n Bridge MCP",
+                "domain": "utilities",
+                "description": "Integration layer for n8n workflow automation â€” trigger workflows remotely from the Creative Liberation Engine",
+                "keywords": [
+                    "n8n",
+                    "workflow",
+                    "automation",
+                    "trigger",
+                    "webhook",
+                    "bridge",
+                    "orchestration",
+                    "execute"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/n8n-bridge/dist/mcp-server.js"
+                ]
+            },
+            {
+                "id": "skills-mcp",
+                "name": "Skills Library MCP",
+                "domain": "utilities",
+                "description": "Agent Skills-as-a-Service integration â€” dynamically load, search, and manage capabilities",
+                "keywords": [
+                    "skill",
+                    "capabilities",
+                    "cowork",
+                    "registry",
+                    "load",
+                    "search",
+                    "agent"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/skills/dist/mcp-server.js"
+                ]
+            }
+        ],
+        "general": [
+            {
+                "id": "inception-sensor-mesh",
+                "name": "ANTITRUST Sensor Mesh MCP",
+                "domain": "utilities",
+                "description": "Biometric, vision, and motion data ingestion from the physical environment.",
+                "keywords": [
+                    "sensor",
+                    "mesh",
+                    "biometric",
+                    "zigsim",
+                    "vision",
+                    "motion",
+                    "udp",
+                    "read_biometrics",
+                    "start_mirror",
+                    "face",
+                    "blendshapes"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/sensor-mesh/dist/mcp-server.js"
+                ]
+            },
+            {
+                "id": "inception-orchestrator",
+                "name": "Inception Orchestrator MCP",
+                "domain": "general",
+                "description": "Access the internal Event Bus and Agent Discovery Cards.",
+                "keywords": [
+                    "event_bus",
+                    "publish",
+                    "agent",
+                    "discovery",
+                    "card",
+                    "orchestrator",
+                    "routing"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/orchestrator/dist/mcp-server.js"
+                ]
+            },
+            {
+                "id": "workspace-mcp",
+                "name": "Google Workspace MCP",
+                "domain": "general",
+                "description": "Google Takeover implementation â€” read/write Calendar, Gmail, Drive, Docs directly",
+                "keywords": [
+                    "google",
+                    "workspace",
+                    "gmail",
+                    "drive",
+                    "docs",
+                    "sheets",
+                    "calendar",
+                    "email",
+                    "calendar",
+                    "event",
+                    "document",
+                    "file",
+                    "gsuite"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "uv",
+                "args": [
+                    "run",
+                    "main.py"
+                ]
+            },
+            {
+                "id": "agent-spawner-mcp",
+                "name": "Agent Spawner MCP",
+                "domain": "general",
+                "description": "Self-replication and horizontal scaling layer â€” dynamically deploy new agents",
+                "keywords": [
+                    "spawn",
+                    "create",
+                    "deploy",
+                    "new agent",
+                    "self-replication",
+                    "scale",
+                    "manifest"
+                ],
+                "alwaysOn": true,
+                "priority": 1,
+                "enabled": true,
+                "transport": "stdio",
+                "command": "node",
+                "args": [
+                    "C:/Creative-Liberation-Engine/packages/agent-spawner/dist/mcp-server.js"
+                ]
+            }
+        ]
+    }
+}

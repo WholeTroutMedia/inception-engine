@@ -1,0 +1,31 @@
+{
+    "name": "@inception/design-tokens",
+    "version": "1.0.0",
+    "description": "Creative Liberation Engine Design System â€” W3C DTCG token definitions and compiled outputs",
+    "main": "dist/js/tokens.cjs",
+    "exports": {
+        ".": "./dist/js/tokens.cjs",
+        "./js": "./dist/js/tokens.cjs",
+        "./css/light": "./dist/css/tokens.light.css",
+        "./css/dark": "./dist/css/tokens.dark.css",
+        "./css/primitives": "./dist/css/tokens.primitives.css",
+        "./json": "./dist/json/tokens.json",
+        "./src": "./src/index.json"
+    },
+    "scripts": {
+        "build": "node build.mjs",
+        "validate": "node scripts/validate-tokens.mjs",
+        "dev": "node build.mjs",
+        "penpot:push": "node ../../scripts/penpot-push.mjs",
+        "penpot:push:dry": "DRY_RUN=1 node ../../scripts/penpot-push.mjs"
+    },
+    "devDependencies": {
+        "@tokens-studio/sd-transforms": "^0.14.0",
+        "@types/node": "^25.3.5",
+        "ajv": "^8.17.1",
+        "style-dictionary": "^4.3.0",
+        "typescript": "^5.7.0",
+        "vitest": "^4.0.18",
+        "@inception/tsconfig": "workspace:*"
+    }
+}

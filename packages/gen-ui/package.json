@@ -1,0 +1,19 @@
+{
+  "name": "@inception/gen-ui",
+  "version": "5.0.0",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@genkit-ai/google-genai": "^1.29.0",
+    "@genkit-ai/googleai": "^1.28.0",
+    "@inception/design-agent": "workspace:*",
+    "@inception/genkit": "workspace:*",
+    "genkit": "^1.29.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  }
+}

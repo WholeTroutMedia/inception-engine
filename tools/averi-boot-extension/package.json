@@ -1,0 +1,57 @@
+{
+    "name": "averi-boot",
+    "displayName": "AVERI Boot — Creative Liberation Engine",
+    "description": "Automatically boots the AVERI collective in the Creative Liberation Engine chat panel when VS Code opens.",
+    "version": "1.0.0",
+    "publisher": "Creative Liberation Engine Community",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "averi-boot.bootNow",
+                "title": "AVERI: Boot Now"
+            }
+        ],
+        "configuration": {
+            "title": "AVERI Boot",
+            "properties": {
+                "averi-boot.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically boot AVERI when VS Code opens."
+                },
+                "averi-boot.delayMs": {
+                    "type": "number",
+                    "default": 2000,
+                    "description": "Delay in milliseconds before sending the boot message (gives Creative Liberation Engine time to initialize)."
+                },
+                "averi-boot.bootMessage": {
+                    "type": "string",
+                    "default": "boot",
+                    "description": "The message sent to Creative Liberation Engine on startup to trigger AVERI boot."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "package": "npx @vscode/vsce package --allow-missing-repository"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.85.0",
+        "@types/node": "^20.0.0",
+        "typescript": "^5.3.0",
+        "@vscode/vsce": "^2.22.0"
+    }
+}

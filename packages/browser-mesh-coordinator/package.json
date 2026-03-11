@@ -1,0 +1,27 @@
+{
+    "name": "@inception/browser-mesh-coordinator",
+    "version": "0.1.0",
+    "description": "Sovereign WebSocket bridge between MV3 browser extension agents and Inception Dispatch",
+    "type": "module",
+    "main": "dist/server.js",
+    "scripts": {
+        "dev": "ts-node-esm src/server.ts",
+        "build": "tsc",
+        "start": "node dist/server.js",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "express": "^4.18.3",
+        "ws": "^8.16.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.19.37",
+        "@types/ws": "^8.18.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.2",
+        "vite": "^7.3.1",
+        "vitest": "^4.0.18"
+    }
+}

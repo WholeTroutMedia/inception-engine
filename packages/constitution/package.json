@@ -1,0 +1,17 @@
+{
+    "name": "@inception/constitution",
+    "version": "5.0.0",
+    "private": true,
+    "description": "Creative Liberation Engine — Constitutional governance, lesson extraction, and constitutional firewall",
+    "type": "module",
+    "main": "./src/lesson-extractor.ts",
+    "scripts": {
+        "extract-lessons": "tsx src/lesson-extractor.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "tsx": "^4.0.0",
+        "typescript": "^5.7.0"
+    }
+}

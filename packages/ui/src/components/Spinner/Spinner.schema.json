@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://creative-liberation-engine.local/schemas/ui/Spinner.json",
+    "title": "Spinner",
+    "description": "Indeterminate loading indicator component.",
+    "type": "object",
+    "properties": {
+        "size": {
+            "type": "string",
+            "enum": [
+                "sm",
+                "md",
+                "lg"
+            ],
+            "default": "md",
+            "description": "Radial size variant mapped to icon scaling tokens."
+        },
+        "color": {
+            "type": "string",
+            "enum": [
+                "primary",
+                "secondary",
+                "accent",
+                "muted",
+                "current"
+            ],
+            "default": "current",
+            "description": "Stroke color mapped to semantic tokens or 'current' for text inheritance."
+        }
+    },
+    "additionalProperties": false,
+    "required": []
+}

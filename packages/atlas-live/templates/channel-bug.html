@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Channel Bug</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            background: transparent;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            position: relative;
+        }
+
+        #bug {
+            position: absolute;
+            top: 36px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #bug.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .channel-mark {
+            background: var(--accent, #e03030);
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .channel-sub {
+            background: rgba(10, 10, 15, 0.85);
+            color: rgba(245, 240, 232, 0.7);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 3px 10px 4px;
+            font-family: 'Arial', sans-serif;
+            text-align: right;
+        }
+
+        /* Live indicator */
+        .live-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--live-color, #e03030);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            margin-top: 6px;
+            animation: live-pulse 2s infinite;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: dot-pulse 1.5s infinite;
+        }
+
+        @keyframes live-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.85;
+            }
+        }
+
+        @keyframes dot-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+        }
+
+        #bug[data-live="false"] .live-bar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bug" data-live="true">
+        <div class="channel-mark" id="f0">NBC</div>
+        <div class="channel-sub" id="f1">NEXUS LIVE</div>
+        <div class="live-bar">
+            <div class="live-dot"></div>
+            LIVE
+        </div>
+    </div>
+
+    <script>
+        function update(data) {
+            if (data.f0) document.getElementById('f0').textContent = data.f0;
+            if (data.f1) document.getElementById('f1').textContent = data.f1;
+            if (data.accent) document.documentElement.style.setProperty('--accent', data.accent);
+            if (data.live !== undefined) {
+                document.getElementById('bug').setAttribute('data-live', data.live);
+            }
+        }
+
+        function play() { document.getElementById('bug').classList.add('visible'); }
+        function stop() {
+            const el = document.getElementById('bug');
+            el.style.transition = 'opacity 0.25s ease, transform 0.2s ease';
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.9)';
+            setTimeout(() => el.classList.remove('visible'), 300);
+        }
+
+        window.update = (xml) => {
+            try {
+                const doc = new DOMParser().parseFromString(xml, 'text/xml');
+                const data = {};
+                doc.querySelectorAll('componentData').forEach(n => {
+                    const id = n.getAttribute('id');
+                    const value = n.querySelector('data')?.getAttribute('value');
+                    if (id && value !== null) data[id] = value;
+                });
+                update(data);
+            } catch (e) { console.error(e); }
+        };
+        window.play = play;
+        window.stop = stop;
+    </script>
+</body>
+
+</html>

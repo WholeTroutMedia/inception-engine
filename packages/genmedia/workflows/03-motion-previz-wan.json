@@ -1,0 +1,155 @@
+{
+    "last_node_id": 9,
+    "last_link_id": 9,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "WanVideoModelLoader",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "model_name": "wan2.1-1.3b.safetensors"
+            }
+        },
+        {
+            "id": 2,
+            "type": "WanTextEncode",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "text": "cinematic tracking shot, dramatic lighting, epic landscape, 4k resolution"
+            }
+        },
+        {
+            "id": 3,
+            "type": "WanEmptyLatentVideo",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "width": 848,
+                "height": 480,
+                "length": 81,
+                "batch_size": 1
+            }
+        },
+        {
+            "id": 4,
+            "type": "WanKSampler",
+            "pos": [
+                500,
+                250
+            ],
+            "inputs": {
+                "cfg": 5.0,
+                "denoise": 1.0,
+                "sampler_name": "euler",
+                "scheduler": "normal",
+                "seed": 987654321,
+                "steps": 25,
+                "model": [
+                    "1",
+                    0
+                ],
+                "positive": [
+                    "2",
+                    0
+                ],
+                "latent_image": [
+                    "3",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "WanVAEDecode",
+            "pos": [
+                900,
+                250
+            ],
+            "inputs": {
+                "samples": [
+                    "4",
+                    0
+                ],
+                "vae": [
+                    "1",
+                    1
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "type": "VideoCombine",
+            "pos": [
+                1200,
+                250
+            ],
+            "inputs": {
+                "frame_rate": 16,
+                "format": "video/mp4",
+                "filename_prefix": "wan_motion_previz_v1",
+                "images": [
+                    "5",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            4,
+            6,
+            "MODEL"
+        ],
+        [
+            2,
+            2,
+            0,
+            4,
+            7,
+            "CONDITIONING"
+        ],
+        [
+            3,
+            3,
+            0,
+            4,
+            8,
+            "LATENT"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            0,
+            "LATENT"
+        ],
+        [
+            5,
+            1,
+            1,
+            5,
+            1,
+            "VAE"
+        ],
+        [
+            6,
+            5,
+            0,
+            6,
+            3,
+            "IMAGE"
+        ]
+    ]
+}

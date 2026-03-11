@@ -1,0 +1,26 @@
+{
+    "name": "@inception/theme-playground",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite --port 5174",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@inception/ui": "workspace:*",
+        "@inception/design-tokens": "workspace:*",
+        "@inception/theme-engine": "workspace:*",
+        "@inception/design-agent": "workspace:*",
+        "@inception/design-sandbox": "workspace:*",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@vitejs/plugin-react": "^4.3.0",
+        "typescript": "^5.7.0",
+        "vite": "^6.0.0"
+    }
+}

@@ -1,0 +1,108 @@
+:root {
+  --bg-core: #050505;
+  --bg-surface: #0a0a0a;
+  --bg-panel: #0d0d0d;
+  --accent-primary: #ff3366; /* sleek bleeding edge crimson/magenta */
+  --accent-secondary: #00f0ff; /* cyan for spatial distinction */
+  --text-main: #f0f0f0;
+  --text-muted: #737373;
+  --border-subtle: #1f1f1f;
+  --border-focus: #333333;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-core);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Spatial Grid Background */
+.spatial-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.hud-container {
+  display: grid;
+  grid-template-columns: 320px 1fr 340px;
+  grid-template-rows: 56px 1fr;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  z-index: 1;
+}
+
+.hud-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.hud-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  margin: 16px 16px 0 16px;
+  border-radius: 2px; /* minimal curve */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hud-panel-header {
+  padding: 10px 16px;
+  border-bottom: 1px dashed var(--border-subtle);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+}
+
+.hud-panel-content {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.hud-main {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar tweaks */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-focus); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }

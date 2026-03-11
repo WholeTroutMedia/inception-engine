@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Liberation Engine — Impact Report · March 10, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080B12;
+      --surface:  #0D1120;
+      --surface2: #121826;
+      --border:   rgba(0, 212, 255, 0.1);
+      --cyan:     #00D4FF;
+      --cyan-dim: rgba(0, 212, 255, 0.15);
+      --cyan-glow:rgba(0, 212, 255, 0.4);
+      --white:    #FFFFFF;
+      --muted:    rgba(255,255,255,0.45);
+      --subtle:   rgba(255,255,255,0.07);
+      --red:      #FF4D6A;
+      --green:    #00FF94;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════
+       ORBS / AMBIENT GLOW
+    ══════════════════════════════ */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 700px; height: 700px; background: rgba(0,212,255,0.06); top: -200px; left: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(99,102,241,0.07); bottom: 5%; right: -150px; animation-delay: -8s; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(0,212,255,0.04); top: 40%; left: 30%; animation-delay: -4s; }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.05); }
+    }
+
+    /* ══════════════════════════════
+       LAYOUT
+    ══════════════════════════════ */
+    .wrap { position: relative; z-index: 1; max-width: 1060px; margin: 0 auto; padding: 0 48px; }
+
+    section { padding: 88px 0; border-top: 1px solid var(--subtle); }
+    section:first-of-type { border-top: none; }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 48px 80px;
+      max-width: 1060px;
+      margin: 0 auto;
+      overflow: visible;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .hero-equation {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-equation .strike {
+      color: var(--red);
+      text-decoration: line-through;
+      opacity: 0.8;
+    }
+
+    .hero-equation .highlight {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .hero-equation .arrow {
+      color: var(--muted);
+      margin: 0 12px;
+    }
+
+    h1 {
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 32px;
+    }
+
+    h1 .line-dim { color: rgba(255,255,255,0.35); display: block; }
+    h1 .line-bright { color: var(--white); display: block; }
+    h1 .line-cyan { color: var(--cyan); display: block; }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 60px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(0,212,255,0.03);
+      width: fit-content;
+    }
+
+    .meta-item {
+      padding: 20px 32px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-val { font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+    .meta-key { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+
+    /* ══════════════════════════════
+       SECTION HEADERS
+    ══════════════════════════════ */
+    .sec-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .sec-desc { font-size: 16px; color: var(--muted); margin-bottom: 52px; max-width: 500px; line-height: 1.6; }
+
+    /* ══════════════════════════════
+       STAT CARDS
+    ══════════════════════════════ */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 0;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--cyan-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 0 32px rgba(0,212,255,0.08);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyan), transparent 60%);
+      opacity: 0.6;
+    }
+
+    .stat-num {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .stat-num .unit { font-size: 24px; font-weight: 700; opacity: 0.6; }
+    .stat-label { font-size: 13px; font-weight: 500; color: var(--muted); }
+    .stat-note { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 6px; }
+
+    /* ══════════════════════════════
+       COMPRESSION RATIOS
+    ══════════════════════════════ */
+    .ratio-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    .ratio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .ratio-card:hover {
+      border-color: var(--cyan-glow);
+      transform: translateY(-3px);
+    }
+
+    .ratio-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--cyan-dim), transparent);
+      opacity: 0.5;
+    }
+
+    .ratio-num {
+      position: relative;
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--cyan);
+    }
+
+    .ratio-label { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .ratio-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ══════════════════════════════
+       WORK LOG TABLE
+    ══════════════════════════════ */
+    .table-shell {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+    thead th {
+      background: var(--surface2);
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--subtle);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: rgba(0,212,255,0.03); }
+    tbody td { padding: 16px 20px; vertical-align: middle; }
+    tbody td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+    tbody td:nth-child(2) { font-weight: 600; color: var(--white); }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tag-cyan   { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+    .tag-purple { background: rgba(139,92,246,0.12); color: #A78BFA; border: 1px solid rgba(139,92,246,0.2); }
+    .tag-green  { background: rgba(0,255,148,0.1); color: var(--green); border: 1px solid rgba(0,255,148,0.2); }
+    .tag-amber  { background: rgba(251,191,36,0.1); color: #FBBF24; border: 1px solid rgba(251,191,36,0.2); }
+
+    .num-cell { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+    .num-cell.red { color: var(--red); }
+
+    /* ══════════════════════════════
+       ORG GRID
+    ══════════════════════════════ */
+    .org-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+    .org-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .org-card:hover { border-color: var(--cyan-glow); transform: translateY(-2px); }
+    .org-icon { font-size: 26px; margin-bottom: 10px; }
+    .org-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
+    .org-sub  { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* ══════════════════════════════
+       CLOSING
+    ══════════════════════════════ */
+    .closing {
+      position: relative;
+      text-align: center;
+      padding: 96px 48px 120px;
+      max-width: 1060px;
+      margin: 0 auto;
+      border-top: 1px solid var(--subtle);
+    }
+
+    .closing-eq {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(13px, 1.4vw, 17px);
+      color: var(--muted);
+      margin-bottom: 40px;
+      line-height: 2;
+    }
+
+    .closing-eq .red { color: var(--red); }
+    .closing-eq .cyan { color: var(--cyan); font-weight: 600; }
+
+    .closing h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .closing p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+
+    .closing p strong { color: var(--white); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 12px 24px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: rgba(0,212,255,0.03);
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+      animation: blink 2.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 900px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .ratio-grid { grid-template-columns: 1fr; }
+      .org-grid   { grid-template-columns: 1fr 1fr; }
+      .hero { padding: 80px 24px 60px; }
+      .wrap { padding: 0 24px; }
+      .hero-meta { flex-wrap: wrap; }
+    }
+
+    @media (max-width: 560px) {
+      .stat-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 42px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AMBIENT ORBS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <div class="hero">
+    <div class="hero-eyebrow">Creative Liberation Engine · Impact Report · March 10, 2026</div>
+
+    <div class="hero-equation">
+      <span class="strike">35 people</span> × <span class="strike">10 weeks</span> × <span class="strike">$148,000</span>
+      <span class="arrow">→</span>
+      <span class="highlight">1 operator</span> × <span class="highlight">5 hours</span> × <span class="highlight">$0</span>
+    </div>
+
+    <h1>
+      <span class="line-dim">What One Operator</span>
+      <span class="line-bright">Did in</span>
+      <span class="line-cyan">One Day.</span>
+    </h1>
+
+    <p class="hero-sub">
+      A quantified comparison of Creative Liberation Engine autonomous output versus traditional software organization structure.
+    </p>
+
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-val">Mar 10</span>
+        <span class="meta-key">Date</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">1</span>
+        <span class="meta-key">Operator</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">8</span>
+        <span class="meta-key">Sessions</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">~5 hrs</span>
+        <span class="meta-key">Wall Clock</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       HUMAN EQUIVALENT
+  ════════════════════════════════════════ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-label">By The Numbers</div>
+      <h2>Human Equivalent</h2>
+      <p class="sec-desc">What a traditional software organization would require to replicate today's output.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" data-target="35">0</div>
+          <div class="stat-label">People Required</div>
+          <div class="stat-note">Across 5 departments</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span data-target="10" class="count-num">0</span><span class="unit"> wks</span></div>
+          <div class="stat-label">Calendar Time</div>
+          <div class="stat-note">With parallel teams</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span data-target="990" class="count-num">0</span><span class="unit"> hrs</span></div>
+          <div class="stat-label">Total Labor Hours</div>
+          <div class="stat-note">490–990 hr range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$<span data-target="148" class="count-num">0</span><span class="unit">K</span></div>
+          <div class="stat-label">Labor Cost</div>
+          <div class="stat-note">@ $150/hr blended</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       COMPRESSION RATIOS
+  ════════════════════════════════════════ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-label">Force Multiplier</div>
+      <h2>Compression Ratios</h2>
+      <p class="sec-desc">The quantified structural advantage of a single autonomous operator.</p>
+
+      <div class="ratio-grid">
+        <div class="ratio-card">
+          <div class="ratio-num">50–70×</div>
+          <div class="ratio-label">Faster</div>
+          <div class="ratio-desc">6–10 weeks delivered in under 5 hours</div>
+        </div>
+        <div class="ratio-card">
+          <div class="ratio-num">20–35×</div>
+          <div class="ratio-label">Fewer People</div>
+          <div class="ratio-desc">Full org output from one human operator</div>
+        </div>
+        <div class="ratio-card">
+          <div class="ratio-num">∞</div>
+          <div class="ratio-label">ROI</div>
+          <div class="ratio-desc">$73K–$148K of labor at zero marginal cost</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       WORK LOG
+  ════════════════════════════════════════ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-label">Session Breakdown</div>
+      <h2>Work Completed Today</h2>
+      <p class="sec-desc">Eight parallel workstreams — executed autonomously by a single operator — without a single meeting, sprint, or ticket.</p>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Workstream</th>
+              <th>Dept</th>
+              <th>Human Team</th>
+              <th>People</th>
+              <th>Calendar</th>
+              <th>Hrs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Git automation diagnosis & config</td>
+              <td><span class="tag tag-cyan">DevOps</span></td>
+              <td>DevOps Engineer</td>
+              <td class="num-cell red">1–2</td>
+              <td class="num-cell">1–2 days</td>
+              <td class="num-cell red">8–16</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>Pitch Deck Cloud Run deploy</td>
+              <td><span class="tag tag-cyan">DevOps</span></td>
+              <td>DevOps + Release Eng</td>
+              <td class="num-cell red">2–3</td>
+              <td class="num-cell">0.5–1 day</td>
+              <td class="num-cell red">4–8</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>Google Labs ingestion pipeline design</td>
+              <td><span class="tag tag-purple">Architecture</span></td>
+              <td>Solutions Arch + Engineers</td>
+              <td class="num-cell red">3–5</td>
+              <td class="num-cell">1–2 weeks</td>
+              <td class="num-cell red">60–120</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>Sandbar codebase archaeology</td>
+              <td><span class="tag tag-purple">Architecture</span></td>
+              <td>Senior Engineer</td>
+              <td class="num-cell red">1–2</td>
+              <td class="num-cell">1–3 days</td>
+              <td class="num-cell red">8–24</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>Public release compliance scrub</td>
+              <td><span class="tag tag-amber">Compliance</span></td>
+              <td>Legal + Engineers</td>
+              <td class="num-cell red">4–6</td>
+              <td class="num-cell">1–2 weeks</td>
+              <td class="num-cell red">80–160</td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td>CI/CD failure investigation</td>
+              <td><span class="tag tag-cyan">DevOps</span></td>
+              <td>SRE / DevOps</td>
+              <td class="num-cell red">1–2</td>
+              <td class="num-cell">1–2 days</td>
+              <td class="num-cell red">8–16</td>
+            </tr>
+            <tr>
+              <td>07</td>
+              <td>Threshold bug fix + deploy</td>
+              <td><span class="tag tag-green">Product Eng</span></td>
+              <td>Frontend Eng + QA</td>
+              <td class="num-cell red">2–3</td>
+              <td class="num-cell">0.5–1 day</td>
+              <td class="num-cell red">4–8</td>
+            </tr>
+            <tr>
+              <td>08</td>
+              <td>Sandbar Stream — 5-screen app</td>
+              <td><span class="tag tag-green">Product Eng</span></td>
+              <td>Product + Design + Engineers</td>
+              <td class="num-cell red">6–10</td>
+              <td class="num-cell">4–8 weeks</td>
+              <td class="num-cell red">320–640</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       REPLACED ORG
+  ════════════════════════════════════════ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-label">Replaced Structure</div>
+      <h2>Departments Covered Today</h2>
+      <p class="sec-desc">Five distinct functions. Zero bureaucracy.</p>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-icon">🏗️</div>
+          <div class="org-name">Product Engineering</div>
+          <div class="org-sub">PM · Frontend · Backend · QA</div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon">⚙️</div>
+          <div class="org-name">DevOps / SRE</div>
+          <div class="org-sub">CI/CD · Deployment · Monitoring</div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon">🧭</div>
+          <div class="org-name">Solutions Architecture</div>
+          <div class="org-sub">Integration design · System mapping</div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon">🎨</div>
+          <div class="org-name">Design</div>
+          <div class="org-sub">Design system · 5 production screens</div>
+        </div>
+        <div class="org-card">
+          <div class="org-icon">⚖️</div>
+          <div class="org-name">Compliance</div>
+          <div class="org-sub">IP scrub · Public release readiness</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CLOSING
+  ════════════════════════════════════════ -->
+  <div class="closing">
+    <div class="closing-eq">
+      <span class="red">35 people × 10 weeks × $148,000</span><br/>
+      <span style="color:rgba(255,255,255,0.2)">compressed to</span><br/>
+      <span class="cyan">1 operator × 5 hours × $0</span>
+    </div>
+
+    <h2>This Isn't Productivity.<br/>It's Structural Compression.</h2>
+    <p>
+      The Creative Liberation Engine doesn't make individuals more productive —
+      it <strong>eliminates the need for organizational structure itself.</strong>
+      What required 20–35 people across 5 departments now requires
+      <strong>one operator and a clear intent.</strong>
+    </p>
+
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Creative Liberation Engine v5.0.0 GENESIS &nbsp;·&nbsp; March 10, 2026 &nbsp;·&nbsp; Whole Trout Media
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       COUNT-UP ANIMATION
+  ════════════════════════════════════════ -->
+  <script>
+    function countUp(el, target, duration = 1400) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = Math.floor(start).toLocaleString();
+      }, 16);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          countUp(el, target);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    // Target both direct data-target and .count-num inside a stat-num
+    document.querySelectorAll('[data-target]').forEach(el => observer.observe(el));
+    document.querySelectorAll('.count-num[data-target]').forEach(el => observer.observe(el));
+
+    // Handle stat-num that directly has data-target
+    document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

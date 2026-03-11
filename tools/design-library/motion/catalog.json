@@ -1,0 +1,19 @@
+{
+  "name": "Motion",
+  "url": "https://motion.dev",
+  "previous_name": "Framer Motion",
+  "package": "motion",
+  "category": "Animation Library",
+  "frameworks": [
+    "React",
+    "JavaScript",
+    "Vue"
+  ],
+  "features": [
+    "Scroll animations",
+    "Layout animations",
+    "Timeline capabilities",
+    "WAAPI hybrid engine",
+    "Spring physics"
+  ]
+}

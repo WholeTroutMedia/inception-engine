@@ -1,0 +1,19 @@
+{
+  "name": "Flora AI (Luma)",
+  "url": "https://lumalabs.ai/dream-machine",
+  "category": "Intelligent Canvas & Video",
+  "account": {
+    "status": "Logged In",
+    "plan": "Active"
+  },
+  "editing_suite": {
+    "name": "Fauna (Beta)",
+    "features": [
+      "Mood Board Generation",
+      "Stylized Illustrations",
+      "Camera Motion Control (Image to Video)",
+      "Infinite Canvas"
+    ],
+    "workflow": "Start with a blank canvas and use AI assistants to map out creative directions, mood boards, or specific camera paths before rendering final video."
+  }
+}

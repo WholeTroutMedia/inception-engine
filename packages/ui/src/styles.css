@@ -1,0 +1,11 @@
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/colors-hsl";
+@import "open-props/gradients";
+@import "open-props/animations";
+@import "open-props/easings";
+
+/* Creative Liberation Engine Base Layer */
+:root {
+  /* We will override these with our theme vars later, but having OpenProps as the fallback/foundation */
+}

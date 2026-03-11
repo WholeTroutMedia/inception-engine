@@ -1,0 +1,45 @@
+/* =============================================================
+   Creative Liberation Engine — Theme Playground
+   Imports the design-token CSS variables as the foundation
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Load the full token system */
+@import '../../../packages/design-tokens/dist/css/tokens.primitives.css';
+@import '../../../packages/design-tokens/dist/css/tokens.light.css';
+
+[data-theme="dark"] {
+    @import url('../../../packages/design-tokens/dist/css/tokens.dark.css');
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--inc-color-background-default, #fff);
+    color: var(--inc-color-text-primary, #09090b);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--inc-color-border-default, #e4e4e7);
+    border-radius: 4px;
+}

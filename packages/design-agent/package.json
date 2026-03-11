@@ -1,0 +1,13 @@
+{
+    "name": "@inception/design-agent",
+    "version": "5.0.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "echo \"No tests defined\""
+    },
+    "devDependencies": {
+        "@types/chroma-js": "^2.4.5"
+    },
+    "types": "dist/index.d.ts"
+}

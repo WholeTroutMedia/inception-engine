@@ -1,0 +1,21 @@
+{
+  "name": "eon-capability-bridge",
+  "version": "5.0.0",
+  "description": "Bridge for EON Reality Spatial AI integration and fallback mechanisms",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "genkit": "^1.29.0",
+    "@inception/memory": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7",
+    "rimraf": "^5.0.5"
+  }
+}

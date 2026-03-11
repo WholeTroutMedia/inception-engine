@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIVE ANIMATE STUDIO — Creative Liberation Engine</title>
+
+  <!-- MediaPipe CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
+
+  <!-- Three.js CDN (matches package.json version) -->
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.162.0/build/three.module.js" } }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050510;
+      --surface: #0b0b1f;
+      --border: rgba(0, 245, 255, 0.12);
+      --cyan: #00f5ff;
+      --orange: #ff6b00;
+      --purple: #bf00ff;
+      --white: #e8eaf0;
+      --dim: rgba(232, 234, 240, 0.45);
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--white); overflow: hidden; }
+
+    /* ── Header ── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; border-bottom: 1px solid var(--border);
+      background: rgba(5, 5, 16, 0.95); backdrop-filter: blur(12px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 52px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+    .logo-text { font-size: 13px; letter-spacing: 0.15em; color: var(--cyan); }
+    .logo-sub { font-size: 10px; color: var(--dim); letter-spacing: 0.08em; }
+
+    .status-bar { display: flex; gap: 16px; align-items: center; font-size: 10px; }
+    .status-pill {
+      padding: 3px 10px; border-radius: 100px; border: 1px solid;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .status-pill.live { border-color: var(--cyan); color: var(--cyan); }
+    .status-pill.comfy { border-color: var(--orange); color: var(--orange); }
+    .status-pill.comfy.running { border-color: #06d6a0; color: #06d6a0; }
+
+    /* ── Panel Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+      height: calc(100vh - 52px);
+      margin-top: 52px;
+      background: var(--border);
+    }
+
+    .panel {
+      background: var(--surface);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    .panel-label {
+      position: absolute; top: 10px; left: 12px; z-index: 10;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px;
+      background: rgba(5, 5, 16, 0.75); backdrop-filter: blur(8px);
+    }
+    .panel-label.d { color: var(--cyan); border: 1px solid rgba(0,245,255,0.3); }
+    .panel-label.a { color: #9b5de5; border: 1px solid rgba(155,93,229,0.3); }
+    .panel-label.c { color: var(--orange); border: 1px solid rgba(255,107,0,0.3); }
+    .panel-label.b { color: #06d6a0; border: 1px solid rgba(6,214,160,0.3); }
+
+    canvas { width: 100%; height: 100%; display: block; object-fit: cover; }
+    video { display: none; }
+
+    /* ── Panel D controls ── */
+    .skeleton-controls {
+      position: absolute; bottom: 10px; right: 10px; z-index: 10;
+      display: flex; gap: 6px;
+    }
+    .ctrl-btn {
+      padding: 4px 10px; border-radius: 4px; font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid rgba(0,245,255,0.3); background: rgba(0,0,0,0.5);
+      color: var(--cyan); transition: all 0.15s;
+    }
+    .ctrl-btn:hover { background: rgba(0,245,255,0.1); }
+    .ctrl-btn.active { background: rgba(0,245,255,0.2); border-color: var(--cyan); }
+
+    /* ── Panel C shader selector ── */
+    .shader-controls {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 10;
+    }
+    .shader-btn {
+      padding: 4px 10px; border-radius: 4px; font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid rgba(255,107,0,0.3); background: rgba(0,0,0,0.5);
+      color: var(--orange); transition: all 0.15s;
+    }
+    .shader-btn:hover, .shader-btn.active { background: rgba(255,107,0,0.15); border-color: var(--orange); }
+
+    /* ── Panel B style transfer ── */
+    .style-controls {
+      position: absolute; bottom: 10px; left: 10px; right: 10px;
+      display: flex; gap: 8px; z-index: 10; align-items: center;
+    }
+    .style-select {
+      flex: 1; background: rgba(0,0,0,0.7); border: 1px solid rgba(6,214,160,0.3);
+      color: #06d6a0; font-size: 10px; padding: 5px 8px; border-radius: 4px;
+      font-family: inherit;
+    }
+    .style-apply {
+      padding: 5px 14px; border-radius: 4px; font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid rgba(6,214,160,0.5); background: rgba(6,214,160,0.1);
+      color: #06d6a0; transition: all 0.15s; font-family: inherit;
+    }
+    .style-apply:hover { background: rgba(6,214,160,0.2); }
+    .style-apply:disabled { opacity: 0.4; cursor: not-allowed; }
+    .style-result {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      pointer-events: none; transition: opacity 0.4s;
+      opacity: 0;
+    }
+    .style-result.visible { opacity: 0.92; }
+    .comfy-status-text {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      font-size: 9px; color: var(--dim); letter-spacing: 0.1em;
+    }
+
+    /* ── Camera error ── */
+    .cam-error {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      background: rgba(5,5,16,0.9); z-index: 50;
+      font-size: 11px; color: var(--dim); text-align: center;
+      padding: 20px; display: none;
+    }
+    .cam-error.show { display: flex; }
+    .cam-error-icon { font-size: 28px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    <div>
+      <div class="logo-text">CREATIVE LIBERATION ENGINE · LIVE ANIMATE</div>
+      <div class="logo-sub">OMNIBUS v1 — Human Vertical</div>
+    </div>
+  </div>
+  <div class="status-bar">
+    <span class="status-pill live" id="cam-status">CAMERA INIT</span>
+    <span class="status-pill live" id="pose-status">POSE INIT</span>
+    <span class="status-pill comfy" id="comfy-status" style="cursor:pointer" onclick="startComfyUI()">COMFYUI OFFLINE</span>
+  </div>
+</header>
+
+<video id="webcam" playsinline autoplay muted></video>
+
+<div class="grid">
+
+  <!-- ── Panel D: OMNIBUS Skeleton ──────────────────────── -->
+  <div class="panel" id="panel-d">
+    <div class="panel-label d">D · OMNIBUS SKELETON</div>
+    <canvas id="canvas-skeleton" width="960" height="540"></canvas>
+    <div class="skeleton-controls">
+      <button class="ctrl-btn active" onclick="setSkeletonStyle('neon')">NEON</button>
+      <button class="ctrl-btn" onclick="setSkeletonStyle('tactical')">TACT</button>
+      <button class="ctrl-btn" onclick="toggleVideo()">VIDEO</button>
+    </div>
+  </div>
+
+  <!-- ── Panel A: Three.js Avatar ────────────────────────── -->
+  <div class="panel" id="panel-a">
+    <div class="panel-label a">A · 3D AVATAR</div>
+    <canvas id="canvas-avatar" width="960" height="540"></canvas>
+  </div>
+
+  <!-- ── Panel C: WebGL Shader Overlay ───────────────────── -->
+  <div class="panel" id="panel-c">
+    <div class="panel-label c">C · SHADER OVERLAY</div>
+    <canvas id="canvas-bg-particles" width="960" height="540" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <canvas id="canvas-shader" width="960" height="540" style="position:absolute;inset:0;z-index:2;"></canvas>
+    <div class="shader-controls">
+      <button class="shader-btn active" onclick="setShader('neon')">NEON</button>
+      <button class="shader-btn" onclick="setShader('glitch')">GLITCH</button>
+      <button class="shader-btn" onclick="setShader('sketch')">SKETCH</button>
+      <button class="shader-btn" onclick="setShader('heat')">HEAT</button>
+      <button class="shader-btn" onclick="setShader('void')">VOID</button>
+    </div>
+  </div>
+
+  <!-- ── Panel B: ComfyUI Style Transfer ─────────────────── -->
+  <div class="panel" id="panel-b">
+    <div class="panel-label b">B · FLUX STYLE TRANSFER</div>
+    <canvas id="canvas-b-preview" width="960" height="540"></canvas>
+    <div class="style-result" id="style-result"></div>
+    <div class="comfy-status-text" id="comfy-panel-status">Start ComfyUI to enable</div>
+    <div class="style-controls">
+      <select class="style-select" id="style-prompt">
+        <option value="oil painting, impressionist, vibrant brushstrokes">Oil Painting</option>
+        <option value="anime style, studio ghibli, soft lighting, detailed">Anime</option>
+        <option value="cyberpunk neon wireframe, tron legacy, glowing circuits">Cyberpunk Wire</option>
+        <option value="watercolor wash, delicate ink lines, artistic">Watercolor</option>
+        <option value="thermal imaging camera, heat signature, infrared">Thermal Vision</option>
+        <option value="pencil sketch, charcoal drawing, hatching texture">Pencil Sketch</option>
+        <option value="comic book, bold outlines, halftone dots, pop art">Comic Book</option>
+        <option value="holographic projection, iridescent, translucent">Hologram</option>
+      </select>
+      <button class="style-apply" id="apply-btn" onclick="applyStyle()" disabled>APPLY</button>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+
+// ─── State ────────────────────────────────────────────────────────────────────
+const video = document.getElementById('webcam');
+const canvasSkeleton = document.getElementById('canvas-skeleton');
+const canvasAvatar = document.getElementById('canvas-avatar');
+const canvasShader = document.getElementById('canvas-shader');
+const canvasBg = document.getElementById('canvas-bg-particles');
+const canvasBPreview = document.getElementById('canvas-b-preview');
+
+let entitySnapshot = [];
+let frameId = 0;
+let showVideo = false;
+let currentShader = 'neon';
+let comfyRunning = false;
+let applyingStyle = false;
+
+// Tracked entity store: id → { position, velocity, trail, groupId, meta, stale }
+const entities = new Map();
+
+// ─── Webcam ───────────────────────────────────────────────────────────────────
+async function startWebcam() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { width: 1280, height: 720, facingMode: 'user' }
+    });
+    video.srcObject = stream;
+    await video.play();
+    document.getElementById('cam-status').textContent = 'CAMERA LIVE';
+    document.getElementById('cam-status').style.borderColor = '#06d6a0';
+    document.getElementById('cam-status').style.color = '#06d6a0';
+    return true;
+  } catch (err) {
+    document.getElementById('cam-status').textContent = 'CAM DENIED';
+    console.error('[studio] Camera error:', err);
+    return false;
+  }
+}
+
+// ─── MediaPipe Pose ───────────────────────────────────────────────────────────
+const LANDMARK_NAMES = [
+  'nose','left_eye_inner','left_eye','left_eye_outer','right_eye_inner','right_eye',
+  'right_eye_outer','left_ear','right_ear','mouth_left','mouth_right',
+  'left_shoulder','right_shoulder','left_elbow','right_elbow','left_wrist','right_wrist',
+  'left_pinky','right_pinky','left_index','right_index','left_thumb','right_thumb',
+  'left_hip','right_hip','left_knee','right_knee','left_ankle','right_ankle',
+  'left_heel','right_heel','left_foot_index','right_foot_index'
+];
+const LANDMARK_GROUP = {
+  0:'face',1:'face',2:'face',3:'face',4:'face',5:'face',6:'face',7:'face',8:'face',9:'face',10:'face',
+  11:'torso',12:'torso',23:'torso',24:'torso',
+  13:'arms',14:'arms',15:'arms',16:'arms',17:'arms',18:'arms',19:'arms',20:'arms',21:'arms',22:'arms',
+  25:'legs',26:'legs',27:'legs',28:'legs',29:'legs',30:'legs',31:'legs',32:'legs'
+};
+const POSE_CONNECTIONS = [
+  [0,1],[1,2],[2,3],[3,7],[0,4],[4,5],[5,6],[6,8],
+  [9,10],[11,12],[11,13],[13,15],[15,17],[15,19],[15,21],
+  [12,14],[14,16],[16,18],[16,20],[16,22],
+  [11,23],[12,24],[23,24],[23,25],[24,26],[25,27],[26,28],
+  [27,29],[28,30],[29,31],[30,32]
+];
+const GROUP_COLORS = { face:'#00f5ff', torso:'#ffffff', arms:'#ff6b00', legs:'#bf00ff', body:'#00d4ff' };
+
+function ingestLandmarks(landmarks) {
+  const now = Date.now();
+  frameId++;
+  for (let i = 0; i < landmarks.length; i++) {
+    const lm = landmarks[i];
+    const vis = lm.visibility ?? 1;
+    if (vis < 0.3) continue;
+    const name = LANDMARK_NAMES[i];
+    const group = LANDMARK_GROUP[i] ?? 'body';
+    const id = `session:${name}`;
+    const newPos = { x: Math.max(0,Math.min(1,lm.x)), y: Math.max(0,Math.min(1,lm.y)), z: lm.z ?? 0 };
+    const existing = entities.get(id);
+    if (existing) {
+      const dt = Math.max(1, now - existing.lastUpdated) / 1000;
+      const lerp = 0.3;
+      const velX = existing.velocity.x * (1-lerp) + ((newPos.x - existing.position.x)/dt) * lerp;
+      const velY = existing.velocity.y * (1-lerp) + ((newPos.y - existing.position.y)/dt) * lerp;
+      const smoothX = existing.position.x * (1-lerp) + newPos.x * lerp;
+      const smoothY = existing.position.y * (1-lerp) + newPos.y * lerp;
+      const trail = [...existing.trail, { x: existing.position.x, y: existing.position.y, timestamp: existing.lastUpdated }].slice(-30);
+      entities.set(id, { ...existing, position: { x: smoothX, y: smoothY, z: newPos.z }, velocity: { x: velX, y: velY }, trail, lastUpdated: now, stale: false, meta: { rawLandmark: { ...lm, visibility: vis } } });
+    } else {
+      entities.set(id, { id, name, groupId: group, position: newPos, velocity: { x:0, y:0 }, trail: [], currentAction: 'position', lastUpdated: now, stale: false, meta: { rawLandmark: { ...lm, visibility: vis } } });
+    }
+  }
+  entitySnapshot = Array.from(entities.values());
+}
+
+function initPose() {
+  const pose = new Pose({ locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${f}` });
+  pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
+  pose.onResults(results => {
+    if (results.poseLandmarks) {
+      ingestLandmarks(results.poseLandmarks);
+      document.getElementById('pose-status').textContent = `POSE ${entitySnapshot.filter(e=>!e.stale).length}L`;
+      document.getElementById('pose-status').style.borderColor = '#06d6a0';
+      document.getElementById('pose-status').style.color = '#06d6a0';
+    }
+  });
+  const cam = new Camera(video, {
+    onFrame: async () => { if (video.readyState >= 2) await pose.send({ image: video }); },
+    width: 1280, height: 720
+  });
+  cam.start();
+}
+
+// ─── MediaPipe Selfie Segmentation ───────────────────────────────────────────
+let segMask = null;
+function initSegmentation() {
+  const seg = new SelfieSegmentation({ locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${f}` });
+  seg.setOptions({ modelSelection: 1 });
+  seg.onResults(results => {
+    if (results.segmentationMask) segMask = results.segmentationMask;
+  });
+  // Run at lower FPS to not compete with Pose
+  setInterval(async () => {
+    if (video.readyState >= 2) await seg.send({ image: video });
+  }, 66); // ~15fps
+}
+
+// ─── Panel D: Skeleton Renderer ───────────────────────────────────────────────
+const ctxSkel = canvasSkeleton.getContext('2d');
+let skeletonStyle = 'neon';
+let showVideoInSkeleton = false;
+let skeletonFrame = 0;
+
+window.setSkeletonStyle = (s) => {
+  skeletonStyle = s;
+  document.querySelectorAll('#panel-d .ctrl-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+};
+window.toggleVideo = () => { showVideoInSkeleton = !showVideoInSkeleton; };
+
+function renderSkeleton() {
+  const w = canvasSkeleton.width, h = canvasSkeleton.height;
+  ctxSkel.fillStyle = '#080810';
+  ctxSkel.fillRect(0,0,w,h);
+
+  if (showVideoInSkeleton && video.readyState >= 2) {
+    ctxSkel.globalAlpha = 0.22;
+    ctxSkel.drawImage(video, 0, 0, w, h);
+    ctxSkel.globalAlpha = 1;
+  }
+
+  // Scanlines
+  ctxSkel.strokeStyle = 'rgba(0,245,255,0.025)';
+  ctxSkel.lineWidth = 1;
+  for (let y = 0; y < h; y += 4) { ctxSkel.beginPath(); ctxSkel.moveTo(0,y); ctxSkel.lineTo(w,y); ctxSkel.stroke(); }
+
+  const byName = new Map();
+  for (const e of entitySnapshot) { if (!e.stale) byName.set(e.name, e); }
+
+  // Connections
+  for (const [ia, ib] of POSE_CONNECTIONS) {
+    const a = byName.get(LANDMARK_NAMES[ia]), b = byName.get(LANDMARK_NAMES[ib]);
+    if (!a || !b) continue;
+    const conf = a.meta.rawLandmark?.visibility ?? 1;
+    const color = GROUP_COLORS[a.groupId] ?? GROUP_COLORS.body;
+    ctxSkel.beginPath();
+    ctxSkel.moveTo(a.position.x*w, a.position.y*h);
+    ctxSkel.lineTo(b.position.x*w, b.position.y*h);
+    ctxSkel.strokeStyle = color + Math.floor(conf*160).toString(16).padStart(2,'0');
+    ctxSkel.lineWidth = 2;
+    ctxSkel.shadowColor = color; ctxSkel.shadowBlur = 8;
+    ctxSkel.stroke(); ctxSkel.shadowBlur = 0;
+  }
+
+  // Joints
+  for (const e of entitySnapshot) {
+    if (e.stale) continue;
+    const sx = e.position.x*w, sy = e.position.y*h;
+    const color = GROUP_COLORS[e.groupId] ?? GROUP_COLORS.body;
+    const conf = e.meta.rawLandmark?.visibility ?? 1;
+    const r = 5 * (0.5 + conf*0.5);
+    ctxSkel.shadowColor = color; ctxSkel.shadowBlur = 12;
+    ctxSkel.fillStyle = color + Math.floor(conf*200).toString(16).padStart(2,'0');
+    ctxSkel.beginPath(); ctxSkel.arc(sx,sy,r,0,Math.PI*2); ctxSkel.fill();
+    ctxSkel.shadowBlur = 0;
+    ctxSkel.fillStyle = `rgba(255,255,255,${conf*0.9})`;
+    ctxSkel.beginPath(); ctxSkel.arc(sx,sy,r*0.35,0,Math.PI*2); ctxSkel.fill();
+  }
+
+  // Trails
+  for (const e of entitySnapshot) {
+    if (e.stale || e.trail.length < 2) continue;
+    const color = GROUP_COLORS[e.groupId] ?? GROUP_COLORS.body;
+    ctxSkel.beginPath();
+    ctxSkel.moveTo(e.trail[0].x*w, e.trail[0].y*h);
+    for (let i = 1; i < e.trail.length; i++) {
+      const a = (i/e.trail.length)*0.35;
+      ctxSkel.strokeStyle = color + Math.floor(a*255).toString(16).padStart(2,'0');
+      ctxSkel.lineWidth = 1;
+      ctxSkel.lineTo(e.trail[i].x*w, e.trail[i].y*h);
+    }
+    ctxSkel.stroke();
+  }
+
+  skeletonFrame++;
+  const alive = entitySnapshot.filter(e=>!e.stale).length;
+  ctxSkel.fillStyle = 'rgba(0,245,255,0.45)'; ctxSkel.font = '10px monospace'; ctxSkel.textAlign = 'left';
+  ctxSkel.fillText(`OMNIBUS ● HUMAN ● ${alive} landmarks ● f${skeletonFrame}`, 10, h-10);
+}
+
+// ─── Panel A: Three.js Avatar ─────────────────────────────────────────────────
+let avatarScene, avatarCamera, avatarRenderer, avatarGrid;
+const jointMeshes = new Map(), boneMeshes = new Map();
+const TORSO_J = new Set(['left_shoulder','right_shoulder','left_hip','right_hip']);
+const ARM_J   = new Set(['left_elbow','right_elbow','left_wrist','right_wrist']);
+const LEG_J   = new Set(['left_knee','right_knee','left_ankle','right_ankle']);
+const FACE_J  = new Set(['nose','left_eye','right_eye','mouth_left','mouth_right']);
+
+function initAvatar() {
+  avatarScene = new THREE.Scene();
+  avatarCamera = new THREE.PerspectiveCamera(45, canvasAvatar.width/canvasAvatar.height, 0.1, 100);
+  avatarCamera.position.set(0, 0, 3);
+  avatarScene.add(new THREE.AmbientLight(0x334466, 1.5));
+  const dir = new THREE.DirectionalLight(0x00f5ff, 2);
+  dir.position.set(1,2,3); avatarScene.add(dir);
+  const grid = new THREE.GridHelper(4, 20, 0x1a1a3a, 0x111128);
+  grid.position.y = -1.2; avatarScene.add(grid);
+  avatarRenderer = new THREE.WebGLRenderer({ canvas: canvasAvatar, antialias: true, alpha: false });
+  avatarRenderer.setSize(canvasAvatar.width, canvasAvatar.height);
+  avatarRenderer.setClearColor(0x080810);
+  avatarRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  const jointNames = ['nose','left_eye','right_eye','mouth_left','mouth_right','left_shoulder','right_shoulder','left_elbow','right_elbow','left_wrist','right_wrist','left_hip','right_hip','left_knee','right_knee','left_ankle','right_ankle'];
+  const geoMap = { face: new THREE.SphereGeometry(0.04,8,8), torso: new THREE.SphereGeometry(0.07,10,10), arms: new THREE.SphereGeometry(0.05,8,8), legs: new THREE.SphereGeometry(0.06,8,8) };
+  const matMap = {
+    face: new THREE.MeshStandardMaterial({ color: 0x00f5ff, emissive: 0x007788, roughness: 0.2 }),
+    torso: new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x334455, roughness: 0.3 }),
+    arms: new THREE.MeshStandardMaterial({ color: 0xff6b00, emissive: 0x442200, roughness: 0.2 }),
+    legs: new THREE.MeshStandardMaterial({ color: 0xbf00ff, emissive: 0x330044, roughness: 0.2 }),
+  };
+  for (const name of jointNames) {
+    const g = FACE_J.has(name)?'face': TORSO_J.has(name)?'torso': ARM_J.has(name)?'arms': LEG_J.has(name)?'legs':'torso';
+    const mesh = new THREE.Mesh(geoMap[g], matMap[g]);
+    mesh.position.set(0,0,-10); avatarScene.add(mesh); jointMeshes.set(name, mesh);
+  }
+  const bonePairs = [['left_shoulder','right_shoulder'],['left_shoulder','left_elbow'],['left_elbow','left_wrist'],['right_shoulder','right_elbow'],['right_elbow','right_wrist'],['left_shoulder','left_hip'],['right_shoulder','right_hip'],['left_hip','right_hip'],['left_hip','left_knee'],['left_knee','left_ankle'],['right_hip','right_knee'],['right_knee','right_ankle']];
+  const boneMat = new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x003344, roughness: 0.4, transparent: true, opacity: 0.7 });
+  for (const [a,b] of bonePairs) {
+    const geo = new THREE.CylinderGeometry(0.018,0.018,1,6);
+    const mesh = new THREE.Mesh(geo, boneMat);
+    mesh.visible = false; avatarScene.add(mesh); boneMeshes.set(`${a}__${b}`, mesh);
+  }
+}
+
+function updateAvatar() {
+  const byName = new Map();
+  for (const e of entitySnapshot) { if (!e.stale) byName.set(e.name, e); }
+  for (const [name, mesh] of jointMeshes) {
+    const e = byName.get(name);
+    if (!e) { mesh.position.z = -10; continue; }
+    const target = new THREE.Vector3((e.position.x-0.5)*2, -(e.position.y-0.5)*2.5, (e.position.z??0)*-0.5);
+    mesh.position.lerp(target, 0.35);
+  }
+  for (const [key, mesh] of boneMeshes) {
+    const [na, nb] = key.split('__');
+    const ja = jointMeshes.get(na), jb = jointMeshes.get(nb);
+    if (!ja||!jb||ja.position.z<-5||jb.position.z<-5) { mesh.visible=false; continue; }
+    mesh.visible = true;
+    const mid = ja.position.clone().add(jb.position).multiplyScalar(0.5);
+    mesh.position.copy(mid);
+    const dir = jb.position.clone().sub(ja.position);
+    mesh.scale.y = dir.length();
+    mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.normalize());
+  }
+  avatarCamera.position.y = Math.sin(Date.now()*0.0003)*0.02;
+}
+
+// ─── Panel C: Shader overlay (simplified inline WebGL) ────────────────────────
+const glCanvas = canvasShader, bgCanvas = canvasBg;
+const gl = glCanvas.getContext('webgl');
+const bgCtx = bgCanvas.getContext('2d');
+let shaderProgram = null, videoTex = null, maskTex = null;
+let particles = [];
+const SHADERS_SRC = {
+  neon: `precision mediump float;uniform sampler2D u_video,u_mask;uniform float u_time;varying vec2 v_tc;void main(){vec4 f=texture2D(u_video,v_tc);float m=texture2D(u_mask,v_tc).r;float s=0.003;float c=dot(f.rgb,vec3(.3,.59,.11));float e=abs(c-dot(texture2D(u_video,v_tc-vec2(s,0)).rgb,vec3(.3,.59,.11)))+abs(c-dot(texture2D(u_video,v_tc+vec2(s,0)).rgb,vec3(.3,.59,.11)));vec3 n=vec3(0.,e*8.+.2,e*6.+.1)+f.rgb*.3;gl_FragColor=vec4(mix(vec3(.02,.02,.08),n*(0.85+sin(u_time*3.)*.15),m),1.);}`,
+  glitch:`precision mediump float;uniform sampler2D u_video,u_mask;uniform float u_time;varying vec2 v_tc;float rand(float n){return fract(sin(n)*43758.5453);}void main(){float m=texture2D(u_mask,v_tc).r;float b=step(.97,rand(floor(v_tc.y*80.)+floor(u_time*8.)));vec2 sh=vec2(.008*rand(u_time)*b,0.);vec3 col=vec3(texture2D(u_video,v_tc+sh*1.5).r,texture2D(u_video,v_tc).g,texture2D(u_video,v_tc-sh*1.5).b);gl_FragColor=vec4(mix(vec3(0.),col*(0.85+.15*sin(v_tc.y*800.+u_time*60.)),m),1.);}`,
+  sketch:`precision mediump float;uniform sampler2D u_video,u_mask;uniform float u_time;varying vec2 v_tc;void main(){float m=texture2D(u_mask,v_tc).r;float s=.002;float sx=-1.*dot(texture2D(u_video,v_tc+vec2(-s,-s)).rgb,vec3(.3,.59,.11))-2.*dot(texture2D(u_video,v_tc+vec2(-s,0)).rgb,vec3(.3,.59,.11))-1.*dot(texture2D(u_video,v_tc+vec2(-s,s)).rgb,vec3(.3,.59,.11))+1.*dot(texture2D(u_video,v_tc+vec2(s,-s)).rgb,vec3(.3,.59,.11))+2.*dot(texture2D(u_video,v_tc+vec2(s,0)).rgb,vec3(.3,.59,.11))+1.*dot(texture2D(u_video,v_tc+vec2(s,s)).rgb,vec3(.3,.59,.11));gl_FragColor=vec4(mix(vec3(.95,.95,.88),vec3(1.-clamp(abs(sx)*4.,0.,1.))*.95,m),1.);}`,
+  heat: `precision mediump float;uniform sampler2D u_video,u_mask;uniform float u_time;varying vec2 v_tc;vec3 hm(float t){return mix(mix(vec3(0.,0.,.5),vec3(0.,1.,0.),clamp(t*2.,0.,1.)),mix(vec3(0.,1.,0.),vec3(1.,0.,0.),clamp(t*2.-1.,0.,1.)),step(.5,t));}void main(){float m=texture2D(u_mask,v_tc).r;float l=dot(texture2D(u_video,v_tc).rgb,vec3(.3,.59,.11));gl_FragColor=vec4(mix(vec3(0.),hm(l),m+sin(v_tc.y*40.-u_time*4.)*.03*m),1.);}`,
+  void:  `precision mediump float;uniform sampler2D u_video,u_mask;uniform float u_time;varying vec2 v_tc;void main(){float m=texture2D(u_mask,v_tc).r;vec4 f=texture2D(u_video,v_tc);float l=dot(f.rgb,vec3(.3,.59,.11));vec2 uv=v_tc*2.-1.;gl_FragColor=vec4(mix(vec3(0.),vec3(1.-l)*(1.-dot(uv,uv)*.5),m),1.);}`,
+};
+const VS = `attribute vec2 a_p,a_tc;varying vec2 v_tc;void main(){gl_Position=vec4(a_p,0,1);v_tc=a_tc;}`;
+
+function buildProgram(fragSrc) {
+  function compileShader(type, src) {
+    const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh));
+    return sh;
+  }
+  if (shaderProgram) gl.deleteProgram(shaderProgram);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compileShader(gl.VERTEX_SHADER, VS));
+  gl.attachShader(prog, compileShader(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  shaderProgram = prog;
+  // Setup quad geometry once
+  const pos = new Float32Array([-1,-1,1,-1,-1,1,1,1]);
+  const tc  = new Float32Array([0,1,1,1,0,0,1,0]);
+  const pb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+  const al = gl.getAttribLocation(prog,'a_p'); gl.enableVertexAttribArray(al); gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+  const tb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, tb); gl.bufferData(gl.ARRAY_BUFFER, tc, gl.STATIC_DRAW);
+  const tl = gl.getAttribLocation(prog,'a_tc'); gl.enableVertexAttribArray(tl); gl.vertexAttribPointer(tl,2,gl.FLOAT,false,0,0);
+}
+
+function buildTex() {
+  function mkTex() {
+    const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR); return t;
+  }
+  videoTex = mkTex(); maskTex = mkTex();
+}
+
+// Mask canvas (receives segmentation)
+const maskCv = document.createElement('canvas');
+maskCv.width = glCanvas.width; maskCv.height = glCanvas.height;
+const maskCvCtx = maskCv.getContext('2d');
+
+// Hook segmentation into the mask canvas
+const segForShader = new SelfieSegmentation({ locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${f}` });
+segForShader.setOptions({ modelSelection: 1 });
+segForShader.onResults(results => {
+  if (results.segmentationMask) {
+    maskCvCtx.clearRect(0,0,maskCv.width,maskCv.height);
+    maskCvCtx.drawImage(results.segmentationMask,0,0,maskCv.width,maskCv.height);
+  }
+});
+setInterval(async () => { if (video.readyState >= 2) await segForShader.send({ image: video }); }, 50);
+
+function renderShaderPanel() {
+  if (!shaderProgram || video.readyState < 2) return;
+  gl.useProgram(shaderProgram);
+  gl.viewport(0, 0, glCanvas.width, glCanvas.height);
+
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, videoTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
+  gl.uniform1i(gl.getUniformLocation(shaderProgram,'u_video'), 0);
+
+  gl.activeTexture(gl.TEXTURE1);
+  gl.bindTexture(gl.TEXTURE_2D, maskTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, maskCv);
+  gl.uniform1i(gl.getUniformLocation(shaderProgram,'u_mask'), 1);
+
+  gl.uniform1f(gl.getUniformLocation(shaderProgram,'u_time'), performance.now()/1000);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+function renderParticles() {
+  const w=bgCanvas.width, h=bgCanvas.height;
+  bgCtx.fillStyle='rgba(4,4,12,0.18)'; bgCtx.fillRect(0,0,w,h);
+  for (const e of entitySnapshot) {
+    if (e.stale) continue;
+    const speed = Math.hypot(e.velocity.x, e.velocity.y);
+    if (speed > 0.01 && Math.random() < speed*8) {
+      const hue = e.groupId==='face'?180:e.groupId==='arms'?30:e.groupId==='legs'?280:200;
+      particles.push({ x:e.position.x*w, y:e.position.y*h, vx:(Math.random()-.5)*2+e.velocity.x*w*.5, vy:(Math.random()-.5)*2+e.velocity.y*h*.5, life:1.0, maxLife:0.6+Math.random()*.8, hue });
+    }
+  }
+  if (particles.length > 400) particles.splice(0,100);
+  particles = particles.filter(p=>p.life>0);
+  for (const p of particles) {
+    p.x+=p.vx*.016; p.y+=p.vy*.016; p.vy+=0.08; p.life-=.016/p.maxLife;
+    bgCtx.fillStyle=`hsla(${p.hue},100%,65%,${Math.max(0,p.life)*.8})`;
+    bgCtx.shadowColor=`hsl(${p.hue},100%,70%)`; bgCtx.shadowBlur=6;
+    bgCtx.beginPath(); bgCtx.arc(p.x,p.y,2*Math.max(0,p.life),0,Math.PI*2); bgCtx.fill();
+  }
+  bgCtx.shadowBlur=0;
+}
+
+window.setShader = (style) => {
+  currentShader = style;
+  buildProgram(SHADERS_SRC[style]);
+  document.querySelectorAll('.shader-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+};
+
+// ─── Panel B: Preview + ComfyUI ──────────────────────────────────────────────
+const ctxBPreview = canvasBPreview.getContext('2d');
+function renderBPreview() {
+  if (video.readyState >= 2) {
+    ctxBPreview.save();
+    ctxBPreview.translate(canvasBPreview.width, 0);
+    ctxBPreview.scale(-1, 1);
+    ctxBPreview.drawImage(video, 0, 0, canvasBPreview.width, canvasBPreview.height);
+    ctxBPreview.restore();
+  }
+}
+
+async function checkComfyUI() {
+  try {
+    const res = await fetch('/api/comfyui/status');
+    const data = await res.json();
+    comfyRunning = data.running;
+    const pill = document.getElementById('comfy-status');
+    const panelStatus = document.getElementById('comfy-panel-status');
+    if (comfyRunning) {
+      pill.textContent = 'COMFYUI LIVE'; pill.className = 'status-pill comfy running';
+      panelStatus.textContent = 'ComfyUI ready · select style and apply';
+      document.getElementById('apply-btn').disabled = false;
+    } else {
+      pill.textContent = 'COMFYUI OFFLINE'; pill.className = 'status-pill comfy';
+      panelStatus.textContent = 'Click COMFYUI OFFLINE in header to start';
+      document.getElementById('apply-btn').disabled = true;
+    }
+  } catch { comfyRunning = false; }
+}
+
+window.startComfyUI = async () => {
+  document.getElementById('comfy-status').textContent = 'STARTING...';
+  try {
+    await fetch('/api/comfyui/start', { method: 'POST' });
+    // Poll until ready
+    for (let i = 0; i < 30; i++) {
+      await new Promise(r => setTimeout(r, 2000));
+      await checkComfyUI();
+      if (comfyRunning) break;
+    }
+  } catch(e) { console.error('[studio] Failed to start ComfyUI:', e); }
+};
+
+window.applyStyle = async () => {
+  if (!comfyRunning || applyingStyle) return;
+  applyingStyle = true;
+  const btn = document.getElementById('apply-btn');
+  const resultEl = document.getElementById('style-result');
+  const statusEl = document.getElementById('comfy-panel-status');
+  btn.textContent = 'PROCESSING'; btn.disabled = true;
+  statusEl.textContent = 'Capturing frame → FLUX1-Schnell...';
+
+  try {
+    // Capture current frame
+    const tmpCv = document.createElement('canvas');
+    tmpCv.width = 512; tmpCv.height = 512;
+    const tmpCtx = tmpCv.getContext('2d');
+    tmpCtx.drawImage(video, 0, 0, 512, 512);
+    const imageB64 = tmpCv.toDataURL('image/jpeg', 0.85).split(',')[1];
+    const stylePrompt = document.getElementById('style-prompt').value;
+
+    // Submit to ComfyUI via proxy
+    const queueRes = await fetch('/api/comfyui/api/prompt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prompt: buildFluxWorkflow(imageB64, stylePrompt),
+        client_id: 'inception-studio',
+      }),
+    });
+    if (!queueRes.ok) throw new Error(await queueRes.text());
+    const { prompt_id } = await queueRes.json();
+    statusEl.textContent = `Rendering… (prompt ${prompt_id.slice(0,8)})`;
+
+    // Poll history
+    let filename = null;
+    for (let i = 0; i < 60; i++) {
+      await new Promise(r => setTimeout(r, 1000));
+      const hist = await fetch(`/api/comfyui/history/${prompt_id}`);
+      const data = await hist.json();
+      const entry = data[prompt_id];
+      if (entry?.outputs) {
+        for (const nodeOut of Object.values(entry.outputs)) {
+          if (nodeOut.images?.[0]?.filename) { filename = nodeOut.images[0].filename; break; }
+        }
+        if (filename) break;
+      }
+    }
+    if (!filename) throw new Error('Timeout — no output generated');
+
+    const imageUrl = `/api/comfyui/view?filename=${encodeURIComponent(filename)}&type=output`;
+    resultEl.style.backgroundImage = `url(${imageUrl})`;
+    resultEl.classList.add('visible');
+    statusEl.textContent = `✓ Done · ${filename}`;
+
+    // Fade out after 10s
+    setTimeout(() => resultEl.classList.remove('visible'), 10000);
+  } catch(err) {
+    statusEl.textContent = `Error: ${err.message}`;
+    console.error('[studio] Style transfer error:', err);
+  }
+
+  applyingStyle = false;
+  btn.textContent = 'APPLY'; btn.disabled = !comfyRunning;
+};
+
+function buildFluxWorkflow(imageB64, stylePrompt) {
+  return {
+    "1": { class_type: "ETN_LoadImageBase64", inputs: { image: imageB64 }},
+    "2": { class_type: "CLIPTextEncode", inputs: { text: stylePrompt, clip: ["6", 1] }},
+    "3": { class_type: "CLIPTextEncode", inputs: { text: "blurry, distorted, low quality", clip: ["6", 1] }},
+    "4": { class_type: "VAEEncode", inputs: { pixels: ["1", 0], vae: ["5", 2] }},
+    "5": { class_type: "UnetLoaderGGUF", inputs: { unet_name: "flux1-schnell-Q8_0.gguf" }},
+    "6": { class_type: "DualCLIPLoaderGGUF", inputs: { clip_name1: "t5xxl_fp8_e4m3fn.safetensors", clip_name2: "clip_l.safetensors", type: "flux" }},
+    "7": { class_type: "KSampler", inputs: { model: ["5",0], positive: ["2",0], negative: ["3",0], latent_image: ["4",0], seed: Math.floor(Math.random()*999999999), steps: 4, cfg: 1.0, sampler_name: "euler", scheduler: "simple", denoise: 0.62 }},
+    "8": { class_type: "VAEDecode", inputs: { samples: ["7",0], vae: ["5",2] }},
+    "9": { class_type: "SaveImage", inputs: { images: ["8",0], filename_prefix: "inception-live-animate" }},
+  };
+}
+
+// ─── Main Loop ────────────────────────────────────────────────────────────────
+function mainLoop() {
+  renderSkeleton();
+  updateAvatar();
+  avatarRenderer?.render(avatarScene, avatarCamera);
+  renderParticles();
+  renderShaderPanel();
+  renderBPreview();
+  requestAnimationFrame(mainLoop);
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+async function boot() {
+  const camOk = await startWebcam();
+  if (!camOk) return;
+
+  // Init Three.js avatar
+  initAvatar();
+
+  // Init WebGL shader
+  buildProgram(SHADERS_SRC.neon);
+  buildTex();
+
+  // Init MediaPipe pose
+  initPose();
+
+  // Check ComfyUI status
+  checkComfyUI();
+  setInterval(checkComfyUI, 15000);
+
+  // Start main render loop
+  mainLoop();
+}
+
+boot();
+</script>
+</body>
+</html>

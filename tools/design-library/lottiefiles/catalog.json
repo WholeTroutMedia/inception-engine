@@ -1,0 +1,22 @@
+{
+  "name": "LottieFiles",
+  "url": "https://lottiefiles.com",
+  "account": {
+    "status": "Logged In",
+    "plan": "Free/Active"
+  },
+  "asset_types": [
+    "Lottie JSON",
+    "dotLottie (.lottie)",
+    "Motion Tokens",
+    "Interactive Animations"
+  ],
+  "integrations": [
+    "React",
+    "Figma",
+    "Web"
+  ],
+  "stats": {
+    "total_animations": "50,000+"
+  }
+}

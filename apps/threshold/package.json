@@ -1,0 +1,13 @@
+{
+  "name": "@inception/threshold",
+  "version": "1.0.0",
+  "description": "The Threshold — Creative Liberation Engine spatial AI experience for Meta Quest & Apple Vision Pro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve . --listen 3900 --cors",
+    "preview": "npx serve . --listen 3900 --cors --ssl-cert ../../../certs/localhost.pem --ssl-key ../../../certs/localhost-key.pem"
+  },
+  "keywords": ["webxr", "three.js", "vr", "spatial-computing", "creative-liberation-engine"],
+  "license": "UNLICENSED"
+}

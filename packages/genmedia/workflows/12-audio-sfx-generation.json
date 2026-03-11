@@ -1,0 +1,114 @@
+{
+    "last_node_id": 5,
+    "last_link_id": 5,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "AudioLDM2Loader",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "model": "audioldm2-large"
+            }
+        },
+        {
+            "id": 2,
+            "type": "CLIPTextEncode",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "text": "cinematic deep bass impact, whoosh, futuristic energy hum, distant thunder rumble, high quality, sound design"
+            }
+        },
+        {
+            "id": 3,
+            "type": "AudioLDM2Sampler",
+            "pos": [
+                500,
+                100
+            ],
+            "inputs": {
+                "model": [
+                    "1",
+                    0
+                ],
+                "positive": [
+                    "2",
+                    0
+                ],
+                "negative": [
+                    "4",
+                    0
+                ],
+                "steps": 50,
+                "cfg_scale": 7.0,
+                "audio_length_s": 5.0,
+                "seed": 20260306
+            }
+        },
+        {
+            "id": 4,
+            "type": "CLIPTextEncode",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "text": "low quality, noise, static, clipping, harsh frequencies"
+            }
+        },
+        {
+            "id": 5,
+            "type": "SaveAudio",
+            "pos": [
+                900,
+                100
+            ],
+            "inputs": {
+                "filename_prefix": "sfx_impact_generator_v1",
+                "audio": [
+                    "3",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            3,
+            0,
+            "MODEL"
+        ],
+        [
+            2,
+            2,
+            0,
+            3,
+            1,
+            "POSITIVE"
+        ],
+        [
+            3,
+            4,
+            0,
+            3,
+            2,
+            "NEGATIVE"
+        ],
+        [
+            4,
+            3,
+            0,
+            5,
+            0,
+            "AUDIO"
+        ]
+    ]
+}

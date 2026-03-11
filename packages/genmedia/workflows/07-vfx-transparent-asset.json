@@ -1,0 +1,212 @@
+{
+    "last_node_id": 9,
+    "last_link_id": 9,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+        },
+        {
+            "id": 2,
+            "type": "LayeredDiffusionApply",
+            "pos": [
+                500,
+                100
+            ],
+            "inputs": {
+                "model": [
+                    "1",
+                    0
+                ],
+                "config": "SDXL, foreground"
+            }
+        },
+        {
+            "id": 3,
+            "type": "CLIPTextEncode",
+            "pos": [
+                100,
+                300
+            ],
+            "inputs": {
+                "text": "isolated magic glowing sword asset, high resolution, sharp focus, fantasy prop, Unreal Engine 5 render, white rim lighting"
+            }
+        },
+        {
+            "id": 4,
+            "type": "EmptyLatentImage",
+            "pos": [
+                100,
+                500
+            ],
+            "inputs": {
+                "width": 1024,
+                "height": 1024,
+                "batch_size": 1
+            }
+        },
+        {
+            "id": 5,
+            "type": "KSampler",
+            "pos": [
+                900,
+                100
+            ],
+            "inputs": {
+                "cfg": 7.0,
+                "denoise": 1.0,
+                "model": [
+                    "2",
+                    0
+                ],
+                "latent_image": [
+                    "4",
+                    0
+                ],
+                "negative": [
+                    ""
+                ],
+                "positive": [
+                    "3",
+                    0
+                ],
+                "sampler_name": "euler_ancestral",
+                "scheduler": "karras",
+                "seed": 10101010,
+                "steps": 30
+            }
+        },
+        {
+            "id": 6,
+            "type": "VAEDecode",
+            "pos": [
+                1300,
+                100
+            ],
+            "inputs": {
+                "samples": [
+                    "5",
+                    0
+                ],
+                "vae": [
+                    "1",
+                    2
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "LayeredDiffusionDecodeRGBA",
+            "pos": [
+                1600,
+                100
+            ],
+            "inputs": {
+                "samples": [
+                    "5",
+                    0
+                ],
+                "images": [
+                    "6",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "SaveImage",
+            "pos": [
+                2000,
+                100
+            ],
+            "inputs": {
+                "filename_prefix": "vfx_transparent_asset_v1",
+                "images": [
+                    "7",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            2,
+            0,
+            "MODEL"
+        ],
+        [
+            2,
+            2,
+            0,
+            5,
+            0,
+            "MODEL"
+        ],
+        [
+            3,
+            3,
+            0,
+            5,
+            1,
+            "CONDITIONING"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            2,
+            "LATENT"
+        ],
+        [
+            5,
+            5,
+            0,
+            6,
+            0,
+            "LATENT"
+        ],
+        [
+            6,
+            1,
+            2,
+            6,
+            1,
+            "VAE"
+        ],
+        [
+            7,
+            5,
+            0,
+            7,
+            0,
+            "LATENT"
+        ],
+        [
+            8,
+            6,
+            0,
+            7,
+            1,
+            "IMAGE"
+        ],
+        [
+            9,
+            7,
+            0,
+            8,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

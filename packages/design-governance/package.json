@@ -1,0 +1,22 @@
+{
+    "name": "@inception/design-governance",
+    "version": "1.0.0",
+    "description": "Creative Liberation Engine Design System — drift detection, token analytics, and governance tooling",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsup src/index.ts --format esm,cjs --dts",
+        "scan": "node dist/ci/scan.js",
+        "report": "node dist/ci/scan.js --report"
+    },
+    "dependencies": {
+        "@inception/design-agent": "workspace:*",
+        "@inception/design-tokens": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/node": "^25.3.5",
+        "tsup": "^8.0.0",
+        "typescript": "^5.7.0"
+    }
+}

@@ -1,0 +1,178 @@
+{
+    "last_node_id": 9,
+    "last_link_id": 9,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "ckpt_name": "sd_xl_turbo_1.0_fp16.safetensors"
+            }
+        },
+        {
+            "id": 2,
+            "type": "CLIPTextEncode",
+            "pos": [
+                100,
+                250
+            ],
+            "inputs": {
+                "text": "cinematic storyboard sketch, rough pencil drawing, strong composition, high contrast lighting, extreme wide shot, action sequence, dynamic angle"
+            }
+        },
+        {
+            "id": 3,
+            "type": "CLIPTextEncode",
+            "pos": [
+                100,
+                400
+            ],
+            "inputs": {
+                "text": "photorealistic, color, polished, text, watermark"
+            }
+        },
+        {
+            "id": 4,
+            "type": "EmptyLatentImage",
+            "pos": [
+                100,
+                550
+            ],
+            "inputs": {
+                "batch_size": 1,
+                "height": 512,
+                "width": 1024
+            }
+        },
+        {
+            "id": 5,
+            "type": "KSampler",
+            "pos": [
+                500,
+                250
+            ],
+            "inputs": {
+                "cfg": 1.0,
+                "denoise": 1.0,
+                "model": [
+                    "1",
+                    0
+                ],
+                "latent_image": [
+                    "4",
+                    0
+                ],
+                "negative": [
+                    "3",
+                    0
+                ],
+                "positive": [
+                    "2",
+                    0
+                ],
+                "sampler_name": "euler_ancestral",
+                "scheduler": "karras",
+                "seed": 123456789,
+                "steps": 4
+            }
+        },
+        {
+            "id": 6,
+            "type": "VAEDecode",
+            "pos": [
+                800,
+                250
+            ],
+            "inputs": {
+                "samples": [
+                    "5",
+                    0
+                ],
+                "vae": [
+                    "1",
+                    2
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "SaveImage",
+            "pos": [
+                1100,
+                250
+            ],
+            "inputs": {
+                "filename_prefix": "storyboard_sketch_v1",
+                "images": [
+                    "6",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            5,
+            0,
+            "MODEL"
+        ],
+        [
+            2,
+            2,
+            0,
+            5,
+            3,
+            "CONDITIONING"
+        ],
+        [
+            3,
+            3,
+            0,
+            5,
+            4,
+            "CONDITIONING"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            2,
+            "LATENT"
+        ],
+        [
+            5,
+            5,
+            0,
+            6,
+            0,
+            "LATENT"
+        ],
+        [
+            6,
+            1,
+            2,
+            6,
+            1,
+            "VAE"
+        ],
+        [
+            7,
+            6,
+            0,
+            7,
+            0,
+            "IMAGE"
+        ]
+    ],
+    "groups": [],
+    "config": {},
+    "extra": {}
+}

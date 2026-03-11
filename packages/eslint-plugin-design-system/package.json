@@ -1,0 +1,12 @@
+{
+    "name":  "eslint-plugin-design-system",
+    "version":  "1.0.0",
+    "type":  "commonjs",
+    "main":  "lib/index.js",
+    "dependencies":  {
+                         "eslint":  "^8.0.0"
+                     },
+    "devDependencies":  {
+                            "@inception/tsconfig":  "workspace:*"
+                        }
+}

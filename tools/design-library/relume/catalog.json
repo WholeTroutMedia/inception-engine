@@ -1,0 +1,49 @@
+{
+  "source": "https://www.relume.io",
+  "account": "operator@gmail.com",
+  "plan": "Paid (dashboard active)",
+  "localized": "2026-03-10",
+  "description": "AI website builder + component library for Webflow, React, and Figma. 1,757 Webflow, 1,524 React, 1,400+ Figma components.",
+  "links": {
+    "dashboard": "https://www.relume.io/dashboard",
+    "componentLibrary": "https://www.relume.io/components",
+    "reactLibrary": "https://www.relume.io/react-library",
+    "figmaLibrary": "https://www.relume.io/figma-library",
+    "figmaPlugin": "https://www.figma.com/community/plugin/relume",
+    "docs": "https://docs.relume.io",
+    "aiBuilder": "https://www.relume.io/ai-website-builder"
+  },
+  "npm": {
+    "ui": "@relume_io/relume-ui",
+    "tailwind": "@relume_io/relume-tailwind"
+  },
+  "totals": {
+    "webflow": 1757,
+    "react": 1524,
+    "figma": 1400
+  },
+  "aiTools": [
+    { "name": "AI Sitemap Builder", "desc": "Generate full site sitemaps from a prompt" },
+    { "name": "AI Wireframe Builder", "desc": "Generate wireframes from sitemap automatically" },
+    { "name": "Style Guide Builder", "desc": "Generate brand + style guide tokens" },
+    { "name": "Relume Ipsum", "desc": "AI copywriting for all placeholder text" }
+  ],
+  "categories": {
+    "marketing": [
+      "Navbars", "Footers", "Hero Headers", "Feature Sections",
+      "Testimonials", "Pricing", "CTAs", "FAQs", "Blog", "Contact",
+      "Team", "Gallery", "Stats", "Timeline", "Logo Clouds"
+    ],
+    "ecommerce": [
+      "Product Lists", "Product Headers", "Category Filters",
+      "Cart", "Checkout", "Order Confirmation"
+    ],
+    "applicationUI": [
+      "Application Shells", "Sidebars", "Topbars",
+      "Tables", "Onboarding Forms", "Stat Cards",
+      "Dashboards", "Settings Panels", "Notifications",
+      "Modals", "Drawers", "Empty States"
+    ]
+  },
+  "integrations": ["Webflow", "Figma", "React", "Tailwind CSS", "shadcn/ui"]
+}

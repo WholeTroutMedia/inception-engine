@@ -1,0 +1,23 @@
+{
+  "name": "@inception/cowork-bridge",
+  "version": "1.0.0",
+  "description": "Cowork Protocol Bridge — MCP server wrappers for Claude Cowork config integration with IE dispatch",
+  "main": "build/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "generate-context": "tsx src/context-generator.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.5.0",
+    "@inception/dispatch": "workspace:*",
+    "@inception/constitution": "workspace:*",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  }
+}

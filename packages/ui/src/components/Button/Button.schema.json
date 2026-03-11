@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://creative-liberation-engine.local/schemas/ui/Button.json",
+    "title": "Button",
+    "description": "Interactive button component.",
+    "type": "object",
+    "properties": {
+        "variant": {
+            "type": "string",
+            "enum": [
+                "primary",
+                "secondary",
+                "ghost",
+                "accent"
+            ],
+            "default": "primary",
+            "description": "Visual style variant mapped to semantic action tokens."
+        },
+        "size": {
+            "type": "string",
+            "enum": [
+                "sm",
+                "md",
+                "lg"
+            ],
+            "default": "md",
+            "description": "Size variant mapped to spacing and typography tokens."
+        },
+        "loading": {
+            "type": "boolean",
+            "default": false,
+            "description": "Shows the loading spinner and disables interaction."
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false,
+            "description": "Disables interaction and applies muted opacities."
+        },
+        "fullWidth": {
+            "type": "boolean",
+            "default": false,
+            "description": "Expands the button to 100% of container width."
+        },
+        "asChild": {
+            "type": "boolean",
+            "default": false,
+            "description": "Radix UI polymorphism: merge props onto the immediate child element."
+        }
+    },
+    "additionalProperties": false,
+    "required": []
+}

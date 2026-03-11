@@ -1,0 +1,114 @@
+{
+  "source": "https://magicui.design",
+  "account": "operator@gmail.com (GitHub: operator)",
+  "plan": "Free (Pro license: $49)",
+  "localized": "2026-03-10",
+  "description": "Open-source animated React component library for landing pages and marketing sites",
+  "npmInstall": "npx magicui-cli@latest init",
+  "docs": "https://magicui.design/docs",
+  "github": "https://github.com/magicuidesign/magicui",
+  "pro": "https://pro.magicui.design",
+  "mcp": "https://magicui.design/docs/mcp",
+  "templates": {
+    "count": 9,
+    "note": "Pro templates require license ($49). Portfolio template is free.",
+    "items": [
+      { "name": "CodeForge", "pro": true, "url": "https://magicui.design/docs/templates/codeforge" },
+      { "name": "AI Agent", "pro": true, "url": "https://magicui.design/docs/templates/agent" },
+      { "name": "Dev Tool", "pro": true, "url": "https://magicui.design/docs/templates/devtool" },
+      { "name": "Mobile", "pro": true, "url": "https://magicui.design/docs/templates/mobile" },
+      { "name": "SaaS", "pro": true, "url": "https://magicui.design/docs/templates/saas" },
+      { "name": "Startup", "pro": true, "url": "https://magicui.design/docs/templates/startup" },
+      { "name": "Portfolio", "pro": false, "url": "https://magicui.design/docs/templates/portfolio" },
+      { "name": "Changelog", "pro": false, "url": "https://magicui.design/docs/templates/changelog", "new": true },
+      { "name": "Blog", "pro": false, "url": "https://magicui.design/docs/templates/blog", "new": true }
+    ]
+  },
+  "components": {
+    "count": "65+",
+    "categories": {
+      "special_effects": [
+        { "name": "Marquee", "url": "https://magicui.design/docs/components/marquee" },
+        { "name": "Terminal", "url": "https://magicui.design/docs/components/terminal" },
+        { "name": "Hero Video Dialog", "url": "https://magicui.design/docs/components/hero-video-dialog" },
+        { "name": "Bento Grid", "url": "https://magicui.design/docs/components/bento-grid" },
+        { "name": "Animated List", "url": "https://magicui.design/docs/components/animated-list" },
+        { "name": "Dock", "url": "https://magicui.design/docs/components/dock" },
+        { "name": "Globe", "url": "https://magicui.design/docs/components/globe" },
+        { "name": "Tweet Card", "url": "https://magicui.design/docs/components/tweet-card" },
+        { "name": "Orbiting Circles", "url": "https://magicui.design/docs/components/orbiting-circles" },
+        { "name": "Avatar Circles", "url": "https://magicui.design/docs/components/avatar-circles" },
+        { "name": "Icon Cloud", "url": "https://magicui.design/docs/components/icon-cloud" },
+        { "name": "Lens", "url": "https://magicui.design/docs/components/lens" },
+        { "name": "Pointer", "url": "https://magicui.design/docs/components/pointer" },
+        { "name": "Smooth Cursor", "url": "https://magicui.design/docs/components/smooth-cursor" },
+        { "name": "Progressive Blur", "url": "https://magicui.design/docs/components/progressive-blur" },
+        { "name": "Dotted Map", "url": "https://magicui.design/docs/components/dotted-map", "new": true }
+      ],
+      "animations": [
+        { "name": "Animated Beam", "url": "https://magicui.design/docs/components/animated-beam" },
+        { "name": "Border Beam", "url": "https://magicui.design/docs/components/border-beam" },
+        { "name": "Shine Border", "url": "https://magicui.design/docs/components/shine-border" },
+        { "name": "Magic Card", "url": "https://magicui.design/docs/components/magic-card" },
+        { "name": "Meteors", "url": "https://magicui.design/docs/components/meteors" },
+        { "name": "Confetti", "url": "https://magicui.design/docs/components/confetti" },
+        { "name": "Particles", "url": "https://magicui.design/docs/components/particles" },
+        { "name": "Animated Theme Toggler", "url": "https://magicui.design/docs/components/animated-theme-toggler", "new": true },
+        { "name": "Blur Fade", "url": "https://magicui.design/docs/components/blur-fade" }
+      ],
+      "text_animations": [
+        { "name": "Text Animate", "url": "https://magicui.design/docs/components/text-animate" },
+        { "name": "Typing Animation", "url": "https://magicui.design/docs/components/typing-animation", "new": true },
+        { "name": "Line Shadow Text", "url": "https://magicui.design/docs/components/line-shadow-text" },
+        { "name": "Aurora Text", "url": "https://magicui.design/docs/components/aurora-text" },
+        { "name": "Video Text", "url": "https://magicui.design/docs/components/video-text" },
+        { "name": "Number Ticker", "url": "https://magicui.design/docs/components/number-ticker" },
+        { "name": "Animated Shiny Text", "url": "https://magicui.design/docs/components/animated-shiny-text" },
+        { "name": "Animated Gradient Text", "url": "https://magicui.design/docs/components/animated-gradient-text" },
+        { "name": "Text Reveal", "url": "https://magicui.design/docs/components/text-reveal" },
+        { "name": "Hyper Text", "url": "https://magicui.design/docs/components/hyper-text" },
+        { "name": "Word Rotate", "url": "https://magicui.design/docs/components/word-rotate" },
+        { "name": "Scroll Based Velocity", "url": "https://magicui.design/docs/components/scroll-based-velocity" },
+        { "name": "Sparkles Text", "url": "https://magicui.design/docs/components/sparkles-text" },
+        { "name": "Morphing Text", "url": "https://magicui.design/docs/components/morphing-text" },
+        { "name": "Spinning Text", "url": "https://magicui.design/docs/components/spinning-text" },
+        { "name": "Text Highlighter", "url": "https://magicui.design/docs/components/highlighter", "new": true }
+      ],
+      "device_mockups": [
+        { "name": "Safari", "url": "https://magicui.design/docs/components/safari" },
+        { "name": "iPhone", "url": "https://magicui.design/docs/components/iphone" },
+        { "name": "Android", "url": "https://magicui.design/docs/components/android" }
+      ],
+      "buttons": [
+        { "name": "Rainbow Button", "url": "https://magicui.design/docs/components/rainbow-button" },
+        { "name": "Shimmer Button", "url": "https://magicui.design/docs/components/shimmer-button" },
+        { "name": "Ripple Button", "url": "https://magicui.design/docs/components/ripple-button" },
+        { "name": "Shiny Button", "url": "https://magicui.design/docs/components/shiny-button" },
+        { "name": "Pulsating Button", "url": "https://magicui.design/docs/components/pulsating-button" },
+        { "name": "Interactive Hover Button", "url": "https://magicui.design/docs/components/interactive-hover-button" }
+      ],
+      "backgrounds": [
+        { "name": "Flickering Grid", "url": "https://magicui.design/docs/components/flickering-grid" },
+        { "name": "Animated Grid Pattern", "url": "https://magicui.design/docs/components/animated-grid-pattern" },
+        { "name": "Retro Grid", "url": "https://magicui.design/docs/components/retro-grid" },
+        { "name": "Ripple", "url": "https://magicui.design/docs/components/ripple" },
+        { "name": "Dot Pattern", "url": "https://magicui.design/docs/components/dot-pattern" },
+        { "name": "Grid Pattern", "url": "https://magicui.design/docs/components/grid-pattern" },
+        { "name": "Striped Pattern", "url": "https://magicui.design/docs/components/striped-pattern", "new": true },
+        { "name": "Interactive Grid Pattern", "url": "https://magicui.design/docs/components/interactive-grid-pattern" },
+        { "name": "Light Rays", "url": "https://magicui.design/docs/components/light-rays", "new": true },
+        { "name": "Warp Background", "url": "https://magicui.design/docs/components/warp-background" }
+      ],
+      "other": [
+        { "name": "File Tree", "url": "https://magicui.design/docs/components/file-tree" },
+        { "name": "Code Comparison", "url": "https://magicui.design/docs/components/code-comparison" },
+        { "name": "Scroll Progress", "url": "https://magicui.design/docs/components/scroll-progress" },
+        { "name": "Neon Gradient Card", "url": "https://magicui.design/docs/components/neon-gradient-card" },
+        { "name": "Comic Text", "url": "https://magicui.design/docs/components/comic-text" },
+        { "name": "Cool Mode", "url": "https://magicui.design/docs/components/cool-mode" },
+        { "name": "Pixel Image", "url": "https://magicui.design/docs/components/pixel-image" },
+        { "name": "Animated Circular Progress Bar", "url": "https://magicui.design/docs/components/animated-circular-progress-bar" }
+      ]
+    }
+  }
+}

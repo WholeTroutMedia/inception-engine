@@ -1,0 +1,24 @@
+{
+    "name": "@wholetrout/shard-v2",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "echo \"No tests defined\""
+    },
+    "devDependencies": {
+        "@types/ioredis": "^4.28.10",
+        "ioredis": "^5.10.0",
+        "typescript": "^5.0.0",
+        "vitest": "^1.0.0"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.27.1"
+    },
+    "bin": {
+        "shard-v2-mcp": "./dist/mcp-server.js"
+    }
+}

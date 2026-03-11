@@ -1,0 +1,123 @@
+{
+    "last_node_id": 5,
+    "last_link_id": 5,
+    "nodes": [
+        {
+            "id": 1,
+            "type": "LoadVideo",
+            "pos": [
+                100,
+                100
+            ],
+            "inputs": {
+                "video": "source_character.mp4",
+                "force_rate": 24,
+                "force_size": "Disabled",
+                "custom_width": 512,
+                "custom_height": 512,
+                "frame_load_cap": 0,
+                "skip_first_frames": 0,
+                "select_every_nth": 1
+            }
+        },
+        {
+            "id": 2,
+            "type": "LoadAudio",
+            "pos": [
+                100,
+                300
+            ],
+            "inputs": {
+                "audio": "dialogue_track.wav"
+            }
+        },
+        {
+            "id": 3,
+            "type": "Wav2Lip",
+            "pos": [
+                500,
+                200
+            ],
+            "inputs": {
+                "mode": "sequential",
+                "face_detect_batch": 8,
+                "images": [
+                    "1",
+                    0
+                ],
+                "audio": [
+                    "2",
+                    0
+                ],
+                "model": "wav2lip_gan.pth"
+            }
+        },
+        {
+            "id": 4,
+            "type": "FaceRestoreCF",
+            "pos": [
+                900,
+                200
+            ],
+            "inputs": {
+                "model": "codeformer.pth",
+                "weight": 0.75,
+                "image": [
+                    "3",
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "VideoCombine",
+            "pos": [
+                1300,
+                200
+            ],
+            "inputs": {
+                "frame_rate": 24,
+                "format": "video/mp4",
+                "filename_prefix": "lipsync_dialogue_v1",
+                "images": [
+                    "4",
+                    0
+                ]
+            }
+        }
+    ],
+    "links": [
+        [
+            1,
+            1,
+            0,
+            3,
+            0,
+            "IMAGE"
+        ],
+        [
+            2,
+            2,
+            0,
+            3,
+            1,
+            "AUDIO"
+        ],
+        [
+            3,
+            3,
+            0,
+            4,
+            2,
+            "IMAGE"
+        ],
+        [
+            4,
+            4,
+            0,
+            5,
+            0,
+            "IMAGE"
+        ]
+    ]
+}

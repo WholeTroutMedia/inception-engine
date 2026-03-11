@@ -1,0 +1,19 @@
+
+> @inception/design-tokens@1.0.0 build C:\\Creative-Liberation-Engine\packages\design-tokens
+> style-dictionary build
+
+node.exe : Build failed; unable to 
+find config file.
+At C:\Users\jahar\AppData\Roaming\npm\p
+npm.ps1:24 char:5
++     & "node$exe"  "$basedir/node_modu
+les/pnpm/bin/pnpm.cjs" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpeci 
+   fied: (Build failed; u...nd config  
+   file.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCo 
+   mmandError
+ 
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
