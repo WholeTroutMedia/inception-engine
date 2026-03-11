@@ -11,7 +11,7 @@ remote:      (?) Learn how to resolve a blocked push
 remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
 remote:             
 remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.        
-remote:      Visit the repository settings page, https://github.com/WholeTroutMedia/creative-liberation-engine/settings/security_analysis        
+remote:      Visit the repository settings page, https://github.com/Creative-Liberation-Engine/creative-liberation-engine/settings/security_analysis        
 remote:             
 remote:             
 remote:       —— Google OAuth Client ID ————————————————————————————        
@@ -20,7 +20,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:5        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
 remote:             
 remote:             
 remote:       —— Google OAuth Client Secret ————————————————————————        
@@ -29,7 +29,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:6        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
 remote:             
 remote: 
 remote: 
@@ -46,7 +46,7 @@ remote:      (?) Learn how to resolve a blocked push
 remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
 remote:             
 remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.        
-remote:      Visit the repository settings page, https://github.com/WholeTroutMedia/creative-liberation-engine/settings/security_analysis        
+remote:      Visit the repository settings page, https://github.com/Creative-Liberation-Engine/creative-liberation-engine/settings/security_analysis        
 remote:             
 remote:             
 remote:       —— Google OAuth Client ID ————————————————————————————        
@@ -55,7 +55,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:5        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
 remote:             
 remote:             
 remote:       —— Google OAuth Client Secret ————————————————————————        
@@ -64,7 +64,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:6        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
 remote:             
 remote: 
 remote: 
@@ -81,7 +81,7 @@ remote:      (?) Learn how to resolve a blocked push
 remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
 remote:             
 remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.        
-remote:      Visit the repository settings page, https://github.com/WholeTroutMedia/creative-liberation-engine/settings/security_analysis        
+remote:      Visit the repository settings page, https://github.com/Creative-Liberation-Engine/creative-liberation-engine/settings/security_analysis        
 remote:             
 remote:             
 remote:       —— Google OAuth Client ID ————————————————————————————        
@@ -90,7 +90,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:5        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
 remote:             
 remote:             
 remote:       —— Google OAuth Client Secret ————————————————————————        
@@ -99,7 +99,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:6        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
 remote:             
 remote: 
 remote: 
@@ -116,7 +116,7 @@ remote:      (?) Learn how to resolve a blocked push
 remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
 remote:             
 remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.        
-remote:      Visit the repository settings page, https://github.com/WholeTroutMedia/creative-liberation-engine/settings/security_analysis        
+remote:      Visit the repository settings page, https://github.com/Creative-Liberation-Engine/creative-liberation-engine/settings/security_analysis        
 remote:             
 remote:             
 remote:       —— Google OAuth Client ID ————————————————————————————        
@@ -125,7 +125,7 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:5        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHLZ0XEthitJ5Ynuu3v5O5jh        
 remote:             
 remote:             
 remote:       —— Google OAuth Client Secret ————————————————————————        
@@ -134,13 +134,13 @@ remote:          - commit: 26f798302296513c34ad2da365089e582f0c45f1
 remote:            path: packages/workspace-mcp/Start-WorkspaceMCP.ps1:6        
 remote:             
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
-remote:        https://github.com/WholeTroutMedia/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
+remote:        https://github.com/Creative-Liberation-Engine/creative-liberation-engine/security/secret-scanning/unblock-secret/3AoJHN2TsZmfFBiuV9fY5bypwzW        
 remote:             
 remote: 
 remote: 
-To https://github.com/WholeTroutMedia/creative-liberation-engine.git
+To https://github.com/Creative-Liberation-Engine/creative-liberation-engine.git
  ! [remote rejected]   main -> main (push declined due to repository rule violations)
  ! [remote rejected]   v5.1.5-COMMUNITY -> v5.1.5-COMMUNITY (push declined due to repository rule violations)
  ! [remote rejected]   v5.1.6-COMMUNITY -> v5.1.6-COMMUNITY (push declined due to repository rule violations)
  ! [remote rejected]   v5.1.8-COMMUNITY -> v5.1.8-COMMUNITY (push declined due to repository rule violations)
-error: failed to push some refs to 'https://github.com/WholeTroutMedia/creative-liberation-engine.git'
+error: failed to push some refs to 'https://github.com/Creative-Liberation-Engine/creative-liberation-engine.git'

@@ -316,22 +316,22 @@
     color: hsl(346, 84%, 70%);
 }
 
-/* ─── IRIS-GEN Panel ─────────────────────────────────────────────────────────── */
-.ds-iris-panel {
+/* ─── ksignd-GEN Panel ─────────────────────────────────────────────────────────── */
+.ds-ksignd-panel {
     background: var(--surface-1, hsl(220, 15%, 8%));
     border: 1px solid hsla(262, 83%, 68%, 0.15);
     border-radius: 16px;
     padding: 28px;
 }
 
-.ds-iris-header {
+.ds-ksignd-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 20px;
 }
 
-.ds-iris-badge {
+.ds-ksignd-badge {
     font-size: 11px;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
@@ -344,17 +344,17 @@
     letter-spacing: 0.06em;
 }
 
-.ds-iris-desc {
+.ds-ksignd-desc {
     font-size: 13px;
     color: var(--text-secondary, hsl(220, 10%, 60%));
 }
 
-.ds-iris-input-row {
+.ds-ksignd-input-row {
     display: flex;
     gap: 12px;
 }
 
-.ds-iris-input {
+.ds-ksignd-input {
     flex: 1;
     background: var(--surface-2, hsl(220, 14%, 12%));
     border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
@@ -367,12 +367,12 @@
     transition: border-color 0.2s;
 }
 
-.ds-iris-input:focus {
+.ds-ksignd-input:focus {
     border-color: hsla(262, 83%, 68%, 0.4);
     box-shadow: 0 0 0 3px hsla(262, 83%, 68%, 0.08);
 }
 
-.ds-iris-btn {
+.ds-ksignd-btn {
     padding: 12px 24px;
     border-radius: 10px;
     border: none;
@@ -386,25 +386,25 @@
     white-space: nowrap;
 }
 
-.ds-iris-btn:hover:not(:disabled) {
+.ds-ksignd-btn:hover:not(:disabled) {
     transform: translateY(-1px);
     box-shadow: 0 4px 20px hsla(262, 83%, 68%, 0.3);
 }
 
-.ds-iris-btn:disabled {
+.ds-ksignd-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none;
 }
 
-.ds-iris-result {
+.ds-ksignd-result {
     margin-top: 20px;
     border: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
     border-radius: 12px;
     overflow: hidden;
 }
 
-.ds-iris-grade {
+.ds-ksignd-grade {
     padding: 12px 20px;
     font-size: 13px;
     font-family: 'JetBrains Mono', monospace;
@@ -414,48 +414,48 @@
     justify-content: space-between;
 }
 
-.ds-iris-grade.promoted {
+.ds-ksignd-grade.promoted {
     background: hsla(142, 71%, 45%, 0.08);
     color: hsl(142, 71%, 60%);
     border-bottom: 1px solid hsla(142, 71%, 45%, 0.15);
 }
 
-.ds-iris-grade.rejected {
+.ds-ksignd-grade.rejected {
     background: hsla(38, 92%, 52%, 0.08);
     color: hsl(38, 92%, 68%);
     border-bottom: 1px solid hsla(38, 92%, 52%, 0.15);
 }
 
-.ds-iris-score {
+.ds-ksignd-score {
     font-size: 12px;
     opacity: 0.75;
 }
 
-.ds-iris-tokens {
+.ds-ksignd-tokens {
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.ds-iris-token-row {
+.ds-ksignd-token-row {
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 13px;
 }
 
-.ds-iris-token-row code {
+.ds-ksignd-token-row code {
     font-family: 'JetBrains Mono', monospace;
     color: hsl(262, 83%, 78%);
     min-width: 160px;
 }
 
-.ds-iris-token-row span {
+.ds-ksignd-token-row span {
     color: var(--text-secondary, hsl(220, 10%, 60%));
 }
 
-.ds-iris-mini-swatch {
+.ds-ksignd-mini-swatch {
     width: 20px;
     height: 20px;
     border-radius: 4px;
@@ -463,7 +463,7 @@
     flex-shrink: 0;
 }
 
-.ds-iris-issues {
+.ds-ksignd-issues {
     padding: 12px 20px;
     border-top: 1px solid var(--border-subtle, hsla(220, 15%, 100%, 0.06));
     display: flex;
@@ -471,7 +471,7 @@
     gap: 6px;
 }
 
-.ds-iris-issue {
+.ds-ksignd-issue {
     font-size: 12px;
     color: hsl(38, 92%, 68%);
     font-family: 'JetBrains Mono', monospace;
@@ -506,8 +506,8 @@
     border: 1px solid var(--border-subtle);
 }
 
-.ds-iris-mini-swatch {
-    background: var(--iris-swatch-bg, transparent);
+.ds-ksignd-mini-swatch {
+    background: var(--ksignd-swatch-bg, transparent);
 }
 
 /* ── Apply-button semantic styles ───────────────────────────────────────────── */

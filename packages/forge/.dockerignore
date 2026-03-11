@@ -40,7 +40,7 @@ packages/forge/docker-compose.forge.yml
 # Large binary directories we don't need for FORGE build
 models
 tools
-inception
+cle
 services/triposr*
 services/foley*
 services/vision*

@@ -79,7 +79,7 @@ export default function ZeroDayTelemetry() {
                 revenue: { total_revenue_usd: 148500 },
             });
             setLeadScores([
-                { email: 'jaymee@studio.com',  score: 95, factors: ['+30 intake_completed', '+40 proposal_accepted', '+25 contract_signed'], last_updated: new Date().toISOString(), recommendation: 'engage_now' },
+                { email: 'the creator@studio.com',  score: 95, factors: ['+30 intake_completed', '+40 proposal_accepted', '+25 contract_signed'], last_updated: new Date().toISOString(), recommendation: 'engage_now' },
                 { email: 'mark@creatives.io',  score: 55, factors: ['+30 intake_completed', '+15 proposal_viewed'], last_updated: new Date().toISOString(), recommendation: 'nurture' },
                 { email: 'nina@photogroup.ca', score: 10, factors: ['+10 intake_started'], last_updated: new Date().toISOString(), recommendation: 'disqualify' },
                 { email: 'tom@agency.co',      score: 80, factors: ['+30 intake_completed', '+40 proposal_accepted'], last_updated: new Date().toISOString(), recommendation: 'engage_now' },

@@ -105,7 +105,7 @@ const CompassInputSchema = z.object({
 const CompassOutputSchema = z.object({
     verdict: z.enum(['PASS', 'HALT']),
     justinAligns: z.boolean(),
-    jaymeeApproves: z.boolean(),
+    the creatorApproves: z.boolean(),
     worldPositive: z.boolean(),
     reasoning: z.string(),
     compassSignature: z.literal('COMPASS').default('COMPASS'),
@@ -130,7 +130,7 @@ You output PASS or HALT only. Justify concisely.`,
             config: { temperature: 0.05 },
         }));
 
-        return { ...(output ?? { verdict: 'HALT' as const, justinAligns: false, jaymeeApproves: false, worldPositive: false, reasoning: 'COMPASS unavailable' }), compassSignature: 'COMPASS' };
+        return { ...(output ?? { verdict: 'HALT' as const, justinAligns: false, the creatorApproves: false, worldPositive: false, reasoning: 'COMPASS unavailable' }), compassSignature: 'COMPASS' };
     }
 );
 
