@@ -58,7 +58,7 @@ export const genkitFlowBuilder = ai.defineFlow(
     },
     async (input) => {
         const start = Date.now();
-        recordAgentCall('ARCH');
+        recordAgentCall('karchd');
 
         console.log(`[ARCH:FLOW_BUILDER] ▶ Building flow for task ${input.taskId}: ${input.title}`);
 

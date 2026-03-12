@@ -47,15 +47,15 @@ const CometBrowserOutputSchema = z.object({
 export type CometBrowserInput = z.infer<typeof CometBrowserInputSchema>;
 export type CometBrowserOutput = z.infer<typeof CometBrowserOutputSchema>;
 
-export const cometBrowserFlow: Flow<typeof CometBrowserInputSchema, typeof CometBrowserOutputSchema> = ai.defineFlow(
+export const kwebdBrowserFlow: Flow<typeof CometBrowserInputSchema, typeof CometBrowserOutputSchema> = ai.defineFlow(
     {
-        name: 'cometBrowserFlow',
+        name: 'kwebdBrowserFlow',
         inputSchema: CometBrowserInputSchema,
         outputSchema: CometBrowserOutputSchema,
     },
     async (input) => {
         const start = Date.now();
-        recordAgentCall('COMET');
+        recordAgentCall('kwebd');
 
         console.log(`[COMET:BROWSER] ▶ Task ${input.taskId}: ${input.title}`);
 

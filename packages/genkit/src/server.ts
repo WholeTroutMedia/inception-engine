@@ -34,11 +34,11 @@ import { VT100Flow } from './flows/vt100.js';
 import { VT220Flow } from './flows/vt220.js';
 import { conversationalVt100Flow } from './flows/conversationalVt100.js';
 import { vt100ChatFlow } from './flows/vt100-chat-flow.js';
-import { KEEPERFlow } from './flows/keeper.js';
+import { kkeeperdFlow } from './flows/keeper.js';
 import { scribeMemoryTool } from './tools/klogd-memory.js';
 import { chromaRetriever } from './tools/chromadb-retriever.js';
-import { HypeReelDirectorFlow } from './flows/hype-reel-director.js';
-import { CreativeDirectorFlow } from './flows/creative-director.js';
+import { khrdFlow } from './flows/hype-reel-director.js';
+import { kcrdFlow } from './flows/creative-director.js';
 import { AGENT_ROSTER, getAgentActivity, recordAgentCall } from './flows/index.js';
 import { agentOAuth } from '@cle/auth/dist/agent-oauth.js';
 import { ConstitutionalGuard } from './core/constitutional-guard.js';
@@ -478,11 +478,11 @@ app.post('/api/mesh/execute', async (req, res) => {
                     const { classifyTaskFlow } = await import('./flows/classify-task.js');
                     return res.json(await classifyTaskFlow(payload));
                 case 'director':
-                    const { HypeReelDirectorFlow } = await import('./flows/hype-reel-director.js');
-                    return res.json(await HypeReelDirectorFlow(payload));
+                    const { khrdFlow } = await import('./flows/hype-reel-director.js');
+                    return res.json(await khrdFlow(payload));
                 case 'creative-director':
-                    const { CreativeDirectorFlow } = await import('./flows/creative-director.js');
-                    return res.json({ result: await CreativeDirectorFlow(payload) });
+                    const { kcrdFlow } = await import('./flows/creative-director.js');
+                    return res.json({ result: await kcrdFlow(payload) });
                 case 'vt100Chat':
                     const { vt100ChatFlow } = await import('./flows/vt100-chat-flow.js');
                     return res.json(await vt100ChatFlow(payload));
@@ -821,7 +821,7 @@ app.post('/director', async (req, res) => {
             return res.status(400).json({ error: 'videoFiles, targetDuration, and mood are required' });
         }
 
-        const edl = await HypeReelDirectorFlow({ videoFiles, targetDuration, mood });
+        const edl = await khrdFlow({ videoFiles, targetDuration, mood });
         res.json(edl);
     } catch (error: any) {
         console.error('[GENKIT:SERVER] Director error:', error.message);
@@ -841,7 +841,7 @@ app.post('/flow/CreativeDirector', async (req, res) => {
             return res.status(400).json({ error: '"brief" is required' });
         }
         console.log(`[ksignd] ðŸŽ¨ CreativeDirector called for: ${brief.project_name ?? 'unknown'}`);
-        const vision = await CreativeDirectorFlow({ brief });
+        const vision = await kcrdFlow({ brief });
         res.json({ result: vision });
     } catch (error: any) {
         console.error('[ksignd] CreativeDirector error:', error.message);
@@ -1029,7 +1029,7 @@ app.post('/vt100/ideate', async (req, res) => {
         console.log(`[VT100:IDEATE] Topic: ${topic.slice(0, 80)}`);
 
         // Step 1 â€” kstated: surface relevant knowledge context
-        const keeperResult = await KEEPERFlow({
+        const keeperResult = await kkeeperdFlow({
             task: 'search',
             query: topic,
             tags: ['ideate', 'vt100'],
@@ -1088,7 +1088,7 @@ app.post('/vt100/plan', async (req, res) => {
         console.log(`[VT100:PLAN] Topic: ${topic.slice(0, 80)}`);
 
         // Step 1 â€” kstated: synthesize knowledge for planning context
-        const keeperResult = await KEEPERFlow({
+        const keeperResult = await kkeeperdFlow({
             task: 'synthesize',
             query: topic,
             tags: ['plan', 'vt100', 'architecture'],
@@ -1301,10 +1301,10 @@ app.post('/api/infraDockerFlow', async (req, res) => {
 // POST /api/cometBrowserFlow â€” COMET agentic browser task planner
 // ---------------------------------------------------------------------------
 
-app.post('/api/cometBrowserFlow', async (req, res) => {
+app.post('/api/kwebdBrowserFlow', async (req, res) => {
     try {
-        const { cometBrowserFlow } = await import('./flows/comet-browser-flow.js');
-        const result = await cometBrowserFlow(req.body);
+        const { kwebdBrowserFlow } = await import('./flows/comet-browser-flow.js');
+        const result = await kwebdBrowserFlow(req.body);
         res.json(result);
     } catch (error: any) {
         console.error('[COMET:BROWSER] Route error:', error.message);
@@ -1481,7 +1481,7 @@ const FLOW_ENDPOINTS = [
     { id: 'stream', method: 'POST', path: '/stream', agent: 'RELAY', description: 'SSE streaming completion endpoint â€” low-latency outputs.' },
     // â”€â”€ Dispatch-facing task executors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     { id: 'infra-docker', method: 'POST', path: '/api/infraDockerFlow', agent: 'RELAY', description: 'FORGE: autonomous Docker/infra task executor for dispatch queue.' },
-    { id: 'comet-browser', method: 'POST', path: '/api/cometBrowserFlow', agent: 'COMET', description: 'COMET: agentic browser action planner for dispatch queue.' },
+    { id: 'kwebd-browser', method: 'POST', path: '/api/kwebdBrowserFlow', agent: 'kwebd', description: 'kwebd: agentic browser action planner for dispatch queue.' },
     { id: 'generic-task', method: 'POST', path: '/api/genericTaskFlow', agent: 'RELAY', description: 'RELAY: universal fallback task executor for any workstream.' },
     { id: 'genkit-flow-builder', method: 'POST', path: '/api/genkitFlowBuilder', agent: 'ARCH', description: 'ARCH+CODEX: meta-flow that generates new Genkit flow files.' },
     // â”€â”€ Generative UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

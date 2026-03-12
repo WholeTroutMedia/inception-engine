@@ -53,35 +53,35 @@ Urgency level: ${input.urgency}. ${input.urgency === 'breaking' ? 'RESPOND IMMED
 // BROADCAST AGENTS
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const ATLASFlow = makeBroadcastAgent(
-    'ATLAS',
+export const katlasdFlow = makeBroadcastAgent(
+    'katlasd',
     'Lead Broadcast Strategist. Coordinates all broadcast hive agents. Sets editorial direction for NBC Nexus and all live ops.',
     'googleai/gemini-2.5-flash'
 );
 
-export const CONTROLROOMFlow = makeBroadcastAgent(
-    'CONTROL_ROOM',
+export const kcontrolroomdFlow = makeBroadcastAgent(
+    'kcontrolroomd',
     'Live operations coordinator. Manages show rundowns, technical feeds, multi-cam switching logic, and broadcast reliability.'
 );
 
-export const SHOWRUNNERFlow = makeBroadcastAgent(
-    'SHOWRUNNER',
+export const kshowrunnerdFlow = makeBroadcastAgent(
+    'kshowrunnerd',
     'Production lead. Manages editorial story flow, segment timing, talent briefings, and show narrative arc for live programming.'
 );
 
-export const GRAPHICSFlow = makeBroadcastAgent(
-    'GRAPHICS',
+export const kgraphicsdFlow = makeBroadcastAgent(
+    'kgraphicsd',
     'Broadcast graphics specialist. Generates lower-thirds, score bugs, full-screen cards, animated chyrons, and motion graphics specs.',
     'googleai/gemini-2.5-flash'
 );
 
-export const STUDIOFlow = makeBroadcastAgent(
-    'STUDIO',
+export const kstudiodFlow = makeBroadcastAgent(
+    'kstudiod',
     'Production studio manager. Handles set design, lighting cues, camera blocking, virtual backgrounds, and studio logistics.'
 );
 
-export const SYSTEMSFlow = makeBroadcastAgent(
-    'SYSTEMS',
+export const ksystemsdFlow = makeBroadcastAgent(
+    'ksystemsd',
     'Broadcast infrastructure engineer. Manages MAM systems, ingest pipelines, encoding chains, CDN distribution, and fault tolerance.'
 );
 

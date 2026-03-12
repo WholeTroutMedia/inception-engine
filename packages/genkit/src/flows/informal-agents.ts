@@ -70,7 +70,7 @@ const GhostOutputSchema = z.object({
 export const GHOSTFlow = ai.defineFlow(
     { name: 'GHOST', inputSchema: GhostInputSchema, outputSchema: GhostOutputSchema },
     async (input) => {
-        recordAgentCall('GHOST');
+        recordAgentCall('kghostd');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -83,7 +83,7 @@ You are invisible to users unless you have findings worth escalating.
 
 Trigger: ${input.trigger} | Scope: ${input.scope}${input.lastCommitSha ? `\nCommit: ${input.lastCommitSha}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('GHOST', Date.now() - startMs);
+        recordAgentCall('kghostd', Date.now() - startMs);
         return { result: text, agentName: 'GHOST' as const, timestamp: new Date().toISOString(), status: 'pass' as const };
     }
 );
@@ -110,7 +110,7 @@ const AlfredOutputSchema = z.object({
 export const ALFREDFlow = ai.defineFlow(
     { name: 'ALFRED', inputSchema: AlfredInputSchema, outputSchema: AlfredOutputSchema },
     async (input) => {
-        recordAgentCall('ALFRED');
+        recordAgentCall('kalfredd');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -124,7 +124,7 @@ You never touch technical systems. You never write code. You serve the creative 
 Task: ${input.task}${input.client ? `\nClient: ${input.client}` : ''}${input.context ? `\nContext: ${input.context}` : ''}
 Style: ${input.style}`,
         });
-        recordAgentCall('ALFRED', Date.now() - startMs);
+        recordAgentCall('kalfredd', Date.now() - startMs);
         return { result: text, agentName: 'ALFRED' as const, timestamp: new Date().toISOString() };
     }
 );

@@ -47,7 +47,7 @@ export const infraDockerFlow = ai.defineFlow(
     },
     async (input) => {
         const start = Date.now();
-        recordAgentCall('RELAY'); // FORGE not in roster yet — route through RELAY
+        recordAgentCall('krelayd'); // FORGE not in roster yet — route through RELAY
 
         console.log(`[FORGE:INFRA] ▶ Task ${input.taskId}: ${input.title}`);
 

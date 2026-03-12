@@ -26,7 +26,7 @@ const VisionOutputSchema = z.object({
 export const VISIONFlow = ai.defineFlow(
     { name: 'VISION', inputSchema: LoRAInputSchema, outputSchema: VisionOutputSchema },
     async (input) => {
-        recordAgentCall('VISION');
+        recordAgentCall('kvisiond');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -38,7 +38,7 @@ You do not write code. You do not generate content. You analyze and critique.
 
 Task: ${input.task}${input.content ? `\nContent to analyze: ${input.content}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('VISION', Date.now() - startMs);
+        recordAgentCall('kvisiond', Date.now() - startMs);
         return { result: text, agentName: 'VISION' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -57,7 +57,7 @@ const SyntaxOutputSchema = z.object({
 export const SYNTAXFlow = ai.defineFlow(
     { name: 'SYNTAX', inputSchema: LoRAInputSchema, outputSchema: SyntaxOutputSchema },
     async (input) => {
-        recordAgentCall('SYNTAX');
+        recordAgentCall('ksyntaxd');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -69,7 +69,7 @@ You understand TypeScript strict mode, monorepo patterns, and Creative Liberatio
 
 Task: ${input.task}${input.content ? `\nCode to analyze:\n${input.content}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('SYNTAX', Date.now() - startMs);
+        recordAgentCall('ksyntaxd', Date.now() - startMs);
         return { result: text, agentName: 'SYNTAX' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -88,7 +88,7 @@ const SiftOutputSchema = z.object({
 export const SIFTFlow = ai.defineFlow(
     { name: 'SIFT', inputSchema: LoRAInputSchema, outputSchema: SiftOutputSchema },
     async (input) => {
-        recordAgentCall('SIFT');
+        recordAgentCall('ksiftd');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -100,7 +100,7 @@ You never hallucinate sources. Low confidence is always better than false certai
 
 Task: ${input.task}${input.content ? `\nContent to sift: ${input.content}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('SIFT', Date.now() - startMs);
+        recordAgentCall('ksiftd', Date.now() - startMs);
         return { result: text, agentName: 'SIFT' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -120,7 +120,7 @@ const AudioOutputSchema = z.object({
 export const AUDIOFlow = ai.defineFlow(
     { name: 'AUDIO', inputSchema: LoRAInputSchema, outputSchema: AudioOutputSchema },
     async (input) => {
-        recordAgentCall('AUDIO');
+        recordAgentCall('kaudiod');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -132,7 +132,7 @@ You understand broadcast standards (LUFS normalization, dynamic range), music pr
 
 Task: ${input.task}${input.content ? `\nContent: ${input.content}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('AUDIO', Date.now() - startMs);
+        recordAgentCall('kaudiod', Date.now() - startMs);
         return { result: text, agentName: 'AUDIO' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -150,7 +150,7 @@ const SpatialOutputSchema = z.object({
 export const SPATIALFlow = ai.defineFlow(
     { name: 'SPATIAL', inputSchema: LoRAInputSchema, outputSchema: SpatialOutputSchema },
     async (input) => {
-        recordAgentCall('SPATIAL');
+        recordAgentCall('kspatiald');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -162,7 +162,7 @@ You bridge the physical and digital. You think in three dimensions.
 
 Task: ${input.task}${input.content ? `\nContent: ${input.content}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('SPATIAL', Date.now() - startMs);
+        recordAgentCall('kspatiald', Date.now() - startMs);
         return { result: text, agentName: 'SPATIAL' as const, timestamp: new Date().toISOString() };
     }
 );

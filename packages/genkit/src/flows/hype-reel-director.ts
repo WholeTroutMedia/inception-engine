@@ -1,9 +1,9 @@
 import { z } from "genkit";
 import { ai } from "../index.js";
 
-export const HypeReelDirectorFlow = ai.defineFlow(
+export const khrdFlow = ai.defineFlow(
     {
-        name: "HypeReelDirector",
+        name: "khrd",
         inputSchema: z.object({
             videoFiles: z.array(z.string()).describe("Array of absolute file paths to proxy videos"),
             targetDuration: z.number().describe("Target duration of the hype reel in seconds"),

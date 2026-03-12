@@ -86,34 +86,34 @@ const CometOutputSchema = z.object({
     endpoints: z.array(z.string()).default([]).describe('API endpoints created or modified'),
     summary: z.string(),
     migrations: z.array(z.string()).default([]).describe('DB migrations generated'),
-    cometSignature: z.literal('COMET').default('COMET'),
+    cometSignature: z.literal('kwebd').default('kwebd'),
 });
 
 export type CometInput = z.infer<typeof CometInputSchema>;
 export type CometOutput = z.infer<typeof CometOutputSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// COMET FLOW
+// kwebd FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const COMETFlow = ai.defineFlow(
+export const kwebdFlow = ai.defineFlow(
     {
-        name: 'COMET',
+        name: 'kwebd',
         inputSchema: CometInputSchema,
         outputSchema: CometOutputSchema,
     },
     async (input): Promise<CometOutput> => {
-        const sessionId = input.sessionId ?? `comet_${Date.now()}`;
-        console.log(`[COMET] 🌠 Activating — Backend task: ${input.task.slice(0, 80)}`);
+        const sessionId = input.sessionId ?? `kwebd_${Date.now()}`;
+        console.log(`[kwebd] 🌠 Activating — Backend task: ${input.task.slice(0, 80)}`);
 
-        return memoryBus.withMemory('COMET', input.task, ['kuid-hive', 'automator', 'backend'], async (context: MemoryEntry[]) => {
+        return memoryBus.withMemory('kwebd', input.task, ['kuid-hive', 'automator', 'backend'], async (context: MemoryEntry[]) => {
             const memCtx = context.length > 0
                 ? `\nPast relevant tasks:\n${context.map(e => `- ${e.task}: ${e.pattern || e.outcome}`).join('\n')}`
                 : '';
 
             const { output } = await ai.generate({
                 model: 'googleai/gemini-2.5-flash',
-                system: `You are COMET — backend automator and API engineer for the Creative Liberation Engine.
+                system: `You are kwebd — backend automator and API engineer for the Creative Liberation Engine.
 
 Tech stack: ${input.techStack.join(', ')}.
 You write production-grade backend code: FastAPI routes, Prisma schemas, Firebase rules, Docker configs, GitHub Actions.
@@ -129,8 +129,8 @@ Principles:
             });
 
             return {
-                ...(output ?? { artifacts: [], endpoints: [], summary: 'COMET output unavailable', migrations: [] }),
-                cometSignature: 'COMET',
+                ...(output ?? { artifacts: [], endpoints: [], summary: 'kwebd output unavailable', migrations: [] }),
+                cometSignature: 'kwebd',
             };
         });
     }

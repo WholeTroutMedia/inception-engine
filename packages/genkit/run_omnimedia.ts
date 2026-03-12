@@ -10,7 +10,7 @@
  *   npx tsx run_omnimedia.ts --folder "B:\MyEvent" --duration 20 --format vertical --prompt "Fast cuts, neon, Berlin rave energy"
  */
 
-import { OmniMediaOrchestratorFlow } from './src/flows/omnimedia-orchestrator.js';
+import { kgenmediaFlow } from './src/flows/omnimedia-orchestrator.js';
 import { spawn } from 'child_process';
 import path from 'path';
 import { parseArgs } from 'util';
@@ -55,7 +55,7 @@ async function main() {
     // ── Step 1: Run OmniMedia God Node Orchestrator ──────────────────────
     let result;
     try {
-        result = await OmniMediaOrchestratorFlow({
+        result = await kgenmediaFlow({
             masterPrompt: MASTER_PROMPT,
             nasFolder: NAS_FOLDER,
             targetDuration: DURATION,

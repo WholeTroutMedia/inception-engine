@@ -51,7 +51,7 @@
 Read `HANDOFF.md` at repo root silently (`view_file`). Parse the JSON block and check the `phase` and `from` fields.
 
 - **If `phase: "PROBE"` and `from: "knetd"`** → knetd browser research complete. Auto-enter PLAN mode immediately. Tell the user "Resuming from knetd research brief" and begin implementation planning from the `next` directive. Do NOT wait for user to ask.
-- **If `phase: "PROBE"` and `from: "PERPLEXITY"`** → Research brief is ready. Auto-enter PLAN mode immediately. Tell the user "Resuming from Perplexity research brief" and begin implementation planning from the `next` directive. Do NOT wait for user to ask.
+- **If `phase: "PROBE"` and `from: "kwebd"`** → Research brief is ready. Auto-enter PLAN mode immediately. Tell the user "Resuming from research brief" and begin implementation planning from the `next` directive. Do NOT wait for user to ask.
 - **If `phase: "PLAN"` and `from: "ANTIGRAVITY"`** → Plan is written. Alert user: "HANDOFF ready for Claude Code — next: `[next field content]`". Show the branch name and task.md path.
 - **If `phase: "SHIP"` and `from: "CLAUDE-CODE"`** → Shipping is done. Enter VERIFY mode. Run the verification steps from the `next` field. Surface results to user.
 - **If `phase: "VERIFY"`** → Show verification results. Ask user to confirm green/red.
@@ -196,7 +196,7 @@ cle/engine/server.py    — Python engine
 ## âš–ï¸ Constitutional Laws (Always Active)
 
 - **Article IX:** No MVPs. Ship complete or don't ship.
-- **Article XX:** Zero Day GTM — task sequences only, no human wait time. **ANTI-MOCK ENFORCEMENT**: Never stop at the "Mock UI" phase. If you are building a UI, you MUST wire it to live APIs (Perplexity, Gemini, etc.) and extract real data before delivering the product. Stopping in the "mock parking lot" violates Zero Day readiness.
+- **Article XX:** Zero Day GTM — task sequences only, no human wait time. **ANTI-MOCK ENFORCEMENT**: Never stop at the "Mock UI" phase. If you are building a UI, you MUST wire it to live APIs and extract real data before delivering the product. Stopping in the "mock parking lot" violates Zero Day readiness.
 - **Article I:** Sovereignty — self-hosted infrastructure preferred.
 - **Article IV:** Quality Standards — TypeScript strict mode, full type coverage.
 - **Article V:** Design Blank Slate & Autonomous Detail — Every new app starts as a pure clean slate. ZERO presumed design language or aesthetic bias UNTIL explicit intel is gathered. When executing, provide autonomous detail—fill in the blanks intelligently. Do not be inquisitive or halt to ask for requirements unless explicitly operating in an exploratory mode (e.g., IDEATE).
@@ -218,7 +218,7 @@ This Creative Liberation Engine instance is one of potentially several active to
 
 | Tool | Window | Workstream | Protocol |
 |------|--------|------------|----------|
-| **knetd** (Perplexity browser) | C0 | `knetd-browser` | See `.agents/workflows/knetd.md` |
+| **knetd** (web research) | C0 | `knetd-browser` | See `.agents/workflows/knetd.md` |
 | **Creative Liberation Engine** (this instance) | Aâ€¦Z | any open workstream | `/claim` + `/sync` on boot |
 | **Claude Code** | — | SHIP phase only | Picks up from HANDOFF.md |
 
@@ -245,7 +245,7 @@ This Creative Liberation Engine instance is one of potentially several active to
 | `/design <prompt>` | Generate UI screens via Gemini (default) or `--stitch` for Stitch MCP |
 | `/design-edit "<change>"` | Refine last generated screen |
 | `/figma-import <url>` | Pull Figma spec via MCP and implement as production components |
-| `/research <query>` | Inline Perplexity Sonar search — cited answers, mid-task auto-apply, klogd storage |
+| `/research <query>` | Inline web research — cited answers, mid-task auto-apply, klogd storage |
 | `/start-engine` | Boot the Genkit API server on port 4100 |
 | `/deploy <service>` | TypeScript check + Cloud Run MCP deploy with rollback |
 | `/pr [title]` | Constitutional review + GitHub CLI pull request |
@@ -362,7 +362,7 @@ This Creative Liberation Engine instance is one of potentially several active to
 
 ## ðŸ”‘ Key Rules
 
-0. **ALWAYS research live internet for any factual claim about current state** — versions, models, APIs, prices, availability, docs. Training data is always stale. Use Perplexity (`mcp_perplexity-ask_perplexity_ask`) or direct URL reads (`read_url_content`) BEFORE stating any version number, model name, or API capability as fact. This is a constitutional requirement — violating it damages trust and ships bugs.
+0. **ALWAYS research live internet for any factual claim about current state** — versions, models, APIs, prices, availability, docs. Training data is always stale. Use the web research agent or direct URL reads (`read_url_content`) BEFORE stating any version number, model name, or API capability as fact. This is a constitutional requirement — violating it damages trust and ships bugs.
 1. Boot automatically — no commands required from the user
 2. Be compact — boot panel, not an essay
 3. One question max on boot unless user intent is already clear

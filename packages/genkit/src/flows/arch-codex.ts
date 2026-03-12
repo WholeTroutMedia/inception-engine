@@ -33,15 +33,15 @@ const ArchOutputSchema = z.object({
     })).describe('Extracted reusable patterns'),
     antiPatterns: z.array(z.string()).default([]).describe('Detected anti-patterns to avoid'),
     summary: z.string(),
-    archSignature: z.literal('ARCH').default('ARCH'),
+    archSignature: z.literal('karchd').default('karchd'),
 });
 
-export const ARCHFlow = ai.defineFlow(
-    { name: 'ARCH', inputSchema: ArchInputSchema, outputSchema: ArchOutputSchema },
+export const karchdFlow = ai.defineFlow(
+    { name: 'karchd', inputSchema: ArchInputSchema, outputSchema: ArchOutputSchema },
     async (input): Promise<z.infer<typeof ArchOutputSchema>> => {
-        console.log(`[ARCH] 🏺 Excavating patterns — Target: ${input.target}`);
+        console.log(`[karchd] 🏺 Excavating patterns — Target: ${input.target}`);
 
-        return memoryBus.withMemory('ARCH', `pattern extraction: ${input.focus}`, ['kstated-hive', 'patterns'], async (_ctx: MemoryEntry[]) => {
+        return memoryBus.withMemory('karchd', `pattern extraction: ${input.focus}`, ['kstated-hive', 'patterns'], async (_ctx: MemoryEntry[]) => {
             const { output } = await ai.generate({
                 model: 'googleai/gemini-2.5-flash',
                 system: `You are ARCH — the Code Archaeologist. You excavate reusable patterns from code, sessions, and decisions.
@@ -51,7 +51,7 @@ Also flag anti-patterns: things that should never be repeated.`,
                 output: { schema: ArchOutputSchema },
                 config: { temperature: 0.2 },
             });
-            return { ...(output ?? { patterns: [], antiPatterns: [], summary: 'ARCH unavailable' }), archSignature: 'ARCH' };
+            return { ...(output ?? { patterns: [], antiPatterns: [], summary: 'karchd unavailable' }), archSignature: 'karchd' };
         });
     }
 );
@@ -70,13 +70,13 @@ const CodexOutputSchema = z.object({
     documentation: z.string().describe('Generated documentation content'),
     format: z.enum(['markdown', 'mermaid', 'jsdoc', 'python_docstring']),
     savedTo: z.string().optional(),
-    codexSignature: z.literal('CODEX').default('CODEX'),
+    codexSignature: z.literal('kcodexd').default('kcodexd'),
 });
 
-export const CODEXFlow = ai.defineFlow(
-    { name: 'CODEX', inputSchema: CodexInputSchema, outputSchema: CodexOutputSchema },
+export const kcodexdFlow = ai.defineFlow(
+    { name: 'kcodexd', inputSchema: CodexInputSchema, outputSchema: CodexOutputSchema },
     async (input): Promise<z.infer<typeof CodexOutputSchema>> => {
-        console.log(`[CODEX] 📖 Generating ${input.docType} for: ${input.moduleName}`);
+        console.log(`[kcodexd] 📖 Generating ${input.docType} for: ${input.moduleName}`);
 
         const docPrompts = {
             readme: `Generate a complete README.md with: overview, features, installation, usage examples, API reference, and constitutional compliance notes.`,
@@ -86,24 +86,24 @@ export const CODEXFlow = ai.defineFlow(
             full_package: `Generate package.json description, README, and API docs combined.`,
         };
 
-        return memoryBus.withMemory('CODEX', `doc: ${input.moduleName}`, ['kstated-hive', 'docs'], async () => {
+        return memoryBus.withMemory('kcodexd', `doc: ${input.moduleName}`, ['kstated-hive', 'docs'], async () => {
             const { output } = await ai.generate({
                 model: 'googleai/gemini-2.5-flash',
-                system: `You are CODEX — the Documentation deity. You enforce Constitutional Article XV: all public interfaces must be documented.
+                system: `You are kcodexd — the Documentation deity. You enforce Constitutional Article XV: all public interfaces must be documented.
 You write documentation that is genuinely useful, not boilerplate. Include real examples. Be specific about constitutional compliance.`,
                 prompt: `${docPrompts[input.docType]}\n\nModule: ${input.moduleName}\n\nCode:\n${input.code.slice(0, 5000)}`,
                 output: { schema: CodexOutputSchema },
                 config: { temperature: 0.2 },
             });
 
-            const result: z.infer<typeof CodexOutputSchema> = { ...(output ?? { documentation: '', format: 'markdown' as const }), codexSignature: 'CODEX' as const };
+            const result: z.infer<typeof CodexOutputSchema> = { ...(output ?? { documentation: '', format: 'markdown' as const }), codexSignature: 'kcodexd' as const };
 
             // Write to disk if output path provided
             if (input.outputPath && result.documentation) {
                 fs.mkdirSync(require('path').dirname(input.outputPath), { recursive: true });
                 fs.writeFileSync(input.outputPath, result.documentation, 'utf8');
                 result.savedTo = input.outputPath;
-                console.log(`[CODEX] ✅ Documentation saved: ${input.outputPath}`);
+                console.log(`[kcodexd] ✅ Documentation saved: ${input.outputPath}`);
             }
 
             return result;

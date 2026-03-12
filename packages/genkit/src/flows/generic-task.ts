@@ -48,7 +48,7 @@ export const genericTaskFlow = ai.defineFlow(
     },
     async (input) => {
         const start = Date.now();
-        recordAgentCall('RELAY');
+        recordAgentCall('krelayd');
 
         console.log(`[RELAY:GENERIC] ▶ Task ${input.taskId} [${input.workstream}]: ${input.title}`);
 

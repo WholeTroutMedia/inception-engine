@@ -57,7 +57,7 @@ const LexOutputSchema = z.object({
 
 export type LexOutput = z.infer<typeof LexOutputSchema>;
 
-export const LEXFlow = ai.defineFlow(
+export const kdocsdFlow = ai.defineFlow(
     { name: 'kdocsd', inputSchema: LexInputSchema, outputSchema: LexOutputSchema },
     async (input): Promise<LexOutput> => {
         const sessionId = input.sessionId ?? `lex_${Date.now()}`;
@@ -108,17 +108,17 @@ const CompassOutputSchema = z.object({
     jaymeeApproves: z.boolean(),
     worldPositive: z.boolean(),
     reasoning: z.string(),
-    compassSignature: z.literal('COMPASS').default('COMPASS'),
+    compassSignature: z.literal('kcompd').default('kcompd'),
 });
 
-export const COMPASSFlow = ai.defineFlow(
-    { name: 'COMPASS', inputSchema: CompassInputSchema, outputSchema: CompassOutputSchema },
+export const kcompdFlow = ai.defineFlow(
+    { name: 'kcompd', inputSchema: CompassInputSchema, outputSchema: CompassOutputSchema },
     async (input): Promise<z.infer<typeof CompassOutputSchema>> => {
-        console.log(`[COMPASS] 🧭 Ethical scan: ${input.action.slice(0, 60)}`);
+        console.log(`[kcompd] 🧭 Ethical scan: ${input.action.slice(0, 60)}`);
 
         const { output } = await ai.generate(applyOmnipresenceCache({
             model: 'googleai/gemini-2.5-flash',
-            system: `You are COMPASS — the Ethical North Star. You evaluate every proposed action against three questions:
+            system: `You are kcompd — the Ethical North Star. You evaluate every proposed action against three questions:
 1. Would The Operator (Founder, artist-liberation mission) allow this?
 2. Would the creator Aharoni (Co-Founder, family values) approve this?
 3. Does this have net positive impact on the world?
@@ -130,7 +130,7 @@ You output PASS or HALT only. Justify concisely.`,
             config: { temperature: 0.05 },
         }));
 
-        return { ...(output ?? { verdict: 'HALT' as const, justinAligns: false, jaymeeApproves: false, worldPositive: false, reasoning: 'COMPASS unavailable' }), compassSignature: 'COMPASS' };
+        return { ...(output ?? { verdict: 'HALT' as const, justinAligns: false, jaymeeApproves: false, worldPositive: false, reasoning: 'kcompd unavailable' }), compassSignature: 'kcompd' };
     }
 );
 

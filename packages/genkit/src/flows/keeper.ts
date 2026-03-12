@@ -34,7 +34,7 @@ const KeeperOutputSchema = z.object({
     keeperSignature: z.literal('kstated').default('kstated'),
 });
 
-export const KEEPERFlow = ai.defineFlow(
+export const kkeeperdFlow = ai.defineFlow(
     { name: 'kstated', inputSchema: KeeperInputSchema, outputSchema: KeeperOutputSchema },
     async (input): Promise<z.infer<typeof KeeperOutputSchema>> => {
         const sessionId = input.sessionId ?? `keeper_${Date.now()}`;

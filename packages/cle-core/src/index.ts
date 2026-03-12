@@ -27,12 +27,12 @@ export const CONSTITUTION = {
     3: { name: 'Constitutional Compliance', immutable: true, summary: 'kdocsd enforces all articles' },
     4: { name: 'Transparency', immutable: false, summary: 'All reasoning observable' },
     5: { name: 'User Sovereignty', immutable: true, summary: 'User vision is supreme' },
-    6: { name: 'Quality Gates', immutable: false, summary: 'VALIDATE before SHIP' },
+    6: { name: 'Quality Gates', immutable: false, summary: 'krecd approval before SHIP' },
     7: { name: 'Knowledge Compounding', immutable: false, summary: 'Every execution contributes to knowledge' },
     8: { name: 'Agent Identity', immutable: false, summary: 'Defined identity per agent' },
     9: { name: 'Error Recovery', immutable: false, summary: 'Graceful failure always' },
     10: { name: 'Resource Stewardship', immutable: false, summary: 'No compute waste' },
-    11: { name: 'Collaboration Protocol', immutable: false, summary: 'RELAY governs inter-agent comms' },
+    11: { name: 'Collaboration Protocol', immutable: false, summary: 'krelayd governs inter-agent comms' },
     12: { name: 'Mode Discipline', immutable: false, summary: 'IDEATE plans, SHIP codes' },
     13: { name: 'Version Control', immutable: false, summary: 'All changes tracked and reversible' },
     14: { name: 'Testing Mandate', immutable: false, summary: 'Untested code is unshipped code' },
@@ -47,12 +47,12 @@ export const CONSTITUTION = {
 
 export const HIVES = {
     AVERI: { lead: 'kruled', members: ['kruled', 'kstrigd', 'ksignd'] as const, mission: 'Strategic consciousness' },
-    kuid: { lead: 'kuid', members: ['kuid', 'kbuildd', 'COMET'] as const, mission: 'Design and engineering' },
-    kstated: { lead: 'kstated', members: ['kstated', 'ARCH', 'CODEX'] as const, mission: 'Knowledge and patterns' },
-    kdocsd: { lead: 'kdocsd', members: ['kdocsd', 'COMPASS'] as const, mission: 'Constitutional compliance' },
-    SWITCHBOARD: { lead: 'SWITCHBOARD', members: ['SWITCHBOARD', 'RELAY', 'SIGNAL'] as const, mission: 'Operations and routing' },
-    VALIDATOR: { lead: 'krecd', members: ['SENTINEL', 'ARCHON', 'PROOF', 'HARBOR', 'krecd'] as const, mission: 'Quality gates' },
-    BROADCAST: { lead: 'ATLAS', members: ['ATLAS', 'CONTROL_ROOM', 'SHOWRUNNER', 'GRAPHICS', 'STUDIO', 'SYSTEMS'] as const, mission: 'Media and live ops' },
+    kuid: { lead: 'kuid', members: ['kuid', 'kbuildd', 'kwebd'] as const, mission: 'Design and engineering' },
+    kstated: { lead: 'kstated', members: ['kstated', 'karchd', 'kcodexd'] as const, mission: 'Knowledge and patterns' },
+    kdocsd: { lead: 'kdocsd', members: ['kdocsd', 'kcompd'] as const, mission: 'Constitutional compliance' },
+    SWITCHBOARD: { lead: 'kswitchd', members: ['kswitchd', 'krelayd', 'ksignald'] as const, mission: 'Operations and routing' },
+    VALIDATOR: { lead: 'krecd', members: ['ksecud', 'karchond', 'kproofd', 'kharbord', 'krecd'] as const, mission: 'Quality gates' },
+    BROADCAST: { lead: 'katlasd', members: ['katlasd', 'kcontrolroomd', 'kshowrunnerd', 'kgraphicsd', 'kstudiod', 'ksystemsd'] as const, mission: 'Media and live ops' },
 } as const;
 
 // ─── Agent Types (from types/agents.ts) ──────────────────────────────────────

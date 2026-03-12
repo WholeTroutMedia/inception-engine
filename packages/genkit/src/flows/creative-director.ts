@@ -101,9 +101,9 @@ Your tone is that of a world-class creative director. Decisive, specific, inspir
 // THE FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const CreativeDirectorFlow = ai.defineFlow(
+export const kcrdFlow = ai.defineFlow(
     {
-        name: 'CreativeDirector',
+        name: 'kcrd',
         inputSchema: z.object({ brief: BriefSchema }),
         outputSchema: CreativeVisionSchema,
     },

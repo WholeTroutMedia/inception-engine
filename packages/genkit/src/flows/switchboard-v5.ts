@@ -22,7 +22,7 @@ const ForgeOutputSchema = z.object({
 export const FORGEFlow = ai.defineFlow(
     { name: 'FORGE', inputSchema: ForgeInputSchema, outputSchema: ForgeOutputSchema },
     async (input) => {
-        recordAgentCall('FORGE');
+        recordAgentCall('kforged');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -36,7 +36,7 @@ Task: ${input.task}${input.target ? `\nTarget: ${input.target}` : ''}${input.con
 
 Respond with concrete shell commands and their expected outcomes. Always use PowerShell syntax for Windows ops.`,
         });
-        recordAgentCall('FORGE', Date.now() - startMs);
+        recordAgentCall('kforged', Date.now() - startMs);
         return { result: text, agentName: 'FORGE' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -62,7 +62,7 @@ const BeaconOutputSchema = z.object({
 export const BEACONFlow = ai.defineFlow(
     { name: 'BEACON', inputSchema: BeaconInputSchema, outputSchema: BeaconOutputSchema },
     async (input) => {
-        recordAgentCall('BEACON');
+        recordAgentCall('kbeacond');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -74,7 +74,7 @@ You write with clarity, warmth, and technical credibility. You make complex syst
 
 Task: ${input.task}${input.audience ? `\nAudience: ${input.audience}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('BEACON', Date.now() - startMs);
+        recordAgentCall('kbeacond', Date.now() - startMs);
         return { result: text, agentName: 'BEACON' as const, timestamp: new Date().toISOString() };
     }
 );
@@ -140,7 +140,7 @@ const FluxOutputSchema = z.object({
 export const FLUXFlow = ai.defineFlow(
     { name: 'FLUX', inputSchema: FluxInputSchema, outputSchema: FluxOutputSchema },
     async (input) => {
-        recordAgentCall('FLUX');
+        recordAgentCall('kfluxd');
         const startMs = Date.now();
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
@@ -152,7 +152,7 @@ You produce clean, typed data. You document schemas. You never modify UI or orch
 
 Task: ${input.task}${input.source ? `\nSource: ${input.source}` : ''}${input.destination ? `\nDestination: ${input.destination}` : ''}${input.context ? `\nContext: ${input.context}` : ''}`,
         });
-        recordAgentCall('FLUX', Date.now() - startMs);
+        recordAgentCall('kfluxd', Date.now() - startMs);
         return { result: text, agentName: 'FLUX' as const, timestamp: new Date().toISOString() };
     }
 );

@@ -7,7 +7,7 @@ The AI orchestration layer for Creative Liberation Engine v5 GENESIS. Provides t
 Wraps Google Firebase Genkit to provide:
 
 - Constitutional middleware (all prompts reviewed before execution)
-- Multi-provider support (Gemini, Perplexity/Sonar, Ollama)
+- Multi-provider support (cloud, web research tier, local models)
 - Typed flows for each AVERI agent (kstrigd, kstated, ARCH-CODEX, etc.)
 - A standalone HTTP API server for other services to invoke flows
 

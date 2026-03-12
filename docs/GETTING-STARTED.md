@@ -1,6 +1,6 @@
 # Getting Started — Creative Liberation Engine
 
-Get from clone to running agents in under 5 minutes.
+First boot. Sovereign ownership. Get from clone to running in under 5 minutes.
 
 ---
 
@@ -22,14 +22,14 @@ cp .env.example .env
 
 Edit `.env` and set **at least one** AI provider key:
 
-| Key | Where to get it | Notes |
-|-----|-----------------|-------|
-| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/apikey) | Free tier, recommended for dev |
-| `GOOGLE_API_KEY` | Google Cloud Console | For Vertex AI / production |
-| `OPENAI_API_KEY` | OpenAI | GPT-4o, etc. |
-| `ANTHROPIC_API_KEY` | Anthropic | Claude |
+| Key | Notes |
+|-----|-------|
+| `GEMINI_API_KEY` | Recommended for dev |
+| `GOOGLE_API_KEY` | For Vertex AI / production |
+| `OPENAI_API_KEY` | GPT-4o, etc. |
+| `ANTHROPIC_API_KEY` | Claude |
 
-**Offline mode:** If you have [Ollama](https://ollama.ai) running locally, the engine will use it when no cloud keys are set.
+**Offline mode:** A local model server works when no cloud keys are set.
 
 ---
 
@@ -39,17 +39,15 @@ Edit `.env` and set **at least one** AI provider key:
 pnpm run build
 ```
 
-This builds the Genkit orchestration layer and its dependencies.
-
 ---
 
-## 4. Boot the agents
+## 4. Boot
 
 ```bash
 pnpm run dev
 ```
 
-This starts the Genkit server. You should see:
+You should see:
 
 ```
 [GENKIT] Creative Liberation Engine provider runtime initialized
@@ -58,9 +56,7 @@ This starts the Genkit server. You should see:
 
 ---
 
-## 5. Use the agents
-
-### Option A: Genkit Dev UI (recommended)
+## 5. Explore
 
 In a **second terminal**:
 
@@ -68,39 +64,7 @@ In a **second terminal**:
 pnpm run genkit:ui
 ```
 
-Then open **http://localhost:4000** in your browser. You can:
-
-- Run flows (vt100, vt220, xterm, classify-task, etc.)
-- Inspect prompts and responses
-- Debug agent behavior
-
-### Option B: HTTP API
-
-```bash
-# Classify a task
-curl -X POST http://localhost:4100/api/flows/classifyTask \
-  -H "Content-Type: application/json" \
-  -d '{"task": "Build a landing page for a coffee shop"}'
-
-# Chat with vt100 (strategy)
-curl -X POST http://localhost:4100/vt100Chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "What should I consider when designing a mobile app?"}'
-```
-
----
-
-## What's included
-
-| Component | Description |
-|-----------|-------------|
-| **TTY Trinity** | vt100 (strategy), vt220 (truth/memory), xterm (execution) |
-| **kuid Hive** | kuid (architect), kbuildd (builder), COMET (automator) |
-| **kstated Hive** | kstated (knowledge), ARCH (patterns), CODEX (docs) |
-| **kdocsd Hive** | LEX (compliance), COMPASS (ethics) |
-| **Switchboard** | RELAY, SIGNAL, routing |
-| **Validators** | SENTINEL, ARCHON, PROOF, HARBOR |
-| **Memory** | klogd (scribe), Living Archive, ChromaDB (optional) |
+Open **http://localhost:4000**. Run flows. Inspect prompts and responses. Find what's there.
 
 ---
 
@@ -112,12 +76,9 @@ curl -X POST http://localhost:4100/vt100Chat \
 | `GEMINI_API_KEY` not found | Copy `.env.example` to `.env` and add your key |
 | Port 4100 in use | Set `PORT=4101` in `.env` |
 | Genkit UI won't connect | Start `pnpm run dev` first, then `pnpm run genkit:ui` |
-| ChromaDB errors | ChromaDB is optional; memory works in-memory without it |
 
 ---
 
 ## Next steps
 
-- Read [README.md](../README.md) for architecture and Constitution
-- Explore flows in the Genkit UI at http://localhost:4000
-- Check [packages/genkit/CONTEXT.md](../packages/genkit/CONTEXT.md) for API details
+Explore the flows. Read the Constitution. The rest you discover.

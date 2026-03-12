@@ -1,4 +1,4 @@
-import { HypeReelDirectorFlow } from './src/flows/hype-reel-director.js';
+import { khrdFlow } from './src/flows/hype-reel-director.js';
 import { GoogleAIFileManager } from '@google/generative-ai/server';
 import 'dotenv/config';
 
@@ -78,7 +78,7 @@ async function main() {
     console.log("🎬 File Enclave Upload Complete. Pushing payload to kruled Director Flow.");
 
     try {
-        const edl = await HypeReelDirectorFlow({
+        const edl = await khrdFlow({
             videoFiles: uploadedFiles,
             targetDuration: 20,
             mood: "15-20sec docu style focused around the band and the event they were playing at. Critically identify the band members and recognize who is playing in the 'reasoning' field so the editor knows."

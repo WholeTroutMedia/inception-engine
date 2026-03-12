@@ -13,7 +13,7 @@
 import { z } from 'genkit';
 import { ai } from '../index.js';
 import { memoryBus, type MemoryEntry } from '@cle/memory';
-import { LEXFlow } from './kdocsd-compass.js';
+import { kdocsdFlow } from './kdocsd-compass.js';
 
 // ─── SHARED VALIDATE INFRASTRUCTURE ─────────────────────────────────────────
 
@@ -38,18 +38,18 @@ const SentinelOutputSchema = z.object({
         fix: z.string(),
     })).default([]),
     secretsFound: z.boolean().default(false),
-    sentinelSignature: z.literal('SENTINEL').default('SENTINEL'),
+    sentinelSignature: z.literal('ksecud').default('ksecud'),
 });
 
-export const SENTINELFlow = ai.defineFlow(
-    { name: 'SENTINEL', inputSchema: ValidatorInputSchema, outputSchema: SentinelOutputSchema },
+export const ksecudFlow = ai.defineFlow(
+    { name: 'ksecud', inputSchema: ValidatorInputSchema, outputSchema: SentinelOutputSchema },
     async (input): Promise<z.infer<typeof SentinelOutputSchema>> => {
-        console.log(`[SENTINEL] 🛡️  Security scan${input.filePath ? `: ${input.filePath}` : ''}`);
+        console.log(`[ksecud] 🛡️  Security scan${input.filePath ? `: ${input.filePath}` : ''}`);
 
-        return memoryBus.withMemory('SENTINEL', `security: ${input.filePath || 'code'}`, ['validator-hive', 'security'], async (_ctx: MemoryEntry[]) => {
+        return memoryBus.withMemory('ksecud', `security: ${input.filePath || 'code'}`, ['validator-hive', 'security'], async (_ctx: MemoryEntry[]) => {
             const { output } = await ai.generate({
                 model: 'googleai/gemini-2.5-flash',
-                system: `You are SENTINEL — the Security Scanner. You enforce Constitutional Article XVI.
+                system: `You are ksecud — the Security Scanner. You enforce Constitutional Article XVI.
 Scan for: hardcoded secrets, API keys, passwords, exposed endpoints, SQL injection, XSS, CSRF, 
 insecure dependencies, eval() usage, prototype pollution, unvalidated input.
 Be thorough. A missed vulnerability is a constitutional violation.`,
@@ -58,11 +58,11 @@ Be thorough. A missed vulnerability is a constitutional violation.`,
                 config: { temperature: 0.05 },
             });
 
-            const result = { ...(output ?? { verdict: 'WARNING' as const, vulnerabilities: [], secretsFound: false }), sentinelSignature: 'SENTINEL' as const };
+            const result = { ...(output ?? { verdict: 'WARNING' as const, vulnerabilities: [], secretsFound: false }), sentinelSignature: 'ksecud' as const };
             if (result.verdict === 'FAIL') {
-                console.error(`[SENTINEL] ❌ FAIL — ${result.vulnerabilities.filter(v => v.severity === 'critical').length} critical vulnerabilities`);
+                console.error(`[ksecud] ❌ FAIL — ${result.vulnerabilities.filter(v => v.severity === 'critical').length} critical vulnerabilities`);
             } else {
-                console.log(`[SENTINEL] ${result.verdict === 'PASS' ? '✅' : '⚠️'} ${result.verdict}`);
+                console.log(`[ksecud] ${result.verdict === 'PASS' ? '✅' : '⚠️'} ${result.verdict}`);
             }
             return result;
         });
@@ -81,17 +81,17 @@ const ArchonOutputSchema = z.object({
         detail: z.string(),
     })).default([]),
     coupling: z.enum(['low', 'medium', 'high']).describe('Estimated coupling level'),
-    archonSignature: z.literal('ARCHON').default('ARCHON'),
+    archonSignature: z.literal('karchond').default('karchond'),
 });
 
-export const ARCHONFlow = ai.defineFlow(
-    { name: 'ARCHON', inputSchema: ValidatorInputSchema, outputSchema: ArchonOutputSchema },
+export const karchondFlow = ai.defineFlow(
+    { name: 'karchond', inputSchema: ValidatorInputSchema, outputSchema: ArchonOutputSchema },
     async (input): Promise<z.infer<typeof ArchonOutputSchema>> => {
-        console.log(`[ARCHON] 🏛️  Architecture compliance scan`);
+        console.log(`[karchond] 🏛️  Architecture compliance scan`);
 
         const { output } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
-            system: `You are ARCHON — the Architecture Compliance scanner.
+            system: `You are karchond — the Architecture Compliance scanner.
 Check for: circular dependencies, God Objects (>500 lines doing everything), 
 violated DIP (high-level depending on low-level), missing abstraction layers,
 violation of single responsibility, and tight coupling.
@@ -100,7 +100,7 @@ Constitutional: Article I (Separation of Powers applies to code too).`,
             output: { schema: ArchonOutputSchema },
         });
 
-        return { ...(output ?? { verdict: 'WARNING' as const, violations: [], coupling: 'medium' as const }), archonSignature: 'ARCHON' };
+        return { ...(output ?? { verdict: 'WARNING' as const, violations: [], coupling: 'medium' as const }), archonSignature: 'karchond' };
     }
 );
 
@@ -116,17 +116,17 @@ const ProofOutputSchema = z.object({
         evidence: z.string(),
     })).default([]),
     missingCases: z.array(z.string()).default([]).describe('Edge cases not handled'),
-    proofSignature: z.literal('PROOF').default('PROOF'),
+    proofSignature: z.literal('kproofd').default('kproofd'),
 });
 
-export const PROOFFlow = ai.defineFlow(
-    { name: 'PROOF', inputSchema: ValidatorInputSchema, outputSchema: ProofOutputSchema },
+export const kproofdFlow = ai.defineFlow(
+    { name: 'kproofd', inputSchema: ValidatorInputSchema, outputSchema: ProofOutputSchema },
     async (input): Promise<z.infer<typeof ProofOutputSchema>> => {
         console.log(`[PROOF] 🔬 Behavioral correctness analysis`);
 
         const { output } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
-            system: `You are PROOF — the Behavioral Correctness analyzer.
+            system: `You are kproofd — the Behavioral Correctness analyzer.
 Verify: does the code actually do what its comments/docs claim?
 Check for: off-by-one errors, missing null checks, unhandled promise rejections,
 incorrect async handling, state mutation bugs, incorrect type coercions.
@@ -135,7 +135,7 @@ List verified behaviors and flag missing edge cases.`,
             output: { schema: ProofOutputSchema },
         });
 
-        return { ...(output ?? { verdict: 'UNCERTAIN' as const, behaviors: [], missingCases: [] }), proofSignature: 'PROOF' };
+        return { ...(output ?? { verdict: 'UNCERTAIN' as const, behaviors: [], missingCases: [] }), proofSignature: 'kproofd' };
     }
 );
 
@@ -148,24 +148,24 @@ const HarborOutputSchema = z.object({
     estimatedCoverage: z.number().min(0).max(100).describe('Estimated test coverage %'),
     missingTests: z.array(z.string()).default([]).describe('Functions/paths lacking tests'),
     testSuggestions: z.array(z.string()).default([]).describe('Suggested test cases to write'),
-    harborSignature: z.literal('HARBOR').default('HARBOR'),
+    harborSignature: z.literal('kharbord').default('kharbord'),
 });
 
-export const HARBORFlow = ai.defineFlow(
-    { name: 'HARBOR', inputSchema: ValidatorInputSchema, outputSchema: HarborOutputSchema },
+export const kharbordFlow = ai.defineFlow(
+    { name: 'kharbord', inputSchema: ValidatorInputSchema, outputSchema: HarborOutputSchema },
     async (input): Promise<z.infer<typeof HarborOutputSchema>> => {
-        console.log(`[HARBOR] ⚓ Test coverage check`);
+        console.log(`[kharbord] ⚓ Test coverage check`);
 
         const { output } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
-            system: `You are HARBOR — the Test Coverage Guardian. You enforce Constitutional Article XIV (Testing Mandate).
+            system: `You are kharbord — the Test Coverage Guardian. You enforce Constitutional Article XIV (Testing Mandate).
 Untested code is unshipped code. Estimate coverage, identify untested paths, suggest specific test cases.
 Minimum acceptable: 80% estimated coverage for PASS.`,
             prompt: `Test coverage analysis:\n\n${input.code.slice(0, 6000)}`,
             output: { schema: HarborOutputSchema },
         });
 
-        return { ...(output ?? { verdict: 'FAIL' as const, estimatedCoverage: 0, missingTests: ['all'], testSuggestions: [] }), harborSignature: 'HARBOR' };
+        return { ...(output ?? { verdict: 'FAIL' as const, estimatedCoverage: 0, missingTests: ['all'], testSuggestions: [] }), harborSignature: 'kharbord' };
     }
 );
 
@@ -188,18 +188,18 @@ const RamCrewOutputSchema = z.object({
     ramSignature: z.literal('krecd').default('krecd'),
 });
 
-export const RAMCREWFlow = ai.defineFlow(
+export const krecdFlow = ai.defineFlow(
     { name: 'krecd', inputSchema: ValidatorInputSchema, outputSchema: RamCrewOutputSchema },
     async (input): Promise<z.infer<typeof RamCrewOutputSchema>> => {
         console.log(`[krecd] 🚀 Full VALIDATE mode — running all 5 gates in parallel`);
 
         // Run all validators in parallel — Constitutional Article VI
         const [sentinel, archon, proof, harbor, kdocsd] = await Promise.allSettled([
-            SENTINELFlow(input),
-            ARCHONFlow(input),
-            PROOFFlow(input),
-            HARBORFlow(input),
-            LEXFlow({ scanType: 'postflight', content: input.code, sessionId: input.sessionId }),
+            ksecudFlow(input),
+            karchondFlow(input),
+            kproofdFlow(input),
+            kharbordFlow(input),
+            kdocsdFlow({ scanType: 'postflight', content: input.code, sessionId: input.sessionId }),
         ]);
 
         const s = sentinel.status === 'fulfilled' ? sentinel.value : null;
@@ -217,13 +217,13 @@ export const RAMCREWFlow = ai.defineFlow(
         };
 
         const blockers: string[] = [];
-        if (s?.verdict === 'FAIL') blockers.push(`SENTINEL: ${s.vulnerabilities.filter(v => v.severity === 'critical').length} critical security issues`);
-        if (a?.verdict === 'FAIL') blockers.push(`ARCHON: Architecture violations`);
-        if (p?.verdict === 'FAIL') blockers.push(`PROOF: Behavioral correctness failed`);
-        if (h?.verdict === 'FAIL') blockers.push(`HARBOR: Test coverage below 80%`);
+        if (s?.verdict === 'FAIL') blockers.push(`ksecud: ${s.vulnerabilities.filter(v => v.severity === 'critical').length} critical security issues`);
+        if (a?.verdict === 'FAIL') blockers.push(`karchond: Architecture violations`);
+        if (p?.verdict === 'FAIL') blockers.push(`kproofd: Behavioral correctness failed`);
+        if (h?.verdict === 'FAIL') blockers.push(`kharbord: Test coverage below 80%`);
         if (l?.verdict === 'HALT') blockers.push(`kdocsd: Constitutional HALT`);
 
-        const passCount = Object.values(gatesResults).filter(v => v === 'PASS').length;
+        const passCount = Object.values(gatesResults).filter((v: string) => v === 'PASS').length;
         const overallScore = Math.round((passCount / 5) * 100);
         const shipDecision = blockers.length === 0 ? 'SHIP' : blockers.length <= 2 ? 'HOLD' : 'REJECT';
 

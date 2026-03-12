@@ -22,7 +22,7 @@ import { ai } from '../index.js';
 import { memoryBus } from '@cle/memory';
 import { VT220Flow } from './vt220.js';
 import { AURORAFlow } from './aurora.js';
-import { LEXFlow } from './kdocsd-compass.js';
+import { kdocsdFlow } from './kdocsd-compass.js';
 // NOTE: @cle/genmedia is dynamically imported to break the genkit ↔ genmedia circular dependency.
 // At runtime this is fine — both packages resolve correctly in the ESM module graph.
 // DO NOT convert this back to a static import.
@@ -57,8 +57,8 @@ const OmniOutputSchema = z.object({
 // OMNIMEDIA FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const OmniMediaOrchestratorFlow = ai.defineFlow(
-    { name: 'OmniMediaOrchestrator', inputSchema: OmniInputSchema, outputSchema: OmniOutputSchema },
+export const kgenmediaFlow = ai.defineFlow(
+    { name: 'kgenmedia', inputSchema: OmniInputSchema, outputSchema: OmniOutputSchema },
     async (input): Promise<z.infer<typeof OmniOutputSchema>> => {
         const startMs = Date.now();
         const sessionId = input.sessionId ?? `omni_${Date.now()}`;
@@ -70,7 +70,7 @@ export const OmniMediaOrchestratorFlow = ai.defineFlow(
 
         return memoryBus.withMemory('OMNIMEDIA', input.brief, ['omni', 'orchestration'], async () => {
             // ─── PHASE 1: Constitutional preflight ─────────────────────────
-            const lexResult = await LEXFlow({
+            const lexResult = await kdocsdFlow({
                 scanType: 'preflight',
                 content: input.brief,
                 agentName: 'OMNIMEDIA',
