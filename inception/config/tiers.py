@@ -37,7 +37,7 @@ TIER_CONFIGS: dict[AccessTier, TierConfig] = {
     AccessTier.STUDIO: TierConfig(
         name="Studio",
         description="Full engine access for internal projects",
-        allowed_hives=["kuid", "AVERI", "ALCHEMY", "HERALD", "LEXICON", "NEXUS"],
+        allowed_hives=["kuid", "TTY", "ALCHEMY", "HERALD", "LEXICON", "NEXUS"],
         max_agents=-1,
         max_parallel=8,
         credits_required=False,

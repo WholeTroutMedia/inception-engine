@@ -3,7 +3,7 @@
  * Creative Liberation Engine v5.0.0 (GENESIS)
  *
  * Wires the A2A protocol (packages/agents/src/a2a) into the Genkit flow
- * architecture. Enables AVERI Trinity + Hive agents to dispatch tasks
+ * architecture. Enables TTY Trinity + Hive agents to dispatch tasks
  * to each other via typed A2A messages, routed through the sovereign
  * dispatch server or direct HTTP endpoints.
  *
@@ -19,9 +19,9 @@ import { z } from 'genkit';
 
 const A2ADispatchInputSchema = z.object({
   /** Agent sending the directive */
-  fromAgentId: z.string().describe('Sender AVERI agent ID (e.g. "kruled", "ksignd")'),
+  fromAgentId: z.string().describe('Sender agent ID (e.g. "vt100", "xterm")'),
   /** Target agent to receive the message */
-  toAgentId: z.string().describe('Recipient AVERI agent ID (e.g. "kstated", "dira")'),
+  toAgentId: z.string().describe('Recipient agent ID (e.g. "kstated", "dira")'),
   /** Tenant context for isolation enforcement */
   tenantId: z.string().describe('Firebase UID / tenant ID'),
   /** Message type */
@@ -44,19 +44,19 @@ const A2ADispatchOutputSchema = z.object({
 
 // â”€â”€ Multi-Agent Orchestration Input / Output â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-const AVERIOrchestrationInputSchema = z.object({
-  /** High-level directive â€” kruled decomposes and routes to appropriate agents */
-  directive: z.string().describe('Natural language directive for AVERI to orchestrate'),
+const TTYOrchestrationInputSchema = z.object({
+  /** High-level directive — vt100 decomposes and routes to appropriate agents */
+  directive: z.string().describe('Natural language directive for orchestration'),
   tenantId: z.string(),
   priority: z.enum(['P0', 'P1', 'P2', 'P3']).default('P1'),
-  /** Specific agents to involve (if empty, kruled auto-selects) */
+  /** Specific agents to involve (if empty, vt100 auto-selects) */
   targetAgents: z.array(z.string()).optional(),
   /** Context from prior conversation turns */
   context: z.record(z.unknown()).optional(),
 });
 
-const AVERIOrchestrationOutputSchema = z.object({
-  plan: z.string().describe('kruled orchestration plan â€” natural language'),
+const TTYOrchestrationOutputSchema = z.object({
+  plan: z.string().describe('vt100 orchestration plan — natural language'),
   assignments: z.array(z.object({
     agentId: z.string(),
     role: z.string(),
@@ -127,26 +127,26 @@ export const a2aDispatchFlow = ai.defineFlow(
   }
 );
 
-// â”€â”€ AVERI Multi-Agent Orchestration Flow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â”€â”€ TTY Multi-Agent Orchestration Flow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /**
- * AVERI full orchestration â€” kruled receives a directive, uses Gemini to plan
- * a multi-agent response, assigns tasks to specific AVERI agents, and dispatches
+ * TTY full orchestration — vt100 receives a directive, uses Gemini to plan
+ * a multi-agent response, assigns tasks to specific agents, and dispatches
  * A2A messages for each assignment.
  *
- * This is the primary entry point for the Chat Console â†’ AVERI pipeline.
+ * This is the primary entry point for the Chat Console → orchestration pipeline.
  */
-export const averiOrchestrationFlow = ai.defineFlow(
+export const ttyOrchestrationFlow = ai.defineFlow(
   {
-    name: 'averiOrchestration',
-    inputSchema: AVERIOrchestrationInputSchema,
-    outputSchema: AVERIOrchestrationOutputSchema,
+    name: 'ttyOrchestration',
+    inputSchema: TTYOrchestrationInputSchema,
+    outputSchema: TTYOrchestrationOutputSchema,
   },
   async (input) => {
-    const AVERI_ROSTER = [
-      { id: 'kruled',   role: 'Strategic orchestration, research direction, system-level decisions' },
-      { id: 'kstrigd',     role: 'Validation, quality assurance, constitutional compliance' },
-      { id: 'ksignd',     role: 'Execution lead, build orchestration, deployment decisions' },
+    const TTY_ROSTER = [
+      { id: 'vt100',   role: 'Strategic orchestration, research direction, system-level decisions' },
+      { id: 'vt220',   role: 'Validation, quality assurance, constitutional compliance' },
+      { id: 'xterm',   role: 'Execution lead, build orchestration, deployment decisions' },
       { id: 'kstated',   role: 'Memory management, context retrieval, knowledge synthesis' },
       { id: 'kdocsd',      role: 'Legal drafting, contract generation, policy writing' },
       { id: 'compass',  role: 'Research tasks, market analysis, competitive intelligence' },
@@ -160,11 +160,11 @@ export const averiOrchestrationFlow = ai.defineFlow(
 
     const { output } = await ai.generate({
       model: 'googleai/gemini-2.5-flash',
-      system: `You are kruled â€” strategic lead of the AVERI collective, Creative Liberation Engine v5.
-Your role: receive a directive and orchestrate the appropriate AVERI agents to fulfil it.
+      system: `You are vt100 — strategic terminal of the Creative Liberation Engine.
+Your role: receive a directive and orchestrate the appropriate agents to fulfil it.
 
 Available agents:
-${AVERI_ROSTER.map(a => `- ${a.id.toUpperCase()}: ${a.role}`).join('\n')}
+${TTY_ROSTER.map(a => `- ${a.id.toUpperCase()}: ${a.role}`).join('\n')}
 
 Rules:
 1. Select only the agents truly needed â€” keep the assignment list minimal
@@ -193,7 +193,7 @@ Plan and assign tasks. Return valid JSON only.`,
       },
     });
 
-    if (!output) throw new Error('[averiOrchestration] Gemini returned no output');
+    if (!output) throw new Error('[ttyOrchestration] Gemini returned no output');
 
     // Dispatch A2A messages for each assignment
     const dispatchUrl = process.env['DISPATCH_URL'] ?? 'http://127.0.0.1:5050';
@@ -201,7 +201,7 @@ Plan and assign tasks. Return valid JSON only.`,
       output.assignments.map(async (assignment) => {
         const envelope = {
           id: `msg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-          from: 'kruled',
+          from: 'vt100',
           to: assignment.agentId,
           tenantId: input.tenantId,
           type: 'task',

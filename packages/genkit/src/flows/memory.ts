@@ -1,7 +1,7 @@
 /**
  * Creative Liberation Engine v5 — Memory Flows
  *
- * Implements the kstrigd klogd mode memory extraction pattern
+ * Implements the vt220 klogd mode memory extraction pattern
  * and the Genkit flows for recalling and committing to the memory bus.
  */
 
@@ -15,14 +15,14 @@ import {
 } from '@cle/memory';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PATTERN EXTRACTION — klogd (kstrigd's memory mode)
+// PATTERN EXTRACTION — klogd (vt220 memory mode)
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function extractPattern(task: string, outcome: string): Promise<string> {
     try {
         const { text } = await ai.generate({
             model: 'googleai/gemini-2.5-flash',
-            prompt: `You are kstrigd's klogd mode. Extract a single reusable principle ("The Why") from this completed task.
+            prompt: `You are vt220 klogd mode. Extract a single reusable principle ("The Why") from this completed task.
 
 Task: ${task}
 Outcome: ${outcome}

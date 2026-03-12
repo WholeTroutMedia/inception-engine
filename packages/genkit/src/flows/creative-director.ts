@@ -1,6 +1,6 @@
 /**
  * packages/genkit/src/flows/creative-director.ts
- * ksignd — Creative Vision Document generator (self-contained in genkit package)
+ * xterm — Creative Vision Document generator (self-contained in genkit package)
  * Input: CreativeBrief → Output: CreativeVision
  * Mirrors god-prompt/src/vision/director.ts but within genkit rootDir
  */
@@ -39,7 +39,9 @@ const BriefSchema = z.object({
         demographics: z.array(z.string()).optional(),
         platforms: z.array(z.string()).optional(),
     }).optional().default({}),
-    averi_notes: z.string().optional().default(''),
+    strategic_notes: z.string().optional().default(''),
+    /** @deprecated use strategic_notes */
+    averi_notes: z.string().optional(),
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -78,7 +80,7 @@ export type CreativeVision = z.infer<typeof CreativeVisionSchema>;
 // ksignd SYSTEM PROMPT
 // ─────────────────────────────────────────────────────────────────────────────
 
-const IRIS_SYSTEM = `You are ksignd — the Creative Vision director of the Creative Liberation Engine.
+const IRIS_SYSTEM = `You are xterm — the Creative Vision director of the Creative Liberation Engine.
 
 Your role is to translate a structured client brief into a comprehensive Creative Vision Document that serves as the authoritative art direction bible for every asset produced in this campaign.
 
@@ -106,7 +108,7 @@ export const CreativeDirectorFlow = ai.defineFlow(
         outputSchema: CreativeVisionSchema,
     },
     async ({ brief }): Promise<CreativeVision> => {
-        console.log(`[ksignd] 🎨 Generating Creative Vision for: ${brief.project_name}`);
+        console.log(`[xterm] Generating Creative Vision for: ${brief.project_name}`);
 
         const deliverableList = brief.deliverables
             .map(d => `  - ${d.quantity}x ${d.type}${d.format ? ` (${d.format})` : ''}${d.duration_seconds ? ` ${d.duration_seconds}s` : ''}`)
@@ -134,7 +136,7 @@ ${deliverableList}
 - Platforms: ${brief.audience?.platforms?.join(', ') || 'multi-platform'}
 - Demographics: ${brief.audience?.demographics?.join(', ') || 'general'}
 
-**AVERI Strategic Notes:** ${brief.averi_notes || 'None provided'}
+**Strategic notes:** ${brief.strategic_notes || (brief as { averi_notes?: string }).averi_notes || 'None provided'}
 
 Generate the definitive creative vision. Every decision should be craft-first and client-specific.
 `.trim();
@@ -147,9 +149,9 @@ Generate the definitive creative vision. Every decision should be craft-first an
             config: { temperature: 0.9 },
         });
 
-        if (!output) throw new Error('[ksignd] Vision generation returned null output');
+        if (!output) throw new Error('[xterm] Vision generation returned null output');
 
-        console.log(`[ksignd] ✅ Creative Vision complete for: ${brief.project_name}`);
+        console.log(`[xterm] Creative Vision complete for: ${brief.project_name}`);
         return output;
     }
 );

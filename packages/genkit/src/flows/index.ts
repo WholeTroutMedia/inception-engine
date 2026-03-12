@@ -9,24 +9,24 @@
  * hived, and registered here.
  */
 
-// ─── AVERI TRINITY ───────────────────────────────────────────────────────────
-export { ATHENAFlow, AthenaInputSchema, AthenaOutputSchema } from './kruled.js';
+// ─── TTY TRINITY ─────────────────────────────────────────────────────────────
+export { VT100Flow, Vt100InputSchema, Vt100OutputSchema } from './vt100.js';
 export { classifyTaskFlow } from './classify-task.js';
-export { VERAFlow } from './kstrigd.js';
-export { IRISFlow } from './ksignd.js';
-export { conversationalAveriFlow } from './conversationalAveri.js';
+export { VT220Flow } from './vt220.js';
+export { XTERMFlow } from './xterm.js';
+export { conversationalVt100Flow } from './conversationalVt100.js';
 
 // ─── kuid HIVE ─────────────────────────────────────────────────────────────
-export { AURORAFlow } from './kuid.js';
-export { AuroraVisualScorerFlow, AuroraVisualScorerInputSchema, AuroraVisualScorerOutputSchema } from './kuid-visual-scorer.js';
-export { BOLTFlow } from './kbuildd.js';
+export { AURORAFlow } from './aurora.js';
+export { AuroraVisualScorerFlow, AuroraVisualScorerInputSchema, AuroraVisualScorerOutputSchema } from './aurora-visual-scorer.js';
+export { BOLTFlow } from './bolt.js';
 export { COMETFlow } from './comet.js';
 
 // ─── CONTINUITY ENGINE ───────────────────────────────────────────────────────
 export { ContinuityEngineFlow, ContinuityIngestInputSchema, ContinuityIngestOutputSchema, ingestDirectory } from '../tools/continuity-engine.js';
 
 // ─── kstated HIVE ─────────────────────────────────────────────────────────────
-export { KEEPERFlow } from './kstated.js';
+export { KEEPERFlow } from './keeper.js';
 export { ARCHFlow, CODEXFlow } from './arch-codex.js';
 export { KeeperBootFlow, keeperBootRecall, type KeeperBootResult } from '../memory/kstated-boot.js';
 
@@ -110,10 +110,10 @@ export { innerVoiceFlow } from './inner-voice.js';
 export type AgentStatus = 'active' | 'standby' | 'planned';
 
 export const AGENT_ROSTER = [
-    // ── AVERI Trinity ──────────────────────────────────────────────────────────
-    { name: 'kruled', hive: 'AVERI', role: 'Strategist', flow: 'kruled', model: 'gemini-2.5-pro', status: 'active' as AgentStatus },
-    { name: 'kstrigd', hive: 'AVERI', role: 'klogd & Memory', flow: 'kstrigd', model: 'gemini-2.5-pro', status: 'active' as AgentStatus },
-    { name: 'ksignd', hive: 'AVERI', role: 'Executor', flow: 'ksignd', model: 'gemini-2.0-flash', status: 'active' as AgentStatus },
+    // ── TTY Trinity ───────────────────────────────────────────────────────────
+    { name: 'vt100', hive: 'TTY', role: 'Strategist', flow: 'vt100', model: 'gemini-2.5-pro', status: 'active' as AgentStatus },
+    { name: 'vt220', hive: 'TTY', role: 'Memory & Truth', flow: 'vt220', model: 'gemini-2.5-pro', status: 'active' as AgentStatus },
+    { name: 'xterm', hive: 'TTY', role: 'Executor', flow: 'xterm', model: 'gemini-2.0-flash', status: 'active' as AgentStatus },
 
     // ── kuid Hive ────────────────────────────────────────────────────────────
     { name: 'kuid', hive: 'kuid', role: 'UX Architect', flow: 'kuid', model: 'gemini-2.5-pro', status: 'active' as AgentStatus },

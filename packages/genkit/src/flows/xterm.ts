@@ -1,9 +1,9 @@
 /**
- * ksignd — Swift Action, Blocker Removal, Direct Execution
- * AVERI Trinity Member #3 | Hive: AVERI | Role: Executor + Unblocker
+ * xterm — Swift Execution / Blocker Removal
+ * Terminal node #3 | Hive: TTY | Role: Executor + Unblocker
  *
- * ksignd is the Violet agent — she acts without hesitation.
- * When kruled strategizes and kstrigd validates, ksignd executes.
+ * xterm acts without hesitation.
+ * When vt100 strategizes and vt220 validates, xterm executes.
  *
  * Capabilities:
  *   - Identify and remove blockers from any active task
@@ -35,11 +35,11 @@ const IrisInputSchema = z.object({
 
 const IrisOutputSchema = z.object({
     action: z.enum(['fix_applied', 'patch_generated', 'escalated', 'command_run', 'guidance_provided']),
-    resolution: z.string().describe('What ksignd did to unblock'),
+    resolution: z.string().describe('What xterm did to unblock'),
     patch: z.string().optional().describe('Code patch or config fix if generated'),
     commandOutput: z.string().optional().describe('Shell command output if allowShell=true'),
     escalationReason: z.string().optional().describe('Why human council was flagged'),
-    irisSignature: z.literal('ksignd').default('ksignd'),
+    signature: z.literal('xterm').default('xterm'),
     nextAgent: z.string().optional().describe('Recommended next agent after unblocking'),
 });
 
@@ -47,22 +47,22 @@ export type IrisInput = z.infer<typeof IrisInputSchema>;
 export type IrisOutput = z.infer<typeof IrisOutputSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ksignd FLOW
+// xterm FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const IRISFlow = ai.defineFlow(
+export const XTERMFlow = ai.defineFlow(
     {
-        name: 'ksignd',
+        name: 'xterm',
         inputSchema: IrisInputSchema,
         outputSchema: IrisOutputSchema,
     },
     async (input): Promise<IrisOutput> => {
-        const sessionId = input.sessionId ?? `iris_${Date.now()}`;
+        const sessionId = input.sessionId ?? `xterm_${Date.now()}`;
 
-        console.log(`[ksignd] 🟣 Activating — Urgency: ${input.urgency}`);
-        console.log(`[ksignd] Blocker: ${input.blocker.slice(0, 100)}`);
+        console.log(`[xterm] 🟣 Activating — Urgency: ${input.urgency}`);
+        console.log(`[xterm] Blocker: ${input.blocker.slice(0, 100)}`);
 
-        const systemPrompt = `You are ksignd — the Violet agent of the AVERI Trinity. You are swift, decisive, and uncompromising.
+        const systemPrompt = `You are xterm — execution terminal of the Creative Liberation Engine. You are swift, decisive, and uncompromising.
 
 Your mandate: Remove blockers. Execute without hesitation. When others deliberate, you act.
 
@@ -76,14 +76,14 @@ For any blocker you receive:
 Output one of: fix_applied, patch_generated, escalated, command_run, guidance_provided
 Never say "I can't do that." You always produce an actionable resolution.
 
-ksignd motto: "Done is better than perfect. Unblocked is better than stuck."
+xterm motto: "Unblocked is better than stuck."
 
 You have access to scribeRemember and scribeRecall tools. Call scribeRemember when you resolve a blocker with a reusable fix pattern (category: 'bug-fix', importance based on urgency). Call scribeRecall before attempting a fix to check if it was previously resolved.`;
 
         // Pre-flight: check klogd archive for similar resolved blockers
         const pastMemories = await scribeRecall({
             query: input.blocker,
-            agentName: 'ksignd',
+            agentName: 'xterm',
             category: 'bug-fix',
             limit: 2,
             tags: [],
@@ -106,8 +106,8 @@ You have access to scribeRemember and scribeRecall tools. Call scribeRemember wh
         if (!output) {
             return {
                 action: 'guidance_provided',
-                resolution: 'ksignd analysis unavailable — manual intervention required',
-                irisSignature: 'ksignd',
+                resolution: 'xterm analysis unavailable — manual intervention required',
+                signature: 'xterm',
             };
         }
 
@@ -115,9 +115,9 @@ You have access to scribeRemember and scribeRecall tools. Call scribeRemember wh
         let commandOutput: string | undefined;
         if (input.allowShell && output.commandOutput && input.urgency === 'critical') {
             try {
-                console.log(`[ksignd] ⚡ Executing shell command (critical urgency)...`);
+                console.log(`[xterm] ⚡ Executing shell command (critical urgency)...`);
                 commandOutput = execSync(output.commandOutput, { encoding: 'utf8', timeout: 30000 });
-                console.log(`[ksignd] Shell output: ${commandOutput.slice(0, 200)}`);
+                console.log(`[xterm] Shell output: ${commandOutput.slice(0, 200)}`);
             } catch (e) {
                 commandOutput = `Shell execution failed: ${e}`;
             }
@@ -126,28 +126,28 @@ You have access to scribeRemember and scribeRecall tools. Call scribeRemember wh
         // Post-flight: commit resolved blockers as bug-fix patterns via klogd v2
         if (output.action !== 'escalated') {
             await scribeRemember({
-                content: `[ksignd] ${input.blocker.slice(0, 80)} → ${output.action}: ${output.resolution.slice(0, 150)}`,
+                content: `[xterm] ${input.blocker.slice(0, 80)} → ${output.action}: ${output.resolution.slice(0, 150)}`,
                 category: 'bug-fix',
                 importance: input.urgency === 'critical' ? 'high' : 'medium',
-                tags: ['averi-trinity', 'ksignd', 'blocker-removal', input.urgency],
-                agentName: 'ksignd',
+                tags: ['tty-trinity', 'xterm', 'blocker-removal', input.urgency],
+                agentName: 'xterm',
                 sessionId,
                 skipGate: false,
             });
         } else {
             // Escalated: force-write to archive regardless of kstrigd score
             await scribeRemember({
-                content: `[ksignd ESCALATED] ${input.blocker.slice(0, 80)} → needs human review`,
+                content: `[xterm ESCALATED] ${input.blocker.slice(0, 80)} → needs human review`,
                 category: 'bug-fix',
                 importance: input.urgency === 'critical' ? 'critical' : 'high',
-                tags: ['averi-trinity', 'ksignd', 'escalated', input.urgency],
-                agentName: 'ksignd',
+                tags: ['tty-trinity', 'xterm', 'escalated', input.urgency],
+                agentName: 'xterm',
                 sessionId,
                 skipGate: true,
             });
         }
 
-        return { ...output, commandOutput: commandOutput ?? output.commandOutput, irisSignature: 'ksignd' };
+        return { ...output, commandOutput: commandOutput ?? output.commandOutput, signature: 'xterm' };
     }
 );
 

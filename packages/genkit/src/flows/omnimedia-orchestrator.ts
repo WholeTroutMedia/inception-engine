@@ -20,8 +20,8 @@
 import { z } from 'genkit';
 import { ai } from '../index.js';
 import { memoryBus } from '@cle/memory';
-import { VERAFlow } from './kstrigd.js';
-import { AURORAFlow } from './kuid.js';
+import { VT220Flow } from './vt220.js';
+import { AURORAFlow } from './aurora.js';
 import { LEXFlow } from './kdocsd-compass.js';
 // NOTE: @cle/genmedia is dynamically imported to break the genkit ↔ genmedia circular dependency.
 // At runtime this is fine — both packages resolve correctly in the ESM module graph.
@@ -88,7 +88,7 @@ export const OmniMediaOrchestratorFlow = ai.defineFlow(
             // ─── PHASE 2: Ideation (parallel) ──────────────────────────────
             const [conceptResult, copyResult] = await Promise.allSettled([
                 AURORAFlow({ mode: 'ideate', prompt: input.brief, outputFormat: 'markdown', context: input.brand, sessionId }),
-                want.includes('copy') ? VERAFlow({
+                want.includes('copy') ? VT220Flow({
                     mode: 'klogd',
                     content: `Write compelling copy/script for: ${input.brief}${input.brand ? `\nBrand: ${input.brand}` : ''}`,
                     sessionId,

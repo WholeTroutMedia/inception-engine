@@ -55,7 +55,7 @@ MODE_CONFIGS: dict[ModeType, ModeConfig] = {
     ModeType.SHIP: ModeConfig(
         mode=ModeType.SHIP,
         description="Build, code, and execute",
-        allowed_hives=["kuid", "ALCHEMY", "AVERI"],
+        allowed_hives=["kuid", "ALCHEMY", "TTY"],
         default_agents=["kbuildd", "PIXEL", "TEMPO"],
         parallel_limit=4,
         requires_confirmation=True,

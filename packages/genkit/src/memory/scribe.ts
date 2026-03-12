@@ -2,7 +2,7 @@
  * klogd v2 — Persistent Memory Tools
  * SC-01: scribeRemember + scribeRecall Genkit tools
  *
- * Routes all writes through the kstrigd Memory Quality Gate before
+ * Routes all writes through the vt220 Memory Quality Gate before
  * committing to ChromaDB via the @cle/memory bus.
  * Provides structured recall with category and tag filtering.
  *
@@ -39,7 +39,7 @@ export const ScribeRememberInputSchema = z.object({
   importance: MemoryImportance.default('medium').describe('Importance level \u2014 low/medium/high/critical'),
   agentName: z.string().default('klogd').describe('Agent committing this memory'),
   sessionId: z.string().optional(),
-  skipGate: z.boolean().default(false).describe('Skip kstrigd quality gate (only for system-critical writes)'),
+  skipGate: z.boolean().default(false).describe('Skip vt220 quality gate (only for system-critical writes)'),
 });
 
 export const ScribeRememberOutputSchema = z.object({
@@ -83,27 +83,27 @@ export const ScribeRecallOutputSchema = z.object({
 export const scribeRemember = ai.defineTool(
   {
     name: 'scribeRemember',
-    description: 'Store a memory in the Creative Liberation Engine Living Archive. Routes through kstrigd quality gate. Use for decisions, patterns, preferences, facts, bug-fixes, and session summaries.',
+    description: 'Store a memory in the Creative Liberation Engine Living Archive. Routes through vt220 quality gate. Use for decisions, patterns, preferences, facts, bug-fixes, and session summaries.',
     inputSchema: ScribeRememberInputSchema,
     outputSchema: ScribeRememberOutputSchema,
   },
   async (input): Promise<z.infer<typeof ScribeRememberOutputSchema>> => {
     console.log(`[klogd] \ud83d\udcdd Remember \u2014 category:${input.category} importance:${input.importance} \u2014 ${input.content.slice(0, 60)}`);
 
-    // Route through kstrigd gate unless explicitly skipped
+    // Route through vt220 gate unless explicitly skipped
     if (!input.skipGate) {
-      const { veraMemoryGateFlow } = await import('./kstrigd-gate.js');
-      const gateResult = await veraMemoryGateFlow({ content: input.content, category: input.category, importance: input.importance, proposedBy: input.agentName ?? 'klogd' });
+      const { vt220MemoryGateFlow } = await import('./vt220-gate.js');
+      const gateResult = await vt220MemoryGateFlow({ content: input.content, category: input.category, importance: input.importance, proposedBy: input.agentName ?? 'klogd' });
 
       if (!gateResult.approved) {
-        console.log(`[klogd] \u274c kstrigd gate rejected: ${gateResult.reason}`);
+        console.log(`[klogd] \u274c vt220 gate rejected: ${gateResult.reason}`);
         return {
           committed: false,
           gateVerdict: { approved: false, reason: gateResult.reason },
           summary: `Memory rejected: ${gateResult.reason}`,
         };
       }
-      console.log(`[klogd] \u2705 kstrigd gate approved: ${gateResult.reason}`);
+      console.log(`[klogd] \u2705 vt220 gate approved: ${gateResult.reason}`);
     }
 
     // Fix F2: Store category and importance as structured metadata,
@@ -124,7 +124,7 @@ export const scribeRemember = ai.defineTool(
     return {
       committed: true,
       memoryId: entry.id,
-      gateVerdict: { approved: true, reason: 'Passed kstrigd quality gate' },
+      gateVerdict: { approved: true, reason: 'Passed vt220 quality gate' },
       summary: `Stored ${input.category} memory: "${input.content.slice(0, 60)}..."`,
     };
   }

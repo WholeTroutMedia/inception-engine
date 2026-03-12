@@ -30,7 +30,7 @@ export interface KeeperBootContext {
     taskHint?: string;
     /** Number of memory results to recall. Default: 10 */
     limit?: number;
-    /** Agent calling kstated boot (used for agent-scoped recall). Default: 'AVERI' */
+    /** Agent calling kstated boot (used for agent-scoped recall). Default: 'TTY' */
     agentName?: string;
 }
 
@@ -98,10 +98,10 @@ function parseHandoffMd(): { taskHint: string; workstream: string } | null {
 /**
  * Run kstated's boot recall protocol.
  * Surfaces relevant episodic + semantic memories for the current task.
- * Returns a formatted brief ready for injection into any AVERI system prompt.
+ * Returns a formatted brief ready for injection into any system prompt.
  */
 export async function keeperBoot(ctx: KeeperBootContext = {}): Promise<KeeperBootResult> {
-    const { limit = 10, agentName = 'AVERI' } = ctx;
+    const { limit = 10, agentName = 'TTY' } = ctx;
 
     // Step 1: Determine task hint
     let taskHint = ctx.taskHint ?? '';
@@ -215,29 +215,29 @@ export async function keeperBoot(ctx: KeeperBootContext = {}): Promise<KeeperBoo
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CONVENIENCE — Format for specific AVERI agents
+// CONVENIENCE — Format for specific TTY agents
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Run kstated boot for kruled — uses topic-focused recall.
+ * Run kstated boot for vt100 — uses topic-focused recall.
  */
-export async function keeperBootForATHENA(topic: string): Promise<string> {
-    const result = await keeperBoot({ taskHint: topic, agentName: 'kruled', limit: 5 });
+export async function keeperBootForVT100(topic: string): Promise<string> {
+    const result = await keeperBoot({ taskHint: topic, agentName: 'vt100', limit: 5 });
     return result.memoryBrief;
 }
 
 /**
- * Run kstated boot for kstrigd — uses validation-focused recall.
+ * Run kstated boot for vt220 — uses validation-focused recall.
  */
-export async function keeperBootForVERA(content: string): Promise<string> {
-    const result = await keeperBoot({ taskHint: content, agentName: 'kstrigd', limit: 5 });
+export async function keeperBootForVT220(content: string): Promise<string> {
+    const result = await keeperBoot({ taskHint: content, agentName: 'vt220', limit: 5 });
     return result.memoryBrief;
 }
 
 /**
- * Run kstated boot for ksignd — uses blocker/resolution recall.
+ * Run kstated boot for xterm — uses blocker/resolution recall.
  */
-export async function keeperBootForIRIS(blocker: string): Promise<string> {
-    const result = await keeperBoot({ taskHint: blocker, agentName: 'ksignd', limit: 5 });
+export async function keeperBootForXTERM(blocker: string): Promise<string> {
+    const result = await keeperBoot({ taskHint: blocker, agentName: 'xterm', limit: 5 });
     return result.memoryBrief;
 }

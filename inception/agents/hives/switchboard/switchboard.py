@@ -28,9 +28,9 @@ CORE DIRECTIVES:
 5. Handle ambiguous routing scenarios with transparency.
 
 ROUTING TABLE:
-- Strategic questions → kruled (via AVERI)
-- Truth/memory → kstrigd (via AVERI or klogd)
-- Execution → ksignd (via AVERI)
+- Strategic questions → vt100 (via TTY)
+- Truth/memory → vt220 (via TTY or klogd)
+- Execution → xterm (via TTY)
 - Design → kuid
 - Engineering → kbuildd or COMET (via kuid)
 - Legal/constitutional → kdocsd

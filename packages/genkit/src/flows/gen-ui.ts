@@ -68,7 +68,7 @@ export const genUiFlow = ai.defineFlow(
     },
     async (input) => {
         const start = Date.now();
-        recordAgentCall('ksignd');
+        recordAgentCall('xterm');
 
         console.log(`[ksignd:GEN_UI] ▶ Generating ${input.componentName} (${input.variant})`);
 

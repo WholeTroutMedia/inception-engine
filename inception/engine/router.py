@@ -104,7 +104,7 @@ class TaskRouter:
         "kdocsd": 3,
         "SWITCHBOARD": 4,
         "BROADCAST": 5,
-        "AVERI": 6,
+        "TTY": 6,
     }
 
     def __init__(self, registry: AgentRegistry):

@@ -1,0 +1,23 @@
+{
+  "name": "@cle/cloud-mesh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloud mesh execution router — routes workloads to cheapest/fastest cloud targets",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,12 +1,12 @@
 /**
- * kruled — Strategist, Architect & Lead of the AVERI Trinity
- * AVERI Trinity Member #1 | Hive: AVERI | Role: Vision + Strategy
+ * vt100 — Strategy / Systems Direction
+ * Terminal node #1 | Hive: TTY | Role: Vision + Strategy
  *
- * kruled leads two operational modes:
+ * vt100 leads two operational modes:
  *   IDEATE — Creative exploration, vision synthesis, possibility space mapping
  *   PLAN   — Architectural specification, implementation roadmaps, agent routing
  *
- * She sees the full board. kstrigd validates her truth; ksignd executes her directives.
+ * It sees the full board. vt220 validates; xterm executes.
  *
  * Constitutional: Article I (Sovereignty), Article VI (Constitutional Governance),
  *                 Article VIII (Agent Identity), Article IX (No MVPs — Ship Complete)
@@ -15,28 +15,28 @@
 import { z } from 'genkit';
 import { ai } from '../index.js';
 import { scribeRemember, scribeRecall } from '../memory/klogd.js';
-import { keeperBootForATHENA } from '../memory/kstated.js';
+import { keeperBootForVT100 } from '../memory/keeper.js';
 import { getOmnipresenceCacheName } from '../core/context-cache.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SCHEMAS
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const AthenaInputSchema = z.object({
+export const Vt100InputSchema = z.object({
     mode: z.enum(['strategy', 'spec']).describe(
         'strategy = IDEATE mode (explore possibilities); spec = PLAN mode (define implementation)'
     ),
     topic: z.string().describe('The idea, feature, system, or problem to reason about'),
     context: z.string().optional().describe('Existing codebase context, constraints, or prior decisions'),
-    keeperContext: z.string().optional().describe('Pre-fetched kstated memory context to inform kruled'),
+    keeperContext: z.string().optional().describe('Pre-fetched kstated memory context to inform vt100'),
     depth: z.enum(['surface', 'deep', 'exhaustive']).default('deep').describe(
         'surface = quick directional take; deep = full analysis; exhaustive = architecture-grade'
     ),
     sessionId: z.string().optional(),
 });
 
-export const AthenaOutputSchema = z.object({
-    directive: z.string().describe('kruled\'s primary directive — the definitive strategic statement'),
+export const Vt100OutputSchema = z.object({
+    directive: z.string().describe('vt100 primary directive — the definitive strategic statement'),
     rationale: z.string().describe('The reasoning behind this directive'),
     options: z.array(z.object({
         title: z.string(),
@@ -53,29 +53,29 @@ export const AthenaOutputSchema = z.object({
     constitutionalFlags: z.array(z.string()).default([]).describe(
         'Any constitutional articles triggered (e.g., Article IX: No MVPs)'
     ),
-    athenaSignature: z.literal('kruled').default('kruled'),
+    signature: z.literal('vt100').default('vt100'),
 });
 
-export type AthenaInput = z.infer<typeof AthenaInputSchema>;
-export type AthenaOutput = z.infer<typeof AthenaOutputSchema>;
+export type Vt100Input = z.infer<typeof Vt100InputSchema>;
+export type Vt100Output = z.infer<typeof Vt100OutputSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// kruled FLOW
+// vt100 FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const ATHENAFlow = ai.defineFlow(
+export const VT100Flow = ai.defineFlow(
     {
-        name: 'kruled',
-        inputSchema: AthenaInputSchema,
-        outputSchema: AthenaOutputSchema,
+        name: 'vt100',
+        inputSchema: Vt100InputSchema,
+        outputSchema: Vt100OutputSchema,
     },
-    async (input): Promise<AthenaOutput> => {
-        const sessionId = input.sessionId ?? `athena_${Date.now()}`;
+    async (input): Promise<Vt100Output> => {
+        const sessionId = input.sessionId ?? `vt100_${Date.now()}`;
 
-        console.log(`[kruled] 🔵 Mode: ${input.mode.toUpperCase()} | Topic: ${input.topic.slice(0, 80)}`);
-        console.log(`[kruled] Depth: ${input.depth}`);
+        console.log(`[vt100] 🔵 Mode: ${input.mode.toUpperCase()} | Topic: ${input.topic.slice(0, 80)}`);
+        console.log(`[vt100] Depth: ${input.depth}`);
 
-        const systemPrompt = `You are kruled — the Blue agent of the AVERI Trinity. You are the Strategist and Lead Architect of the Creative Liberation Engine.
+        const systemPrompt = `You are vt100 — strategy terminal of the Creative Liberation Engine.
 
 Your two modes:
 
@@ -96,12 +96,12 @@ Agent roster you can activate:
 - kdocsd: Legal/compliance
 - COMPASS: Constitutional ethics
 - COMET: Browser automation
-- kstrigd: Truth validation
-- ksignd: Execution, blocker removal
+- vt220: Truth validation
+- xterm: Execution, blocker removal
 - RELAY: Inter-service routing
 - SIGNAL: External integrations
 
-You are the first word. kstrigd validates your truth. ksignd executes your strategy. Think completely.
+You are the first word. vt220 validates. xterm executes. Think completely.
 
 You have access to scribeRemember and scribeRecall tools. Call scribeRemember when you:
 - Make a significant architectural decision in PLAN mode (category: 'decision', importance: 'high')
@@ -112,17 +112,17 @@ Call scribeRecall at the start of PLAN sessions to surface prior decisions on th
         // Pre-flight memory recall via klogd v2
         const recallResult = await scribeRecall({
             query: input.topic,
-            agentName: 'kruled',
+            agentName: 'vt100',
             limit: 3,
             tags: [],
             successOnly: false,
         });
         const memoryContext = recallResult.results.length > 0
-            ? `\n\nATHENA's relevant prior decisions:\n${recallResult.results.map(m => `- ${m.content.slice(0, 120)}`).join('\n')}`
+            ? `\n\nvt100 relevant prior decisions:\n${recallResult.results.map(m => `- ${m.content.slice(0, 120)}`).join('\n')}`
             : '';
 
         // SC-04: Auto-run kstated v2 boot recall if not pre-populated by caller
-        const rawKeeperContext = input.keeperContext ?? await keeperBootForATHENA(input.topic);
+        const rawKeeperContext = input.keeperContext ?? await keeperBootForVT100(input.topic);
         const keeperContext = rawKeeperContext
             ? `\n\nKEEPER knowledge context:\n${rawKeeperContext}`
             : '';
@@ -170,28 +170,28 @@ Your directive is the single executable next step.`,
 
         if (!output) {
             return {
-                directive: 'kruled unavailable — strategic analysis deferred',
+                directive: 'vt100 unavailable — strategic analysis deferred',
                 rationale: 'Model generation failed',
                 options: [],
                 suggestedAgents: [],
                 nextMode: 'PLAN',
                 constitutionalFlags: [],
-                athenaSignature: 'kruled',
+                signature: 'vt100',
             };
         }
 
         // Post-flight: auto-commit directive to Living Archive via klogd v2
         await scribeRemember({
-            content: `[kruled ${input.mode.toUpperCase()}] ${input.topic.slice(0, 80)} → ${output.directive.slice(0, 200)}`,
+            content: `[vt100 ${input.mode.toUpperCase()}] ${input.topic.slice(0, 80)} → ${output.directive.slice(0, 200)}`,
             category: input.mode === 'spec' ? 'decision' : 'pattern',
             importance: input.depth === 'exhaustive' ? 'high' : 'medium',
-            tags: ['averi-trinity', 'kruled', input.mode, input.depth],
-            agentName: 'kruled',
+            tags: ['tty-trinity', 'vt100', input.mode, input.depth],
+            agentName: 'vt100',
             sessionId,
             skipGate: false,
         });
 
-        return { ...output, athenaSignature: 'kruled' };
+        return { ...output, signature: 'vt100' };
     }
 );
 

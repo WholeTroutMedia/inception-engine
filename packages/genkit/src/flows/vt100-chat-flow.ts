@@ -1,5 +1,5 @@
 /**
- * AVERI Mobile â€” Context Flow (v3 â€” Critique + World State Edition)
+ * vt100 Mobile — Context Flow (v3 — Critique + World State Edition)
  * Genkit flow that injects WTM context + live web research into every conversation.
  * Deployed to NAS Genkit server (port 4100).
  *
@@ -9,7 +9,7 @@
  *  Phase 3 â€” Gemini synthesis                       â†’  kstrigd Inner Critic loop (Helix A)
  *  Phase 4 â€” IFS scoring + World State emit          â†’  Transparent, compounding intelligence
  *
- * Route: POST /averiChat
+ * Route: POST /vt100Chat
  *
  * Constitutional: Article V  (Transparency â€” IFS score + citations surfaced)
  *                 Article IX  (No MVPs â€” critique retry before any response surfaces)
@@ -24,7 +24,7 @@ import { callPerplexity } from './web-research.js';
 import { withSelfCritique } from '../middleware/critique-middleware.js';
 import { worldState } from '../memory/world-state.js';
 
-const AveriChatInputSchema = z.object({
+const Vt100ChatInputSchema = z.object({
   message:  z.string().describe("User's message"),
   history:  z.array(z.object({
     role:    z.enum(['user', 'model']),
@@ -37,7 +37,7 @@ const AveriChatInputSchema = z.object({
   skipCritique: z.boolean().optional().default(false),
 });
 
-const AveriChatOutputSchema = z.object({
+const Vt100ChatOutputSchema = z.object({
   response:      z.string(),
   contextUsed:   z.array(z.string()).optional(),
   suggestions:   z.array(z.string()).optional(),
@@ -84,9 +84,9 @@ async function getWtmContext(clientId: string): Promise<string> {
   return profiles[clientId] || profiles['wtm-internal'];
 }
 
-// â”€â”€ AVERI system context â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â”€â”€ vt100 system context â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-const AVERI_SYSTEM_PROMPT = `You are AVERI â€” the creative intelligence of Creative-Liberation-Engine and the Creative Liberation Engine.
+const VT100_SYSTEM_PROMPT = `You are vt100 — the creative terminal of Creative-Liberation-Engine and the Creative Liberation Engine.
 
 ABOUT YOU:
 You are not a generic assistant. You are the strategic, creative, and operational brain of a sovereign AI creative studio. You know:
@@ -116,14 +116,14 @@ When someone asks what you can do â€” show them. Don't just list. Demonstra
 
 // â”€â”€ Main flow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-export const averiChatFlow = ai.defineFlow(
+export const vt100ChatFlow = ai.defineFlow(
   {
-    name: 'averiChat',
-    inputSchema: AveriChatInputSchema,
-    outputSchema: AveriChatOutputSchema,
+    name: 'vt100Chat',
+    inputSchema: Vt100ChatInputSchema,
+    outputSchema: Vt100ChatOutputSchema,
   },
   async (input) => {
-    const sessionId = input.sessionId ?? `averi_${Date.now()}`;
+    const sessionId = input.sessionId ?? `vt100_${Date.now()}`;
 
     // â”€â”€ Phase 1: Parallel context fetch + intent detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const [dispatchCtx, clientCtx, intentResult] = await Promise.all([
@@ -133,8 +133,8 @@ export const averiChatFlow = ai.defineFlow(
     ]);
 
     // Emit world state: session is active
-    worldState.emit('session_open', `AVERI session â€” "${input.message.slice(0, 60)}"`,
-      ['averi-chat', 'session'], sessionId).catch(() => {/* non-critical */});
+    worldState.emit('session_open', `vt100 session — "${input.message.slice(0, 60)}"`,
+      ['vt100-chat', 'session'], sessionId).catch(() => {/* non-critical */});
 
     // â”€â”€ Phase 2: Research (if needed) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     let researchContext = '';
@@ -162,17 +162,17 @@ IMPORTANT: Use the research above to answer accurately. Synthesize it in AVERI's
           researchUsed  = true;
           citations     = research.citations;
           researchModel = research.model;
-          console.log(`[AVERI] âœ“ Research injected | model:${research.model} | citations:${citations.length}`);
+          console.log(`[VT100] Research injected | model:${research.model} | citations:${citations.length}`);
         } else {
-          console.warn(`[AVERI] Perplexity research failed, proceeding LLM-only: ${research.errorMessage}`);
+          console.warn(`[VT100] Perplexity research failed, proceeding LLM-only: ${research.errorMessage}`);
         }
       } catch (err) {
-        console.warn('[AVERI] Research phase error, proceeding LLM-only:', err);
+        console.warn('[VT100] Research phase error, proceeding LLM-only:', err);
       }
     }
 
     // â”€â”€ Phase 3: Gemini synthesis + kstrigd Inner Critic (Helix A) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    const systemPrompt = AVERI_SYSTEM_PROMPT
+    const systemPrompt = VT100_SYSTEM_PROMPT
       .replace('{DISPATCH_CONTEXT}', dispatchCtx)
       .replace('{CLIENT_CONTEXT}', clientCtx)
       .replace('{RESEARCH_CONTEXT}', researchContext || '');
@@ -197,7 +197,7 @@ IMPORTANT: Use the research above to answer accurately. Synthesize it in AVERI's
           system:  systemPrompt,
           messages,
         });
-        return text ?? 'AVERI is thinkingâ€¦';
+        return text ?? 'vt100 is thinking...';
       },
       // Retry with revision directive injected
       async (directive: string) => {
@@ -206,7 +206,7 @@ IMPORTANT: Use the research above to answer accurately. Synthesize it in AVERI's
           system:  systemPrompt + `\n\nCRITIQUE DIRECTIVE: ${directive}`,
           messages,
         });
-        return text ?? 'AVERI is thinkingâ€¦';
+        return text ?? 'vt100 is thinking...';
       },
       input.message,
       {
@@ -222,8 +222,8 @@ IMPORTANT: Use the research above to answer accurately. Synthesize it in AVERI's
     worldState.recordIFSScore(critiqueResult.ifs.score).catch(() => {/* non-critical */});
     worldState.emit(
       critiqueResult.retried ? 'critique_retry' : 'generation',
-      `AVERI response | IFS=${critiqueResult.ifs.score} | retried=${critiqueResult.retried}`,
-      ['averi-chat', `ifs-${critiqueResult.ifs.label.toLowerCase()}`],
+      `vt100 response | IFS=${critiqueResult.ifs.score} | retried=${critiqueResult.retried}`,
+      ['vt100-chat', `ifs-${critiqueResult.ifs.label.toLowerCase()}`],
       sessionId,
     ).catch(() => {/* non-critical */});
 

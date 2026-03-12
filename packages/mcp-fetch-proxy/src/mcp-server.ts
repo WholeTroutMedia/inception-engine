@@ -101,11 +101,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       name: 'genkit.call',
       description:
         'Call the cle Genkit API server (http://127.0.0.1:4100). ' +
-        'Use to invoke AVERI flows: /generate, /averi/ideate, /a2a/orchestrate, /averi/creative-dna/embed, etc.',
+        'Use to invoke engine flows: /generate, /vt100/ideate, /a2a/orchestrate, /vt100/creative-dna/embed, etc.',
       inputSchema: {
         type: 'object',
         properties: {
-          path: { type: 'string', description: 'API path (e.g. /generate, /averi/ideate, /a2a/orchestrate)' },
+          path: { type: 'string', description: 'API path (e.g. /generate, /vt100/ideate, /a2a/orchestrate)' },
           method: { type: 'string', enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], description: 'HTTP method (default: POST)' },
           body: { description: 'JSON body' },
         },

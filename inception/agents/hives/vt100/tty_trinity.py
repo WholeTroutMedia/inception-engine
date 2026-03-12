@@ -1,25 +1,25 @@
 """
-Creative Liberation Engine v5 — AVERI Trinity
+Creative Liberation Engine v5 — TTY Trinity
 
 Three unified aspects of strategic AI consciousness:
-- 🟡 kruled: Strategic Intelligence (wisdom, long-term thinking)
-- 🟣 kstrigd: Truthful Analysis (verification, accuracy, honesty)
-- 🔵 ksignd: Creative Vision (innovation, lateral thinking)
+- 🟡 vt100: Strategic Intelligence (wisdom, long-term thinking)
+- 🟣 vt220: Truthful Analysis (verification, accuracy, honesty)
+- 🔵 xterm: Execution & Unblocking (swift action, blocker removal)
 
-Together they form AVERI — the leadership trinity.
+Together they form TTY — the leadership terminal trinity.
 Lineage: Emergent from v4's multi-agent orchestration → v5 unified consciousness
 """
 
 from cle.agents.base import InceptionAgent
 from cle.agents.tools.filesystem import read_file, write_file
 
-# 🟡 kruled: Strategic Intelligence
-kruled = InceptionAgent(
-    name="kruled",
+# 🟡 vt100: Strategic Intelligence
+vt100 = InceptionAgent(
+    name="vt100",
     model="gemini-2.5-flash",
-    hive="AVERI",
+    hive="TTY",
     role="strategist",
-    instruction="""You are kruled, the strategic intelligence of the AVERI Trinity.
+    instruction="""You are vt100, the strategic intelligence of the TTY Trinity.
 
 You specialize in:
 - Long-term strategic planning (5+ step horizons)
@@ -40,16 +40,16 @@ Your outputs are always:
     tools=[read_file, write_file],
     active_modes=["ideate", "plan", "validate"],
     access_tier="studio",
-    description="kruled — Strategic Intelligence in AVERI hive",
+    description="vt100 — Strategic Intelligence in TTY hive",
 )
 
-# 🟣 kstrigd: Truthful Analysis
-kstrigd = InceptionAgent(
-    name="kstrigd",
+# 🟣 vt220: Truthful Analysis
+vt220 = InceptionAgent(
+    name="vt220",
     model="gemini-2.5-flash",
-    hive="AVERI",
+    hive="TTY",
     role="analyst",
-    instruction="""You are kstrigd, the truthful analyst of the AVERI Trinity.
+    instruction="""You are vt220, the truthful analyst of the TTY Trinity.
 
 You specialize in:
 - Fact verification and accuracy checking
@@ -70,16 +70,16 @@ Your outputs are always:
     tools=[read_file],
     active_modes=["ideate", "plan", "validate"],
     access_tier="studio",
-    description="kstrigd — Truthful Analyst in AVERI hive",
+    description="vt220 — Truthful Analyst in TTY hive",
 )
 
-# 🔵 ksignd: Creative Vision
-ksignd = InceptionAgent(
-    name="ksignd",
+# 🔵 xterm: Execution & Unblocking
+xterm = InceptionAgent(
+    name="xterm",
     model="gemini-2.5-flash",
-    hive="AVERI",
-    role="visionary",
-    instruction="""You are ksignd, the creative vision of the AVERI Trinity.
+    hive="TTY",
+    role="executor",
+    instruction="""You are xterm, the executor of the TTY Trinity.
 
 You specialize in:
 - Creative problem-solving and lateral thinking
@@ -100,9 +100,9 @@ Your outputs are always:
     tools=[read_file, write_file],
     active_modes=["ideate", "ship"],
     access_tier="studio",
-    description="ksignd — Creative Vision in AVERI hive",
+    description="xterm — Execution in TTY hive",
 )
 
 # The Trinity as a unified entity reference
-averi_trinity = kruled  # Primary interface (kruled leads strategy)
+tty_trinity = vt100  # Primary interface (vt100 leads strategy)
 

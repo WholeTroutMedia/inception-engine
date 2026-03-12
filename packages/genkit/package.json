@@ -19,9 +19,9 @@
             "import": "./dist/memory/klogd.js",
             "types": "./dist/memory/klogd.d.ts"
         },
-        "./memory/kstrigd-gate": {
-            "import": "./dist/memory/kstrigd-gate.js",
-            "types": "./dist/memory/kstrigd-gate.d.ts"
+        "./memory/vt220-gate": {
+            "import": "./dist/memory/vt220-gate.js",
+            "types": "./dist/memory/vt220-gate.d.ts"
         },
         "./memory/context-pager": {
             "import": "./dist/memory/context-pager.js",

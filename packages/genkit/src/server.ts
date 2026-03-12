@@ -30,11 +30,11 @@ import {
 } from '@cle/toolbox';
 import { getAuditLog, getAuditStats } from './middleware/audit-logger.js';
 import { classifyTaskFlow } from './flows/classify-task.js';
-import { ATHENAFlow } from './flows/kruled.js';
-import { VERAFlow } from './flows/kstrigd.js';
-import { conversationalAveriFlow } from './flows/conversationalAveri.js';
-import { averiChatFlow } from './flows/averi-chat-flow.js';
-import { KEEPERFlow } from './flows/kstated.js';
+import { VT100Flow } from './flows/vt100.js';
+import { VT220Flow } from './flows/vt220.js';
+import { conversationalVt100Flow } from './flows/conversationalVt100.js';
+import { vt100ChatFlow } from './flows/vt100-chat-flow.js';
+import { KEEPERFlow } from './flows/keeper.js';
 import { scribeMemoryTool } from './tools/klogd-memory.js';
 import { chromaRetriever } from './tools/chromadb-retriever.js';
 import { HypeReelDirectorFlow } from './flows/hype-reel-director.js';
@@ -484,9 +484,9 @@ app.post('/api/mesh/execute', async (req, res) => {
                 case 'creative-director':
                     const { CreativeDirectorFlow } = await import('./flows/creative-director.js');
                     return res.json({ result: await CreativeDirectorFlow(payload) });
-                case 'averiChat':
-                    const { averiChatFlow } = await import('./flows/averi-chat-flow.js');
-                    return res.json(await averiChatFlow(payload));
+                case 'vt100Chat':
+                    const { vt100ChatFlow } = await import('./flows/vt100-chat-flow.js');
+                    return res.json(await vt100ChatFlow(payload));
                 default:
                     return res.status(400).json({ error: `Unknown flow: ${payload.flow}` });
             }
@@ -969,7 +969,7 @@ Score it 0-100 and provide a 1-2 sentence critique. JSON only.`;
 });
 
 // ---------------------------------------------------------------------------
-// POST /conversational â€” Conversational AVERI (Bi-Directional Siri iOS Shortcut)
+// POST /conversational â€” Conversational vt100 (Bi-Directional Siri iOS Shortcut)
 // ---------------------------------------------------------------------------
 
 app.post('/conversational', async (req, res) => {
@@ -980,46 +980,46 @@ app.post('/conversational', async (req, res) => {
             return res.status(400).json({ error: '"text" is required' });
         }
 
-        const result = await conversationalAveriFlow({ text, sessionId });
+        const result = await conversationalVt100Flow({ text, sessionId });
         res.json(result);
     } catch (error: any) {
-        console.error('[GENKIT:SERVER] Conversational AVERI error:', error.message);
+        console.error('[GENKIT:SERVER] Conversational vt100 error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
 
 // ---------------------------------------------------------------------------
-// POST /averiChat â€” AVERI Mobile PWA endpoint
+// POST /vt100Chat â€” vt100 Mobile PWA endpoint
 // Context-enriched chat: injects live dispatch status + WTM client profile
-// into every Gemini conversation. Powers the AVERI Mobile iPhone PWA.
+// into every Gemini conversation. Powers the vt100 Mobile iPhone PWA.
 // ---------------------------------------------------------------------------
 
-app.post('/averiChat', async (req, res) => {
+app.post('/vt100Chat', async (req, res) => {
     try {
         const { message, history, clientId, userId } = req.body;
         if (!message) {
             return res.status(400).json({ error: '"message" is required' });
         }
-        console.log(`[AVERI:MOBILE] ðŸ’¬ ${userId ?? 'unknown'} [${clientId ?? 'wtm-internal'}]: ${message.slice(0, 60)}`);
-        const result = await averiChatFlow({ message, history, clientId, userId, sessionId: (req.body as { sessionId?: string }).sessionId, skipCritique: false });
+        console.log(`[VT100:MOBILE] ${userId ?? 'unknown'} [${clientId ?? 'wtm-internal'}]: ${message.slice(0, 60)}`);
+        const result = await vt100ChatFlow({ message, history, clientId, userId, sessionId: (req.body as { sessionId?: string }).sessionId, skipCritique: false });
         res.json(result);
     } catch (error: any) {
-        console.error('[AVERI:MOBILE] Error:', error.message);
+        console.error('[VT100:MOBILE] Error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
 
-app.get('/averiChat/health', (_req, res) => {
-    res.json({ status: 'operational', service: 'averi-chat', version: '1.0.0' });
+app.get('/vt100Chat/health', (_req, res) => {
+    res.json({ status: 'operational', service: 'vt100-chat', version: '1.0.0' });
 });
 
 
 
 // ---------------------------------------------------------------------------
-// POST /averi/ideate  â€” IDEATE mode: kstated recall â†’ kruled strategy
+// POST /vt100/ideate  â€” IDEATE mode: kstated recall â†’ vt100 strategy
 // ---------------------------------------------------------------------------
 
-app.post('/averi/ideate', async (req, res) => {
+app.post('/vt100/ideate', async (req, res) => {
     try {
         const { topic, context, depth = 'deep', sessionId } = req.body;
 
@@ -1027,19 +1027,19 @@ app.post('/averi/ideate', async (req, res) => {
             return res.status(400).json({ error: '"topic" is required' });
         }
 
-        console.log(`[AVERI:IDEATE] ðŸ”µ Topic: ${topic.slice(0, 80)}`);
+        console.log(`[VT100:IDEATE] Topic: ${topic.slice(0, 80)}`);
 
         // Step 1 â€” kstated: surface relevant knowledge context
         const keeperResult = await KEEPERFlow({
             task: 'search',
             query: topic,
-            tags: ['ideate', 'averi'],
+            tags: ['ideate', 'vt100'],
             sessionId,
         });
-        console.log(`[AVERI:IDEATE] kstated found ${keeperResult.relevantKIs.length} KIs`);
+        console.log(`[VT100:IDEATE] kstated found ${keeperResult.relevantKIs.length} KIs`);
 
-        // Step 2 â€” kruled: strategy mode with kstated context injected
-        const athenaResult = await ATHENAFlow({
+        // Step 2 â€” vt100: strategy mode with kstated context injected
+        const vt100Result = await VT100Flow({
             mode: 'strategy',
             topic,
             context,
@@ -1047,7 +1047,7 @@ app.post('/averi/ideate', async (req, res) => {
             depth,
             sessionId,
         });
-        console.log(`[AVERI:IDEATE] kruled directive: ${athenaResult.directive.slice(0, 80)}...`);
+        console.log(`[VT100:IDEATE] vt100 directive: ${vt100Result.directive.slice(0, 80)}...`);
 
         res.json({
             mode: 'IDEATE',
@@ -1057,28 +1057,28 @@ app.post('/averi/ideate', async (req, res) => {
                 relevantKIs: keeperResult.relevantKIs,
                 isDuplicate: keeperResult.isDuplicate,
             },
-            kruled: {
-                directive: athenaResult.directive,
-                rationale: athenaResult.rationale,
-                options: athenaResult.options,
-                suggestedAgents: athenaResult.suggestedAgents,
-                nextMode: athenaResult.nextMode,
-                constitutionalFlags: athenaResult.constitutionalFlags,
+            vt100: {
+                directive: vt100Result.directive,
+                rationale: vt100Result.rationale,
+                options: vt100Result.options,
+                suggestedAgents: vt100Result.suggestedAgents,
+                nextMode: vt100Result.nextMode,
+                constitutionalFlags: vt100Result.constitutionalFlags,
             },
-            signatures: ['kstated', 'kruled'],
+            signatures: ['kstated', 'vt100'],
             timestamp: new Date().toISOString(),
         });
     } catch (error: any) {
-        console.error('[AVERI:IDEATE] Error:', error.message);
+        console.error('[VT100:IDEATE] Error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
 
 // ---------------------------------------------------------------------------
-// POST /averi/plan  â€” PLAN mode: kstated recall â†’ kruled spec â†’ kstrigd truth-check
+// POST /vt100/plan  â€” PLAN mode: kstated recall â†’ vt100 spec â†’ vt220 truth-check
 // ---------------------------------------------------------------------------
 
-app.post('/averi/plan', async (req, res) => {
+app.post('/vt100/plan', async (req, res) => {
     try {
         const { topic, context, depth = 'deep', sessionId } = req.body;
 
@@ -1086,19 +1086,19 @@ app.post('/averi/plan', async (req, res) => {
             return res.status(400).json({ error: '"topic" is required' });
         }
 
-        console.log(`[AVERI:PLAN] ðŸ”µ Topic: ${topic.slice(0, 80)}`);
+        console.log(`[VT100:PLAN] Topic: ${topic.slice(0, 80)}`);
 
         // Step 1 â€” kstated: synthesize knowledge for planning context
         const keeperResult = await KEEPERFlow({
             task: 'synthesize',
             query: topic,
-            tags: ['plan', 'averi', 'architecture'],
+            tags: ['plan', 'vt100', 'architecture'],
             sessionId,
         });
-        console.log(`[AVERI:PLAN] kstated synthesis complete`);
+        console.log(`[VT100:PLAN] kstated synthesis complete`);
 
-        // Step 2 â€” kruled: spec mode (precise, not exploratory)
-        const athenaResult = await ATHENAFlow({
+        // Step 2 â€” vt100: spec mode (precise, not exploratory)
+        const vt100Result = await VT100Flow({
             mode: 'spec',
             topic,
             context,
@@ -1106,16 +1106,16 @@ app.post('/averi/plan', async (req, res) => {
             depth,
             sessionId,
         });
-        console.log(`[AVERI:PLAN] kruled spec: ${athenaResult.directive.slice(0, 80)}...`);
+        console.log(`[VT100:PLAN] vt100 spec: ${vt100Result.directive.slice(0, 80)}...`);
 
-        // Step 3 â€” kstrigd: truth-check kruled's specification
-        const veraResult = await VERAFlow({
+        // Step 3 â€” vt220: truth-check vt100 specification
+        const vt220Result = await VT220Flow({
             mode: 'truth',
-            content: `kruled DIRECTIVE:\n${athenaResult.directive}\n\nRATIONALE:\n${athenaResult.rationale}`,
+            content: `vt100 DIRECTIVE:\n${vt100Result.directive}\n\nRATIONALE:\n${vt100Result.rationale}`,
             context: topic,
             sessionId,
         });
-        console.log(`[AVERI:PLAN] kstrigd confidence: ${veraResult.confidence}`);
+        console.log(`[VT100:PLAN] vt220 confidence: ${vt220Result.confidence}`);
 
         res.json({
             mode: 'PLAN',
@@ -1124,37 +1124,37 @@ app.post('/averi/plan', async (req, res) => {
                 synthesis: keeperResult.synthesis ?? keeperResult.findings,
                 relevantKIs: keeperResult.relevantKIs,
             },
-            kruled: {
-                directive: athenaResult.directive,
-                rationale: athenaResult.rationale,
-                options: athenaResult.options,
-                suggestedAgents: athenaResult.suggestedAgents,
-                nextMode: athenaResult.nextMode,
-                constitutionalFlags: athenaResult.constitutionalFlags,
+            vt100: {
+                directive: vt100Result.directive,
+                rationale: vt100Result.rationale,
+                options: vt100Result.options,
+                suggestedAgents: vt100Result.suggestedAgents,
+                nextMode: vt100Result.nextMode,
+                constitutionalFlags: vt100Result.constitutionalFlags,
             },
-            kstrigd: {
-                verdict: veraResult.verdict,
-                confidence: veraResult.confidence,
-                contradictions: veraResult.contradictions,
-                pattern: veraResult.pattern,
+            vt220: {
+                verdict: vt220Result.verdict,
+                confidence: vt220Result.confidence,
+                contradictions: vt220Result.contradictions,
+                pattern: vt220Result.pattern,
             },
-            planApproved: veraResult.confidence >= 0.7 && veraResult.contradictions.length === 0,
-            signatures: ['kstated', 'kruled', 'kstrigd'],
+            planApproved: vt220Result.confidence >= 0.7 && vt220Result.contradictions.length === 0,
+            signatures: ['kstated', 'vt100', 'vt220'],
             timestamp: new Date().toISOString(),
         });
     } catch (error: any) {
-        console.error('[AVERI:PLAN] Error:', error.message);
+        console.error('[VT100:PLAN] Error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
 
 // ---------------------------------------------------------------------------
-// POST /averi/creative-dna/embed â€” Creative DNA Vector Generation (T20260308-696)
+// POST /vt100/creative-dna/embed â€” Creative DNA Vector Generation (T20260308-696)
 // Generates 1408-dim multimodal embeddings via Vertex AI multimodalembedding@001.
 // Used for per-tenant style fingerprinting in the multi-tenant platform.
 // ---------------------------------------------------------------------------
 
-app.post('/averi/creative-dna/embed', async (req, res) => {
+app.post('/vt100/creative-dna/embed', async (req, res) => {
     try {
         const { tenantId, image, text, video } = req.body;
         if (!tenantId) return res.status(400).json({ error: '"tenantId" is required' });
@@ -1162,7 +1162,7 @@ app.post('/averi/creative-dna/embed', async (req, res) => {
             return res.status(400).json({ error: 'At least one of image, text, or video is required' });
         }
 
-        console.log(`[AVERI:CREATIVE-DNA] ðŸ§¬ Generating vector | tenant: ${tenantId} | type: ${image ? 'image' : text ? 'text' : 'video'}`);
+        console.log(`[VT100:CREATIVE-DNA] Generating vector | tenant: ${tenantId} | type: ${image ? 'image' : text ? 'text' : 'video'}`);
         const { generateCreativeDnaVector } = await import('./creative-dna-vectors.js');
         const result = await generateCreativeDnaVector({ tenantId, image, text, video });
 
@@ -1177,7 +1177,7 @@ app.post('/averi/creative-dna/embed', async (req, res) => {
             vectorLength: result.vector.length,
         });
     } catch (error: any) {
-        console.error('[AVERI:CREATIVE-DNA] Error:', error.message);
+        console.error('[VT100:CREATIVE-DNA] Error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
@@ -1206,9 +1206,9 @@ app.post('/a2a/dispatch', async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// POST /a2a/orchestrate â€” Full AVERI multi-agent orchestration (T20260308-506)
-// kruled receives a directive, plans, assigns tasks to AVERI agents, dispatches
-// A2A messages to each. Primary pipeline for Chat Console â†’ AVERI.
+// POST /a2a/orchestrate â€” TTY multi-agent orchestration (T20260308-506)
+// vt100 receives a directive, plans, assigns tasks, dispatches A2A messages.
+// Primary pipeline for Chat Console â†’ orchestration.
 // ---------------------------------------------------------------------------
 
 app.post('/a2a/orchestrate', async (req, res) => {
@@ -1218,9 +1218,9 @@ app.post('/a2a/orchestrate', async (req, res) => {
             return res.status(400).json({ error: '"directive" and "tenantId" are required' });
         }
 
-        console.log(`[A2A:ORCHESTRATE] ðŸ§  kruled orchestrating | tenant: ${tenantId} | priority: ${priority ?? 'P1'}`);
-        const { averiOrchestrationFlow } = await import('./flows/a2a-orchestration.js');
-        const result = await averiOrchestrationFlow({ directive, tenantId, priority: priority ?? 'P1', targetAgents, context });
+        console.log(`[A2A:ORCHESTRATE] ðŸ§  vt100 orchestrating | tenant: ${tenantId} | priority: ${priority ?? 'P1'}`);
+        const { ttyOrchestrationFlow } = await import('./flows/a2a-orchestration.js');
+        const result = await ttyOrchestrationFlow({ directive, tenantId, priority: priority ?? 'P1', targetAgents, context });
 
         res.json(result);
     } catch (error: any) {
@@ -1470,9 +1470,9 @@ app.post('/api/engines/:engine', async (req, res) => {
 
 const FLOW_ENDPOINTS = [
     { id: 'classify', method: 'POST', path: '/classify', agent: 'RELAY', description: 'Classify a user request to the right agent/flow.' },
-    { id: 'averi-ideate', method: 'POST', path: '/averi/ideate', agent: 'kruled', description: 'IDEATE mode: kstated recall â†’ kruled strategic vision.' },
-    { id: 'averi-plan', method: 'POST', path: '/averi/plan', agent: 'kruled', description: 'PLAN mode: kstated recall â†’ kruled spec â†’ kstrigd truth-check.' },
-    { id: 'creative-director', method: 'POST', path: '/flow/CreativeDirector', agent: 'ksignd', description: 'ksignd creative vision document generation from a campaign brief.' },
+    { id: 'vt100-ideate', method: 'POST', path: '/vt100/ideate', agent: 'vt100', description: 'IDEATE mode: kstated recall â†’ vt100 strategy.' },
+    { id: 'vt100-plan', method: 'POST', path: '/vt100/plan', agent: 'vt100', description: 'PLAN mode: kstated recall â†’ vt100 spec â†’ vt220 truth-check.' },
+    { id: 'creative-director', method: 'POST', path: '/flow/CreativeDirector', agent: 'xterm', description: 'xterm creative vision document generation from a campaign brief.' },
     { id: 'generate-media', method: 'POST', path: '/generate-media', agent: 'GEN-1', description: 'Route asset generation (image/video/text) to optimal pipeline.' },
     { id: 'score', method: 'POST', path: '/score', agent: 'SENTINEL', description: 'Vision LoRA scoring of creative assets (0-100) with critique.' },
     { id: 'director', method: 'POST', path: '/director', agent: 'ATLAS', description: 'kruled Video EDL Engine â€” hype reel director for campaign video.' },
@@ -1500,7 +1500,7 @@ const FLOW_ENDPOINTS = [
 
 app.get('/api/flows', (_req, res) => {
     const hiveColors: Record<string, string> = {
-        AVERI: '#F5A524', kuid: '#C17D4A', kstated: '#9B72CF',
+        TTY: '#F5A524', kuid: '#C17D4A', kstated: '#9B72CF',
         SWITCHBOARD: '#22c55e', kdocsd: '#4285F4', BROADCAST: '#FF6B35',
         VALIDATOR: '#ef4444', SPECIALIST: '#20B2AA', ENHANCEMENT: '#8B5CF6',
     };
@@ -1542,8 +1542,8 @@ setImmediate(() => {
 â•‘     POST /director       â€” kruled Video EDL Engine   â•‘
 â•‘     POST /search         â€” Perplexity search         â•‘
 â•‘     POST /retrieve       â€” ChromaDB vector search    â•‘
-â•‘     POST /averi/ideate   â€” IDEATE mode (kruled+kstated) â•‘
-â•‘     POST /averi/plan     â€” PLAN mode (kruled+kstrigd+kstated) â•‘
+â•‘     POST /vt100/ideate   â€” IDEATE mode (vt100+kstated) â•‘
+â•‘     POST /vt100/plan     â€” PLAN mode (vt100+vt220+kstated) â•‘
 â•‘     POST /flow/CreativeDirector â€” ksignd vision doc    â•‘
 â•‘     POST /generate-media â€” Campaign asset generator  â•‘
 â•‘     POST /score          â€” Vision LoRA scoring       â•‘

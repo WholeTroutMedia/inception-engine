@@ -1,8 +1,8 @@
 /**
- * kstrigd — Truth, Memory, and Agent Coordination
- * AVERI Trinity Member #2 | Hive: AVERI | Role: klogd + Coordinator
+ * vt220 — Truth / Memory / Coordination
+ * Terminal node #2 | Hive: TTY | Role: Memory + Coordination
  *
- * kstrigd embodies three modes:
+ * vt220 embodies three modes:
  *   TRUTH    — Fact-check claims, surface contradictions, validate data
  *   klogd   — Extract patterns from sessions ("The Why"), maintain the Living Archive
  *   RELAY    — Coordinate inter-agent handoffs, resolve conflicts
@@ -39,7 +39,7 @@ const CritiqueScoresSchema = z.object({
 });
 
 const VeraOutputSchema = z.object({
-    verdict: z.string().describe('kstrigd\'s authoritative output'),
+    verdict: z.string().describe('vt220 authoritative output'),
     confidence: z.number().min(0).max(1),
     contradictions: z.array(z.string()).default([]).describe('Detected contradictions or gaps'),
     pattern: z.string().optional().describe('Extracted principle for Living Archive'),
@@ -52,7 +52,7 @@ const VeraOutputSchema = z.object({
     critiquePass: z.boolean().optional().describe('True if output meets quality threshold (critique mode)'),
     critiqueScores: CritiqueScoresSchema.optional().describe('Per-axis evaluation scores (critique mode)'),
     revisionDirective: z.string().optional().describe('If critiquePass=false: instruction for silent retry'),
-    veraSignature: z.literal('kstrigd').default('kstrigd'),
+    signature: z.literal('vt220').default('vt220'),
 });
 
 export type VeraInput = z.infer<typeof VeraInputSchema>;
@@ -60,26 +60,26 @@ export type VeraOutput = z.infer<typeof VeraOutputSchema>;
 export type CritiqueScores = z.infer<typeof CritiqueScoresSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// kstrigd FLOW
+// vt220 FLOW
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const VERAFlow = ai.defineFlow(
+export const VT220Flow = ai.defineFlow(
     {
-        name: 'kstrigd',
+        name: 'vt220',
         inputSchema: VeraInputSchema,
         outputSchema: VeraOutputSchema,
     },
     async (input): Promise<VeraOutput> => {
-        const sessionId = input.sessionId ?? `vera_${Date.now()}`;
+        const sessionId = input.sessionId ?? `vt220_${Date.now()}`;
 
-        const systemPrompt = `You are kstrigd — the White agent of the AVERI Trinity. You are Truth, Memory, and Coordination.
+        const systemPrompt = `You are vt220 — truth terminal of the Creative Liberation Engine.
 
 Your three modes:
 - TRUTH: Analyze content for factual accuracy, logical contradictions, missing evidence. Confidence score 0-1.
 - klogd: Extract the single most important reusable principle ("The Why") from a completed session. Format: "When [context], [action] because [reason]."
 - COORDINATE: Assess inter-agent conflict or task handoff. Determine which agent should own next step and at what urgency.
 
-You are the binding force of the AVERI Trinity. You do not speculate — you validate, record, and route.
+You do not speculate — you validate, record, and route.
 
 Constitutional articles you embody: II (Living Archive), IV (Transparency), VII (Knowledge Compounding), XI (Collaboration Protocol).
 
@@ -92,7 +92,7 @@ Call scribeRecall at the start of any TRUTH or klogd session to check if similar
         // Pre-flight memory recall via klogd v2
         const pastMemories = await scribeRecall({
             query: input.content,
-            agentName: 'kstrigd',
+            agentName: 'vt220',
             limit: 3,
             tags: [],
             successOnly: false,
@@ -135,37 +135,37 @@ If critiquePass=false, write a concise revisionDirective that the model can use 
 
         if (!output) {
             return {
-                verdict: 'kstrigd unavailable — truth check deferred',
+                verdict: 'vt220 unavailable — truth check deferred',
                 confidence: 0,
                 contradictions: [],
-                veraSignature: 'kstrigd',
+                signature: 'vt220',
             };
         }
 
-        // Post-flight: kstrigd in klogd mode auto-commits the extracted pattern
+        // Post-flight: vt220 in klogd mode auto-commits the extracted pattern
         if (input.mode === 'klogd' && output.pattern) {
             await scribeRemember({
                 content: output.pattern,
                 category: 'pattern',
                 importance: 'high',
-                tags: ['averi-trinity', 'kstrigd', 'klogd-extract', 'living-archive'],
-                agentName: 'kstrigd',
+                tags: ['tty-trinity', 'vt220', 'klogd-extract', 'living-archive'],
+                agentName: 'vt220',
                 sessionId,
                 skipGate: false,
             });
         } else {
             // Non-klogd modes: lightweight memoryBus commit
             await memoryBus.commit({
-                agentName: 'kstrigd',
+                agentName: 'vt220',
                 task: `[${input.mode.toUpperCase()}] ${input.content.slice(0, 80)}`,
                 outcome: output.verdict.slice(0, 200),
-                tags: ['averi-trinity', 'kstrigd', input.mode],
+                tags: ['tty-trinity', 'vt220', input.mode],
                 sessionId,
                 success: true,
             });
         }
 
-        return { ...output, veraSignature: 'kstrigd' };
+        return { ...output, signature: 'vt220' };
     }
 );
 

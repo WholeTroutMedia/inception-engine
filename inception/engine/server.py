@@ -149,13 +149,13 @@ def _load_agents() -> None:
         logger.debug("SIGNAL agent not yet available")
 
     try:
-        from cle.agents.hives.averi.averi_trinity import averi
-        _registry.register(averi)
+        from cle.agents.hives.vt100.tty_trinity import tty_trinity
+        _registry.register(tty_trinity)
     except ImportError:
-        logger.debug("AVERI Trinity agent not yet available")
+        logger.debug("TTY Trinity agent not yet available")
 
     try:
-        from cle.agents.hives.averi.oracle_council import oracle_council
+        from cle.agents.hives.vt100.oracle_council import oracle_council
         _registry.register(oracle_council)
     except ImportError:
         logger.debug("Oracle Council agent not yet available")

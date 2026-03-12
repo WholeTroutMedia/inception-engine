@@ -19,7 +19,7 @@ HIVES = {
     "kstated": "Knowledge Organization & Documentation",
     "BROADCAST": "Communication & Content Distribution",
     "SWITCHBOARD": "Task Routing & Agent Coordination",
-    "AVERI": "Constitutional Alignment & Leadership",
+    "TTY": "Constitutional Alignment & Leadership",
 }
 
 # Access tier names

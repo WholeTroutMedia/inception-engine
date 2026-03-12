@@ -1,5 +1,5 @@
 /**
- * kstrigd Memory Quality Gate — Genkit Flow
+ * vt220 Memory Quality Gate — Genkit Flow
  *
  * Formal evaluation pipeline for klogd memory write proposals.
  * Runs as a standalone flow so it can be called directly from
@@ -113,7 +113,7 @@ function fastPathEvaluate(
 // LLM evaluator
 // ---------------------------------------------------------------------------
 
-const EVAL_SYSTEM = `You are kstrigd, the Creative Liberation Engine Memory Quality Gate.
+const EVAL_SYSTEM = `You are vt220, the Creative Liberation Engine Memory Quality Gate.
 
 Your job is to evaluate whether a memory entry is worth saving to long-term storage.
 
@@ -157,11 +157,11 @@ ${input.content.slice(0, 800)}`,
     try {
         parsed = JSON.parse(response.text.replace(/```json|```/g, '').trim());
     } catch {
-        console.warn('[kstrigd:GATE] Failed to parse LLM response, using conservative defaults');
+        console.warn('[vt220:GATE] Failed to parse LLM response, using conservative defaults');
         parsed = {
             breakdown: { specificity: 12, futureValue: 12, novelty: 12, safety: 25 },
             flags: ['PARSE_ERROR'],
-            reason: 'kstrigd parse error — conservative score applied',
+            reason: 'vt220 parse error — conservative score applied',
         };
     }
 
@@ -180,22 +180,22 @@ ${input.content.slice(0, 800)}`,
 }
 
 // ---------------------------------------------------------------------------
-// SC-02: veraMemoryGateFlow — Exported Genkit Flow
+// SC-02: vt220MemoryGateFlow — Exported Genkit Flow
 // ---------------------------------------------------------------------------
 
-export const veraMemoryGateFlow = ai.defineFlow(
+export const vt220MemoryGateFlow = ai.defineFlow(
     {
-        name: 'veraMemoryGate',
+        name: 'vt220MemoryGate',
         inputSchema: VERAGateInput,
         outputSchema: VERAGateOutput,
     },
     async (input) => {
-        console.log(`[kstrigd:GATE] 🔒 Evaluating memory: category=${input.category} importance=${input.importance} from=${input.proposedBy}`);
+        console.log(`[vt220:GATE] 🔒 Evaluating memory: category=${input.category} importance=${input.importance} from=${input.proposedBy}`);
 
         // Try fast path first
         const fast = fastPathEvaluate(input);
         if (fast) {
-            console.log(`[kstrigd:GATE] ⚡ Fast-path: ${fast.approved ? '✅ APPROVED' : '❌ REJECTED'} — ${fast.reason}`);
+            console.log(`[vt220:GATE] ⚡ Fast-path: ${fast.approved ? '✅ APPROVED' : '❌ REJECTED'} — ${fast.reason}`);
             return fast;
         }
 
@@ -203,21 +203,21 @@ export const veraMemoryGateFlow = ai.defineFlow(
         try {
             const result = await llmEvaluate(input);
             const status = result.approved ? '✅ APPROVED' : '❌ REJECTED';
-            console.log(`[kstrigd:GATE] ${status} (score=${result.score}) — ${result.reason}`);
+            console.log(`[vt220:GATE] ${status} (score=${result.score}) — ${result.reason}`);
 
             if (result.flags.length > 0) {
-                console.warn(`[kstrigd:GATE] ⚠️  Flags: ${result.flags.join(', ')}`);
+                console.warn(`[vt220:GATE] ⚠️  Flags: ${result.flags.join(', ')}`);
             }
 
             return result;
         } catch (err: unknown) {
             const msg = err instanceof Error ? err.message : String(err);
-            console.error(`[kstrigd:GATE] LLM evaluation failed: ${msg}`);
+            console.error(`[vt220:GATE] LLM evaluation failed: ${msg}`);
 
             const importanceRank = IMPORTANCE_RANK[input.importance];
             return {
                 approved: importanceRank >= 2,
-                reason: `kstrigd gate unavailable (${msg}) — fallback based on importance`,
+                reason: `vt220 gate unavailable (${msg}) — fallback based on importance`,
                 score: importanceRank >= 2 ? 70 : 30,
                 breakdown: { specificity: 15, futureValue: 15, novelty: 15, safety: 25 },
                 flags: ['VERA_UNAVAILABLE'],
@@ -234,7 +234,7 @@ export const veraMemoryGateFlow = ai.defineFlow(
 export async function evaluateMemoryWrite(
     input: z.infer<typeof VERAGateInput>
 ): Promise<{ approved: boolean; reason: string; score: number }> {
-    const result = await veraMemoryGateFlow(input);
+    const result = await vt220MemoryGateFlow(input);
     return { approved: result.approved, reason: result.reason, score: result.score };
 }
 

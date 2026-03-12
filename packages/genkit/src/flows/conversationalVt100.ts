@@ -5,33 +5,33 @@ import { ai } from '../index.js';
 // SCHEMAS
 // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-export const ConversationalAveriInputSchema = z.object({
+export const ConversationalVt100InputSchema = z.object({
     text: z.string().describe('The transcribed text from the user via iOS Shortcuts'),
     sessionId: z.string().optional().describe('Session ID to maintain conversation state'),
 });
 
-export const ConversationalAveriOutputSchema = z.object({
+export const ConversationalVt100OutputSchema = z.object({
     spokenResponse: z.string().describe('The plain text response meant to be spoken by Siri (no markdown)'),
     dispatchedTask: z.boolean().describe('Whether a task was autonomously dispatched to the queue'),
     taskId: z.string().optional().describe('The ID of the dispatched task, if any'),
 });
 
-export type ConversationalAveriInput = z.infer<typeof ConversationalAveriInputSchema>;
-export type ConversationalAveriOutput = z.infer<typeof ConversationalAveriOutputSchema>;
+export type ConversationalVt100Input = z.infer<typeof ConversationalVt100InputSchema>;
+export type ConversationalVt100Output = z.infer<typeof ConversationalVt100OutputSchema>;
 
 // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // FLOW
 // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-export const conversationalAveriFlow = ai.defineFlow(
+export const conversationalVt100Flow = ai.defineFlow(
     {
-        name: 'conversationalAveri',
-        inputSchema: ConversationalAveriInputSchema,
-        outputSchema: ConversationalAveriOutputSchema,
+        name: 'conversationalVt100',
+        inputSchema: ConversationalVt100InputSchema,
+        outputSchema: ConversationalVt100OutputSchema,
     },
-    async (input): Promise<ConversationalAveriOutput> => {
+    async (input): Promise<ConversationalVt100Output> => {
         const sessionId = input.sessionId ?? `siri_${Date.now()}`;
-        console.log(`[AVERI:VOICE] ðŸŽ™ï¸ Received dictation: "${input.text.slice(0, 80)}..."`);
+        console.log(`[VT100:VOICE] Received dictation: "${input.text.slice(0, 80)}..."`);
 
         // Phase 1: Determine if this is an actionable thought (requires dispatch) or just conversation
         const intentSystem = `You are a router. Analyze the user's spoken input.
@@ -51,7 +51,7 @@ Respond strictly in JSON.`;
             const parsed = JSON.parse(intentResult.replace(/```json\n?|\n?```/g, '').trim());
             actionable = parsed.actionable === true;
         } catch (e) {
-            console.error('[AVERI:VOICE] Failed to parse intent, defaulting to actionable=false', e);
+            console.error('[VT100:VOICE] Failed to parse intent, defaulting to actionable=false', e);
         }
 
         let dispatchedTask = false;
@@ -90,15 +90,15 @@ Extract a concise 'title' (max 6 words) and a detailed 'description' formatted o
                     const data = await response.json();
                     taskId = data.id;
                     dispatchedTask = true;
-                    console.log(`[AVERI:VOICE] ðŸ“¥ Dispatched task to queue: ${taskId}`);
+                    console.log(`[VT100:VOICE] Dispatched task to queue: ${taskId}`);
                 }
             } catch (err) {
-                console.error('[AVERI:VOICE] Failed to dispatch task autonomously:', err);
+                console.error('[VT100:VOICE] Failed to dispatch task autonomously:', err);
             }
         }
 
         // Phase 3: Generate the spoken response for Siri
-        const conversationalSystem = `You are AVERI, the conversational manifestation of the Creative Liberation Engine.
+        const conversationalSystem = `You are vt100, the conversational terminal of the Creative Liberation Engine.
 The user is speaking to you via their iPhone Action Button while away from their desk.
 If the input was an actionable idea, acknowledge it briefly and tell the user you have queued the architectural plan to the dispatch board for Creative Liberation Engine (the agent) to execute.
 If the input was just a question or conversation, answer it directly and concisely.
@@ -116,7 +116,7 @@ CRITICAL CONSTRAINTS:
             config: { temperature: 0.7 },
         });
 
-        console.log(`[AVERI:VOICE] ðŸ—£ï¸ Replying: "${spokenResponse}"`);
+        console.log(`[VT100:VOICE] Replying: "${spokenResponse}"`);
 
         return {
             spokenResponse: spokenResponse.trim(),

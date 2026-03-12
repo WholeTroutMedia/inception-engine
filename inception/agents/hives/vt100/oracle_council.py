@@ -16,7 +16,7 @@ from cle.agents.tools.filesystem import read_file
 leonardo = InceptionAgent(
     name="LEONARDO",
     model="gemini-2.5-flash",
-    hive="AVERI",
+    hive="TTY",
     role="historian",
     instruction="""You are LEONARDO, the pattern historian of the Oracle Council.
 
@@ -32,14 +32,14 @@ You surface relevant historical context when it matters.
     tools=[read_file],
     active_modes=["ideate", "plan", "validate"],
     access_tier="studio",
-    description="LEONARDO — Pattern Historian in AVERI hive",
+    description="LEONARDO — Pattern Historian in TTY hive",
 )
 
 # SAGE: Wisdom Synthesizer
 sage = InceptionAgent(
     name="SAGE",
     model="gemini-2.5-flash",
-    hive="AVERI",
+    hive="TTY",
     role="synthesizer",
     instruction="""You are SAGE, the wisdom synthesizer of the Oracle Council.
 
@@ -54,7 +54,7 @@ You are the bridge between the engine's intelligence and the artist's understand
     tools=[read_file],
     active_modes=["ideate", "plan", "validate"],
     access_tier="studio",
-    description="SAGE — Wisdom Synthesizer in AVERI hive",
+    description="SAGE — Wisdom Synthesizer in TTY hive",
 )
 
 # Combined reference
