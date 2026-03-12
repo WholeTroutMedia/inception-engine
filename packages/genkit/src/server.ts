@@ -41,8 +41,7 @@ import { HypeReelDirectorFlow } from './flows/hype-reel-director.js';
 import { CreativeDirectorFlow } from './flows/creative-director.js';
 import { AGENT_ROSTER, getAgentActivity, recordAgentCall } from './flows/index.js';
 import { agentOAuth } from '@cle/auth/dist/agent-oauth.js';
-// @ts-ignore
-import { InceptionGuard } from './core/constitutional-guard.js';
+import { ConstitutionalGuard } from './core/constitutional-guard.js';
 import { guestIntelligenceFlow } from './flows/guestIntelligence.js';
 import { strangerAlertFlow } from './flows/strangerAlert.js';
 import { birdWatcherFlow } from './flows/birdWatcher.js';
@@ -271,16 +270,16 @@ app.get('/dira/metrics', async (req, res) => {
         if (!getCol.ok) {
             return res.json({ workflowSparklines: [], topExceptions: [], caseResolutionRate: [], totalWorkflows: 0, avgResolutionSec: 0 });
         }
-        const col = await getCol.json();
+        const col = (await getCol.json()) as { id?: string };
         
-        const docsRes = await fetch(`${CHROMADB_URL}/api/v2/collections/${col.id}/get`, {
+        const docsRes = await fetch(`${CHROMADB_URL}/api/v2/collections/${col.id ?? 'production_cases'}/get`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ include: ['metadatas'] })
         });
         if (!docsRes.ok) throw new Error('Failed to fetch cases');
-        const docs = await docsRes.json();
-        const metadatas: any[] = docs.metadatas ?? [];
+        const docs = (await docsRes.json()) as { metadatas?: unknown[] };
+        const metadatas = (docs.metadatas ?? []) as Record<string, unknown>[];
 
         // Date math for rolling 7-day window
         const now = new Date();
@@ -1573,7 +1572,7 @@ app.post('/api/toolbox/palette', (req, res) => {
 app.post('/api/toolbox/contrast', (req, res) => {
     const { hex1, hex2 } = req.body as { hex1: string; hex2: string };
     const result = contrastRatio(hex1, hex2);
-    res.json({ ratio: result?.ratio, meetsAA: result?.wcagAA });
+    res.json({ ratio: result.ratio, meetsAA: result.wcagAA });
 });
 
 app.post('/api/toolbox/slugify', (req, res) => {
@@ -1583,7 +1582,9 @@ app.post('/api/toolbox/slugify', (req, res) => {
 
 app.post('/api/toolbox/base64', (req, res) => {
     const { input } = req.body as { input: string };
-    res.json({ base64: base64Encode(input).output, base64url: base64Encode(input, true).output });
+    const enc = base64Encode(input);
+    const encUrl = base64Encode(input, true);
+    res.json({ base64: enc.output, base64url: encUrl.output });
 });
 
 app.post('/api/toolbox/mime', (req, res) => {

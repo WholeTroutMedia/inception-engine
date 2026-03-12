@@ -37,7 +37,7 @@ const EonResearchOutputSchema = z.object({
     significance: z.enum(['critical', 'high', 'medium', 'low']),
     source: z.string().optional(),
   })),
-  inception_engine_opportunities: z.array(z.object({
+  cle_opportunities: z.array(z.object({
     opportunity: z.string(),
     integration_path: z.string(),
     timeline: z.string(),

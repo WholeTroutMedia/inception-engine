@@ -346,7 +346,7 @@ export const slugifyTool = ai.defineTool(
     },
     async (input) => {
         const { urlSlugify } = await import('@cle/toolbox');
-        const slug = urlSlugify(input.input, { separator: input.separator, maxLength: input.maxLength }) as string;
+        const slug = urlSlugify(input.input, { separator: input.separator, maxLength: input.maxLength });
         return { slug };
     },
 );

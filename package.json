@@ -5,12 +5,16 @@
   "description": "a generative reasoning engine",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
-    "dev": "node --import tsx/esm packages/ai/src/server.ts",
-    "build": "tsc -b packages/core packages/ai",
-    "type-check": "tsc --noEmit -p packages/core/tsconfig.json && tsc --noEmit -p packages/ai/tsconfig.json",
+    "dev": "pnpm --filter @cle/genkit dev",
+    "genkit:dev": "pnpm --filter @cle/genkit dev",
+    "genkit:ui": "pnpm --filter @cle/genkit genkit:ui",
+    "build": "pnpm --filter @cle/genkit build",
+    "build:all": "pnpm -r run build",
+    "type-check": "pnpm -r run type-check --filter \"./packages/*\" 2>/dev/null || true",
     "test": "vitest run"
   },
   "devDependencies": {

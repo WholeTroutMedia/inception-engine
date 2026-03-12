@@ -70,7 +70,7 @@ export async function generateWithCache(
                 const bestMatch = matches[0];
 
                 // V1 Fallback Threshold Check: If the original prompt was saved in the 'task' field, do a strict string comparison or length heuristic
-                if (bestMatch.task === promptText || bestMatch.task.length > 50) {
+                if (bestMatch.task === promptText || (bestMatch.task?.length ?? 0) > 50) {
                     if (verbose) {
                         console.log(`[SEMANTIC CACHE] ⚡ HIT! Bypassing '${request.model}' (Cost: $0, Latency: <50ms)`);
                     }
@@ -116,7 +116,7 @@ export async function generateWithCache(
             await chromaMemory.persist({
                 id: `cache_${hash.substring(0, 16)}`,
                 agentName: collectionName,
-                timestamp: new Date().toISOString(),
+                timestamp: Date.now(),
                 task: promptText,         // Store the prompt
                 outcome: response.text, // Store the answer
                 tags: ['system-cache'],

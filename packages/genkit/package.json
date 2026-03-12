@@ -58,6 +58,7 @@
         "firebase-functions": "^7.0.6",
         "genkit": "^1.29.0",
         "genkitx-ollama": "^1.29.0",
+        "axios": "^1.7.0",
         "ollama-ai-provider": "^1.2.0",
         "p-limit": "^6.1.0",
         "zod": "^4.3.6"

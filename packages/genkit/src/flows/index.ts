@@ -28,7 +28,8 @@ export { ContinuityEngineFlow, ContinuityIngestInputSchema, ContinuityIngestOutp
 // ─── kstated HIVE ─────────────────────────────────────────────────────────────
 export { KEEPERFlow } from './keeper.js';
 export { ARCHFlow, CODEXFlow } from './arch-codex.js';
-export { KeeperBootFlow, keeperBootRecall, type KeeperBootResult } from '../memory/kstated-boot.js';
+export { KeeperBootFlow, keeperBootRecall } from '../memory/kstated-boot.js';
+export type { KeeperBootResult } from '../memory/kstated-boot.js';
 
 // ─── kdocsd HIVE ────────────────────────────────────────────────────────────────
 export { LEXFlow, COMPASSFlow } from './kdocsd-compass.js';
@@ -46,7 +47,8 @@ export { ATLASFlow, CONTROLROOMFlow, SHOWRUNNERFlow, GRAPHICSFlow, STUDIOFlow, S
 export { OmniMediaOrchestratorFlow } from './omnimedia-orchestrator.js';
 
 // ─── MEMORY BUS ──────────────────────────────────────────────────────────────
-export { memoryBus, MemoryBus, RecallMemoryFlow, CommitMemoryFlow } from './memory.js';
+export { memoryBus, RecallMemoryFlow, CommitMemoryFlow } from './memory.js';
+export type { MemoryBus } from './memory.js';
 
 // ─── CREATIVE / MEDIA FLOWS (previously unregistered) ────────────────────────
 export { CreativeDirectorFlow } from './creative-director.js';

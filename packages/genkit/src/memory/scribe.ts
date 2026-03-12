@@ -169,16 +169,17 @@ export const scribeRecall = ai.defineTool(
 
     return {
       results: filtered.map(entry => {
-        const meta = (entry as any).metadata ?? {};
+        const meta = (entry as { metadata?: Record<string, unknown> }).metadata ?? {};
+        const agentName = typeof entry.agentName === 'string' ? entry.agentName : (typeof entry.agentId === 'string' ? entry.agentId : 'klogd');
+        const createdAt = typeof entry.timestamp === 'number' ? new Date(entry.timestamp).toISOString() : undefined;
         return {
           id: entry.id ?? `mem_${Date.now()}`,
-          content: entry.outcome ?? entry.task ?? '',
-          // Fix F2: Read category/importance from metadata, fall back to tag scan for legacy entries
+          content: (entry.outcome ?? entry.task ?? '') as string,
           category: (meta.category ?? (entry.tags ?? []).find((t: string) => ['decision', 'pattern', 'preference', 'fact', 'bug-fix', 'session'].includes(t)) ?? 'session') as MemoryCategory,
           tags: entry.tags ?? [],
           importance: (meta.importance ?? (entry.tags ?? []).find((t: string) => ['low', 'medium', 'high', 'critical'].includes(t)) ?? 'medium') as MemoryImportance,
-          agentName: entry.agentName ?? 'klogd',
-          createdAt: entry.timestamp,
+          agentName,
+          createdAt,
         };
       }),
       totalFound: filtered.length,

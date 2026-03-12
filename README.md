@@ -128,20 +128,18 @@ const result = await OmniMediaOrchestratorFlow({
 git clone https://github.com/Creative-Liberation-Engine/creative-liberation-engine.git
 cd creative-liberation-engine
 pnpm install
+cp .env.example .env   # Add GEMINI_API_KEY (or GOOGLE_API_KEY) for AI
+pnpm run build
+pnpm run dev           # Boots the agent server on http://localhost:4100
 ```
 
-Set your environment variables:
-
-```bash
-cp .env.example .env
-# Fill in at minimum: GOOGLE_API_KEY
-```
+In a second terminal, open the Genkit Dev UI to run flows:
 
 ```bash
-cd packages/genkit
-pnpm run dev          # Starts the Genkit dev server
-pnpm run genkit:ui    # Opens the Genkit developer UI at http://localhost:4000
+pnpm run genkit:ui    # Opens http://localhost:4000
 ```
+
+**→ Full walkthrough:** [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md)
 
 ---
 

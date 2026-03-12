@@ -39,7 +39,8 @@ Be concrete and generalizable. This becomes permanent knowledge.`,
 
 // Inject the pattern extractor into the memoryBus so it doesn't need to depend on Genkit
 // This breaks the physical module dependency cycle.
-memoryBus.setPatternExtractor(extractPattern);
+// Adapter: extractPattern(task, outcome) -> (content) => string[]
+memoryBus.setPatternExtractor((content) => extractPattern('', content).then((r) => (r ? [r] : [])));
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GENKIT FLOWS — callable via Genkit runtime
@@ -55,5 +56,6 @@ export const CommitMemoryFlow = ai.defineFlow(
     async (input) => memoryBus.commit(input)
 );
 
-export { memoryBus, MemoryBus } from '@cle/memory';
+export { memoryBus } from '@cle/memory';
+export type { MemoryBus } from '@cle/memory';
 

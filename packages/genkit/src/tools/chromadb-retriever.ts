@@ -2,7 +2,7 @@
  * ChromaDB RAG Retriever â€” Project-Scoped
  *
  * Genkit retriever for semantic search against ChromaDB.
- * Supports BOTH global `inception_memory` collection AND
+ * Supports BOTH global `cle_memory` collection AND
  * project-scoped collections (project_{projectId}) for
  * the CONTINUITY ENGINE â€” production-specific model training.
  *
@@ -17,7 +17,7 @@ import { ai } from '../index.js';
 // ---------------------------------------------------------------------------
 
 const CHROMADB_URL = process.env.CHROMADB_URL || 'http://127.0.0.1:8000';
-const GLOBAL_COLLECTION = process.env.CHROMADB_COLLECTION || 'inception_memory';
+const GLOBAL_COLLECTION = process.env.CHROMADB_COLLECTION || 'cle_memory';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -38,8 +38,8 @@ async function ensureCollection(name: string): Promise<string | null> {
     // Try GET first
     const getRes = await fetch(`${CHROMADB_URL}/api/v2/collections/${name}`);
     if (getRes.ok) {
-        const col = await getRes.json();
-        return col.id as string;
+        const col = (await getRes.json()) as { id?: string };
+        return col.id ?? name;
     }
 
     // Create if missing
@@ -61,9 +61,9 @@ async function ensureCollection(name: string): Promise<string | null> {
         return null;
     }
 
-    const created = await createRes.json();
-    console.log(`[CHROMADB] âœ¨ Created collection "${name}" (id: ${created.id})`);
-    return created.id as string;
+    const created = (await createRes.json()) as { id?: string };
+    console.log(`[CHROMADB] Created collection "${name}" (id: ${created.id})`);
+    return created.id ?? name;
 }
 
 // ---------------------------------------------------------------------------
@@ -118,7 +118,7 @@ export const chromaRetriever = ai.defineRetriever(
                 return { documents: [] };
             }
 
-            const results = await queryRes.json();
+            const results = (await queryRes.json()) as { documents?: string[][]; ids?: string[][]; distances?: number[][]; metadatas?: Record<string, unknown>[][]; };
 
             const documents = (results.documents?.[0] || []).map(
                 (doc: string, i: number) => ({

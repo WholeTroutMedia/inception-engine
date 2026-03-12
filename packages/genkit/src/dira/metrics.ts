@@ -34,9 +34,8 @@ export interface WorkflowStat {
 export async function fetchDiraMetrics(): Promise<DiraMetrics> {
   try {
     const res = await fetch(`${DISPATCH_URL}/dira/metrics`, {
-      cache: 'no-store',
       signal: AbortSignal.timeout(5000),
-    });
+    } as RequestInit);
     if (res.ok) return res.json() as Promise<DiraMetrics>;
   } catch {
     // Fall through to mock data

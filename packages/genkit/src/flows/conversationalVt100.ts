@@ -87,7 +87,7 @@ Extract a concise 'title' (max 6 words) and a detailed 'description' formatted o
                 });
 
                 if (response.ok) {
-                    const data = await response.json();
+                    const data = (await response.json()) as { id?: string };
                     taskId = data.id;
                     dispatchedTask = true;
                     console.log(`[VT100:VOICE] Dispatched task to queue: ${taskId}`);

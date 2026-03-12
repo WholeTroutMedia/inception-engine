@@ -163,7 +163,7 @@ Your directive is the single executable next step.`,
             model: omnipresenceCache ? 'googleai/gemini-1.5-pro' : 'googleai/gemini-2.5-flash',
             system: systemInstruction,
             prompt: modePrompts[input.mode],
-            output: { schema: AthenaOutputSchema },
+            output: { schema: Vt100OutputSchema },
             config: genConfig,
             tools: [scribeRemember, scribeRecall],
         });

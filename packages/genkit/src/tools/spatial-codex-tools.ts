@@ -33,7 +33,7 @@ export const searchHardwareCodexTool = ai.defineTool(
     },
     async (input) => {
         try {
-            const results = searchHardwareCodex(input.query);
+            const results = await searchHardwareCodex(input.query);
             if (results.length === 0) {
                  return { status: 'No matching records found in local codex.', query: input.query, results: [] };
             }
